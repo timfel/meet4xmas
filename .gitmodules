@@ -1,0 +1,3 @@
+[submodule "src/ios/Libraries/HessianKit"]
+	path = src/ios/Libraries/HessianKit
+	url = https://github.com/360/HessianKit.git
