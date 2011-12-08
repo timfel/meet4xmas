@@ -6,6 +6,10 @@ public class ResponseBody implements Serializable {
 	public static class ErrorInfo implements Serializable {
 		public int code;
 		public String message;
+
+    public String toString() {
+      return "API-ERROR(" + code  +"): '" + message + "'";
+    }
 	}
 
 	public boolean success;
