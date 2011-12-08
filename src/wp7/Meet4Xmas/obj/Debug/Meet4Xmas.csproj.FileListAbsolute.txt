@@ -1,0 +1,15 @@
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\ApplicationIcon.png
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\Background.png
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\Meet4Xmas.dll
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\Meet4Xmas.pdb
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\AppManifest.xaml
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\Meet4Xmas.xap
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\Microsoft.Phone.Controls.dll
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\Bin\Debug\Microsoft.Phone.Controls.xml
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\App.g.i.cs
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\MainPage.g.i.cs
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\Meet4Xmas.g.resources
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\Meet4Xmas.dll
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\Meet4Xmas.pdb
+C:\Users\Administrator\Desktop\weihnachtsmarkt\src\wp7\Meet4Xmas\obj\Debug\XapCacheFile.xml
