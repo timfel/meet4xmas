@@ -14,7 +14,7 @@ module Java
   include_class 'org.mortbay.jetty.servlet.Context'
   include_class 'org.mortbay.jetty.servlet.ServletHolder'
   include_class 'com.caucho.hessian.server.HessianServlet'
-  
+
   java_import   'lib.java.Appointment'
   java_import   'lib.java.Location'
   java_import   'lib.java.TravelPlan'
