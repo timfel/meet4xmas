@@ -14,10 +14,12 @@ module Java
   include_class 'org.mortbay.jetty.servlet.Context'
   include_class 'org.mortbay.jetty.servlet.ServletHolder'
   include_class 'com.caucho.hessian.server.HessianServlet'
+  
   java_import   'lib.java.Appointment'
   java_import   'lib.java.Location'
-  java_import   'lib.java.Traveller'
   java_import   'lib.java.TravelPlan'
+
+  java_import   'lib.java.Servlet'
 end
 
 class Appointment
@@ -79,8 +81,9 @@ class TravelPlan
   end
 end
 
-class Traveller < Java::HessianServlet
-  include Java::Traveller
+class Servlet < Java::HessianServlet
+  include Java::Servlet
+
   def registerAccount(userId)
     0
   end
@@ -113,7 +116,7 @@ end
 def init_jetty
   server = Java::Server.new(4567)
   context = Java::Context.new(server, '/', 0)
-  servlet = Traveller.new
+  servlet = Servlet.new
   holder = Java::ServletHolder.new servlet
   context.addServlet(holder, '/')
   server.start()
