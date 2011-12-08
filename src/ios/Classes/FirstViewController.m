@@ -7,7 +7,7 @@
 //
 
 #import "FirstViewController.h"
-#import "RegisterViewController.h"
+#import "RegistrationViewController.h"
 
 @implementation FirstViewController
 
@@ -53,11 +53,11 @@
     
     //TODO: if (![user loggedIn]) {...
     // Load the registration view modally. It will define a done button for the navigation controller.
-    RegisterViewController* registrationViewController;
+    RegistrationViewController* registrationViewController;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        registrationViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterView_iPhone" bundle:nil];
+        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPhone" bundle:nil];
     } else {
-        registrationViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterView_iPad" bundle:nil];
+        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPad" bundle:nil];
         // Only show a small form on the iPad, not full screen
         registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     }

@@ -6,9 +6,9 @@
 //  Copyright (c) 2011 HPI. All rights reserved.
 //
 
-#import "RegisterViewController.h"
+#import "RegistrationViewController.h"
 
-@implementation RegisterViewController
+@implementation RegistrationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
