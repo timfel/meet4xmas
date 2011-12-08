@@ -1,4 +1,5 @@
 $LOAD_PATH.unshift File.dirname(__FILE__)
+VERSION = 1
 
 require 'java'
 require 'hessian'
@@ -87,7 +88,7 @@ def init_jetty
   context = Java::Context.new(server, '/', 0)
   servlet = Servlet.new
   holder = Java::ServletHolder.new servlet
-  context.addServlet(holder, '/')
+  context.addServlet(holder, "/#{VERSION}/")
   server.start()
 end
 init_jetty
