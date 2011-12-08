@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01A47CEC1490FAF8007E1DFC /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEA1490FAF8007E1DFC /* RegisterViewController.m */; };
+		01A47CEF1490FBE1007E1DFC /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEE1490FBE1007E1DFC /* FirstViewController.m */; };
+		01A47CF41490FC5A007E1DFC /* RegisterView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegisterView_iPad.xib */; };
+		01A47CF71490FC90007E1DFC /* RegisterView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegisterView_iPhone.xib */; };
 		01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307B1490F05F00548992 /* UIKit.framework */; };
 		01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307D1490F05F00548992 /* Foundation.framework */; };
 		01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307F1490F05F00548992 /* CoreGraphics.framework */; };
 		01CE30861490F05F00548992 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30841490F05F00548992 /* InfoPlist.strings */; };
 		01CE30881490F05F00548992 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CE30871490F05F00548992 /* main.m */; };
 		01CE308C1490F05F00548992 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CE308B1490F05F00548992 /* AppDelegate.m */; };
-		01CE308F1490F05F00548992 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CE308E1490F05F00548992 /* FirstViewController.m */; };
 		01CE30911490F05F00548992 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30901490F05F00548992 /* first.png */; };
 		01CE30931490F05F00548992 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30921490F05F00548992 /* first@2x.png */; };
 		01CE30961490F05F00548992 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CE30951490F05F00548992 /* SecondViewController.m */; };
@@ -26,6 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01A47CE91490FAF8007E1DFC /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		01A47CEA1490FAF8007E1DFC /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		01A47CEE1490FBE1007E1DFC /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegisterView_iPad.xib; sourceTree = "<group>"; };
+		01A47CF61490FC90007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegisterView_iPhone.xib; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -37,7 +45,6 @@
 		01CE308A1490F05F00548992 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		01CE308B1490F05F00548992 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		01CE308D1490F05F00548992 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		01CE308E1490F05F00548992 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		01CE30901490F05F00548992 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		01CE30921490F05F00548992 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		01CE30941490F05F00548992 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -67,8 +74,10 @@
 		01A47CE81490F4CF007E1DFC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01A47CE91490FAF8007E1DFC /* RegisterViewController.h */,
+				01A47CEA1490FAF8007E1DFC /* RegisterViewController.m */,
+				01A47CEE1490FBE1007E1DFC /* FirstViewController.m */,
 				01CE308D1490F05F00548992 /* FirstViewController.h */,
-				01CE308E1490F05F00548992 /* FirstViewController.m */,
 				01CE30941490F05F00548992 /* SecondViewController.h */,
 				01CE30951490F05F00548992 /* SecondViewController.m */,
 			);
@@ -143,6 +152,8 @@
 				01CE309E1490F05F00548992 /* FirstViewController_iPad.xib */,
 				01CE30A11490F05F00548992 /* SecondViewController_iPhone.xib */,
 				01CE30A41490F05F00548992 /* SecondViewController_iPad.xib */,
+				01A47CF21490FC5A007E1DFC /* RegisterView_iPad.xib */,
+				01A47CF51490FC90007E1DFC /* RegisterView_iPhone.xib */,
 				01CE30841490F05F00548992 /* InfoPlist.strings */,
 			);
 			path = "User Interface";
@@ -208,6 +219,8 @@
 				01CE30A01490F05F00548992 /* FirstViewController_iPad.xib in Resources */,
 				01CE30A31490F05F00548992 /* SecondViewController_iPhone.xib in Resources */,
 				01CE30A61490F05F00548992 /* SecondViewController_iPad.xib in Resources */,
+				01A47CF41490FC5A007E1DFC /* RegisterView_iPad.xib in Resources */,
+				01A47CF71490FC90007E1DFC /* RegisterView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,14 +233,31 @@
 			files = (
 				01CE30881490F05F00548992 /* main.m in Sources */,
 				01CE308C1490F05F00548992 /* AppDelegate.m in Sources */,
-				01CE308F1490F05F00548992 /* FirstViewController.m in Sources */,
 				01CE30961490F05F00548992 /* SecondViewController.m in Sources */,
+				01A47CEC1490FAF8007E1DFC /* RegisterViewController.m in Sources */,
+				01A47CEF1490FBE1007E1DFC /* FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		01A47CF21490FC5A007E1DFC /* RegisterView_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01A47CF31490FC5A007E1DFC /* en */,
+			);
+			name = RegisterView_iPad.xib;
+			sourceTree = "<group>";
+		};
+		01A47CF51490FC90007E1DFC /* RegisterView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01A47CF61490FC90007E1DFC /* en */,
+			);
+			name = RegisterView_iPhone.xib;
+			sourceTree = "<group>";
+		};
 		01CE30841490F05F00548992 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
