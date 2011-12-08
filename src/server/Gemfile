@@ -1,0 +1,4 @@
+source 'http://rubygems.org'
+
+gem 'geokit'
+gem 'json_pure' # XXX: required by geokit
