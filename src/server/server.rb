@@ -8,114 +8,91 @@ require 'servlet-api'
 require 'rubygems'
 require 'geokit'
 
-
 module Java
   include_class 'org.mortbay.jetty.Server'
   include_class 'org.mortbay.jetty.servlet.Context'
   include_class 'org.mortbay.jetty.servlet.ServletHolder'
   include_class 'com.caucho.hessian.server.HessianServlet'
+
   java_import   'lib.java.Appointment'
   java_import   'lib.java.Location'
-  java_import   'lib.java.Traveller'
   java_import   'lib.java.TravelPlan'
+  java_import   'lib.java.ResponseBody'
+  java_import   'lib.java.Servlet'
 end
 
-class Appointment
-  include Java::Appointment
+class Servlet < Java::HessianServlet
+  include Java::Servlet
 
-  def id
-    0
-  end
-
-  def locationType
-    0 # -> xmas market
-  end
-
-  def Location location
-  end
-
-  def invitees
-    [] # user_id's
-  end
-
-  def participants
-    [] # user_id's
-  end
-end
-
-class Location
-  include Java::Location
-
-  def lng
-    13.13175
-  end
-
-  def lat
-    52.39363
-  end
-
-  def title
-    "Hasso-Plattner-Institut"
-  end
-
-  def description
-    "Campus Griebnitzsee, Prof.-Dr.-Helmert-Straße 2, 14482 Potsdam, Germany"
-  end
-end
-
-class TravelPlan
-  include Java::TravelPlan
-
-  def appointmentId
-    0
-  end
-
-  def path
-    [] # locations
-  end
-
-  def travelType
-    0 # -> 0 = car, 1 = by foot, 2 = public transportation
-  end
-end
-
-class Traveller < Java::HessianServlet
-  include Java::Traveller
   def registerAccount(userId)
-    0
+    _success_response(0)
   end
 
   def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
-    0
+    _error_response(42, 'error!')
   end
 
   def getAppointment(appointmentId)
-    Appointment.new
+    a = Java::Appointment.new
+    a.identifier = appointmentId
+    a.locationType = 0
+    a.invitees = ['foo']
+    a.participants = ['bar']
+    puts "sending: #{a}"
+    _success_response(a)
   end
 
   def getTravelPlan(appointmentId, travelType, location)
-    TravelPlan.new
+    _success_response(TravelPlan.new)
   end
 
   def joinAppointment(appointmentId, userId, travelType, location)
-    TravelPlan.new
+    _success_response(TravelPlan.new)
   end
 
   def declineAppointment(appointmentId, userId, userMessage)
-    0
+    _success_response()
   end
 
   def finalizeAppointment(appointmentId)
-    0
+    _success_response()
+  end
+
+private
+  def _build_response(success, error_info=nil, payload=nil)
+    if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
+      info = Java::ResponseBody::ErrorInfo.new
+      info.code = error_info[:code]
+      info.message = error_info[:message]
+      error_info = info
+    end
+    response = Java::ResponseBody.new
+    response.success = success
+    response.error = error_info
+    response.payload = payload
+    response
+  end
+
+  def _success_response(payload=nil)
+    _build_response(true, nil, payload)
+  end
+
+  def _error_response(error_code, error_message)
+    _build_response(false, {:code => error_code, :message => error_message})
   end
 end
 
-def init_jetty
-  server = Java::Server.new(4567)
-  context = Java::Context.new(server, '/', 0)
-  servlet = Traveller.new
-  holder = Java::ServletHolder.new servlet
-  context.addServlet(holder, '/')
-  server.start()
+module Server
+  API_VERSION = 1
+
+  def self.init_jetty
+    server = Java::Server.new(4567)
+    context = Java::Context.new(server, '/', 0)
+    servlet = Servlet.new
+    holder = Java::ServletHolder.new servlet
+    context.addServlet(holder, "/#{API_VERSION}/")
+    server.start()
+    puts "Server living at port 4567 - api version: #{API_VERSION}"
+  end
 end
-init_jetty
+Server::init_jetty
