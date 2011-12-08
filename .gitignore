@@ -1,0 +1,5 @@
+.DS_Store
+src/ios/build/
+src/ios/DerivedData/
+src/ios/Meet4Xmas.xcodeproj/xcuserdata/*
+xcuserdata
