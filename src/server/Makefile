@@ -5,6 +5,9 @@ source_ext=java
 classes=$(source_dir)/Appointment.$(class_ext) \
 				$(source_dir)/Location.$(class_ext) \
 				$(source_dir)/TravelPlan.$(class_ext) \
+				\
+				$(source_dir)/ResponseBody.$(class_ext) \
+				\
 				$(source_dir)/Servlet.$(class_ext)
 
 classpath=-classpath .

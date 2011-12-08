@@ -19,81 +19,26 @@ module Java
   java_import   'lib.java.Location'
   java_import   'lib.java.TravelPlan'
 
+  java_import   'lib.java.ResponseBody'
+
   java_import   'lib.java.Servlet'
-end
-
-class Appointment
-  include Java::Appointment
-
-  def id
-    0
-  end
-
-  def locationType
-    0 # -> xmas market
-  end
-
-  def Location location
-  end
-
-  def invitees
-    [] # user_id's
-  end
-
-  def participants
-    [] # user_id's
-  end
-end
-
-class Location
-  include Java::Location
-
-  def lng
-    13.13175
-  end
-
-  def lat
-    52.39363
-  end
-
-  def title
-    "Hasso-Plattner-Institut"
-  end
-
-  def description
-    "Campus Griebnitzsee, Prof.-Dr.-Helmert-Straße 2, 14482 Potsdam, Germany"
-  end
-end
-
-class TravelPlan
-  include Java::TravelPlan
-
-  def appointmentId
-    0
-  end
-
-  def path
-    [] # locations
-  end
-
-  def travelType
-    0 # -> 0 = car, 1 = by foot, 2 = public transportation
-  end
 end
 
 class Servlet < Java::HessianServlet
   include Java::Servlet
 
   def registerAccount(userId)
-    0
+    _success_response(0)
   end
 
   def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
-    0
+    _error_response(42, 'error!')
   end
 
   def getAppointment(appointmentId)
-    Appointment.new
+    #_success_response(Java::Appointment.new)
+    #_success_response({'a'=>42, 'b'=>'foo'})
+    {'a'=>42, 'b'=>'Hallo Tim!'}
   end
 
   def getTravelPlan(appointmentId, travelType, location)
@@ -110,6 +55,30 @@ class Servlet < Java::HessianServlet
 
   def finalizeAppointment(appointmentId)
     0
+  end
+
+  private
+
+  def _build_response(success, error_info=nil, payload=nil)
+    if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
+      info = Java::ResponseBody::ErrorInfo.new
+      info.code = error_info[:code]
+      info.message = error_info[:message]
+      error_info = info
+    end
+    response = Java::ResponseBody.new
+    response.success = success
+    response.error = error_info
+    response.payload = payload
+    response
+  end
+
+  def _success_response(payload=nil)
+    _build_response(true, nil, payload)
+  end
+
+  def _error_response(error_code, error_message)
+    _build_response(false, {:code => error_code, :message => error_message})
   end
 end
 
