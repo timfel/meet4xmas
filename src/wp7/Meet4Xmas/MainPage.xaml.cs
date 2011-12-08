@@ -33,5 +33,10 @@ namespace Meet4Xmas
                 App.ViewModel.LoadData();
             }
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -26,7 +26,14 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem Header="My Account">
-                <!--Double line list with text wrapping-->
+                <Grid Height="Auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="grid1" VerticalAlignment="Stretch" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="290" />
+                        <ColumnDefinition Width="118" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Height="Auto" HorizontalAlignment="Stretch" Name="textBox1" Text="TextBox" VerticalAlignment="Top" Width="Auto" IsEnabled="True" Grid.ColumnSpan="2" />
+                    <Button Content="Button" Height="72" HorizontalAlignment="Left" Margin="6,78,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+                </Grid>
             </controls:PanoramaItem>
  
             <!--Panorama item two-->
@@ -49,9 +56,5 @@
                 </ListBox>
             </controls:PanoramaItem>
         </controls:Panorama>
-        <Grid Height="Auto" HorizontalAlignment="Stretch" Margin="12,304,0,0" Name="grid1" VerticalAlignment="Stretch" Width="Auto">
-            <TextBox Height="72" HorizontalAlignment="Left" Name="textBox1" Text="TextBox" VerticalAlignment="Top" Width="423" IsEnabled="True" />
-            <Button Content="Button" Height="72" HorizontalAlignment="Left" Margin="6,78,0,0" Name="button1" VerticalAlignment="Top" Width="160" />
-        </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
