@@ -8,7 +8,19 @@
 
 #import "RegistrationViewController.h"
 
+#import "HessianKit.h"
+
+@interface RegistrationViewController()
+
+- (IBAction) registrationDone:(id)sender;
+
+@end
+
 @implementation RegistrationViewController
+
+@synthesize delegate = _delegate;
+@synthesize emailTextField = _emailTextField;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +46,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"Register";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(registrationDone)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(registrationDone:)];
 }
 
 - (void)viewDidUnload
@@ -48,6 +60,15 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+#pragma mark - Navigation bar callbacks
+
+- (IBAction)registrationDone:(id)sender
+{
+    if (self.delegate != nil) {
+        [self.delegate userRegisteredWithEmail:self.emailTextField.text];
+    }
 }
 
 @end

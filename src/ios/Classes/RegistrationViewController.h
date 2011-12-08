@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RegistrationViewControllerDelegate <NSObject>
+
+- (void)userRegisteredWithEmail:(NSString*)email;
+
+@end
+
+
 @interface RegistrationViewController : UIViewController
+
+@property (strong, nonatomic) id<RegistrationViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UITextField* emailTextField;
 
 @end
