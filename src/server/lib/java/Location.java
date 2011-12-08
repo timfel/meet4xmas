@@ -7,12 +7,12 @@ public class Location implements java.io.Serializable {
   public String description;
 
   public String toString() {
-  	StringBuilder sb = new StringBuilder("Location(");
-  	sb.append("@longitude: ").append(longitude).append(", ");
-  	sb.append("@latitude: ").append(latitude).append(", ");
-  	sb.append("@title: ").append(title).append(", ");
-  	sb.append("@description: ").append(description);
-  	sb.append(")");
-  	return sb.toString();
+    StringBuilder sb = new StringBuilder("Location(");
+    sb.append("@longitude: ").append(longitude).append(", ");
+    sb.append("@latitude: ").append(latitude).append(", ");
+    sb.append("@title: ").append(title).append(", ");
+    sb.append("@description: ").append(description);
+    sb.append(")");
+    return sb.toString();
   }
 }
