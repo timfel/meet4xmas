@@ -1,5 +1,4 @@
 $LOAD_PATH.unshift File.dirname(__FILE__)
-VERSION = 1
 
 require 'java'
 require 'hessian'
@@ -8,7 +7,6 @@ require 'jetty-util'
 require 'servlet-api'
 require 'rubygems'
 require 'geokit'
-
 
 module Java
   include_class 'org.mortbay.jetty.Server'
@@ -19,9 +17,7 @@ module Java
   java_import   'lib.java.Appointment'
   java_import   'lib.java.Location'
   java_import   'lib.java.TravelPlan'
-
   java_import   'lib.java.ResponseBody'
-
   java_import   'lib.java.Servlet'
 end
 
@@ -37,29 +33,32 @@ class Servlet < Java::HessianServlet
   end
 
   def getAppointment(appointmentId)
-    #_success_response(Java::Appointment.new)
-    #_success_response({'a'=>42, 'b'=>'foo'})
-    {'a'=>42, 'b'=>'Hallo Tim!'}
+    a = Java::Appointment.new
+    a.identifier = appointmentId
+    a.locationType = 0
+    a.invitees = ['foo']
+    a.participants = ['bar']
+    puts "sending: #{a}"
+    _success_response(a)
   end
 
   def getTravelPlan(appointmentId, travelType, location)
-    TravelPlan.new
+    _success_response(TravelPlan.new)
   end
 
   def joinAppointment(appointmentId, userId, travelType, location)
-    TravelPlan.new
+    _success_response(TravelPlan.new)
   end
 
   def declineAppointment(appointmentId, userId, userMessage)
-    0
+    _success_response()
   end
 
   def finalizeAppointment(appointmentId)
-    0
+    _success_response()
   end
 
-  private
-
+private
   def _build_response(success, error_info=nil, payload=nil)
     if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
       info = Java::ResponseBody::ErrorInfo.new
@@ -83,12 +82,17 @@ class Servlet < Java::HessianServlet
   end
 end
 
-def init_jetty
-  server = Java::Server.new(4567)
-  context = Java::Context.new(server, '/', 0)
-  servlet = Servlet.new
-  holder = Java::ServletHolder.new servlet
-  context.addServlet(holder, "/#{VERSION}/")
-  server.start()
+module Server
+  API_VERSION = 1
+
+  def self.init_jetty
+    server = Java::Server.new(4567)
+    context = Java::Context.new(server, '/', 0)
+    servlet = Servlet.new
+    holder = Java::ServletHolder.new servlet
+    context.addServlet(holder, "/#{API_VERSION}/")
+    server.start()
+    puts "Server living at port 4567 - api version: #{API_VERSION}"
+  end
 end
-init_jetty
+Server::init_jetty
