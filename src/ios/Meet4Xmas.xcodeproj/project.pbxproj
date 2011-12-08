@@ -67,6 +67,7 @@
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
 		01A47CF61490FC90007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPhone.xib; sourceTree = "<group>"; };
 		01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HessianKit.xcodeproj; path = Libraries/HessianKit/HessianKit.xcodeproj; sourceTree = "<group>"; };
+		01A47D0C14911E5D007E1DFC /* Appointment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appointment.h; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -165,6 +166,7 @@
 				01CE30831490F05F00548992 /* Meet4Xmas-Info.plist */,
 				01CE30871490F05F00548992 /* main.m */,
 				01CE30891490F05F00548992 /* Meet4Xmas-Prefix.pch */,
+				01A47D0C14911E5D007E1DFC /* Appointment.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
