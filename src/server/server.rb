@@ -108,10 +108,6 @@ class Traveller < Java::HessianServlet
   def finalizeAppointment(appointmentId)
     0
   end
-
-  def test
-    [1, 1.2, '1.3', :'1.4']
-  end
 end
 
 def init_jetty
