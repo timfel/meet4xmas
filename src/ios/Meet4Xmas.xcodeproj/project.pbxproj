@@ -12,6 +12,8 @@
 		01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */; };
 		01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegistrationView_iPhone.xib */; };
 		01A47D0914911C36007E1DFC /* libStaticHessianKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A47D0414911C1D007E1DFC /* libStaticHessianKit.a */; };
+		01A47D1B14921832007E1DFC /* ServiceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47D1914920C56007E1DFC /* ServiceProxy.m */; };
+		01A47D1D149219A7007E1DFC /* ServiceProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47D1C149219A7007E1DFC /* ServiceProtocols.m */; };
 		01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307B1490F05F00548992 /* UIKit.framework */; };
 		01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307D1490F05F00548992 /* Foundation.framework */; };
 		01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307F1490F05F00548992 /* CoreGraphics.framework */; };
@@ -67,7 +69,10 @@
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
 		01A47CF61490FC90007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPhone.xib; sourceTree = "<group>"; };
 		01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HessianKit.xcodeproj; path = Libraries/HessianKit/HessianKit.xcodeproj; sourceTree = "<group>"; };
-		01A47D0C14911E5D007E1DFC /* Appointment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appointment.h; sourceTree = "<group>"; };
+		01A47D0C14911E5D007E1DFC /* ServiceProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProtocols.h; sourceTree = "<group>"; };
+		01A47D1814920C56007E1DFC /* ServiceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProxy.h; sourceTree = "<group>"; };
+		01A47D1914920C56007E1DFC /* ServiceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProxy.m; sourceTree = "<group>"; };
+		01A47D1C149219A7007E1DFC /* ServiceProtocols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocols.m; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,6 +134,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		01A47D1714920C1B007E1DFC /* Service Connection */ = {
+			isa = PBXGroup;
+			children = (
+				01A47D0C14911E5D007E1DFC /* ServiceProtocols.h */,
+				01A47D1C149219A7007E1DFC /* ServiceProtocols.m */,
+				01A47D1814920C56007E1DFC /* ServiceProxy.h */,
+				01A47D1914920C56007E1DFC /* ServiceProxy.m */,
+			);
+			name = "Service Connection";
+			sourceTree = "<group>";
+		};
 		01CE306C1490F05F00548992 = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +182,6 @@
 				01CE30831490F05F00548992 /* Meet4Xmas-Info.plist */,
 				01CE30871490F05F00548992 /* main.m */,
 				01CE30891490F05F00548992 /* Meet4Xmas-Prefix.pch */,
-				01A47D0C14911E5D007E1DFC /* Appointment.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -174,6 +189,7 @@
 		01CE30B01490F18E00548992 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				01A47D1714920C1B007E1DFC /* Service Connection */,
 				01A47CE81490F4CF007E1DFC /* Controllers */,
 				01CE308A1490F05F00548992 /* AppDelegate.h */,
 				01CE308B1490F05F00548992 /* AppDelegate.m */,
@@ -309,11 +325,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A47D1B14921832007E1DFC /* ServiceProxy.m in Sources */,
 				01CE30881490F05F00548992 /* main.m in Sources */,
 				01CE308C1490F05F00548992 /* AppDelegate.m in Sources */,
 				01CE30961490F05F00548992 /* SecondViewController.m in Sources */,
 				01A47CEC1490FAF8007E1DFC /* RegistrationViewController.m in Sources */,
 				01A47CEF1490FBE1007E1DFC /* FirstViewController.m in Sources */,
+				01A47D1D149219A7007E1DFC /* ServiceProtocols.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

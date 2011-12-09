@@ -62,7 +62,7 @@
         registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    //TODO: Assign delegate
+    registrationViewController.delegate = self;
     
     // Create a navigation controller and present it modally.
     UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:registrationViewController];
@@ -87,6 +87,19 @@
     } else {
         return YES;
     }
+}
+
+#pragma mark - RegistrationViewControllerDelegate
+
+- (void)userRegisteredWithEmail:(NSString*)email
+{
+    //TODO: Should we really do that here?
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)registrationFailed
+{
+    //TODO: Oops! What now?
 }
 
 @end

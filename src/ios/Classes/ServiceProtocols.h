@@ -6,6 +6,11 @@
 //  Copyright (c) 2011 HPI. All rights reserved.
 //
 
+OBJC_EXPORT NSString* const kClassPrefix;
+
+#define getFullClassName(name) [NSString stringWithFormat:@"%@.%@", kClassPrefix, name]
+
+OBJC_EXPORT NSString* const kAppointmentClassName;
 @protocol Appointment 
 
 @property(nonatomic) int identifier;
@@ -16,6 +21,8 @@
 
 @end
 
+
+OBJC_EXPORT NSString* const kErrorInfoClassName;
 @protocol ErrorInfo
 
 @property(nonatomic) int code;
@@ -23,6 +30,8 @@
 
 @end
 
+
+OBJC_EXPORT NSString* const kResponseBodyClassName;
 @protocol ResponseBody
 
 @property(nonatomic) BOOL success;
@@ -31,9 +40,12 @@
 
 @end
 
+
 @protocol Service
 
-- (id<ResponseBody>) createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
-- (id<ResponseBody>) getAppointment:(int)aid;
+- (void)registerAccount:(NSString*)userId;
+
+- (id<ResponseBody>)createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
+- (id<ResponseBody>)getAppointment:(int)aid;
 
 @end
