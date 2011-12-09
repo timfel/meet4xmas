@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+#import "RegistrationViewController.h"
+
+@interface FirstViewController : UIViewController <RegistrationViewControllerDelegate>
 
 @end
