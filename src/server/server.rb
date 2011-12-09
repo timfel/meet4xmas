@@ -5,8 +5,11 @@ require 'lib/java/hessian'
 require 'lib/java/jetty'
 require 'lib/java/jetty-util'
 require 'lib/java/servlet-api'
+
 require 'rubygems'
 require 'geokit'
+
+require 'lib/persistence/setup' # requires all models
 
 module Java
   include_class 'org.mortbay.jetty.Server'
@@ -28,6 +31,7 @@ end
 
 class ServletHandler
   def registerAccount(userId)
+    Persistence::User.create :identifier => userId
     _success_response()
   end
 
