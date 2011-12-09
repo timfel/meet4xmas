@@ -93,7 +93,7 @@ module Server
     holder = Java::ServletHolder.new servlet
     context.addServlet(holder, "/#{API_VERSION}/")
     server.start()
-    puts "Server living at port 4567 - api version: #{API_VERSION}"
+    puts "Server living at port #{port} - api version: #{API_VERSION}"
   end
 end
 Server::init_jetty
