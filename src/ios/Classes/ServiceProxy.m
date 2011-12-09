@@ -44,7 +44,8 @@
 - (id)init {
     self = [super init];
     if (self) {
-        NSURL* serviceUrl = [NSURL URLWithString:@"http://tessi.fornax.uberspace.de/xmas/1/"];
+        NSString* urlString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serviceUrl"];
+        NSURL* serviceUrl = [NSURL URLWithString:urlString];
         
         self.connection = [[CWHessianConnection alloc] initWithServiceURL:serviceUrl];
         
