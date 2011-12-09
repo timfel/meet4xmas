@@ -11,6 +11,7 @@
 @protocol RegistrationViewControllerDelegate <NSObject>
 
 - (void)userRegisteredWithEmail:(NSString*)email;
+- (void)registrationFailed;
 
 @end
 

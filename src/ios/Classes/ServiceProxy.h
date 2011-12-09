@@ -10,6 +10,8 @@
 
 @interface ServiceProxy : NSObject
 
++ (BOOL)registerAccount:(NSString*)userId;
+
 + (id<Appointment>)getAppointment:(int)identifier;
 
 @end

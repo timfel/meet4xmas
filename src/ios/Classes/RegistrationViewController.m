@@ -67,11 +67,17 @@
 
 - (IBAction)registrationDone:(id)sender
 {
-    // For testing only
-//    id<Appointment> appointment = [ServiceProxy getAppointment:42];
-//    NSLog(@"Appointment: %d", appointment.identifier);
-    
-    if (self.delegate != nil) {
+    if (![ServiceProxy registerAccount:self.emailTextField.text]) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
+                                                          message:@"Something went wrong while registering your e-mail address. Please try again later." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        if (self.delegate != nil) {
+            [self.delegate registrationFailed];
+        }
+    } else if (self.delegate != nil) {
         [self.delegate userRegisteredWithEmail:self.emailTextField.text];
     }
 }

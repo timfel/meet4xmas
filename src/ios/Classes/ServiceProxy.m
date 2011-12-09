@@ -59,6 +59,15 @@
     return self;
 }
 
+#pragma mark - Account
+
++ (BOOL)registerAccount:(NSString*)userId
+{
+    [[self sharedInstance].serviceProxy registerAccount:userId];
+    // TODO: Error handling
+    return YES;
+}
+
 #pragma mark - Appointment
 
 + (id<Appointment>)getAppointment:(int)identifier

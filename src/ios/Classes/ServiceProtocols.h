@@ -43,7 +43,9 @@ OBJC_EXPORT NSString* const kResponseBodyClassName;
 
 @protocol Service
 
-- (id<ResponseBody>) createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
-- (id<ResponseBody>) getAppointment:(int)aid;
+- (void)registerAccount:(NSString*)userId;
+
+- (id<ResponseBody>)createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
+- (id<ResponseBody>)getAppointment:(int)aid;
 
 @end
