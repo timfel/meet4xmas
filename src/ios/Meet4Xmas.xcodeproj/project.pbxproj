@@ -11,6 +11,7 @@
 		01A47CEF1490FBE1007E1DFC /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEE1490FBE1007E1DFC /* FirstViewController.m */; };
 		01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */; };
 		01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegistrationView_iPhone.xib */; };
+		01A47D0914911C36007E1DFC /* libStaticHessianKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A47D0414911C1D007E1DFC /* libStaticHessianKit.a */; };
 		01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307B1490F05F00548992 /* UIKit.framework */; };
 		01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307D1490F05F00548992 /* Foundation.framework */; };
 		01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307F1490F05F00548992 /* CoreGraphics.framework */; };
@@ -28,12 +29,45 @@
 		01CE30A61490F05F00548992 /* SecondView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30A41490F05F00548992 /* SecondView_iPad.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		01A47D0314911C1D007E1DFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A6CE14CA0FE01620009CD7AA;
+			remoteInfo = StaticHessianKit;
+		};
+		01A47D0514911C1D007E1DFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A6CE15AF0FE01E7C009CD7AA;
+			remoteInfo = iPhoneTests;
+		};
+		01A47D0714911C1D007E1DFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A6CE15BA0FE01ED1009CD7AA;
+			remoteInfo = MacTests;
+		};
+		01A47D0A14911C41007E1DFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A6CE14C90FE01620009CD7AA;
+			remoteInfo = StaticHessianKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01A47CE91490FAF8007E1DFC /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
 		01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
 		01A47CEE1490FBE1007E1DFC /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
 		01A47CF61490FC90007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPhone.xib; sourceTree = "<group>"; };
+		01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HessianKit.xcodeproj; path = Libraries/HessianKit/HessianKit.xcodeproj; sourceTree = "<group>"; };
+		01A47D0C14911E5D007E1DFC /* Appointment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appointment.h; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A47D0914911C36007E1DFC /* libStaticHessianKit.a in Frameworks */,
 				01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */,
 				01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */,
 				01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */,
@@ -84,9 +119,20 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		01A47CF914911C1D007E1DFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01A47D0414911C1D007E1DFC /* libStaticHessianKit.a */,
+				01A47D0614911C1D007E1DFC /* iPhoneTests.octest */,
+				01A47D0814911C1D007E1DFC /* MacTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		01CE306C1490F05F00548992 = {
 			isa = PBXGroup;
 			children = (
+				01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */,
 				01CE30B31490F20100548992 /* User Interface */,
 				01CE30B21490F1D800548992 /* Images */,
 				01CE30B01490F18E00548992 /* Classes */,
@@ -120,6 +166,7 @@
 				01CE30831490F05F00548992 /* Meet4Xmas-Info.plist */,
 				01CE30871490F05F00548992 /* main.m */,
 				01CE30891490F05F00548992 /* Meet4Xmas-Prefix.pch */,
+				01A47D0C14911E5D007E1DFC /* Appointment.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -173,6 +220,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				01A47D0B14911C41007E1DFC /* PBXTargetDependency */,
 			);
 			name = Meet4Xmas;
 			productName = Meet4Xmas;
@@ -198,12 +246,42 @@
 			mainGroup = 01CE306C1490F05F00548992;
 			productRefGroup = 01CE30781490F05F00548992 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 01A47CF914911C1D007E1DFC /* Products */;
+					ProjectRef = 01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				01CE30761490F05F00548992 /* Meet4Xmas */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		01A47D0414911C1D007E1DFC /* libStaticHessianKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libStaticHessianKit.a;
+			remoteRef = 01A47D0314911C1D007E1DFC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01A47D0614911C1D007E1DFC /* iPhoneTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = iPhoneTests.octest;
+			remoteRef = 01A47D0514911C1D007E1DFC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01A47D0814911C1D007E1DFC /* MacTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MacTests.octest;
+			remoteRef = 01A47D0714911C1D007E1DFC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		01CE30751490F05F00548992 /* Resources */ = {
@@ -240,6 +318,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01A47D0B14911C41007E1DFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StaticHessianKit;
+			targetProxy = 01A47D0A14911C41007E1DFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */ = {
@@ -355,7 +441,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/Meet4Xmas-Prefix.pch";
 				INFOPLIST_FILE = "Supporting Files/Meet4Xmas-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = Libraries/HessianKit/HessianClasses;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -366,7 +454,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Supporting Files/Meet4Xmas-Prefix.pch";
 				INFOPLIST_FILE = "Supporting Files/Meet4Xmas-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = Libraries/HessianKit/HessianClasses;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

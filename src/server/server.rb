@@ -139,13 +139,14 @@ module Server
   API_VERSION = 1
 
   def self.init_jetty
-    server = Java::Server.new(4567)
+    port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : 4567
+    server = Java::Server.new port
     context = Java::Context.new(server, '/', 0)
     servlet = Servlet.new
     holder = Java::ServletHolder.new servlet
     context.addServlet(holder, "/#{API_VERSION}/")
     server.start()
-    puts "Server living at port 4567 - api version: #{API_VERSION}"
+    puts "Server living at port #{port} - api version: #{API_VERSION}"
   end
 end
 Server::init_jetty
