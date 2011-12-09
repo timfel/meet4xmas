@@ -14,14 +14,16 @@ module Java
   include_class 'org.mortbay.jetty.servlet.ServletHolder'
   include_class 'com.caucho.hessian.server.HessianServlet'
 
-  $CLASSPATH << 'lib/java'
-  java_import   'org.meet4xmas.wire.Appointment'
-  java_import   'org.meet4xmas.wire.ErrorInfo'
-  java_import   'org.meet4xmas.wire.IServiceAPI'
-  java_import   'org.meet4xmas.wire.Location'
-  java_import   'org.meet4xmas.wire.Participant'
-  java_import   'org.meet4xmas.wire.Response'
-  java_import   'org.meet4xmas.wire.TravelPlan'
+  module Wire
+    $CLASSPATH << 'lib/java'
+    java_import   'org.meet4xmas.wire.Appointment'
+    java_import   'org.meet4xmas.wire.ErrorInfo'
+    java_import   'org.meet4xmas.wire.IServiceAPI'
+    java_import   'org.meet4xmas.wire.Location'
+    java_import   'org.meet4xmas.wire.Participant'
+    java_import   'org.meet4xmas.wire.Response'
+    java_import   'org.meet4xmas.wire.TravelPlan'
+  end
 end
 
 class ServletHandler
@@ -34,9 +36,9 @@ class ServletHandler
   end
 
   def getAppointment(appointmentId)
-    a = Java::Appointment.new
+    a = Java::Wire::Appointment.new
     a.identifier = appointmentId
-    a.locationType = Java::Location::LocationType::ChristmasMarket
+    a.locationType = Java::Wire::Location::LocationType::ChristmasMarket
     a.participants = ['bar']
     _success_response(a)
   end
@@ -61,12 +63,12 @@ class ServletHandler
 
   def _build_response(success, error_info=nil, payload=nil)
     if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
-      info = Java::ErrorInfo.new
+      info = Java::Wire::ErrorInfo.new
       info.code = error_info[:code]
       info.message = error_info[:message]
       error_info = info
     end
-    response = Java::Response.new
+    response = Java::Wire::Response.new
     response.success = success
     response.error = error_info
     response.payload = payload
@@ -83,7 +85,7 @@ class ServletHandler
 end
 
 class Servlet < Java::HessianServlet
-  include Java::IServiceAPI
+  include Java::Wire::IServiceAPI
 
   def initialize(*args, &block)
     super
