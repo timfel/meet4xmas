@@ -21,9 +21,7 @@ module Java
   java_import   'lib.java.Servlet'
 end
 
-class Servlet < Java::HessianServlet
-  include Java::Servlet
-
+class ServletHandler
   def registerAccount(userId)
     _success_response()
   end
@@ -38,7 +36,6 @@ class Servlet < Java::HessianServlet
     a.locationType = Java.Location::LocationType::ChristmasMarket
     a.invitees = ['foo']
     a.participants = ['bar']
-    puts "sending: #{a}"
     _success_response(a)
   end
 
@@ -58,7 +55,8 @@ class Servlet < Java::HessianServlet
     _success_response()
   end
 
-private
+  # responses
+
   def _build_response(success, error_info=nil, payload=nil)
     if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
       info = Java::ResponseBody::ErrorInfo.new
@@ -79,6 +77,61 @@ private
 
   def _error_response(error_code, error_message)
     _build_response(false, {:code => error_code, :message => error_message})
+  end
+end
+
+class Servlet < Java::HessianServlet
+  include Java::Servlet
+
+  def initialize(*args, &block)
+    super
+    @handler = ServletHandler.new
+  end
+
+  %w(registerAccount createAppointment getAppointment getTravelPlan joinAppointment declineAppointment finalizeAppointment).each do |meth|
+    define_method(meth) do |*args, &block|
+      handle_servlet_action(meth, *args, &block)
+    end
+  end
+
+  def handle_servlet_action(meth, *args, &block)
+    begin
+      puts "received: #{meth}(#{args_to_s(*args)})"
+    rescue => e
+      puts "error logging received operation: #{e}"
+    end
+
+    begin
+      response = @handler.send(meth, *args, &block)
+    rescue => e
+      response = @handler._error_response(0, e.to_s)
+    end
+    
+    begin
+      puts "sending: #{response}"
+    rescue => e
+      puts "error logging response: #{e}"
+    end
+    response
+  end
+
+private
+  
+  def args_to_s(*args)
+    args.map do |arg|
+      case arg
+      when nil
+        "<null>"
+      when String
+        "'#{arg}'"
+      else
+        if arg.respond_to? :each
+          "[#{args_to_s(*arg)}]"
+        else
+          arg
+        end
+      end
+    end.join(', ')
   end
 end
 
