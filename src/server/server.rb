@@ -88,7 +88,8 @@ class Servlet < Java::HessianServlet
     @handler = ServletHandler.new
   end
 
-  %w(registerAccount createAppointment getAppointment getTravelPlan joinAppointment declineAppointment finalizeAppointment).each do |meth|
+  %w(registerAccount createAppointment getAppointment getTravelPlan
+     joinAppointment declineAppointment finalizeAppointment).each do |meth|
     define_method(meth) do |*args, &block|
       handle_servlet_action(meth, *args, &block)
     end
