@@ -33,7 +33,7 @@ class ServletHandler
   def getAppointment(appointmentId)
     a = Java::Appointment.new
     a.identifier = appointmentId
-    a.locationType = Java.Location::LocationType::ChristmasMarket
+    a.locationType = Java::Location::LocationType::ChristmasMarket
     a.invitees = ['foo']
     a.participants = ['bar']
     _success_response(a)
