@@ -3,9 +3,19 @@ package lib.java;
 import lib.java.util.StringUtil;
 
 public class TravelPlan implements java.io.Serializable {
+  public static enum TravelType {
+    Car(0),
+    Walk(1),
+    PublicTransport(2);
+
+    private int value;
+    private TravelType(int value) { this.value = value; }
+    public int getValue() { return value; }
+  }
+
   public int appointmentId;
   public Location[] path;
-  public int travelType; // 0 = car, 1 = by foot, 2 = public transportation
+  public TravelType travelType;
 
   public String toString() {
     StringBuilder sb = new StringBuilder("TravelPlan(");

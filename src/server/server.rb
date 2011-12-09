@@ -35,7 +35,7 @@ class Servlet < Java::HessianServlet
   def getAppointment(appointmentId)
     a = Java::Appointment.new
     a.identifier = appointmentId
-    a.locationType = 0
+    a.locationType = Java.Location::LocationType::ChristmasMarket
     a.invitees = ['foo']
     a.participants = ['bar']
     puts "sending: #{a}"

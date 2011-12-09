@@ -3,6 +3,14 @@ package lib.java;
 import lib.java.util.StringUtil;
 
 public class Location implements java.io.Serializable {
+  public static enum LocationType {
+    ChristmasMarket(0);
+
+    private int value;
+    private LocationType(int value) { this.value = value; }
+    public int getValue() { return value; }
+  }
+
   public double longitude;
   public double latitude;
   public String title;

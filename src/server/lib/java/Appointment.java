@@ -4,7 +4,7 @@ import lib.java.util.StringUtil;
 
 public class Appointment implements java.io.Serializable {
   public int identifier;
-  public int locationType; // 0 -> xmas market
+  public Location.LocationType locationType;
   public Location location;
   public String[] invitees;
   public String[] participants;
