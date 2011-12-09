@@ -7,8 +7,9 @@ classes=$(source_dir)/Appointment.$(class_ext) \
 				$(source_dir)/TravelPlan.$(class_ext) \
 				\
 				$(source_dir)/ResponseBody.$(class_ext) \
+				$(source_dir)/Servlet.$(class_ext) \
 				\
-				$(source_dir)/Servlet.$(class_ext)
+				$(source_dir)/util/StringUtil.$(class_ext)
 
 classpath=-classpath .
 
