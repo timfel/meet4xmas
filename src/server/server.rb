@@ -25,7 +25,7 @@ class Servlet < Java::HessianServlet
   include Java::Servlet
 
   def registerAccount(userId)
-    _success_response(0)
+    _success_response()
   end
 
   def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
