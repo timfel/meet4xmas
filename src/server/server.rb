@@ -1,10 +1,10 @@
 $LOAD_PATH.unshift File.dirname(__FILE__)
 
 require 'java'
-require 'hessian'
-require 'jetty'
-require 'jetty-util'
-require 'servlet-api'
+require 'lib/java/hessian'
+require 'lib/java/jetty'
+require 'lib/java/jetty-util'
+require 'lib/java/servlet-api'
 require 'rubygems'
 require 'geokit'
 
@@ -14,11 +14,14 @@ module Java
   include_class 'org.mortbay.jetty.servlet.ServletHolder'
   include_class 'com.caucho.hessian.server.HessianServlet'
 
-  java_import   'lib.java.Appointment'
-  java_import   'lib.java.Location'
-  java_import   'lib.java.TravelPlan'
-  java_import   'lib.java.ResponseBody'
-  java_import   'lib.java.Servlet'
+  $CLASSPATH << 'lib/java'
+  java_import   'org.meet4xmas.wire.Appointment'
+  java_import   'org.meet4xmas.wire.ErrorInfo'
+  java_import   'org.meet4xmas.wire.IServiceAPI'
+  java_import   'org.meet4xmas.wire.Location'
+  java_import   'org.meet4xmas.wire.Participant'
+  java_import   'org.meet4xmas.wire.Response'
+  java_import   'org.meet4xmas.wire.TravelPlan'
 end
 
 class ServletHandler
@@ -34,7 +37,6 @@ class ServletHandler
     a = Java::Appointment.new
     a.identifier = appointmentId
     a.locationType = Java::Location::LocationType::ChristmasMarket
-    a.invitees = ['foo']
     a.participants = ['bar']
     _success_response(a)
   end
@@ -59,12 +61,12 @@ class ServletHandler
 
   def _build_response(success, error_info=nil, payload=nil)
     if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
-      info = Java::ResponseBody::ErrorInfo.new
+      info = Java::ErrorInfo.new
       info.code = error_info[:code]
       info.message = error_info[:message]
       error_info = info
     end
-    response = Java::ResponseBody.new
+    response = Java::Response.new
     response.success = success
     response.error = error_info
     response.payload = payload
@@ -81,7 +83,7 @@ class ServletHandler
 end
 
 class Servlet < Java::HessianServlet
-  include Java::Servlet
+  include Java::IServiceAPI
 
   def initialize(*args, &block)
     super

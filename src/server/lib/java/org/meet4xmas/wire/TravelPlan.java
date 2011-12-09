@@ -1,6 +1,6 @@
-package lib.java;
+package org.meet4xmas.wire;
 
-import lib.java.util.StringUtil;
+import org.meet4xmas.util.StringUtil;
 
 public class TravelPlan implements java.io.Serializable {
   public static class TravelType {

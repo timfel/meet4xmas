@@ -1,4 +1,4 @@
-package lib.java.util;
+package org.meet4xmas.util;
 
 public class StringUtil {
 	static String NULL_STRING = "<null>";

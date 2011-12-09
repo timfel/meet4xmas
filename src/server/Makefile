@@ -1,37 +1,20 @@
-source_dir=lib/java
+all: java_libs
 
-class_ext=class
-source_ext=java
+java_lib_dir=lib/java
+java_libs:
+	cd $(java_lib_dir) && make all
 
-server_classes=$(source_dir)/Appointment.$(class_ext) \
-	$(source_dir)/Location.$(class_ext) \
-	$(source_dir)/TravelPlan.$(class_ext) \
-	\
-	$(source_dir)/ResponseBody.$(class_ext) \
-	$(source_dir)/Servlet.$(class_ext) \
-	\
-	$(source_dir)/util/StringUtil.$(class_ext)
-test_classes=Test.$(class_ext)
+java_libs_service:
+	cd $(java_lib_dir) && make service_classes
 
-all_classes=$(server_classes) $(test_classes)
+java_libs_test:
+	cd $(java_lib_dir) && make test_classes
 
-classpath=-classpath .
-
-all: $(all_classes)
-
-
-test: $(test_classes)
-	java -classpath ".:hessian.jar" Test
-
-Test.$(class_ext): Test.$(source_ext)
-	javac -classpath ".:hessian.jar" $<
-
-run: $(server_classes)
+run: $(java_libs_service)
 	ruby server.rb
 
-%.$(class_ext): %.$(source_ext)
-	javac $(classpath) $<
-
+run_test: $(java_libs_test)
+	cd $(java_lib_dir) && make run_test
 
 clean:
-	rm -rf $(all_classes)
+	cd $(java_lib_dir) && make clean

@@ -1,18 +1,8 @@
-package lib.java;
+package org.meet4xmas.wire;
 
-import lib.java.util.StringUtil;
-import java.io.Serializable;
+import org.meet4xmas.util.StringUtil;
 
-public class ResponseBody implements Serializable {
-	public static class ErrorInfo implements Serializable {
-		public int code;
-		public String message;
-
-    public String toString() {
-      return "API ERROR(" + code  +"): '" + message + "'";
-    }
-	}
-
+public class Response implements java.io.Serializable {
 	public boolean success;
 	public ErrorInfo error;
 	public Object payload;
