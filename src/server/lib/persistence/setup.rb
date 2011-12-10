@@ -10,9 +10,9 @@ module Persistence
   DB_FILE = File.expand_path('../meet4xmas.sqlite', __FILE__)
 end
 DataMapper.setup(:default, "sqlite3://#{Persistence::DB_FILE}")
-DataMapper.finalize
 
 # create/update the tables
+DataMapper.finalize
 DataMapper.auto_upgrade!
 
 # some configurations
