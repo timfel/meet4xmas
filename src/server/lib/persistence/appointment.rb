@@ -54,6 +54,14 @@ module Persistence
   		participation.update attributes
       save
     end
+
+    def join(participant, travel_type, location) # participant is either a User or its id
+      update_participation_info(participant, {
+        :status => ParticipationStatus::Accepted,
+        :travel_type => travel_type
+        #:location => location # TODO
+      })
+    end
   end
 
   class AppointmentParticipation
