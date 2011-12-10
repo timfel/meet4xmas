@@ -3,12 +3,18 @@ package org.meet4xmas.util;
 public class StringUtil {
 	static String NULL_STRING = "<null>";
 
-	public static String ValueOrNullToString(Object obj) {
+	public static String ValueOrNullToString(Object obj, boolean testForString) {
 		if (obj == null) {
 			return NULL_STRING;
+		} else if(testForString && obj instanceof String) {
+			return "'" + obj + "'";
 		} else {
 			return obj.toString();
 		}
+	}
+
+	public static String ValueOrNullToString(Object obj) {
+		return ValueOrNullToString(obj, false);
 	}
 
 	public static interface IArrayElementVisitor {
@@ -17,15 +23,6 @@ public class StringUtil {
 	public static class DefaultArrayElementVisitor implements IArrayElementVisitor {
 		public String visitElement(Object elem) {
 			return ValueOrNullToString(elem);
-		}
-	}
-	public static class StringArrayElementVisitor implements IArrayElementVisitor {
-		public String visitElement(Object elem) {
-			if(elem == null) {
-        return StringUtil.NULL_STRING;
-      } else {
-        return "'" + elem + "'";
-      }
 		}
 	}
 

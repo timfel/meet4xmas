@@ -23,8 +23,8 @@ public class Location implements java.io.Serializable {
     StringBuilder sb = new StringBuilder("Location(");
     sb.append("@longitude: ").append(longitude).append(", ");
     sb.append("@latitude: ").append(latitude).append(", ");
-    sb.append("@title: ").append(StringUtil.ValueOrNullToString(title)).append(", ");
-    sb.append("@description: ").append(StringUtil.ValueOrNullToString(description));
+    sb.append("@title: ").append(StringUtil.ValueOrNullToString(title, true)).append(", ");
+    sb.append("@description: ").append(StringUtil.ValueOrNullToString(description, true));
     sb.append(")");
     return sb.toString();
   }

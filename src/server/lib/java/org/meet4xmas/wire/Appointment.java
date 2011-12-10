@@ -15,7 +15,8 @@ public class Appointment implements java.io.Serializable {
     sb.append("@identifier: ").append(identifier).append(", ");
     sb.append("@locationType: ").append(Location.LocationType.toString(locationType)).append(", ");
     sb.append("@location: ").append(StringUtil.ValueOrNullToString(location)).append(", ");
-    sb.append("@participants: ").append(StringUtil.ArrayOrNullToString(participants, new StringUtil.StringArrayElementVisitor()));
+    sb.append("@participants: ").append(StringUtil.ArrayOrNullToString(participants));
+    sb.append(")");
     return sb.toString();
   }
 }

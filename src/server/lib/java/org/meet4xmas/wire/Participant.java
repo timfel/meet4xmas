@@ -23,8 +23,9 @@ public class Participant implements java.io.Serializable {
 
   public String toString() {
     StringBuilder sb = new StringBuilder("Participant(");
-    sb.append("@userId: ").append(StringUtil.ValueOrNullToString(userId)).append(", ");
+    sb.append("@userId: ").append(StringUtil.ValueOrNullToString(userId, true)).append(", ");
     sb.append("@status: ").append(ParticipationStatus.toString(status));
+    sb.append(")");
     return sb.toString();
   }
 }

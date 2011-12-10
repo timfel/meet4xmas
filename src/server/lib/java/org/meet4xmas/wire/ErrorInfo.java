@@ -5,6 +5,6 @@ public class ErrorInfo implements java.io.Serializable {
 	public String message;
 
   public String toString() {
-    return "API ERROR(" + code  +"): '" + message + "'";
+    return "ErrorInfo(" + code  +", '" + message + "')";
   }
 }
