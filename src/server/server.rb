@@ -32,6 +32,8 @@ end
 class ServletHandler
   def registerAccount(userId)
     user = Persistence::User.create :id => userId
+    return _error_response(0, "Unknown error while creating user") unless user
+
     _success_response()
   end
 
