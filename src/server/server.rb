@@ -47,11 +47,21 @@ class ServletHandler
   end
 
   def getAppointment(appointmentId)
-    a = Java::Wire::Appointment.new
-    a.identifier = appointmentId
-    a.locationType = Java::Wire::Location::LocationType::ChristmasMarket
-    a.participants = ['bar']
-    _success_response(a)
+    appointment = Persistence::Appointment.first(:id => appointmentId)
+    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
+
+    result = Java::Wire::Appointment.new
+    result.identifier = appointment.id
+    result.creator = appointment.creator.id
+    result.locationType = appointment.location_type
+    result.participants = appointment.participations.map do |participation|
+      java_participant = Java::Wire::Participant.new
+      java_participant.userId = participation.participant.id
+      java_participant.status = participation.status
+      java_participant
+    end
+    result.message = appointment.user_message
+    _success_response(result)
   end
 
   def getTravelPlan(appointmentId, travelType, location)
