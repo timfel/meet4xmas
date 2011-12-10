@@ -4,6 +4,8 @@ require 'dm-migrations'
 
 # load models
 require File.expand_path('../user', __FILE__)
+require File.expand_path('../appointment', __FILE__)
+
 # not a real model, but required to operate correctly
 require File.expand_path('../enums', __FILE__)
 
