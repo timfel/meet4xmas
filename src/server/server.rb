@@ -38,7 +38,12 @@ class ServletHandler
   end
 
   def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
-    _error_response(42, 'error!')
+    user = Persistence::User.first(:id => userId)
+    return _error_response(0, "User '#{userId}' does not exist") unless user
+    appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
+    return _error_response(0, "Unknown error while creating appointment") unless appointment
+    
+    _success_response(appointment.id)
   end
 
   def getAppointment(appointmentId)
