@@ -44,5 +44,6 @@ end
 puts "For help enter 'h'"
 def h
 	puts 'available methods:'
-	puts @rpc_methods.join("\n")
+	@rpc_methods.each { |m| puts "  #{m}" }
+	nil
 end
