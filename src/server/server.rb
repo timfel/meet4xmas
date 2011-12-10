@@ -31,7 +31,7 @@ end
 
 class ServletHandler
   def registerAccount(userId)
-    Persistence::User.create :identifier => userId
+    user = Persistence::User.create :id => userId
     _success_response()
   end
 
