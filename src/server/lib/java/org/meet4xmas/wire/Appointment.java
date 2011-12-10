@@ -4,9 +4,11 @@ import org.meet4xmas.util.StringUtil;
 
 public class Appointment implements java.io.Serializable {
   public int identifier;
+  public String creator; // userId
   public int locationType; // use values in Location.LocationType
   public Location location;
-  public String[] participants;
+  public Participant[] participants;
+  public String message;
 
   public String toString() {
     StringBuilder sb = new StringBuilder("Appointment(");
