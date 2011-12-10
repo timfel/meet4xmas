@@ -64,7 +64,7 @@ module Persistence
 
   	# some participant properties specific to this very participation
   	property :travel_type, Integer # use values of Persistence::TravelType
-  	# has 1, :location
+  	# has 1, :location # TODO
   	property :status, Integer, :required => true, :default => ParticipationStatus::Pending
   	# use values of Persistence::ParticipationStatus
   end
