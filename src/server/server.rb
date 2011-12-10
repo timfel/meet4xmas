@@ -115,7 +115,7 @@ class Servlet < Java::HessianServlet
     begin
       response = @handler.send(meth, *args, &block)
     rescue => e
-      response = @handler._error_response(0, e.to_s)
+      response = @handler._error_response(0, "#{e}\n  "+e.backtrace.join("\n  "))
     end
     
     begin
