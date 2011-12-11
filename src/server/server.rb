@@ -55,6 +55,7 @@ class ServletHandler
     result.creator = appointment.creator.id
     result.locationType = appointment.location_type
     #result.location = nil # TODO
+    result.isFinal = appointment.is_final
     result.participants = appointment.participations.map do |participation|
       java_participant = Java::Wire::Participant.new
       java_participant.userId = participation.participant.id

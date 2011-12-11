@@ -13,6 +13,7 @@ module Persistence
     property :user_message, String
     property :location_type, Integer, :required => true, :default => LocationType::ChristmasMarket
     validates_within :location_type, :set => LocationType::ALL # use values of Persistence::LocationType
+    property :is_final, Boolean, :required => true, :default => false
 
     belongs_to :creator, 'Persistence::User'
     has n, :participations, 'Persistence::AppointmentParticipation'

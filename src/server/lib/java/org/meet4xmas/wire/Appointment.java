@@ -9,13 +9,15 @@ public class Appointment implements java.io.Serializable {
   public Location location;
   public Participant[] participants;
   public String message;
+  public boolean isFinal;
 
   public String toString() {
     StringBuilder sb = new StringBuilder("Appointment(");
     sb.append("@identifier: ").append(identifier).append(", ");
     sb.append("@locationType: ").append(Location.LocationType.toString(locationType)).append(", ");
     sb.append("@location: ").append(StringUtil.ValueOrNullToString(location)).append(", ");
-    sb.append("@participants: ").append(StringUtil.ArrayOrNullToString(participants));
+    sb.append("@participants: ").append(StringUtil.ArrayOrNullToString(participants)).append(", ");
+    sb.append("@isFinal: ").append(isFinal);
     sb.append(")");
     return sb.toString();
   }
