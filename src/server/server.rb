@@ -83,7 +83,13 @@ class ServletHandler
   end
 
   def getTravelPlan(appointmentId, travelType, java_location)
-    _success_response(TravelPlan.new)
+    appointment = Persistence::Appointment.first(:id => appointmentId)
+    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
+
+    plan = Java::Wire::TravelPlan.new
+    plan.path = [] # TODO
+
+    _success_response(plan)
   end
 
   def joinAppointment(appointmentId, userId, travelType, java_location)

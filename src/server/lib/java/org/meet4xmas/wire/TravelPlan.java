@@ -18,15 +18,11 @@ public class TravelPlan implements java.io.Serializable {
     }
   }
 
-  public int appointmentId;
   public Location[] path;
-  public int travelType; // use values in TravelType
 
   public String toString() {
     StringBuilder sb = new StringBuilder("TravelPlan(");
-    sb.append("@appointmentId: ").append(appointmentId).append(", ");
-    sb.append("@path: ").append(StringUtil.ArrayOrNullToString(path)).append(", ");
-    sb.append("@travelType: ").append(TravelType.toString(travelType));
+    sb.append("@path: ").append(StringUtil.ArrayOrNullToString(path));
     sb.append(")");
     return sb.toString();
   }
