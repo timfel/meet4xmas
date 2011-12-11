@@ -39,12 +39,14 @@ class ServletHandler
   end
 
   def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
-    user = Persistence::User.first(:id => userId)
-    return _error_response(0, "User '#{userId}' does not exist") unless user
-    appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
-    return _error_response(0, "Unknown error while creating appointment") unless appointment
-    
-    _success_response(appointment.id)
+    Persistence.transaction do |t|
+      user = Persistence::User.first(:id => userId)
+      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
+      appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
+      return _rollback_and_return_error(t, 0, "Unknown error while creating appointment") unless appointment
+      
+      _success_response(appointment.id)
+    end
   end
 
   def getAppointment(appointmentId)
@@ -72,34 +74,37 @@ class ServletHandler
   end
 
   def joinAppointment(appointmentId, userId, travelType, location)
-    appointment = Persistence::Appointment.first(:id => appointmentId)
-    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
-    user = Persistence::User.first(:id => userId)
-    return _error_response(0, "User '#{userId}' does not exist") unless user
+    Persistence.transaction do |t|
+      appointment = Persistence::Appointment.first(:id => appointmentId)
+      return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
+      user = Persistence::User.first(:id => userId)
+      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
 
-    appointment.join(user, travelType, location)
-
-    _success_response()
+      appointment.join(user, travelType, location)
+      _success_response()
+    end
   end
 
   def declineAppointment(appointmentId, userId)
-    appointment = Persistence::Appointment.first(:id => appointmentId)
-    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
-    user = Persistence::User.first(:id => userId)
-    return _error_response(0, "User '#{userId}' does not exist") unless user
+    Persistence.transaction do |t|
+      appointment = Persistence::Appointment.first(:id => appointmentId)
+      return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
+      user = Persistence::User.first(:id => userId)
+      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
 
-    appointment.decline(user)
-    
-    _success_response()
+      appointment.decline(user)
+      _success_response()
+    end
   end
 
   def finalizeAppointment(appointmentId)
-    appointment = Persistence::Appointment.first(:id => appointmentId)
-    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
-    
-    appointment.finalize()
-
-    _success_response()
+    Persistence.transaction do |t|
+      appointment = Persistence::Appointment.first(:id => appointmentId)
+      return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
+      
+      appointment.finalize()
+      _success_response()
+    end
   end
 
   # responses
