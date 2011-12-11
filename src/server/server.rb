@@ -38,10 +38,23 @@ class ServletHandler
     end
   end
 
-  def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
+  def createAppointment(userId, travelType, java_location, invitees, locationType, userMessage)
+    return _error_response(0, "Missing parameter 'location'") unless java_location
+
     Persistence.transaction do |t|
+      # fetch user
       user = Persistence::User.first(:id => userId)
       return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
+
+      # build location object
+      location = Persistence::Location.create({
+        :latitude => java_location.latitude,
+        :longitude => java_location.longitude,
+        :title => java_location.title,
+        :description => java_location.description
+      })
+
+      # create appointment
       appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
       return _rollback_and_return_error(t, 0, "Unknown error while creating appointment") unless appointment
       
@@ -69,17 +82,29 @@ class ServletHandler
     _success_response(result)
   end
 
-  def getTravelPlan(appointmentId, travelType, location)
+  def getTravelPlan(appointmentId, travelType, java_location)
     _success_response(TravelPlan.new)
   end
 
-  def joinAppointment(appointmentId, userId, travelType, location)
+  def joinAppointment(appointmentId, userId, travelType, java_location)
+    return _error_response(0, "Missing parameter 'location'") unless java_location
+
     Persistence.transaction do |t|
+      # fetch user and appointment
       appointment = Persistence::Appointment.first(:id => appointmentId)
       return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
       user = Persistence::User.first(:id => userId)
       return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
 
+      # build location object
+      location = Persistence::Location.create({
+        :latitude => java_location.latitude,
+        :longitude => java_location.longitude,
+        :title => java_location.title,
+        :description => java_location.description
+      })
+
+      # join the appointment
       appointment.join(user, travelType, location)
       _success_response()
     end

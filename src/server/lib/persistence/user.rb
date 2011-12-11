@@ -17,7 +17,7 @@ module Persistence
         :created_at => DateTime.now,
         :location_type => location_type, :user_message => user_message
       })
-      appointment.update_participation_info self, :travel_type => travel_type #, :location => location # TODO
+      appointment.update_participation_info self, :travel_type => travel_type, :location => location
       appointment.add_participants *invitees
       if appointment.save
         return appointment

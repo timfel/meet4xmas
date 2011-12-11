@@ -62,8 +62,8 @@ module Persistence
       puts "travel_type: #{travel_type}"
       update_participation_info(participant, {
         :status => ParticipationStatus::Accepted,
-        :travel_type => travel_type
-        #:location => location # TODO
+        :travel_type => travel_type,
+        :location => location
       })
     end
 
