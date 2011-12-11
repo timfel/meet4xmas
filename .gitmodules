@@ -1,0 +1,3 @@
+[submodule "src/wp7/hessiancsharp"]
+	path = src/wp7/hessiancsharp
+	url = https://github.com/timfel/csharp-hessian.git
