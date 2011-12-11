@@ -13,15 +13,17 @@ module Persistence
     has n, :appointments, :through => :appointment_participations, :via => :appointment
 
     def create_appointment(travel_type, location, invitees, location_type, user_message)
-      User.transaction do
-        appointment = created_appointments.create({
-          :created_at => DateTime.now,
-          :location_type => location_type, :user_message => user_message
-        })
-        appointment.update_participation_info self, :travel_type => travel_type #, :location => location # TODO
-        appointment.add_participants *invitees
-        appointment.save
-        appointment
+      appointment = created_appointments.create({
+        :created_at => DateTime.now,
+        :location_type => location_type, :user_message => user_message
+      })
+      appointment.update_participation_info self, :travel_type => travel_type #, :location => location # TODO
+      appointment.add_participants *invitees
+      if appointment.save
+        return appointment
+      else
+        errors = appointment.errors.join(", \n")
+        raise "Failed to save the appointment. Errors:\n#{errors}"
       end
     end
   end

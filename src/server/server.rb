@@ -31,10 +31,11 @@ end
 
 class ServletHandler
   def registerAccount(userId)
-    user = Persistence::User.create :id => userId
-    return _error_response(0, "Unknown error while creating user") unless user
-
-    _success_response()
+    Persistence.transaction do |t|
+      user = Persistence::User.create :id => userId
+      return _rollback_and_return_error(t, 0, "Unknown error while creating user") unless user
+      _success_response()
+    end
   end
 
   def createAppointment(userId, travelType, location, invitees, locationType, userMessage)
@@ -123,6 +124,13 @@ class ServletHandler
 
   def _error_response(error_code, error_message)
     _build_response(false, {:code => error_code, :message => error_message})
+  end
+
+  def _rollback_and_return_error(transaction, error_code, error_message)
+    t.rollback
+    x = _error_response(error_code, error_message)
+    puts "result0: #{x}"
+    x
   end
 end
 
