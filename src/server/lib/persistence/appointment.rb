@@ -68,6 +68,11 @@ module Persistence
     def decline(participant) # participant is either a User or its id
       update_participation_info(participant, :status => ParticipationStatus::Declined)
     end
+
+    def finalize()
+      self.is_final = true
+      save
+    end
   end
 
   class AppointmentParticipation

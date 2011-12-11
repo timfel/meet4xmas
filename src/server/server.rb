@@ -93,6 +93,11 @@ class ServletHandler
   end
 
   def finalizeAppointment(appointmentId)
+    appointment = Persistence::Appointment.first(:id => appointmentId)
+    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
+    
+    appointment.finalize()
+
     _success_response()
   end
 
