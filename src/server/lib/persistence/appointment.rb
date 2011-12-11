@@ -32,7 +32,7 @@ module Persistence
     	invitees.each do |invitee|
     		unless invitee.kind_of? User
     			inviteeObj = User.first(:id => invitee)
-    			raise "Invalid user '#{invitee}'" unless inviteeObj
+    			raise "User '#{invitee}' does not exist" unless inviteeObj
     			invitee = inviteeObj
     		end
     		participations.create(:participant => invitee)
@@ -46,7 +46,7 @@ module Persistence
 
     	unless participant.kind_of? User
   			participantObj = User.first(:id => participant)
-  			raise "Invalid user '#{participant}'" unless participantObj
+  			raise "User '#{participant}' does not exist" unless participantObj
   			participant = participantObj
   		end
   		participation = participations.first(:participant => participant)
