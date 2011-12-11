@@ -82,8 +82,8 @@ module Persistence
   	belongs_to :appointment, 'Persistence::Appointment', :key => true
 
   	# some participant properties specific to this very participation
-  	property :travel_type, Integer
-    validates_within :travel_type, :set => TravelType::ALL # use values of Persistence::TravelType
+  	property :travel_type, Integer # use values of Persistence::TravelType
+    validates_within :travel_type, :set => TravelType::ALL, :allow_nil => true
   	# has 1, :location # TODO
   	property :status, Integer, :required => true, :default => ParticipationStatus::Pending
     validates_within :status, :set => ParticipationStatus::ALL # use values of Persistence::ParticipationStatus
