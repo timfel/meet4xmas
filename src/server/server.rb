@@ -76,11 +76,18 @@ class ServletHandler
     return _error_response(0, "User '#{userId}' does not exist") unless user
 
     appointment.join(user, travelType, location)
-    
+
     _success_response()
   end
 
-  def declineAppointment(appointmentId, userId, userMessage)
+  def declineAppointment(appointmentId, userId)
+    appointment = Persistence::Appointment.first(:id => appointmentId)
+    return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
+    user = Persistence::User.first(:id => userId)
+    return _error_response(0, "User '#{userId}' does not exist") unless user
+
+    appointment.decline(user)
+    
     _success_response()
   end
 

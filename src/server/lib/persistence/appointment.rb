@@ -62,6 +62,10 @@ module Persistence
         #:location => location # TODO
       })
     end
+
+    def decline(participant) # participant is either a User or its id
+      update_participation_info(participant, :status => ParticipationStatus::Declined)
+    end
   end
 
   class AppointmentParticipation
