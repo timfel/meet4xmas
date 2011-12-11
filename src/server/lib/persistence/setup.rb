@@ -11,6 +11,9 @@ require File.expand_path('../appointment', __FILE__)
 require File.expand_path('../enums', __FILE__)
 
 
+# debugging options
+DataMapper::Logger.new(STDOUT, :debug)
+
 # open the database
 module Persistence
   DB_FILE = File.expand_path('../meet4xmas.sqlite', __FILE__)
