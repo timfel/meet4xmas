@@ -1,3 +1,7 @@
 [submodule "src/wp7/hessiancsharp"]
 	path = src/wp7/hessiancsharp
 	url = https://github.com/timfel/csharp-hessian.git
+[submodule "src/ios/Libraries/HessianKit"]
+	path = src/ios/Libraries/HessianKit
+	url = git://github.com/frankschlegel/HessianKit.git
+

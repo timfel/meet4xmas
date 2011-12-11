@@ -1,21 +1,20 @@
-source_dir=lib/java
+all: java_libs
 
-class_ext=class
-source_ext=java
-classes=$(source_dir)/Appointment.$(class_ext) \
-				$(source_dir)/Location.$(class_ext) \
-				$(source_dir)/Traveller.$(class_ext) \
-				$(source_dir)/TravelPlan.$(class_ext)
+java_lib_dir=lib/java
+java_libs:
+	cd $(java_lib_dir) && make all
 
-classpath=-classpath .
+java_libs_service:
+	cd $(java_lib_dir) && make service_classes
 
-all: $(classes)
+java_libs_test:
+	cd $(java_lib_dir) && make test_classes
 
-%.$(class_ext): %.$(source_ext)
-	javac $(classpath) $<
-
-run: all
+run: java_libs_service
 	ruby server.rb
 
+run_test: java_libs_test
+	cd $(java_lib_dir) && make run_test
+
 clean:
-	rm -rf $(classes)
+	cd $(java_lib_dir) && make clean
