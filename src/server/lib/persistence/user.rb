@@ -22,8 +22,7 @@ module Persistence
       if appointment.save
         return appointment
       else
-        errors = appointment.errors.join(", \n")
-        raise "Failed to save the appointment. Errors:\n#{errors}"
+        raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
       end
     end
   end

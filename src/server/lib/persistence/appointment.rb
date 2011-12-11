@@ -21,7 +21,7 @@ module Persistence
 
     def initialize(*args, &block)
       super
-      save
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
 
       # add the creator to the participants
       add_participants creator
@@ -39,7 +39,7 @@ module Persistence
         end
         participations.create(:participant => invitee)
       end
-      save
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
     end
 
     def update_participation_info(participant, attributes)
@@ -54,10 +54,12 @@ module Persistence
       participation = participations.first(:participant => participant)
       raise "User '#{participant.id}' does not participate in appointment #{id}" unless participation
       participation.update attributes
-      save
+
+      raise "Failed to save the appointment. Errors:\n#{participation.errors.inspect}" unless participation.save()
     end
 
     def join(participant, travel_type, location) # participant is either a User or its id
+      puts "travel_type: #{travel_type}"
       update_participation_info(participant, {
         :status => ParticipationStatus::Accepted,
         :travel_type => travel_type
@@ -71,7 +73,7 @@ module Persistence
 
     def finalize()
       self.is_final = true
-      save
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
     end
   end
 

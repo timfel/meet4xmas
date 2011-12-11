@@ -32,6 +32,3 @@ DataMapper.setup(Persistence::REPOSITORY_NAME, "sqlite3://#{Persistence::DB_FILE
 # create/update the tables
 DataMapper.finalize
 DataMapper.auto_upgrade!
-
-# some configurations
-DataMapper::Model.raise_on_save_failure = true
