@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'dm-core'
 require 'dm-migrations'
+require 'dm-validations'
 
 # load models
 require File.expand_path('../user', __FILE__)
