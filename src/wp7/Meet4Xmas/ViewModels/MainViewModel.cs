@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.IO.IsolatedStorage;
 
 
 namespace Meet4Xmas
@@ -21,12 +22,15 @@ namespace Meet4Xmas
         public MainViewModel()
         {
             this.Items = new ObservableCollection<ItemViewModel>();
+            this.Settings = IsolatedStorageSettings.ApplicationSettings;
         }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
         public ObservableCollection<ItemViewModel> Items { get; private set; }
+
+        public IsolatedStorageSettings Settings { get; private set; }
 
         private string _sampleProperty = "Sample Runtime Property Value";
         /// <summary>

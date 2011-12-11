@@ -17,7 +17,6 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
- 
         <!--Panorama control-->
         <controls:Panorama Title="Meet 4 Xmas">
             <controls:Panorama.Background>
@@ -26,13 +25,18 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem Header="My Account">
-                <Grid Height="Auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="grid1" VerticalAlignment="Stretch" Width="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="290" />
-                        <ColumnDefinition Width="118" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox Height="Auto" HorizontalAlignment="Stretch" Name="textBox1" Text="TextBox" VerticalAlignment="Top" Width="Auto" IsEnabled="True" Grid.ColumnSpan="2" />
-                    <Button Content="Button" Height="72" HorizontalAlignment="Left" Margin="6,78,0,0" Name="button1" VerticalAlignment="Top" Width="160" Click="button1_Click" />
+                <Grid Name="SignUpGrid" VerticalAlignment="Top" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition MinHeight="50" />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <!-- Progress Bar -->
+                    <ProgressBar x:Name="SignUpProgressBar" IsIndeterminate="True" Grid.Row="1" Visibility="Collapsed"></ProgressBar>
+                    <TextBox Name="textBox1" Text="" IsEnabled="True" Grid.ColumnSpan="1" Grid.Row="2" AcceptsReturn="True" />
+                    <Button Content="Sign me up!" Name="SignUpButton" Click="SignUpButtonClick" Grid.Row="3" DataContext="{Binding}" />
+                    <TextBlock Name="SignUpTextInput" Text="You have to create an account first. Choose a username and click &quot;Sign me up!&quot;" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" />
                 </Grid>
             </controls:PanoramaItem>
  
