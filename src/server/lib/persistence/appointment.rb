@@ -20,40 +20,40 @@ module Persistence
     has n, :participants, 'Persistence::User', :through => :participations, :via => :participant
 
     def initialize(*args, &block)
-    	super
-    	save
+      super
+      save
 
-    	# add the creator to the participants
-    	add_participants creator
-    	update_participation_info creator, :status => ParticipationStatus::Accepted
+      # add the creator to the participants
+      add_participants creator
+      update_participation_info creator, :status => ParticipationStatus::Accepted
 
-    	self
+      self
     end
 
     def add_participants(*invitees) # either resources or their ids
-    	invitees.each do |invitee|
-    		unless invitee.kind_of? User
-    			inviteeObj = User.first(:id => invitee)
-    			raise "User '#{invitee}' does not exist" unless inviteeObj
-    			invitee = inviteeObj
-    		end
-    		participations.create(:participant => invitee)
-    	end
-    	save
+      invitees.each do |invitee|
+        unless invitee.kind_of? User
+          inviteeObj = User.first(:id => invitee)
+          raise "User '#{invitee}' does not exist" unless inviteeObj
+          invitee = inviteeObj
+        end
+        participations.create(:participant => invitee)
+      end
+      save
     end
 
     def update_participation_info(participant, attributes)
-    	# participant is either a User or its id
-    	# attributes will be passed to AppointmentParticipation#update
+      # participant is either a User or its id
+      # attributes will be passed to AppointmentParticipation#update
 
-    	unless participant.kind_of? User
-  			participantObj = User.first(:id => participant)
-  			raise "User '#{participant}' does not exist" unless participantObj
-  			participant = participantObj
-  		end
-  		participation = participations.first(:participant => participant)
-  		raise "User '#{participant.id}' does not participate in appointment #{id}" unless participation
-  		participation.update attributes
+      unless participant.kind_of? User
+        participantObj = User.first(:id => participant)
+        raise "User '#{participant}' does not exist" unless participantObj
+        participant = participantObj
+      end
+      participation = participations.first(:participant => participant)
+      raise "User '#{participant.id}' does not participate in appointment #{id}" unless participation
+      participation.update attributes
       save
     end
 
@@ -76,16 +76,16 @@ module Persistence
   end
 
   class AppointmentParticipation
-  	include DataMapper::Resource
+    include DataMapper::Resource
 
-  	belongs_to :participant, 'Persistence::User', :key => true
-  	belongs_to :appointment, 'Persistence::Appointment', :key => true
+    belongs_to :participant, 'Persistence::User', :key => true
+    belongs_to :appointment, 'Persistence::Appointment', :key => true
 
-  	# some participant properties specific to this very participation
-  	property :travel_type, Integer # use values of Persistence::TravelType
+    # some participant properties specific to this very participation
+    property :travel_type, Integer # use values of Persistence::TravelType
     validates_within :travel_type, :set => TravelType::ALL, :allow_nil => true
-  	# has 1, :location # TODO
-  	property :status, Integer, :required => true, :default => ParticipationStatus::Pending
+    # has 1, :location # TODO
+    property :status, Integer, :required => true, :default => ParticipationStatus::Pending
     validates_within :status, :set => ParticipationStatus::ALL # use values of Persistence::ParticipationStatus
   end
 end
