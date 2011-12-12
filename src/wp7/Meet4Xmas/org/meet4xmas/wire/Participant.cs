@@ -6,9 +6,9 @@ namespace org.meet4xmas.wire
     {
         public static class ParticipationStatus
         {
-            public sealed static const int Pending = 0;
-            public sealed static const int Joined = 1;
-            public sealed static const int Declined = 2;
+            public const int Pending = 0;
+            public const int Joined = 1;
+            public const int Declined = 2;
 
             public static string ToString(int status)
             {

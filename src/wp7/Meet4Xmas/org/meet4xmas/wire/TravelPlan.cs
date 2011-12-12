@@ -6,9 +6,9 @@ namespace org.meet4xmas.wire
     {
         public static class TravelType
         {
-            public sealed static const int Car = 0;
-            public sealed static const int Walk = 1;
-            public sealed static const int PublicTransport = 2;
+            public const int Car = 0;
+            public const int Walk = 1;
+            public const int PublicTransport = 2;
 
             public static string ToString(int travelType)
             {

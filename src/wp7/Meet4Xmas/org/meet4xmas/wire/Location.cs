@@ -6,7 +6,7 @@ namespace org.meet4xmas.wire
     {
         public static class LocationType
         {
-            public static const int ChristmasMarket = 0;
+            public const int ChristmasMarket = 0;
 
             public static string ToString(int locationType)
             {
