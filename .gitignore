@@ -7,3 +7,5 @@ src/ios/DerivedData/
 src/ios/Meet4Xmas.xcodeproj/xcuserdata/*
 xcuserdata
 
+
+*.suo
