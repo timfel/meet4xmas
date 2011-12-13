@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using hessiancsharp.client;
-using System.Reflection;
+using org.meet4xmas.wire;
+using System.Windows.Controls.Primitives;
 
 namespace Meet4Xmas
 {
@@ -44,27 +35,27 @@ namespace Meet4Xmas
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
-                if (!App.ViewModel.Settings.Contains("AccountName"))
-                {
-                    SignUpGrid.Visibility = Visibility.Visible;
-                }
+            }
+            if (Settings.Account == null)
+            {
+                NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
             }
         }
 
-        private void SignUpButtonClick(object sender, RoutedEventArgs e)
+        private void CreateAppointmentButtonClick(object sender, RoutedEventArgs e)
         {
-            SignUpProgressBar.Visibility = Visibility.Visible;
-            CHessianProxyFactory factory = new CHessianProxyFactory();
-            String url = "http://172.16.18.83:4567/";
-            CAsyncHessianMethodCaller methodCaller = new CAsyncHessianMethodCaller(factory, new Uri(url));
-            MethodInfo mInfo_1 = typeof(IHessianTest).GetMethod("getAppointment");
-            methodCaller.BeginHessianMethodCall(new object[] { 42 }, mInfo_1, new AsyncCallback(EndSignUpButtonClick));
-        }
-
-        private void EndSignUpButtonClick(IAsyncResult ar)
-        {
-            SignUpProgressBar.Visibility = Visibility.Collapsed;
-            object result = ar.AsyncState;
+            Panorama.DefaultItem = AppointmentsList;
+            Appointment.Create(Settings.Account, TravelPlan.TravelType.PublicTransport,
+                new Participant[] {}, Location.LocationType.ChristmasMarket, "TODO MESSAGE",
+                (Appointment apt) => { Settings.Appointments.Add(apt); App.ViewModel.LoadAppointments(); },
+                (ErrorInfo errorInfo) => {
+                    Popup p = new Popup();
+                    InfoPopup ip = new InfoPopup();
+                    ip.container = p;
+                    ip.PopupText.Text = "An error occurred trying to create your appointment." + errorInfo.message;
+                    p.Child = ip;
+                    p.IsOpen = true;
+                });
         }
     }
 }

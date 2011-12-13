@@ -2,7 +2,7 @@
 
 namespace org.meet4xmas.wire
 {
-    public class ErrorInfo
+    public partial class ErrorInfo
     {
         public int code;
         public string message;

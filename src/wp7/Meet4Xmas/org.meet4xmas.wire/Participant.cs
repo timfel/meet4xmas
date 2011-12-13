@@ -2,7 +2,7 @@
 
 namespace org.meet4xmas.wire
 {
-    public class Participant
+    public partial class Participant
     {
         public static class ParticipationStatus
         {

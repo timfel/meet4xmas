@@ -2,7 +2,7 @@
 
 namespace org.meet4xmas.wire
 {
-    public class Location
+    public partial class Location
     {
         public static class LocationType
         {

@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.IO.IsolatedStorage;
 
 namespace Meet4Xmas
 {
@@ -34,7 +35,7 @@ namespace Meet4Xmas
                 return viewModel;
             }
         }
-
+        
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

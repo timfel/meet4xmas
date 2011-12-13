@@ -2,7 +2,7 @@
 
 namespace org.meet4xmas.wire
 {
-    public class Appointment
+    public partial class Appointment
     {
         public int identifier;
         public string creator; // userId

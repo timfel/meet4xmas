@@ -7,44 +7,35 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Panorama control-->
-        <controls:Panorama Title="Meet 4 Xmas">
+        <controls:Panorama x:Name="Panorama" Title="Meet 4 Xmas">
             <controls:Panorama.Background>
-                <ImageBrush ImageSource="PanoramaBackground.png"/>
+                <LinearGradientBrush></LinearGradientBrush>
+                <!--<ImageBrush ImageSource="PanoramaBackground.png"/>-->
             </controls:Panorama.Background>
  
             <!--Panorama item one-->
-            <controls:PanoramaItem Header="My Account">
-                <Grid Name="SignUpGrid" VerticalAlignment="Top" Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition MinHeight="50" />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <!-- Progress Bar -->
-                    <ProgressBar x:Name="SignUpProgressBar" IsIndeterminate="True" Grid.Row="1" Visibility="Collapsed"></ProgressBar>
-                    <TextBox Name="textBox1" Text="" IsEnabled="True" Grid.ColumnSpan="1" Grid.Row="2" AcceptsReturn="True" />
-                    <Button Content="Sign me up!" Name="SignUpButton" Click="SignUpButtonClick" Grid.Row="3" DataContext="{Binding}" />
-                    <TextBlock Name="SignUpTextInput" Text="You have to create an account first. Choose a username and click &quot;Sign me up!&quot;" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" />
-                </Grid>
+            <controls:PanoramaItem x:Name="MyAccountPanoramaItem" Header="My Account">
+                <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
+                    <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
+                    <Button BorderBrush="#00000000">Settings</Button>
+                </ListBox>
             </controls:PanoramaItem>
  
             <!--Panorama item two-->
             <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem Header="Contacts" IsEnabled="False">
+            <controls:PanoramaItem x:Name="AppointmentsList" Header="Appointments" IsEnabled="True">
                 <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Appointments}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
