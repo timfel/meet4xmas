@@ -8,7 +8,8 @@ require 'hessian'
 puts "Connecting to RPC server at '#{@address}'"
 @hessian_client = Hessian::HessianClient.new(@address)
 
-@rpc_methods = %w(registerAccount createAppointment getAppointment getTravelPlan
+@rpc_methods = %w(registerAccount deleteAccount
+  createAppointment getAppointment getTravelPlan
   joinAppointment declineAppointment finalizeAppointment)
 
 def do_rpc(meth, *args, &block)

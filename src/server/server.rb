@@ -33,7 +33,16 @@ class ServletHandler
   def registerAccount(userId)
     Persistence.transaction do |t|
       user = Persistence::User.create :id => userId
-      return _rollback_and_return_error(t, 0, "Unknown error while creating user") unless user
+      return _rollback_and_return_error(t, 0, "Unknown error while creating account") unless user
+      _success_response()
+    end
+  end
+
+  def deleteAccount(userId)
+    Persistence.transaction do |t|
+      user = Persistence::User.first(:id => userId)
+      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
+      return _rollback_and_return_error(t, 0, "Unknown error deleting account") unless user.destroy()
       _success_response()
     end
   end
@@ -178,8 +187,11 @@ class Servlet < Java::HessianServlet
     @handler = ServletHandler.new
   end
 
-  %w(registerAccount createAppointment getAppointment getTravelPlan
-     joinAppointment declineAppointment finalizeAppointment).each do |meth|
+  ALL_MESSAGES = %w(registerAccount deleteAccount
+    createAppointment getAppointment getTravelPlan
+    joinAppointment declineAppointment finalizeAppointment)
+  
+  ALL_MESSAGES.each do |meth|
     define_method(meth) do |*args, &block|
       handle_servlet_action(meth, *args, &block)
     end
