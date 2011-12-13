@@ -33,8 +33,26 @@ class ServletHandler
   def registerAccount(userId)
     Persistence.transaction do |t|
       user = Persistence::User.create :id => userId
-      return _rollback_and_return_error(t, 0, "Unknown error while creating user") unless user
-      _success_response()
+      if user
+        _success_response()
+      else
+        _rollback_and_return_error(t, 0, "Unknown error while creating account")
+      end
+    end
+  end
+
+  def deleteAccount(userId)
+    Persistence.transaction do |t|
+      user = Persistence::User.first(:id => userId)
+      if user
+        if user.destroy()
+          _success_response()
+        else
+          _rollback_and_return_error(t, 0, "Unknown error deleting account")
+        end
+      else
+        _rollback_and_return_error(t, 0, "User '#{userId}' does not exist")
+      end
     end
   end
 
@@ -44,21 +62,26 @@ class ServletHandler
     Persistence.transaction do |t|
       # fetch user
       user = Persistence::User.first(:id => userId)
-      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
+      if user
 
-      # build location object
-      location = Persistence::Location.create({
-        :latitude => java_location.latitude,
-        :longitude => java_location.longitude,
-        :title => java_location.title,
-        :description => java_location.description
-      })
+        # build location object
+        location = Persistence::Location.create({
+          :latitude => java_location.latitude,
+          :longitude => java_location.longitude,
+          :title => java_location.title,
+          :description => java_location.description
+        })
 
-      # create appointment
-      appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
-      return _rollback_and_return_error(t, 0, "Unknown error while creating appointment") unless appointment
-      
-      _success_response(appointment.id)
+        # create appointment
+        appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
+        if appointment
+          _success_response(appointment.id)
+        else
+          _rollback_and_return_error(t, 0, "Unknown error while creating appointment")
+        end
+      else
+        _rollback_and_return_error(t, 0, "User '#{userId}' does not exist")
+      end
     end
   end
 
@@ -98,43 +121,59 @@ class ServletHandler
     Persistence.transaction do |t|
       # fetch user and appointment
       appointment = Persistence::Appointment.first(:id => appointmentId)
-      return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
-      user = Persistence::User.first(:id => userId)
-      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
+      if appointment
+        user = Persistence::User.first(:id => userId)
+        if user
 
-      # build location object
-      location = Persistence::Location.create({
-        :latitude => java_location.latitude,
-        :longitude => java_location.longitude,
-        :title => java_location.title,
-        :description => java_location.description
-      })
+          # build location object
+          location = Persistence::Location.create({
+            :latitude => java_location.latitude,
+            :longitude => java_location.longitude,
+            :title => java_location.title,
+            :description => java_location.description
+          })
 
-      # join the appointment
-      appointment.join(user, travelType, location)
-      _success_response()
+          # join the appointment
+          appointment.join(user, travelType, location)
+          _success_response()
+        else
+          _rollback_and_return_error(t, 0, "User '#{userId}' does not exist")
+        end
+      else
+        _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist")
+      end
     end
   end
 
   def declineAppointment(appointmentId, userId)
     Persistence.transaction do |t|
+      # fetch user and appointment
       appointment = Persistence::Appointment.first(:id => appointmentId)
-      return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
-      user = Persistence::User.first(:id => userId)
-      return _rollback_and_return_error(t, 0, "User '#{userId}' does not exist") unless user
+      if appointment
+        user = Persistence::User.first(:id => userId)
+        if user
 
-      appointment.decline(user)
-      _success_response()
+          # decline the appointment
+          appointment.decline(user)
+          _success_response()
+        else
+          _rollback_and_return_error(t, 0, "User '#{userId}' does not exist")
+        end
+      else
+        _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist")
+      end
     end
   end
 
   def finalizeAppointment(appointmentId)
     Persistence.transaction do |t|
       appointment = Persistence::Appointment.first(:id => appointmentId)
-      return _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist") unless appointment
-      
-      appointment.finalize()
-      _success_response()
+      if appointment
+        appointment.finalize()
+        _success_response()
+      else
+        _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist")
+      end
     end
   end
 
@@ -163,10 +202,8 @@ class ServletHandler
   end
 
   def _rollback_and_return_error(transaction, error_code, error_message)
-    t.rollback
-    x = _error_response(error_code, error_message)
-    puts "result0: #{x}"
-    x
+    transaction.rollback
+    _error_response(error_code, error_message)
   end
 end
 
@@ -178,8 +215,11 @@ class Servlet < Java::HessianServlet
     @handler = ServletHandler.new
   end
 
-  %w(registerAccount createAppointment getAppointment getTravelPlan
-     joinAppointment declineAppointment finalizeAppointment).each do |meth|
+  ALL_MESSAGES = %w(registerAccount deleteAccount
+    createAppointment getAppointment getTravelPlan
+    joinAppointment declineAppointment finalizeAppointment)
+  
+  ALL_MESSAGES.each do |meth|
     define_method(meth) do |*args, &block|
       handle_servlet_action(meth, *args, &block)
     end
