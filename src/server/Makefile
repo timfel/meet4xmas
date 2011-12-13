@@ -7,13 +7,10 @@ java_libs:
 java_libs_service:
 	cd $(java_lib_dir) && make service_classes
 
-java_libs_test:
-	cd $(java_lib_dir) && make test_classes
-
 run: java_libs_service
 	ruby server.rb
 
-run_test: java_libs_test
+run_test:
 	cd $(java_lib_dir) && make run_test
 
 clean:

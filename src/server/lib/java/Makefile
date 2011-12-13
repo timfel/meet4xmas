@@ -24,12 +24,9 @@ classpath=.
 
 all: $(all_classes)
 
-
-test: $(test_classes)
-	java -classpath "$(classpath):hessian.jar" Test
-
 Test.$(class_ext): Test.$(source_ext)
 	javac -classpath "$(classpath):hessian.jar" $<
+
 
 service_classes: $(service_classes)
 
