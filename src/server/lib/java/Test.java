@@ -6,17 +6,17 @@ public class Test {
     //String url = "http://tessi.fornax.uberspace.de/xmas/1/";
     String url = "http://localhost:4567/1/";
     HessianProxyFactory factory = new HessianProxyFactory();
-    IServiceAPI appointment = (IServiceAPI) factory.create(IServiceAPI.class, url);
+    IServiceAPI proxy = (IServiceAPI) factory.create(IServiceAPI.class, url);
 
     // createAppointment
-    Response response = appointment.createAppointment("tessi@tessenow.org", 0, null, new String[]{"student@hpi.uni-potsdam.de"}, 0, "my message to all my friends");
+    Response response = proxy.createAppointment("tessi@tessenow.org", 0, null, new String[]{"student@hpi.uni-potsdam.de"}, 0, "my message to all my friends");
     if(response.success)
       System.out.println(response.payload);
     else
       System.out.println(response.error);
 
     // getAppointment
-    response = appointment.getAppointment(40);
+    response = proxy.getAppointment(40);
     if(response.success)
       System.out.println(response.payload);
     else
