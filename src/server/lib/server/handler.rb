@@ -1,33 +1,17 @@
-$LOAD_PATH.unshift File.dirname(__FILE__)
-
-require 'java'
-require 'lib/java/hessian'
-require 'lib/java/jetty'
-require 'lib/java/jetty-util'
-require 'lib/java/servlet-api'
-
-require 'rubygems'
-require 'geokit'
-
-require 'lib/persistence/setup' # requires all models
-
+# load the wire classes
+require File.expand_path('../../java/init', __FILE__)
 module Java
-  include_class 'org.mortbay.jetty.Server'
-  include_class 'org.mortbay.jetty.servlet.Context'
-  include_class 'org.mortbay.jetty.servlet.ServletHolder'
-  include_class 'com.caucho.hessian.server.HessianServlet'
-
   module Wire
-    $CLASSPATH << 'lib/java'
     java_import   'org.meet4xmas.wire.Appointment'
     java_import   'org.meet4xmas.wire.ErrorInfo'
-    java_import   'org.meet4xmas.wire.IServiceAPI'
     java_import   'org.meet4xmas.wire.Location'
     java_import   'org.meet4xmas.wire.Participant'
     java_import   'org.meet4xmas.wire.Response'
     java_import   'org.meet4xmas.wire.TravelPlan'
   end
 end
+
+require 'lib/persistence/setup' # requires all models
 
 class ServletHandler
   def registerAccount(userId)
@@ -206,78 +190,3 @@ class ServletHandler
     _error_response(error_code, error_message)
   end
 end
-
-class Servlet < Java::HessianServlet
-  include Java::Wire::IServiceAPI
-
-  def initialize(*args, &block)
-    super
-    @handler = ServletHandler.new
-  end
-
-  ALL_MESSAGES = %w(registerAccount deleteAccount
-    createAppointment getAppointment getTravelPlan
-    joinAppointment declineAppointment finalizeAppointment)
-  
-  ALL_MESSAGES.each do |meth|
-    define_method(meth) do |*args, &block|
-      handle_servlet_action(meth, *args, &block)
-    end
-  end
-
-  def handle_servlet_action(meth, *args, &block)
-    begin
-      puts "received: #{meth}(#{args_to_s(*args)})"
-    rescue => e
-      puts "error logging received operation: #{e}"
-    end
-
-    begin
-      response = @handler.send(meth, *args, &block)
-    rescue => e
-      response = @handler._error_response(0, "#{e}\n  "+e.backtrace.join("\n  "))
-    end
-    
-    begin
-      puts "sending: #{response}"
-    rescue => e
-      puts "error logging response: #{e}"
-    end
-    response
-  end
-
-private
-  
-  def args_to_s(*args)
-    args.map do |arg|
-      case arg
-      when nil
-        "<null>"
-      when String
-        "'#{arg}'"
-      else
-        if arg.respond_to? :each
-          "[#{args_to_s(*arg)}]"
-        else
-          arg
-        end
-      end
-    end.join(', ')
-  end
-end
-
-module Server
-  API_VERSION = 1
-
-  def self.init_jetty
-    port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : 4567
-    server = Java::Server.new port
-    context = Java::Context.new(server, '/', 0)
-    servlet = Servlet.new
-    holder = Java::ServletHolder.new servlet
-    context.addServlet(holder, "/#{API_VERSION}/")
-    server.start()
-    puts "Server living at port #{port} - api version: #{API_VERSION}"
-  end
-end
-Server::init_jetty
