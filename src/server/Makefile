@@ -10,10 +10,10 @@ java_libs_service:
 run_server: java_libs_service
 	ruby lib/server.rb
 
-run_test:
-	cd $(java_lib_dir) && make run_test
-
 run: run_server
+
+run_java_test_client:
+	cd $(java_lib_dir) && make run_test
 
 clean:
 	cd $(java_lib_dir) && make clean
