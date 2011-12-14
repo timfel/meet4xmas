@@ -1,8 +1,7 @@
 # ruby test script using the hessian client
 # You get the best effect if you require this file in irb.
 
-require 'rubygems'
-require 'hessian'
+require File.expand_path('../lib/hessian_client/lib/hessian', __FILE__)
 
 @address = 'http://localhost:4567/1/'
 puts "Connecting to RPC server at '#{@address}'"
