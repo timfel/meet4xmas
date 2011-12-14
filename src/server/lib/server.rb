@@ -19,15 +19,13 @@ require File.expand_path('../server/servlet', __FILE__)
 
 module Meet4Xmas
 module Server
-  API_VERSION = Server::API::VERSION
-
   def self.run(port = nil)
     port = 4567 if port == nil
     server = Java::Jetty::Server.new port
     context = Java::Jetty::Context.new(server, '/', 0)
     servlet = Servlet.new # our servlet implementation
     holder = Java::Jetty::ServletHolder.new servlet
-    context.addServlet(holder, "/#{API_VERSION}/")
+    context.addServlet(holder, "/#{Server::API::VERSION}/")
     server.start()
     return server
   end
