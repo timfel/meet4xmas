@@ -29,7 +29,6 @@ module Server
     holder = Java::Jetty::ServletHolder.new servlet
     context.addServlet(holder, "/#{API_VERSION}/")
     server.start()
-    puts "Server living at port #{port} - api version: #{API_VERSION}"
     return server
   end
 end
@@ -38,4 +37,5 @@ end
 if __FILE__ == $0
   port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : nil
   Meet4Xmas::Server::run port
+  puts "Server living at port #{port} - api version: #{Meet4Xmas::Server::API::VERSION}"
 end
