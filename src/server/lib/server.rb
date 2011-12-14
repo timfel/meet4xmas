@@ -30,6 +30,7 @@ module Server
     context.addServlet(holder, "/#{API_VERSION}/")
     server.start()
     puts "Server living at port #{port} - api version: #{API_VERSION}"
+    return server
   end
 end
 end
