@@ -24,11 +24,12 @@ describe 'Meet4Xmas Service' do
     @client = Hessian::HessianClient.new(@_address)
   end
 
-  it "has tests" do
-    pending "first implement a test!"
-  end
-
-  it "has even more tests" do
-    pending "first implement any test!"
+  describe '#registerAccount' do
+    it 'succeeds if the account does not exist yet' do
+      response = @client.registerAccount('lysann.kessler@gmail.com')
+      response['success'].should be_true
+      response['error'].should be_nil
+      response['payload'].should be_nil
+    end
   end
 end
