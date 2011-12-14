@@ -20,8 +20,8 @@ require File.expand_path('../server/servlet', __FILE__)
 module Server
   API_VERSION = Server::API::VERSION
 
-  def self.run
-    port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : 4567
+  def self.run(port = nil)
+    port = 4567 if port == nil
     server = Java::Jetty::Server.new port
     context = Java::Jetty::Context.new(server, '/', 0)
     servlet = Servlet.new # our servlet implementation
@@ -32,4 +32,7 @@ module Server
   end
 end
 
-Server::run if __FILE__ == $0
+if __FILE__ == $0
+  port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : nil
+  Server::run port
+end
