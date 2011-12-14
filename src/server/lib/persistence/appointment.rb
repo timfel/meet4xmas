@@ -4,6 +4,7 @@ require 'dm-validations'
 
 require File.expand_path('../enums', __FILE__)
 
+module Meet4Xmas
 module Persistence
   class Appointment
     include DataMapper::Resource
@@ -12,12 +13,12 @@ module Persistence
     property :created_at, DateTime, :required => true
     property :user_message, String
     property :location_type, Integer, :required => true, :default => LocationType::ChristmasMarket
-    validates_within :location_type, :set => LocationType::ALL # use values of Persistence::LocationType
+    validates_within :location_type, :set => LocationType::ALL # use values of LocationType
     property :is_final, Boolean, :required => true, :default => false
 
-    belongs_to :creator, 'Persistence::User'
-    has n, :participations, 'Persistence::AppointmentParticipation'
-    has n, :participants, 'Persistence::User', :through => :participations, :via => :participant
+    belongs_to :creator, 'Meet4Xmas::Persistence::User'
+    has n, :participations, 'Meet4Xmas::Persistence::AppointmentParticipation'
+    has n, :participants, 'Meet4Xmas::Persistence::User', :through => :participations, :via => :participant
 
     def initialize(*args, &block)
       super
@@ -80,14 +81,15 @@ module Persistence
   class AppointmentParticipation
     include DataMapper::Resource
 
-    belongs_to :participant, 'Persistence::User', :key => true
-    belongs_to :appointment, 'Persistence::Appointment', :key => true
+    belongs_to :participant, 'Meet4Xmas::Persistence::User', :key => true
+    belongs_to :appointment, 'Meet4Xmas::Persistence::Appointment', :key => true
 
     # some participant properties specific to this very participation
-    property :travel_type, Integer # use values of Persistence::TravelType
+    property :travel_type, Integer # use values of TravelType
     validates_within :travel_type, :set => TravelType::ALL, :allow_nil => true
     has 1, :location
     property :status, Integer, :required => true, :default => ParticipationStatus::Pending
-    validates_within :status, :set => ParticipationStatus::ALL # use values of Persistence::ParticipationStatus
+    validates_within :status, :set => ParticipationStatus::ALL # use values of ParticipationStatus
   end
+end
 end

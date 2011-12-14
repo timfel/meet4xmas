@@ -6,7 +6,7 @@ module Java
     include_class 'com.caucho.hessian.server.HessianServlet'
   end
   module Wire
-    java_import   'org.meet4xmas.wire.IServiceAPI'
+    java_import 'org.meet4xmas.wire.IServiceAPI'
   end
 end
 
@@ -16,57 +16,61 @@ require File.expand_path('../api', __FILE__)
 require File.expand_path('../handler', __FILE__)
 
 # the Java Servlet. The ServletHandler (see handler.rb) performs the actual work.
-class Servlet < Java::Hessian::HessianServlet
-  include Java::Wire::IServiceAPI
+module Meet4Xmas
+module Server
+  class Servlet < Java::Hessian::HessianServlet
+    include Java::Wire::IServiceAPI
 
-  def initialize(*args, &block)
-    super
-    @handler = ServletHandler.new
-  end
-  
-  Server::API::ALL_MESSAGES.each do |meth|
-    define_method(meth) do |*args, &block|
-      handle_servlet_action(meth, *args, &block)
-    end
-  end
-
-  def handle_servlet_action(meth, *args, &block)
-    begin
-      puts "received: #{meth}(#{args_to_s(*args)})"
-    rescue => e
-      puts "error logging received operation: #{e}"
-    end
-
-    begin
-      response = @handler.send(meth, *args, &block)
-    rescue => e
-      response = @handler._error_response(0, "#{e}\n  "+e.backtrace.join("\n  "))
+    def initialize(*args, &block)
+      super
+      @handler = ServletHandler.new
     end
     
-    begin
-      puts "sending: #{response}"
-    rescue => e
-      puts "error logging response: #{e}"
-    end
-    response
-  end
-
-private
-  
-  def args_to_s(*args)
-    args.map do |arg|
-      case arg
-      when nil
-        "<null>"
-      when String
-        "'#{arg}'"
-      else
-        if arg.respond_to? :each
-          "[#{args_to_s(*arg)}]"
-        else
-          arg
-        end
+    Server::API::ALL_MESSAGES.each do |meth|
+      define_method(meth) do |*args, &block|
+        handle_servlet_action(meth, *args, &block)
       end
-    end.join(', ')
+    end
+
+    def handle_servlet_action(meth, *args, &block)
+      begin
+        puts "received: #{meth}(#{args_to_s(*args)})"
+      rescue => e
+        puts "error logging received operation: #{e}"
+      end
+
+      begin
+        response = @handler.send(meth, *args, &block)
+      rescue => e
+        response = @handler._error_response(0, "#{e}\n  "+e.backtrace.join("\n  "))
+      end
+      
+      begin
+        puts "sending: #{response}"
+      rescue => e
+        puts "error logging response: #{e}"
+      end
+      response
+    end
+
+  private
+    
+    def args_to_s(*args)
+      args.map do |arg|
+        case arg
+        when nil
+          "<null>"
+        when String
+          "'#{arg}'"
+        else
+          if arg.respond_to? :each
+            "[#{args_to_s(*arg)}]"
+          else
+            arg
+          end
+        end
+      end.join(', ')
+    end
   end
+end
 end

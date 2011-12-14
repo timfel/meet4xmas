@@ -16,6 +16,7 @@ require File.expand_path('../enums', __FILE__)
 DataMapper::Logger.new(STDOUT, :debug)
 
 # open the database
+module Meet4Xmas
 module Persistence
   DB_FILE = File.expand_path('../meet4xmas.sqlite', __FILE__)
   REPOSITORY_NAME = :default
@@ -28,7 +29,8 @@ module Persistence
     self.repository.transaction.commit(&block)
   end
 end
-DataMapper.setup(Persistence::REPOSITORY_NAME, "sqlite3://#{Persistence::DB_FILE}")
+end
+DataMapper.setup(Meet4Xmas::Persistence::REPOSITORY_NAME, "sqlite3://#{Meet4Xmas::Persistence::DB_FILE}")
 
 # create/update the tables
 DataMapper.finalize

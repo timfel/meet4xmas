@@ -17,6 +17,7 @@ end
 # require our hessian servlet implementation
 require File.expand_path('../server/servlet', __FILE__)
 
+module Meet4Xmas
 module Server
   API_VERSION = Server::API::VERSION
 
@@ -31,8 +32,9 @@ module Server
     puts "Server living at port #{port} - api version: #{API_VERSION}"
   end
 end
+end
 
 if __FILE__ == $0
   port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : nil
-  Server::run port
+  Meet4Xmas::Server::run port
 end
