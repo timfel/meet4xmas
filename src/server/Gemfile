@@ -8,3 +8,5 @@ gem 'dm-migrations'
 gem 'dm-transactions'
 gem 'dm-validations'
 gem 'dm-sqlite-adapter'
+
+gem 'rspec'
