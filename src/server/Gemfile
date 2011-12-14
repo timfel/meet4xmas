@@ -1,12 +1,15 @@
 source 'http://rubygems.org'
 
+# geocoding, map location calculations, ...
 gem 'geokit'
 gem 'json_pure' # XXX: required by geokit
 
+# persistence
 gem 'dm-core'
 gem 'dm-migrations'
 gem 'dm-transactions'
 gem 'dm-validations'
 gem 'dm-sqlite-adapter'
 
+# for the tests
 gem 'rspec'
