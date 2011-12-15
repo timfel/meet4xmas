@@ -1,4 +1,5 @@
 $MEET4XMAS_NO_LOGGING = true
+$MEET4XMAS_DB_FILE_SUFFIX = '_test'
 
 # require server implementation & api info
 require File.expand_path('../../../lib/server', __FILE__)

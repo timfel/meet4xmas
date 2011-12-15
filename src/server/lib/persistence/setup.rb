@@ -18,7 +18,8 @@ DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_LOGGING
 # open the database
 module Meet4Xmas
 module Persistence
-  DB_FILE = File.expand_path('../meet4xmas.sqlite', __FILE__)
+  DB_FILE = File.expand_path('../meet4xmas', __FILE__)
+  DB_FILE_EXTENSION = '.sqlite'
   REPOSITORY_NAME = :default
 
   def self.repository
@@ -42,7 +43,9 @@ module Persistence
   end
 end
 end
-DataMapper.setup(Meet4Xmas::Persistence::REPOSITORY_NAME, "sqlite3://#{Meet4Xmas::Persistence::DB_FILE}")
+suffix = $MEET4XMAS_DB_FILE_SUFFIX || ''
+file_name = "sqlite3://#{Meet4Xmas::Persistence::DB_FILE}#{$MEET4XMAS_DB_FILE_SUFFIX}#{Meet4Xmas::Persistence::DB_FILE_EXTENSION}"
+DataMapper.setup(Meet4Xmas::Persistence::REPOSITORY_NAME, file_name)
 
 # create/update the tables
 DataMapper.finalize
