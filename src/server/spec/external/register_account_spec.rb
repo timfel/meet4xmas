@@ -7,15 +7,13 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'succeeds if the account does not exist yet' do
-      response = @client.registerAccount(@user_id)
-      response.should be_successful
+      @client.registerAccount(@user_id).should be_successful
     end
 
     it 'succeeds if the account does not exist anymore' do
       @client.registerAccount(@user_id)
       @client.deleteAccount(@user_id)
-      response = @client.registerAccount(@user_id)
-      response.should be_successful
+      @client.registerAccount(@user_id).should be_successful
     end
 
     it 'fails if the account already exists' do

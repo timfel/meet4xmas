@@ -25,21 +25,17 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'succeeds if everything is alright' do
-      response = @client.createAppointment(*@create_appointment_args)
-      response.should be_successful
+      @client.createAppointment(*@create_appointment_args).should be_successful
     end
 
     it 'returns the appointment id' do
-      response = @client.createAppointment(*@create_appointment_args)
-      payload = response['payload']
+      payload = @client.createAppointment(*@create_appointment_args)['payload']
       payload.should be_kind_of(Numeric)
     end
 
     it 'can create multiple appointments' do
-      response = @client.createAppointment(*@create_appointment_args)
-      response.should be_successful
-      response = @client.createAppointment(*@create_appointment_args)
-      response.should be_successful
+      @client.createAppointment(*@create_appointment_args).should be_successful
+      @client.createAppointment(*@create_appointment_args).should be_successful
     end
 
     it 'returns different appointment ids for different appointments' do
@@ -129,8 +125,7 @@ describe 'Meet4Xmas Service' do
         location = @create_appointment_args[2]
         location.delete('title')
         location.delete('description')
-        response = @client.createAppointment(*@create_appointment_args)
-        response.should be_successful
+        @client.createAppointment(*@create_appointment_args).should be_successful
       end
     end
   end
