@@ -17,7 +17,7 @@ module Meet4Xmas
 module Server
   class ServletHandler
     def registerAccount(userId)
-      Persistence.transaction do |t|
+      _transaction do |t|
         user = Persistence::User.create :id => userId
         if user
           _success_response()
@@ -28,7 +28,7 @@ module Server
     end
 
     def deleteAccount(userId)
-      Persistence.transaction do |t|
+      _transaction do |t|
         user = Persistence::User.first(:id => userId)
         if user
           if user.destroy()
@@ -45,7 +45,7 @@ module Server
     def createAppointment(userId, travelType, java_location, invitees, locationType, userMessage)
       return _error_response(0, "Missing parameter 'location'") unless java_location
 
-      Persistence.transaction do |t|
+      _transaction do |t|
         # fetch user
         user = Persistence::User.first(:id => userId)
         if user
@@ -104,7 +104,7 @@ module Server
     def joinAppointment(appointmentId, userId, travelType, java_location)
       return _error_response(0, "Missing parameter 'location'") unless java_location
 
-      Persistence.transaction do |t|
+      _transaction do |t|
         # fetch user and appointment
         appointment = Persistence::Appointment.first(:id => appointmentId)
         if appointment
@@ -132,7 +132,7 @@ module Server
     end
 
     def declineAppointment(appointmentId, userId)
-      Persistence.transaction do |t|
+      _transaction do |t|
         # fetch user and appointment
         appointment = Persistence::Appointment.first(:id => appointmentId)
         if appointment
@@ -152,7 +152,7 @@ module Server
     end
 
     def finalizeAppointment(appointmentId)
-      Persistence.transaction do |t|
+      _transaction do |t|
         appointment = Persistence::Appointment.first(:id => appointmentId)
         if appointment
           appointment.finalize()
@@ -161,6 +161,14 @@ module Server
           _rollback_and_return_error(t, 0, "Appointment #{appointmentId} does not exist")
         end
       end
+    end
+
+  private
+
+    # transaction wrapper
+
+    def _transaction(&block)
+      Persistence.transaction &block
     end
 
     # responses
