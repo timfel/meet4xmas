@@ -1,10 +1,28 @@
+# require server implementation & api info
 require File.expand_path('../../../lib/server', __FILE__)
 require File.expand_path('../../../lib/server/api', __FILE__)
 
+# require hessian client
 require File.expand_path('../../../lib/hessian_client/lib/hessian', __FILE__)
 
+# for resetting DB
 require 'rubygems'
 require 'dm-core'
+
+# custom matchers for response objects
+require 'rspec/expectations'
+RSpec::Matchers.define :be_successful do
+  match_for_should do |response|
+    response['success'] == true && response['error'] == nil
+  end
+  match_for_should_not do |response|
+    response['success'] == false && response['error'] != nil &&
+    response['error']['code'] != nil && response['error']['message'] != nil
+  end
+  description do
+    "be successful"
+  end
+end
 
 MEET4XMAS_TEST_PORT = 4568
 
@@ -35,8 +53,7 @@ describe 'Meet4Xmas Service' do
   describe '#registerAccount' do
     it 'succeeds if the account does not exist yet' do
       response = @client.registerAccount('lysann.kessler@gmail.com')
-      response['success'].should be_true
-      response['error'].should be_nil
+      response.should be_successful
       response['payload'].should be_nil
     end
   end
