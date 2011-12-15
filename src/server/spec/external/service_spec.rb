@@ -12,12 +12,21 @@ require 'dm-core'
 # custom matchers for response objects
 require 'rspec/expectations'
 RSpec::Matchers.define :be_successful do
+  def consistent?(response)
+    # must be a Hash
+    return false unless response.kind_of?(Hash)
+    # either successful and error is nil
+    (response['success'] == true && response['error'] == nil) ||
+    # or not successful and error is not nil and contains error information
+    (response['success'] == false && response['error'] != nil &&
+     response['error']['code'] != nil && response['error']['message'] != nil)
+  end
+
   match_for_should do |response|
-    response['success'] == true && response['error'] == nil
+    consistent?(response) && response['success'] == true
   end
   match_for_should_not do |response|
-    response['success'] == false && response['error'] != nil &&
-    response['error']['code'] != nil && response['error']['message'] != nil
+    consistent?(response) && response['success'] == false
   end
   description do
     "be successful"
