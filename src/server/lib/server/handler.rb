@@ -163,8 +163,6 @@ module Server
       end
     end
 
-  private
-
     # transaction wrapper
 
     def _transaction(&block)
