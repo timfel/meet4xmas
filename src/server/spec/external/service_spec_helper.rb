@@ -3,7 +3,12 @@
 #
 
 $MEET4XMAS_NO_LOGGING = true
-$MEET4XMAS_DB_FILE_SUFFIX = '_test'
+
+module Meet4Xmas
+  module Persistence
+    DB_FILE = 'sqlite::memory:'
+  end
+end
 
 #
 # server and client implementation
