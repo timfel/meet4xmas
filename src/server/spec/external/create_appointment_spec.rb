@@ -96,5 +96,43 @@ describe 'Meet4Xmas Service' do
       response.should_not be_successful
       # TODO: test error code
     end
+
+    it 'succeeds if the user message is missing' do
+      @create_appointment_args[5] = nil
+      response = @client.createAppointment(*@create_appointment_args)
+      response.should be_successful
+    end
+
+    describe 'validates the location: it' do
+      { 'latitude'  => { 'valid_values' => [0, 5, -17, 90, -90], 'invalid_values' => [90.1, -90.1, -420, 180] },
+        'longitude' => { 'valid_values' => [0, 90.1, -17, 42.7, 180, -180], 'invalid_values' => [180.1, -180.1, -420, 1000] }
+      }.each do |key, values|
+        values['valid_values'].each do |value|
+          it "succeeds if location #{key} is valid (#{value})" do
+            location = @create_appointment_args[2]
+            location[key] = value
+            @client.createAppointment(*@create_appointment_args).should be_successful
+          end
+        end
+        values['invalid_values'].each do |value|
+          it "fails if location #{key} is invalid (#{value})" do
+            pending
+            location = @create_appointment_args[2]
+            location[key] = value
+            response = @client.createAppointment(*@create_appointment_args)
+            response.should_not be_successful
+            # TODO: test error code
+          end
+        end
+      end
+
+      it 'succeeds if location title and description are missing' do
+        location = @create_appointment_args[2]
+        location.delete('title')
+        location.delete('description')
+        response = @client.createAppointment(*@create_appointment_args)
+        response.should be_successful
+      end
+    end
   end
 end
