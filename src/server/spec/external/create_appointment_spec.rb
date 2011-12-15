@@ -116,7 +116,6 @@ describe 'Meet4Xmas Service' do
         end
         values['invalid_values'].each do |value|
           it "fails if location #{key} is invalid (#{value})" do
-            pending
             location = @create_appointment_args[2]
             location[key] = value
             response = @client.createAppointment(*@create_appointment_args)

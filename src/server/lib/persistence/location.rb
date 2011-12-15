@@ -12,6 +12,9 @@ module Persistence
     property :longitude, Float, :required => true
     property :title, String
     property :description, String
+
+    validates_within :latitude, :set => -90..90
+    validates_within :longitude, :set => -180..180
   end
 end
 end
