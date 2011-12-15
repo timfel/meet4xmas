@@ -80,5 +80,11 @@ describe 'Meet4Xmas Service' do
       response = @client.registerAccount('lysann.kessler@gmail.com')
       response.should_not be_successful
     end
+
+    it 'fails if the account id is not an email address' do
+      pending('need to check for account id format')
+      response = @client.registerAccount('lysann.kessler')
+      response.should_not be_successful
+    end
   end
 end
