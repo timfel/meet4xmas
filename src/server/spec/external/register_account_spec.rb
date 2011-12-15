@@ -26,7 +26,6 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'fails if the account id is not an email address' do
-      pending('need to check for account id format')
       @user_id = 'lysann.kessler'
       response = @client.registerAccount(@user_id)
       response.should_not be_successful
