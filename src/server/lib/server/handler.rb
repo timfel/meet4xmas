@@ -18,8 +18,8 @@ module Server
   class ServletHandler
     def registerAccount(userId)
       _transaction do |t|
-        user = Persistence::User.create :id => userId
-        if user
+        user = Persistence::User.new :id => userId
+        if user.save
           _success_response()
         else
           _rollback_and_return_error(t, 0, "Unknown error while creating account")
