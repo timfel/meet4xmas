@@ -2,7 +2,7 @@
 # server config overrides
 #
 
-$MEET4XMAS_NO_LOGGING = true
+$MEET4XMAS_NO_LOGGING = true if $MEET4XMAS_NO_LOGGING == nil
 
 module Meet4Xmas
   module Persistence
