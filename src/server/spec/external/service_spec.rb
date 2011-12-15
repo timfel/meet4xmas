@@ -84,6 +84,7 @@ describe 'Meet4Xmas Service' do
       @client.registerAccount(@user_id)
       response = @client.registerAccount(@user_id)
       response.should_not be_successful
+      # TODO: test error code
     end
 
     it 'fails if the account id is not an email address' do
@@ -91,6 +92,7 @@ describe 'Meet4Xmas Service' do
       @user_id = 'lysann.kessler'
       response = @client.registerAccount(@user_id)
       response.should_not be_successful
+      # TODO: test error code
     end
   end
 
@@ -104,6 +106,7 @@ describe 'Meet4Xmas Service' do
     it 'fails if the account does not exist yet' do
       response = @client.deleteAccount(@user_id)
       response.should_not be_successful
+      # TODO: test error code
     end
 
     it 'fails if the account does not exist anymore' do
@@ -111,6 +114,7 @@ describe 'Meet4Xmas Service' do
       @client.deleteAccount(@user_id)
       response = @client.deleteAccount(@user_id)
       response.should_not be_successful
+      # TODO: test error code
     end
   end
 end
