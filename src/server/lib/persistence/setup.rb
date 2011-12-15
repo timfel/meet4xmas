@@ -13,7 +13,7 @@ require File.expand_path('../enums', __FILE__)
 
 
 # debugging options
-DataMapper::Logger.new(STDERR, :debug)
+DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_LOGGING
 
 # open the database
 module Meet4Xmas

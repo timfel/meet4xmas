@@ -37,7 +37,7 @@ module Server
         puts "received: #{meth}(#{args_to_s(*args)})"
       rescue => e
         puts "error logging received operation: #{e}"
-      end
+      end unless $MEET4XMAS_NO_LOGGING
 
       begin
         response = @handler.send(meth, *args, &block)
@@ -49,7 +49,7 @@ module Server
         puts "sending: #{response}"
       rescue => e
         puts "error logging response: #{e}"
-      end
+      end unless $MEET4XMAS_NO_LOGGING
       response
     end
 

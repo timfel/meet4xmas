@@ -1,3 +1,5 @@
+$MEET4XMAS_NO_LOGGING = true
+
 # require server implementation & api info
 require File.expand_path('../../../lib/server', __FILE__)
 require File.expand_path('../../../lib/server/api', __FILE__)
