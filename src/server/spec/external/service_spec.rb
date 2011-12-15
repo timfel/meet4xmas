@@ -61,48 +61,54 @@ describe 'Meet4Xmas Service' do
     DataMapper.auto_migrate!
   end
 
+  # set some general fixture info
+  before :each do
+    @user_id = 'lysann.kessler@gmail.com'
+  end
+
   describe '#registerAccount' do
     it 'succeeds if the account does not exist yet' do
-      response = @client.registerAccount('lysann.kessler@gmail.com')
+      response = @client.registerAccount(@user_id)
       response.should be_successful
     end
 
     it 'succeeds if the account does not exist anymore' do
-      response = @client.registerAccount('lysann.kessler@gmail.com')
-      response = @client.deleteAccount('lysann.kessler@gmail.com')
-      response = @client.registerAccount('lysann.kessler@gmail.com')
+      response = @client.registerAccount(@user_id)
+      response = @client.deleteAccount(@user_id)
+      response = @client.registerAccount(@user_id)
       response.should be_successful
     end
 
     it 'fails if the account already exists' do
-      response = @client.registerAccount('lysann.kessler@gmail.com')
-      response = @client.registerAccount('lysann.kessler@gmail.com')
+      response = @client.registerAccount(@user_id)
+      response = @client.registerAccount(@user_id)
       response.should_not be_successful
     end
 
     it 'fails if the account id is not an email address' do
       pending('need to check for account id format')
-      response = @client.registerAccount('lysann.kessler')
+      @user_id = 'lysann.kessler'
+      response = @client.registerAccount(@user_id)
       response.should_not be_successful
     end
   end
 
   describe '#deleteAccount' do
     it 'succeeds if the account exists' do
-      response = @client.registerAccount('lysann.kessler@gmail.com')
-      response = @client.deleteAccount('lysann.kessler@gmail.com')
+      response = @client.registerAccount(@user_id)
+      response = @client.deleteAccount(@user_id)
       response.should be_successful
     end
 
     it 'fails if the account does not exist yet' do
-      response = @client.deleteAccount('lysann.kessler@gmail.com')
+      response = @client.deleteAccount(@user_id)
       response.should_not be_successful
     end
 
     it 'fails if the account does not exist anymore' do
-      response = @client.registerAccount('lysann.kessler@gmail.com')
-      response = @client.deleteAccount('lysann.kessler@gmail.com')
-      response = @client.deleteAccount('lysann.kessler@gmail.com')
+      response = @client.registerAccount(@user_id)
+      response = @client.deleteAccount(@user_id)
+      response = @client.deleteAccount(@user_id)
       response.should_not be_successful
     end
   end
