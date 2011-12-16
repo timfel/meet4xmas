@@ -43,32 +43,36 @@ describe 'Meet4Xmas Service' do
 
     describe 'returns' do
       before :each do
-        @payload = @client.getAppointment(@appointment_id)['payload']
+        @appointment = @client.getAppointment(@appointment_id)['payload']
       end
 
       it 'the requested appointment' do
-        @payload['identifier'].should == @appointment_id
+        @appointment['identifier'].should == @appointment_id
       end
 
-      it 'all attributes' do # TODO: split this test into subtests
-        @payload['creator'].should == @creator
-        @payload['locationType'].should == @location_type
-        #@payload['location'].should_not be_nil # TODO
-        @payload['isFinal'].should == false
-        @payload['message'].should == @user_message
+      { 'creator' => 'lysann.kessler@gmail.com',
+        'locationType' => Meet4Xmas::Persistence::LocationType::ALL.first,
+        #'location' => nil # TODO
+        'message' => 'user message'
+      }.each do |key, value|
+        it "the #{key}" do @appointment[key].should == value end
+      end
 
-        returned_participants = @payload['participants']
-        returned_participants.should be_kind_of(Array)
-        returned_participants.count.should == @participants.count
+      it 'the participants (all invitees and the creator)' do
+        returned_participants = @appointment['participants']
         returned_participant_ids = returned_participants.map { |p| p['userId'] }
         Set.new(returned_participant_ids).should == Set.new(@participants)
+      end
 
-        # the following two checks are actually more like lifecycle checks...
-        creator_participant = returned_participants.find { |p| p['userId'] == @creator }
-        creator_participant['status'].should == Meet4Xmas::Persistence::ParticipationStatus::Accepted
+      it 'some final state' do
+        [true, false].should include(@appointment['isFinal'])
+      end
 
-        invited_participants = returned_participants.select { |p| p['userId'] != @creator }
-        invited_participants.each { |p| p['status'].should == Meet4Xmas::Persistence::ParticipationStatus::Pending }
+      it 'participant states' do
+        returned_participants = @appointment['participants']
+        returned_participants.each do |p|
+          Meet4Xmas::Persistence::ParticipationStatus::ALL.should include(p['status'])
+        end
       end
     end
   end
