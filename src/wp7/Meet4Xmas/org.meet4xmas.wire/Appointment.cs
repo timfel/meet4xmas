@@ -12,7 +12,7 @@ namespace org.meet4xmas.wire
         public string message;
         public bool isFinal;
 
-        public string ToString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder("<Appointment ");
             sb.Append("@identifier: ").Append(identifier).Append(", ");
