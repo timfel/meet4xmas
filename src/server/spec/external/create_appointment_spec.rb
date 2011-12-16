@@ -21,7 +21,7 @@ describe 'Meet4Xmas Service' do
       ]
 
       register_users @creator
-      register_users *@invitees
+      register_users(*@invitees)
     end
 
     it 'succeeds if everything is alright' do
@@ -80,7 +80,7 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'succeeds if there are no invitees' do
-      unregister_users *@invitees # optional for this test
+      unregister_users(*@invitees) # optional for this test
       @create_appointment_args[3] = []
       response = @client.createAppointment(*@create_appointment_args)
       response.should be_successful

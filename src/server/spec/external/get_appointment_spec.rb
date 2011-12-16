@@ -21,7 +21,7 @@ describe 'Meet4Xmas Service' do
         @user_message
       ]
       register_users @creator
-      register_users *invitees
+      register_users(*invitees)
       @appointment_id = @client.createAppointment(*create_appointment_args)['payload']
       @participants = [] + invitees; @participants << @creator
     end
