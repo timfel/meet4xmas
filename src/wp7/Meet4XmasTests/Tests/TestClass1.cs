@@ -11,8 +11,8 @@ namespace Meet4XmasTests.Tests
     [TestClass]
     public class TestClass1 : SilverlightTest
     {
-        //const string url = "http://tessi.fornax.uberspace.de/xmas/1/";
-        const string url = "http://172.16.18.83:4567/1/";
+        const string url = "http://tessi.fornax.uberspace.de/xmas/1/";
+        //const string url = "http://172.16.18.83:4567/1/";
 
         object global;
         CHessianProxyFactory factory;
@@ -30,24 +30,17 @@ namespace Meet4XmasTests.Tests
         [Asynchronous]
         public void TestMethod1()
         {
-            EnqueueCallback(() => BeginRequest("registerAccount", new object[] { "Tim" + DateTime.Now.ToString() }));
+            string name = "Tim" + DateTime.Now.ToString();
+            EnqueueCallback(() => Account.Create(name,
+                                                (Account ac) => global = ac,
+                                                (ErrorInfo ei) => global = ei));
             EnqueueConditional(() => global != null);
             EnqueueCallback(() =>
             {
-                Assert.IsInstanceOfType(global, typeof(Response));
+                Assert.IsInstanceOfType(global, typeof(Account));
+                Assert.AreEqual(((Account)global).userId, name);
             });
             EnqueueTestComplete();
-        }
-
-        private void BeginRequest(string method, object[] args)
-        {
-            MethodInfo mInfo_1 = typeof(IServiceAPI).GetMethod(method);
-            methodCaller.BeginHessianMethodCall(args, mInfo_1, new AsyncCallback(EndRequest));
-        }
-
-        private void EndRequest(IAsyncResult ar)
-        {
-            global = ar.AsyncState;
         }
     }
 }
