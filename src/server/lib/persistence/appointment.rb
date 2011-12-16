@@ -60,7 +60,6 @@ module Persistence
     end
 
     def join(participant, travel_type, location) # participant is either a User or its id
-      puts "travel_type: #{travel_type}"
       update_participation_info(participant, {
         :status => ParticipationStatus::Accepted,
         :travel_type => travel_type,
