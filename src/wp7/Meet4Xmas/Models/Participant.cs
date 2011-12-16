@@ -2,13 +2,16 @@
 
 namespace org.meet4xmas.wire
 {
-    public partial class Participant : Model
+    public partial class Participant
     {
-        public static void Find(string userId, Action<Account> cb, Action<ErrorInfo> errorCb)
+        public static bool operator ==(Participant a, Participant b)
         {
+            return a.userId == b.userId;
         }
 
-        private Action<Account> callback;
-        private Action<ErrorInfo> errorCallback;
+        public static bool operator !=(Participant a, Participant b)
+        {
+            return a.userId != b.userId;
+        }
     }
 }
