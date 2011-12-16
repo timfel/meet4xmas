@@ -53,7 +53,7 @@ namespace Meet4XmasTests.Tests
             EnqueueConditional(() => tim == null || error != null);
             EnqueueCallback(() =>
             {
-                Assert.IsNull(error);
+                Assert.IsNull(error, error.message);
                 Assert.IsNull(tim);
             });
             EnqueueTestComplete();
@@ -84,7 +84,7 @@ namespace Meet4XmasTests.Tests
             EnqueueConditional(() => app != null || error != null);
             EnqueueCallback(() =>
             {
-                Assert.IsNull(error);
+                Assert.IsNull(error, error.message);
                 Assert.IsInstanceOfType(app, typeof(Appointment));
                 Assert.AreEqual(((Appointment)app).creator, tim.userId);
                 Assert.IsNotNull(((Appointment)app).identifier);
