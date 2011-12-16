@@ -47,7 +47,7 @@ namespace org.meet4xmas.wire
                             } else {
                                 Appointment.Find((int)result.payload, cb, errorCb);
                             };
-                        }, user, travelType, loc, inviteeNames, locType, msg);
+                        }, user.userId, travelType, loc, inviteeNames, locType, msg);
             }, errorCb);
         }
 
@@ -102,7 +102,7 @@ namespace org.meet4xmas.wire
                             errorCb(result.error);
                         } else {
                             foreach (Participant p in this.participants) {
-                                if (p == user) {
+                                if (p.Equals(user)) {
                                     p.status = Participant.ParticipationStatus.Joined;
                                     break;
                                 }
@@ -122,7 +122,7 @@ namespace org.meet4xmas.wire
                         errorCb(result.error);
                     } else {
                         foreach (Participant p in this.participants) {
-                            if (p == user) {
+                            if (p.Equals(user)) {
                                 p.status = Participant.ParticipationStatus.Declined;
                                 break;
                             }
