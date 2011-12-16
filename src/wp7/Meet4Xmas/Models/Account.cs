@@ -5,46 +5,41 @@ namespace org.meet4xmas.wire
 {
     public class Account : Participant
     {
+        const string ServiceCallCreate = "registerAccount";
+        const string ServiceCallDelete = "deleteAccount";
+
+        public void Delete(Action callback, Action<ErrorInfo> errorCallback)
+        {
+            ServiceCall.Invoke(ServiceCallDelete,
+                (Response ar) =>
+                {
+                    if (ar.success) {
+                        callback();
+                    } else {
+                        errorCallback(ar.error);
+                    }
+                }, this.userId);
+        }
+
         /// <summary>
         /// Creates a new User account on the server.
         /// </summary>
         /// <param name="userId">The new user name</param>
         /// <param name="cb">A callback to pass the created account to</param>
         /// <param name="errorCb">An error callback that will receive ErrorInfo</param>
-        public static void Create(string userId, Action<Account> cb, Action<ErrorInfo> errorCb)
+        public static void Create(string userId, Action<Account> callback, Action<ErrorInfo> errorCallback)
         {
-            Account a = new Account(userId);
-            a.Create(cb, errorCb);
-        }
-
-        private Account(string userId) {
-            this.userId = userId;
-        }
-
-        private void Create(Action<Account> callback, Action<ErrorInfo> errorCallback)
-        {
-            this.callback = callback;
-            this.errorCallback = errorCallback;
-            ServiceCall.Invoke("registerAccount", new AsyncCallback(FinishCreate), this.userId);
-        }
-
-        public void FinishCreate(IAsyncResult ar)
-        {
-            Response result = (Response)ar.AsyncState;
-            UIDispatcher.BeginInvoke(() =>
-            {
-                if (!result.success)
+            ServiceCall.Invoke(ServiceCallCreate,
+                (Response result) =>
                 {
-                    errorCallback.Invoke(result.error);
-                }
-                else
-                {
-                    callback.Invoke(this);
-                }
-            });
+                    if (!result.success) {
+                        errorCallback(result.error);
+                    } else {
+                        Account a = new Account();
+                        a.userId = userId;
+                        callback(a);
+                    }
+                }, userId);
         }
-
-        private Action<Account> callback;
-        private Action<ErrorInfo> errorCallback;
     }
 }
