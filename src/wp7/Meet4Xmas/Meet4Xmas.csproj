@@ -75,7 +75,6 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Utils\Gps.cs" />
     <Compile Include="Models\Participant.cs" />
-    <Compile Include="Models\Model.cs" />
     <Compile Include="Utils\ServiceCall.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="org.meet4xmas.wire\Appointment.cs" />
