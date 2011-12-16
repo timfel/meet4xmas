@@ -12,11 +12,13 @@ using hessiancsharp.client;
 using System.Reflection;
 using org.meet4xmas.wire;
 using Meet4Xmas;
+using System.Windows.Threading;
 
 namespace Meet4Xmas
 {
     public class ServiceCall
     {
+        private static Dispatcher UIDispatcher = Deployment.Current.Dispatcher;
         private static string ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/1/";
         private static CHessianProxyFactory m_proxyFactory = null;
         private static CHessianProxyFactory ProxyFactory
@@ -28,11 +30,12 @@ namespace Meet4Xmas
             }
         }
 
-        public static void Invoke(string method, AsyncCallback cb, params object[] args)
+        public static void Invoke(string method, Action<Response> cb, params object[] args)
         {
             CAsyncHessianMethodCaller methodCaller = new CAsyncHessianMethodCaller(ProxyFactory, new Uri(ServiceUrl));
             MethodInfo mInfo_1 = typeof(IServiceAPI).GetMethod(method);
-            methodCaller.BeginHessianMethodCall(args, mInfo_1, cb);
+            methodCaller.BeginHessianMethodCall(args, mInfo_1,
+                    new AsyncCallback((r) => UIDispatcher.BeginInvoke(() => cb((Response)r))));
         }
     }
 }
