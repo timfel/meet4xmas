@@ -13,7 +13,7 @@ end
 
 desc "Generate code coverage using rcov"
 RSpec::Core::RakeTask.new(:coverage) do |t|
-  #t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
+  t.pattern = "./spec/external/all.rb"
   t.rcov = true
-  t.rcov_opts = ['--exclude', 'spec|gems|hessian_client']
+  t.rcov_opts = ['--exclude', 'spec|gems|hessian_client|jsignal_internal']
 end
