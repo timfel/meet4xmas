@@ -35,7 +35,7 @@ namespace Meet4Xmas
             CAsyncHessianMethodCaller methodCaller = new CAsyncHessianMethodCaller(ProxyFactory, new Uri(ServiceUrl));
             MethodInfo mInfo_1 = typeof(IServiceAPI).GetMethod(method);
             methodCaller.BeginHessianMethodCall(args, mInfo_1,
-                    new AsyncCallback((r) => UIDispatcher.BeginInvoke(() => cb((Response)r))));
+                    new AsyncCallback((r) => UIDispatcher.BeginInvoke(() => cb((Response)r.AsyncState))));
         }
     }
 }
