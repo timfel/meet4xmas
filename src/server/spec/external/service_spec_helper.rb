@@ -57,6 +57,7 @@ end
 require 'rubygems'
 require 'dm-core'
 
+require 'rspec/core'
 RSpec.configure do |config|
   # server setup & teardown
   config.before :all do
