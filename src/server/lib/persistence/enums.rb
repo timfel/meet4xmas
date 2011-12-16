@@ -1,3 +1,4 @@
+module Meet4Xmas
 module Persistence
   module LocationType
     ChristmasMarket = 0
@@ -20,4 +21,5 @@ module Persistence
 
     ALL = [ Pending, Accepted, Declined ]
   end
+end
 end

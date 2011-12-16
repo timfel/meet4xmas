@@ -1,0 +1,4 @@
+This directory contains the hessian client implementation for ruby.
+We do not use this in the server implementation, but it has proven useful for test scripts and spec implementation.
+
+Version: 1.0.1

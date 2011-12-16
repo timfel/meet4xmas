@@ -13,11 +13,12 @@ require File.expand_path('../enums', __FILE__)
 
 
 # debugging options
-DataMapper::Logger.new(STDOUT, :debug)
+DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_LOGGING
 
 # open the database
+module Meet4Xmas
 module Persistence
-  DB_FILE = File.expand_path('../meet4xmas.sqlite', __FILE__)
+  DB_FILE ||= 'sqlite3://' + File.expand_path('../meet4xmas.sqlite', __FILE__)
   REPOSITORY_NAME = :default
 
   def self.repository
@@ -27,8 +28,21 @@ module Persistence
   def self.transaction(&block)
     self.repository.transaction.commit(&block)
   end
+
+  def self.transient_transaction(&block)
+  	transaction = self.repository.transaction
+    begin
+      transaction.begin
+      rval = nil
+      rval = transaction.within { |*block_args| yield(*block_args) }
+    ensure
+      transaction.rollback if transaction.begin?
+      rval
+    end
+  end
 end
-DataMapper.setup(Persistence::REPOSITORY_NAME, "sqlite3://#{Persistence::DB_FILE}")
+end
+DataMapper.setup(Meet4Xmas::Persistence::REPOSITORY_NAME, Meet4Xmas::Persistence::DB_FILE)
 
 # create/update the tables
 DataMapper.finalize

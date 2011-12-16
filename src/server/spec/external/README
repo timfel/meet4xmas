@@ -1,0 +1,5 @@
+This directory contains tests of the external service API, i.e. the RPC interface implementation.
+It starts the server and uses the hessian client implementation for ruby to communicate with the server.
+The server is a black box in these tests.
+
+Tests concerning internal details of the server should be placed in ../internal.

@@ -1,17 +1,17 @@
 # ruby test script using the hessian client
 # You get the best effect if you require this file in irb.
 
-require 'rubygems'
-require 'hessian'
+# load some general server API information
+require File.expand_path('../lib/server/api', __FILE__)
+puts "Meet4Xmas API version #{Meet4Xmas::Server::API::VERSION}"
 
-@address = 'http://localhost:4567/1/'
+# create the hessian client instance
+require File.expand_path('../lib/hessian_client/lib/hessian', __FILE__)
+@address = "http://localhost:4567/#{Meet4Xmas::Server::API::VERSION}/"
 puts "Connecting to RPC server at '#{@address}'"
 @hessian_client = Hessian::HessianClient.new(@address)
 
-@rpc_methods = %w(registerAccount deleteAccount
-  createAppointment getAppointment getTravelPlan
-  joinAppointment declineAppointment finalizeAppointment)
-
+# hook up method_missing with a RPC call
 def do_rpc(meth, *args, &block)
   response = @hessian_client.send(meth, *args, &block)
   if response != nil
@@ -33,18 +33,18 @@ rescue => e
   trace = e.backtrace.join("\n    ")
   puts "    #{trace}"
 end
-
 def method_missing(meth, *args, &block)
-  if @rpc_methods.include? meth.to_s
+  if Meet4Xmas::Server::API::ALL_MESSAGES.include? meth.to_s
     do_rpc(meth, *args, &block)
   else
     super
   end
 end
 
+# print a help hint
 puts "For help enter 'h'"
 def h
   puts 'available methods:'
-  @rpc_methods.each { |m| puts "  #{m}" }
+  Meet4Xmas::Server::API::ALL_MESSAGES.each { |m| puts "  #{m}" }
   nil
 end
