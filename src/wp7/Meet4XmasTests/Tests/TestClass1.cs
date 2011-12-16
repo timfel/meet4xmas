@@ -5,14 +5,21 @@ using System.Reflection;
 using org.meet4xmas.wire;
 using System;
 using System.Threading;
+using Meet4Xmas;
 
 namespace Meet4XmasTests.Tests
 {
     [TestClass]
     public class TestClass1 : SilverlightTest
     {
-        const string url = "http://tessi.fornax.uberspace.de/xmas/1/";
-        //const string url = "http://172.16.18.83:4567/1/";
+
+        [TestInitialize]
+        public void setUp()
+        {
+            //const string url = "http://tessi.fornax.uberspace.de/xmas/1/";
+            //const string url = "http://172.16.18.83:4567/1/";
+            ServiceCall.ServiceUrl = "http://172.16.59.124:4567/1/";
+        }
 
         [TestMethod]
         [Asynchronous]
