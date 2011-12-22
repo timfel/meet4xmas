@@ -11,5 +11,6 @@
 NSString* const kClassPrefix = @"lib.java";
 
 NSString* const kAppointmentClassName = @"Appointment";
+NSString* const kLocationClassName = @"Location";
 NSString* const kErrorInfoClassName = @"ResponseBody$ErrorInfo";
 NSString* const kResponseBodyClassName = @"ResponseBody";

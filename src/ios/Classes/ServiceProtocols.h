@@ -21,6 +21,15 @@ OBJC_EXPORT NSString* const kAppointmentClassName;
 
 @end
 
+OBJC_EXPORT NSString* const kLocationClassName;
+@protocol Location
+
+@property(nonatomic) double latitude;
+@property(nonatomic) double longitude;
+@property(strong, nonatomic) NSString* title;
+@property(strong, nonatomic) NSString* desciption;
+
+@end
 
 OBJC_EXPORT NSString* const kErrorInfoClassName;
 @protocol ErrorInfo
