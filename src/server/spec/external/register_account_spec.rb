@@ -16,11 +16,9 @@ describe 'Meet4Xmas Service' do
       @client.registerAccount(@user_id).should be_successful
     end
 
-    it 'fails if the account already exists' do
+    it 'succeeds if the account already exists' do
       @client.registerAccount(@user_id)
-      response = @client.registerAccount(@user_id)
-      response.should_not be_successful
-      # TODO: test error code
+      @client.registerAccount(@user_id).should be_successful
     end
 
     it 'fails if the account id is not an email address' do
