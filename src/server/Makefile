@@ -26,7 +26,7 @@ run_java_test_client:
 
 
 external_spec:
-	rspec --color spec/external/all.rb
+	rake spec
 
 spec: external_spec
 
