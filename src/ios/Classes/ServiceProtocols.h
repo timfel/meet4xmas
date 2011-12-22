@@ -21,6 +21,14 @@ OBJC_EXPORT NSString* const kAppointmentClassName;
 
 @end
 
+OBJC_EXPORT NSString* const kParticipantClassName;
+@protocol Participant
+
+@property(nonatomic) int userId;
+@property(nonatomic) int status;
+
+@end
+
 OBJC_EXPORT NSString* const kLocationClassName;
 @protocol Location
 
