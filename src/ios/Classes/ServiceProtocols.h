@@ -31,6 +31,13 @@ OBJC_EXPORT NSString* const kLocationClassName;
 
 @end
 
+OBJC_EXPORT NSString* const kTravelPlanClassName;
+@protocol TravelPlan
+
+@property(strong, nonatomic) NSArray* path;
+
+@end
+
 OBJC_EXPORT NSString* const kErrorInfoClassName;
 @protocol ErrorInfo
 
