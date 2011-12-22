@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
-	<string>AppointmentListView_iPhone</string>
+	<string>RootView_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
-	<string>AppointmentListView_iPad</string>
+	<string>RootView_iPad</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
