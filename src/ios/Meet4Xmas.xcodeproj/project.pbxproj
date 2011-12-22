@@ -20,10 +20,6 @@
 		01CE30861490F05F00548992 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30841490F05F00548992 /* InfoPlist.strings */; };
 		01CE30881490F05F00548992 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CE30871490F05F00548992 /* main.m */; };
 		01CE308C1490F05F00548992 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CE308B1490F05F00548992 /* AppDelegate.m */; };
-		01CE30911490F05F00548992 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30901490F05F00548992 /* first.png */; };
-		01CE30931490F05F00548992 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30921490F05F00548992 /* first@2x.png */; };
-		01CE30981490F05F00548992 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30971490F05F00548992 /* second.png */; };
-		01CE309A1490F05F00548992 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CE30991490F05F00548992 /* second@2x.png */; };
 		01F3E58A14A38823005813E4 /* RootView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F3E58814A38823005813E4 /* RootView_iPad.xib */; };
 		01F3E58D14A38861005813E4 /* RootView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F3E58B14A38861005813E4 /* RootView_iPhone.xib */; };
 /* End PBXBuildFile section */
@@ -81,10 +77,6 @@
 		01CE308A1490F05F00548992 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		01CE308B1490F05F00548992 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		01CE308D1490F05F00548992 /* AppointmentListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentListViewController.h; sourceTree = "<group>"; };
-		01CE30901490F05F00548992 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		01CE30921490F05F00548992 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		01CE30971490F05F00548992 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		01CE30991490F05F00548992 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		01F3E58914A38823005813E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootView_iPad.xib; sourceTree = "<group>"; };
 		01F3E58C14A38861005813E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootView_iPhone.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,10 +183,6 @@
 		01CE30B21490F1D800548992 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				01CE30901490F05F00548992 /* first.png */,
-				01CE30921490F05F00548992 /* first@2x.png */,
-				01CE30971490F05F00548992 /* second.png */,
-				01CE30991490F05F00548992 /* second@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -294,10 +282,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				01CE30861490F05F00548992 /* InfoPlist.strings in Resources */,
-				01CE30911490F05F00548992 /* first.png in Resources */,
-				01CE30931490F05F00548992 /* first@2x.png in Resources */,
-				01CE30981490F05F00548992 /* second.png in Resources */,
-				01CE309A1490F05F00548992 /* second@2x.png in Resources */,
 				01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */,
 				01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */,
 				01F3E58A14A38823005813E4 /* RootView_iPad.xib in Resources */,
