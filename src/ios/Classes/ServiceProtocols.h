@@ -10,22 +10,30 @@ OBJC_EXPORT NSString* const kClassPrefix;
 
 #define getFullClassName(name) [NSString stringWithFormat:@"%@.%@", kClassPrefix, name]
 
-OBJC_EXPORT NSString* const kAppointmentClassName;
-@protocol Appointment 
+typedef enum {
+    WEIHNACHTSMARKT
+} LocationType;
 
-@property(nonatomic) int identifier;
-@property(nonatomic) int locationType;
-@property(strong, nonatomic) id location;
-@property(strong, nonatomic) NSArray* invitees;
-@property(strong, nonatomic) NSArray* participants;
+typedef enum {
+    CAR,
+    WALK,
+    PUBLICTRANSPORT
+} TravelType;
 
-@end
+typedef enum {
+    PENDING,
+    JOINED,
+    DECLINED
+} ParticipationStatus;
+
+typedef NSString* UserId;
+typedef int AppointmentId;
 
 OBJC_EXPORT NSString* const kParticipantClassName;
 @protocol Participant
 
-@property(nonatomic) int userId;
-@property(nonatomic) int status;
+@property(strong, nonatomic) UserId userId;
+@property(nonatomic) ParticipationStatus status;
 
 @end
 
@@ -36,6 +44,19 @@ OBJC_EXPORT NSString* const kLocationClassName;
 @property(nonatomic) double longitude;
 @property(strong, nonatomic) NSString* title;
 @property(strong, nonatomic) NSString* desciption;
+
+@end
+
+OBJC_EXPORT NSString* const kAppointmentClassName;
+@protocol Appointment 
+
+@property(nonatomic) int AppointmentId;
+@property(strong, nonatomic) UserId creator;
+@property(nonatomic) LocationType locationType;
+@property(strong, nonatomic) id<Location> location;
+@property(strong, nonatomic) NSArray* participants;
+@property(strong, nonatomic) NSString* message;
+@property(nonatomic) BOOL isFinal;
 
 @end
 
