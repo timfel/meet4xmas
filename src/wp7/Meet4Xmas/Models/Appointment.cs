@@ -77,7 +77,7 @@ namespace org.meet4xmas.wire
                 }, this.identifier, travelType, this.location);
         }
 
-        public void finalize(Action cb, Action<ErrorInfo> errorCb)
+        public void Finalize(Action cb, Action<ErrorInfo> errorCb)
         {
             ServiceCall.Invoke(ServiceCallFinalize,
                 (Response result) =>
@@ -91,7 +91,7 @@ namespace org.meet4xmas.wire
                 }, this.identifier);
         }
 
-        public void join(Account user, int travelType, Action cb, Action<ErrorInfo> errorCb)
+        public void Join(Account user, int travelType, Action cb, Action<ErrorInfo> errorCb)
         {
             withGpsLocationDo((Location loc) =>
             {
@@ -113,7 +113,7 @@ namespace org.meet4xmas.wire
             }, errorCb);
         }
 
-        public void decline(Account user, Action cb, Action<ErrorInfo> errorCb)
+        public void Decline(Account user, Action cb, Action<ErrorInfo> errorCb)
         {
             ServiceCall.Invoke(ServiceCallDecline,
                 (Response result) =>
