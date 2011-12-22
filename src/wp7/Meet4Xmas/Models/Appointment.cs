@@ -45,7 +45,7 @@ namespace org.meet4xmas.wire
                             if (!result.success) {
                                 errorCb(result.error);
                             } else {
-                                Appointment.Find((int)result.payload, cb, errorCb);
+                                Appointment.Find(Convert.ToInt32(result.payload), cb, errorCb);
                             };
                         }, user.userId, travelType, loc, inviteeNames, locType, msg);
             }, errorCb);
