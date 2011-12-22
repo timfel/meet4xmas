@@ -64,7 +64,7 @@ namespace org.meet4xmas.wire
                 }, id);
         }
 
-        public void getTravelPlan(int travelType, Action<TravelPlan> cb, Action<ErrorInfo> errorCb)
+        public void GetTravelPlan(int travelType, Action<TravelPlan> cb, Action<ErrorInfo> errorCb)
         {
             ServiceCall.Invoke(ServiceCallGetTravelPlan,
                 (Response result) =>
