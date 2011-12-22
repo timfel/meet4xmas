@@ -20,7 +20,7 @@ module Server
       _transaction do |t|
         user = Persistence::User.first(:id => userId)
         if user
-          _success_response()
+          _success_response(user.appointments.map { |a| a.id })
         else
           user = Persistence::User.new :id => userId
           if user.save
