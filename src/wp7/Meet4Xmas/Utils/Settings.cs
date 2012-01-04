@@ -24,6 +24,7 @@ namespace Meet4Xmas
             get
             {
                 if (!Storage.Contains("Account")) return null;
+                if (Storage["Account"] == null) return null;
                 XmlSerializer xs = new XmlSerializer(typeof(Account));
                 return (Account)xs.Deserialize(new System.IO.StringReader((string)Storage["Account"]));
             }
