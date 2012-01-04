@@ -16,9 +16,15 @@ namespace Meet4XmasTests.Tests
         [TestInitialize]
         public void setUp()
         {
-            //const string url = "http://tessi.fornax.uberspace.de/xmas/1/";
-            //const string url = "http://172.16.18.83:4567/1/";
-            ServiceCall.ServiceUrl = "http://172.16.59.124:4567/1/";
+            ServiceCall.ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/1/";
+            //ServiceCall.ServiceUrl = "http://172.16.18.83:4567/1/";
+            //ServiceCall.ServiceUrl = "http://172.16.59.124:4567/1/";
+            //ServiceCall.ServiceUrl = "http://172.16.18.55:4567/1/";
+        }
+
+        public string getNewName()
+        {
+            return String.Format("Tim{0}@example.com", DateTime.Now.Ticks.ToString());
         }
 
         [TestMethod]
@@ -26,7 +32,7 @@ namespace Meet4XmasTests.Tests
         public void TestAccCreate()
         {
             object result = null;
-            string name = "Tim" + DateTime.Now.ToString();
+            string name = getNewName();
             EnqueueCallback(() => Account.Create(name,
                                                 (Account ac) => result = ac,
                                                 (ErrorInfo ei) => result = ei));
@@ -43,7 +49,7 @@ namespace Meet4XmasTests.Tests
         [Asynchronous]
         public void TestAccDelete()
         {
-            string name = "Tim";
+            string name = getNewName();
             Account tim = null;
             ErrorInfo error = null;
             EnqueueCallback(() => Account.Create(name,
@@ -53,14 +59,14 @@ namespace Meet4XmasTests.Tests
             EnqueueCallback(() =>
             {
                 Assert.IsNotNull(tim);
-                Assert.IsNull(error);
+                assertNoError(error);
                 tim.Delete(() => tim = null,
                            (ErrorInfo ei) => error = ei);
             });
             EnqueueConditional(() => tim == null || error != null);
             EnqueueCallback(() =>
             {
-                Assert.IsNull(error, error.message);
+                assertNoError(error);
                 Assert.IsNull(tim);
             });
             EnqueueTestComplete();
@@ -70,7 +76,7 @@ namespace Meet4XmasTests.Tests
         [Asynchronous]
         public void TestAppointmentCreate()
         {
-            string name = "Tim";
+            string name = getNewName();
             Account tim = null;
             ErrorInfo error = null;
             object app = null;
@@ -83,7 +89,7 @@ namespace Meet4XmasTests.Tests
             EnqueueCallback(() =>
             {
                 Assert.IsNotNull(tim);
-                Appointment.Create(tim, TravelPlan.TravelType.Walk, new Participant[] { tim },
+                Appointment.Create(tim, TravelPlan.TravelType.Walk, new Participant[] {},
                     Location.LocationType.ChristmasMarket, testMessage,
                     (Appointment a) => app = a,
                     (ErrorInfo e) => error = e);
@@ -91,13 +97,93 @@ namespace Meet4XmasTests.Tests
             EnqueueConditional(() => app != null || error != null);
             EnqueueCallback(() =>
             {
-                Assert.IsNull(error, error.message);
+                assertNoError(error);
                 Assert.IsInstanceOfType(app, typeof(Appointment));
                 Assert.AreEqual(((Appointment)app).creator, tim.userId);
                 Assert.IsNotNull(((Appointment)app).identifier);
                 Assert.AreEqual(((Appointment)app).message, testMessage);
                 Assert.AreEqual(((Appointment)app).locationType, Location.LocationType.ChristmasMarket);
                 Assert.IsFalse(((Appointment)app).isFinal);
+            });
+            EnqueueTestComplete();
+        }
+
+        private static void assertNoError(ErrorInfo error)
+        {
+            String msg = error == null ? "" : error.message;
+            Assert.IsNull(error, msg);
+        }
+
+        [TestMethod]
+        [Asynchronous]
+        public void TestAppointmentGetTravelPlan()
+        {
+            string name = getNewName();
+            Account tim = null;
+            ErrorInfo error = null;
+            Appointment app = null;
+            TravelPlan travelPlan = null;
+            string testMessage = "Test Appointment";
+
+            EnqueueCallback(() => Account.Create(name, (Account ac) => tim = ac, (ErrorInfo ei) => error = ei));
+            EnqueueConditional(() => tim != null || error != null);
+            EnqueueCallback(() =>
+            {
+                Assert.IsNotNull(tim, "Account creation failed");
+                Appointment.Create(tim, TravelPlan.TravelType.Walk, new Participant[] { },
+                    Location.LocationType.ChristmasMarket, testMessage,
+                    (Appointment a) => app = a,
+                    (ErrorInfo e) => error = e);
+            });
+            EnqueueConditional(() => app != null || error != null);
+            EnqueueCallback(() =>
+            {
+                Assert.IsNotNull(app, "Appointment creation failed");
+                app.GetTravelPlan(TravelPlan.TravelType.PublicTransport,
+                    (TravelPlan t) => travelPlan = t,
+                    (ErrorInfo e) => error = e);
+            });
+            EnqueueConditional(() => travelPlan != null || error != null);
+            EnqueueCallback(() =>
+            {
+                assertNoError(error);
+                Assert.IsNotNull(travelPlan);
+            });
+            EnqueueTestComplete();
+        }
+
+        [TestMethod]
+        [Asynchronous]
+        public void TestAppointmentFinalize()
+        {
+            string name = getNewName();
+            Account tim = null;
+            ErrorInfo error = null;
+            Appointment app = null;
+            TravelPlan travelPlan = null;
+            string testMessage = "Test Appointment";
+
+            EnqueueCallback(() => Account.Create(name, (Account ac) => tim = ac, (ErrorInfo ei) => error = ei));
+            EnqueueConditional(() => tim != null || error != null);
+            EnqueueCallback(() =>
+            {
+                Assert.IsNotNull(tim, "Account creation failed");
+                Appointment.Create(tim, TravelPlan.TravelType.Walk, new Participant[] { },
+                    Location.LocationType.ChristmasMarket, testMessage,
+                    (Appointment a) => app = a,
+                    (ErrorInfo e) => error = e);
+            });
+            EnqueueConditional(() => app != null || error != null);
+            EnqueueCallback(() =>
+            {
+                Assert.IsNotNull(app, "Appointment creation failed");
+                app.Finalize(() => { }, (ErrorInfo e) => error = e);
+            });
+            EnqueueConditional(() => app.isFinal == true || error != null);
+            EnqueueCallback(() =>
+            {
+                assertNoError(error);
+                Assert.IsTrue(app.isFinal);
             });
             EnqueueTestComplete();
         }
