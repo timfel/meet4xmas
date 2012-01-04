@@ -9,6 +9,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.IO.IsolatedStorage;
+using System.Xml;
+using System.Xml.Serialization;
 using org.meet4xmas.wire;
 using System.Collections.Generic;
 
@@ -17,17 +19,20 @@ namespace Meet4Xmas
     public class Settings
     {
         public static IsolatedStorageSettings Storage = IsolatedStorageSettings.ApplicationSettings;
-
         public static Account Account
         {
             get
             {
                 if (!Storage.Contains("Account")) return null;
-                return (Account)Storage["Account"];
+                XmlSerializer xs = new XmlSerializer(typeof(Account));
+                return (Account)xs.Deserialize(new System.IO.StringReader((string)Storage["Account"]));
             }
             set
             {
-                Storage["Account"] = value;
+                XmlSerializer xs = new XmlSerializer(typeof(Account));
+                System.IO.StringWriter writer = new System.IO.StringWriter();
+                xs.Serialize(writer, value);
+                Storage["Account"] = writer.ToString();
                 Storage.Save();
             }
         }
