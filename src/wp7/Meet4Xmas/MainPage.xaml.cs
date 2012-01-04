@@ -6,17 +6,6 @@ using System.Windows.Controls.Primitives;
 
 namespace Meet4Xmas
 {
-    public class Foo
-    {
-        int a;
-        string b;
-    }
-
-    public interface IHessianTest
-    {
-        Foo getAppointment(int id);
-    }
-
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
