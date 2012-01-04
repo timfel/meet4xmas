@@ -28,6 +28,7 @@ namespace Meet4Xmas
             set
             {
                 Storage["Account"] = value;
+                Storage.Save();
             }
         }
 
@@ -38,6 +39,11 @@ namespace Meet4Xmas
                 if (!Storage.Contains("Appointments")) Storage["Appointments"] = new List<Appointment>();
                 return (List<Appointment>)Storage["Appointments"];
             }
+        }
+
+        public void Save()
+        {
+            Storage.Save();
         }
     }
 }
