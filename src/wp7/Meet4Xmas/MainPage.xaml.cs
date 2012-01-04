@@ -46,5 +46,11 @@ namespace Meet4Xmas
                     p.IsOpen = true;
                 });
         }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Account = null;
+            NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
+        }
     }
 }
