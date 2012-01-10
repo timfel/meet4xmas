@@ -26,7 +26,7 @@ run_java_test_client:
 
 
 external_spec:
-	rake spec
+	jruby --1.9 -S rake spec
 
 spec: external_spec
 
