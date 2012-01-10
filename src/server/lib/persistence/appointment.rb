@@ -65,7 +65,7 @@ module Persistence
 
       locations = Location.from_type location_type
       origins = URI.escape(self.participations.map{|p|"#{p.location.latitude},#{p.location.longitude}"}.join('|'))
-      
+
       googleResults = nil
       while locations.count > 0
         destinations = URI.escape(locations.shift(50).map{ |l| "#{l.latitude},#{l.longitude}" }.join('|'))
