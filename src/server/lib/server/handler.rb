@@ -101,7 +101,14 @@ module Server
       return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
 
       plan = Java::Wire::TravelPlan.new
-      plan.path = [] # TODO
+      plan.path = appointment.travel_plan.map do |location|
+        Java::Wire::Location.new.tap do |l|
+          l.title = location.title
+          l.description = location.description
+          l.latitude = location.latitude
+          l.longitude = location.longitude
+        end
+      end
 
       _success_response(plan)
     end
