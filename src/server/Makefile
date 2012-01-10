@@ -10,7 +10,7 @@ java_libs_service:
 
 
 run_server: java_libs_service
-	jruby --1.9 lib/server.rb
+	jruby --debug --1.9 lib/server.rb
 
 run: run_server
 
