@@ -13,7 +13,7 @@ module Persistence
     property :created_at, DateTime, :required => true
     property :user_message, String
     property :location_type, Integer, :required => true, :default => LocationType::ChristmasMarket
-    belongs_to :location, 'Meet4Xmas::Persistence::Location', :allow_nil => true, :required => false # TODO: validate presence if: there is a location with this location_type, and there are any active participants
+    belongs_to :location, 'Meet4Xmas::Persistence::Location', :required => false # TODO: validate presence if: there is a location with this location_type, and there are any active participants
     validates_within :location_type, :set => LocationType::ALL # use values of LocationType
     property :is_final, Boolean, :required => true, :default => false
 
