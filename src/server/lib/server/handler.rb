@@ -84,7 +84,12 @@ module Server
       result.identifier = appointment.id
       result.creator = appointment.creator.id
       result.locationType = appointment.location_type
-      #result.location = nil # TODO
+      result.location = Java::Wire::Location.new.tap do |l|
+        l.title = appointment.location.title
+        l.description = appointment.location.description
+        l.latitude = appointment.location.latitude
+        l.longitude = appointment.location.longitude
+      end
       result.isFinal = appointment.is_final
       result.participants = appointment.participations.map do |participation|
         java_participant = Java::Wire::Participant.new
