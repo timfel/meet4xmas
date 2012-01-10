@@ -27,6 +27,8 @@ module Persistence
       # add the creator to the participants
       add_participants creator
       update_participation_info creator, :status => ParticipationStatus::Accepted
+      # find the initial location
+      update_location
 
       self
     end
@@ -57,6 +59,31 @@ module Persistence
       participation.update attributes
 
       raise "Failed to save the appointment. Errors:\n#{participation.errors.inspect}" unless participation.save()
+    end
+
+    def update_location
+      require 'csv'
+      require 'net/http'
+      require 'rubygems'; require 'ruby-debug'; debugger
+      csv_filename = File.join(File.dirname(__FILE__),'..','..','OpenData','weihnachtsmaerkte_geo.csv')
+      locations = CSV.open(csv_filename, 'r', :headers=>true).to_a
+
+      origins = self.participations.map{|p|"#{p.location.latitude},#{p.location.longitude}"}.join('|')
+      destinations = locations.map{|l|"#{l['Latitude']},#{l['Longitude']}"}.join('|')
+
+      base_url = "http://maps.googleapis.com/maps/api/distancematrix/json"
+      url = "#{base_url}?sensor=false&origins=#{origins}&destinations=#{destinations}"
+      uri = URI.parse(url)
+
+      resp = Net::HTTP.get_response(uri)
+      case resp
+      when Net::HTTPSuccess
+        data = resp.body
+        result = JSON.parse(data)
+        require 'rubygems'; require 'ruby-debug'; debugger
+      else
+        puts "Unexpected response #{resp}"
+      end
     end
 
     def join(participant, travel_type, location) # participant is either a User or its id
