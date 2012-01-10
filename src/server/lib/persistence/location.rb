@@ -20,7 +20,7 @@ module Persistence
     def self.HPI
         self.new :title => "Hasso-Plattner-Institue",
                  :description => "Here is the shit!!1!",
-                 :latitude =>52.393957,
+                 :latitude => 52.393957,
                  :longitude => 13.132473
     end
 
