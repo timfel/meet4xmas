@@ -62,25 +62,55 @@ module Persistence
 
     def update_location
       require 'net/http'
-      require 'rubygems'; require 'ruby-debug'; debugger
+
       locations = Location.from_type location_type
+      origins = URI.escape(self.participations.map{|p|"#{p.location.latitude},#{p.location.longitude}"}.join('|'))
+      
+      googleResults = nil
+      while locations.count > 0
+        destinations = URI.escape(locations.shift(50).map{ |l| "#{l.latitude},#{l.longitude}" }.join('|'))
+        base_url = "http://maps.googleapis.com/maps/api/distancematrix/json"
+        url = "#{base_url}?sensor=false&origins=#{origins}&destinations=#{destinations}"
+        uri = URI.parse(url)
 
-      origins = self.participations.map{|p|"#{p.location.latitude},#{p.location.longitude}"}.join('|')
-      destinations = locations.map{ |l| "#{l.latitude},#{l.longitude}" }.join('|')
-
-      base_url = "http://maps.googleapis.com/maps/api/distancematrix/json"
-      url = "#{base_url}?sensor=false&origins=#{origins}&destinations=#{destinations}"
-      uri = URI.parse(url)
-
-      resp = Net::HTTP.get_response(uri)
-      case resp
-      when Net::HTTPSuccess
-        data = resp.body
-        result = JSON.parse(data)
-        require 'rubygems'; require 'ruby-debug'; debugger
-      else
-        puts "Unexpected response #{resp}"
+        resp = Net::HTTP.get_response(uri)
+        case resp
+        when Net::HTTPSuccess
+          data = resp.body
+          result = JSON.parse(data)
+          unless googleResults
+            googleResults = result['rows']
+          else
+            result['rows'].each_with_index do |row,index|
+              googleResults[index]['elements'] += row['elements']
+            end
+          end
+        else
+          puts "Unexpected response #{resp}"
+        end
       end
+
+      locations = Location.from_type(location_type)
+      destinationDistances = [0] * locations.count
+      googleResults.each do |row| # one origin
+        row['elements'].each_with_index do |element, index| # one destination
+          destinationDistances[index] += element['duration']['value']
+        end
+      end
+
+      minDistance = Float::INFINITY
+      minIndex = nil
+      destinationDistances.each_with_index do |distance, index|
+        if distance < minDistance
+          minIndex = index
+          minDistance = distance
+        end
+      end
+      if minIndex
+        self.location = locations[minIndex]
+      end
+      puts minIndex
+      puts self.location
     end
 
     def join(participant, travel_type, location) # participant is either a User or its id
