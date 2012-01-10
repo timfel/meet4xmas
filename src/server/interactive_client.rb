@@ -5,6 +5,9 @@
 require File.expand_path('../lib/server/api', __FILE__)
 puts "Meet4Xmas API version #{Meet4Xmas::Server::API::VERSION}"
 
+# load models
+require File.join File.dirname(__FILE__), 'lib', 'persistence', 'setup'
+
 # create the hessian client instance
 require File.expand_path('../lib/hessian_client/lib/hessian', __FILE__)
 #@address = "http://tessi.fornax.uberspace.de/xmas/#{Meet4Xmas::Server::API::VERSION}/"
