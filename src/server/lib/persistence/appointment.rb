@@ -129,6 +129,10 @@ module Persistence
       self.is_final = true
       raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
     end
+
+    def travel_plan(travel_type, current_location)
+      [current_location, location]
+    end
   end
 
   class AppointmentParticipation
