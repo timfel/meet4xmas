@@ -31,5 +31,11 @@ external_spec:
 spec: external_spec
 
 
+external_coverage:
+	jruby --1.9 -S rake coverage
+
+coverage: external_coverage
+
+
 clean:
 	cd $(java_lib_dir) && make clean
