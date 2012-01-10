@@ -40,7 +40,7 @@ module Persistence
         end
         participations.create(:participant => invitee)
       end
-      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
     end
 
     def update_participation_info(participant, attributes)
@@ -56,7 +56,7 @@ module Persistence
       raise "User '#{participant.id}' does not participate in appointment #{id}" unless participation
       participation.update attributes
 
-      raise "Failed to save the appointment. Errors:\n#{participation.errors.inspect}" unless participation.save()
+      raise "Failed to save the appointment. Errors:\n#{participation.errors.inspect}" unless participation.save
     end
 
     def update_location
@@ -96,7 +96,7 @@ module Persistence
 
     def finalize()
       self.is_final = true
-      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
     end
   end
 
