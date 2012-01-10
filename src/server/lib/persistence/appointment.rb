@@ -62,14 +62,12 @@ module Persistence
     end
 
     def update_location
-      require 'csv'
       require 'net/http'
       require 'rubygems'; require 'ruby-debug'; debugger
-      csv_filename = File.join(File.dirname(__FILE__),'..','..','OpenData','weihnachtsmaerkte_geo.csv')
-      locations = CSV.open(csv_filename, 'r', :headers=>true).to_a
+      locations = Location.from_type location_type
 
       origins = self.participations.map{|p|"#{p.location.latitude},#{p.location.longitude}"}.join('|')
-      destinations = locations.map{|l|"#{l['Latitude']},#{l['Longitude']}"}.join('|')
+      destinations = locations.map{ |l| "#{l.latitude},#{l.longitude}" }.join('|')
 
       base_url = "http://maps.googleapis.com/maps/api/distancematrix/json"
       url = "#{base_url}?sensor=false&origins=#{origins}&destinations=#{destinations}"
