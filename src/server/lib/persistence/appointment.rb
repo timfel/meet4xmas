@@ -22,13 +22,11 @@ module Persistence
 
     def initialize(*args, &block)
       super
-      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
 
       # add the creator to the participants
       add_participants creator
       update_participation_info creator, :status => ParticipationStatus::Accepted
-      # find the initial location
-      update_location
 
       self
     end
