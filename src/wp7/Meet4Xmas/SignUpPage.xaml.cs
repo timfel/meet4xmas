@@ -37,7 +37,8 @@ namespace Meet4Xmas
                 },
                 (ErrorInfo errorInfo) =>
                 {
-                    SignUpErrorInfo.Text = SignUpErrorInfo.Text + "\n" + errorInfo.ToString();
+                    SignUpProgressBar.Visibility = Visibility.Collapsed;
+                    SignUpErrorInfo.Text = errorInfo.message;
                 });
         }
     }

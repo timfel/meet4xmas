@@ -10,5 +10,12 @@ namespace org.meet4xmas.wire
                 return false;
             return this == obj;
         }
+
+        public Participant() { }
+        public Participant(string userId)
+        {
+            this.userId = userId;
+            this.status = ParticipationStatus.Pending;
+        }
     }
 }
