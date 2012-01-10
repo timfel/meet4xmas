@@ -109,8 +109,6 @@ module Persistence
       if minIndex
         self.location = locations[minIndex]
       end
-      puts minIndex
-      puts self.location
     end
 
     def join(participant, travel_type, location) # participant is either a User or its id
