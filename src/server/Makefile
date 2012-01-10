@@ -10,13 +10,13 @@ java_libs_service:
 
 
 run_server: java_libs_service
-	ruby lib/server.rb
+	jruby --1.9 lib/server.rb
 
 run: run_server
 
 
 run_ruby_interactive_test_client:
-	irb -r 'interactive_client'
+	jruby --1.9 -S irb -r 'interactive_client'
 
 run_client: run_ruby_interactive_test_client
 
