@@ -23,7 +23,7 @@ namespace org.meet4xmas.wire
         public string title;
         public string description;
 
-        public string ToString()
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder("<Location ");
             sb.Append("@longitude: ").Append(longitude).Append(", ");

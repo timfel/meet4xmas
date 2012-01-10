@@ -37,10 +37,10 @@
             </Grid.RowDefinitions>
             <!-- Progress Bar -->
             <ProgressBar x:Name="SignUpProgressBar" IsIndeterminate="True" Grid.Row="1" Visibility="Collapsed"></ProgressBar>
-            <TextBox Name="textBox1" Text="" IsEnabled="True" Grid.ColumnSpan="1" Grid.Row="2" AcceptsReturn="True" />
+            <TextBox Name="SignUpTextInput" Text="" IsEnabled="True" Grid.ColumnSpan="1" Grid.Row="2" AcceptsReturn="True" />
             <Button Content="Sign me up!" Name="SignUpButton" Click="SignUpButtonClick" Grid.Row="3" DataContext="{Binding}" />
-            <TextBlock Name="SignUpTextInput" Text="You have to create an account first. Choose a username and click &quot;Sign me up!&quot;" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" />
-            <TextBlock Name="SignUpErrorInfo" Text="There was an error registering that account." VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" Grid.Row="4" FontWeight="Bold" FontStretch="Expanded" Visibility="Collapsed" />
+            <TextBlock Name="textBlock1" Text="You have to create an account first. Choose a username and click &quot;Sign me up!&quot;" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" />
+            <TextBlock Name="SignUpErrorInfo" Text="" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" Grid.Row="4" FontWeight="Bold" FontStretch="Expanded" />
         </Grid>
     </Grid>
  

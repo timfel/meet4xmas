@@ -6,17 +6,6 @@ using System.Windows.Controls.Primitives;
 
 namespace Meet4Xmas
 {
-    public class Foo
-    {
-        int a;
-        string b;
-    }
-
-    public interface IHessianTest
-    {
-        Foo getAppointment(int id);
-    }
-
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
@@ -44,18 +33,13 @@ namespace Meet4Xmas
 
         private void CreateAppointmentButtonClick(object sender, RoutedEventArgs e)
         {
-            Panorama.DefaultItem = AppointmentsList;
-            Appointment.Create(Settings.Account, TravelPlan.TravelType.PublicTransport,
-                new Participant[] {}, Location.LocationType.ChristmasMarket, "TODO MESSAGE",
-                (Appointment apt) => { Settings.Appointments.Add(apt); App.ViewModel.LoadAppointments(); },
-                (ErrorInfo errorInfo) => {
-                    Popup p = new Popup();
-                    InfoPopup ip = new InfoPopup();
-                    ip.container = p;
-                    ip.PopupText.Text = "An error occurred trying to create your appointment." + errorInfo.message;
-                    p.Child = ip;
-                    p.IsOpen = true;
-                });
+            NavigationService.Navigate(new Uri("/AppointmentCreate.xaml", UriKind.Relative));
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Account = null;
+            NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
         }
     }
 }

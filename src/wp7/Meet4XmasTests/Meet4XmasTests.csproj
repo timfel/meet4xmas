@@ -54,6 +54,7 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight">
       <HintPath>packages\WindowsPhoneEssentials.Testing.0.7.2.88\lib\SL4-WindowsPhone71\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
     </Reference>
+    <Reference Include="SilverHessian, Version=1.3.4367.30573, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="SilverlightSerializer.WP7">
       <HintPath>packages\WindowsPhoneEssentials.0.7.2.88\lib\SL4-WindowsPhone71\SilverlightSerializer.WP7.dll</HintPath>
     </Reference>
@@ -103,10 +104,6 @@
     <None Include="Notes.htm" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\hessiancsharp\SilverHessian.csproj">
-      <Project>{A56BE294-6746-4B87-BCDF-9BDC685A8D5C}</Project>
-      <Name>SilverHessian</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Meet4Xmas\Meet4Xmas.csproj">
       <Project>{7D442AB2-EB2D-40A3-A154-0C9566919993}</Project>
       <Name>Meet4Xmas</Name>

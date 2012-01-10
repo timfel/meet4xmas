@@ -1,25 +1,15 @@
 //
-//  FirstViewController.m
+//  AppointmentListViewController.m
 //  Meet4Xmas
 //
 //  Created by Frank Schlegel on 08.12.11.
 //  Copyright (c) 2011 HPI. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "AppointmentListViewController.h"
 #import "RegistrationViewController.h"
 
-@implementation FirstViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = NSLocalizedString(@"First", @"First");
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
-    }
-    return self;
-}
+@implementation AppointmentListViewController
 							
 - (void)didReceiveMemoryWarning
 {

@@ -28,6 +28,7 @@
                 <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
                     <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
                     <Button BorderBrush="#00000000">Settings</Button>
+                    <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
                 </ListBox>
             </controls:PanoramaItem>
  
