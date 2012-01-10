@@ -20,7 +20,7 @@ module Server
       _transaction do |t|
         user = Persistence::User.first(:id => userId)
         if user
-          _success_response(user.appointments.map { |a| a.id })
+          _success_response(user.appointments.map(&:id))
         else
           user = Persistence::User.new :id => userId
           if user.save
@@ -54,14 +54,7 @@ module Server
         # fetch user
         user = Persistence::User.first(:id => userId)
         if user
-
-          # build location object
-          location = Persistence::Location.create({
-            :latitude => java_location.latitude,
-            :longitude => java_location.longitude,
-            :title => java_location.title,
-            :description => java_location.description
-          })
+          location = Persistence::Location.from_java(java_location)
 
           # create appointment
           appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
@@ -80,39 +73,15 @@ module Server
       appointment = Persistence::Appointment.first(:id => appointmentId)
       return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
 
-      result = Java::Wire::Appointment.new
-      result.identifier = appointment.id
-      result.creator = appointment.creator.id
-      result.locationType = appointment.location_type
-      result.location = Java::Wire::Location.new.tap do |l|
-        l.title = appointment.location.title
-        l.description = appointment.location.description
-        l.latitude = appointment.location.latitude
-        l.longitude = appointment.location.longitude
-      end
-      result.isFinal = appointment.is_final
-      result.participants = appointment.participations.map do |participation|
-        java_participant = Java::Wire::Participant.new
-        java_participant.userId = participation.participant.id
-        java_participant.status = participation.status
-        java_participant
-      end
-      result.message = appointment.user_message
-      _success_response(result)
+      _success_response(appointment.to_java)
     end
 
     def getTravelPlan(appointmentId, travelType, java_location)
       appointment = Persistence::Appointment.first(:id => appointmentId)
       return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
 
-      plan = Java::Wire::TravelPlan.new
-      plan.path = appointment.travel_plan( travelType, java_location).map do |location|
-        Java::Wire::Location.new.tap do |l|
-          l.title = location.title
-          l.description = location.description
-          l.latitude = location.latitude
-          l.longitude = location.longitude
-        end
+      plan = Java::Wire::TravelPlan.new.tap do |java_plan|
+        java_plan.path = appointment.travel_plan(travelType, java_location).map(&:to_java)
       end
 
       _success_response(plan)
@@ -129,12 +98,7 @@ module Server
           if user
 
             # build location object
-            location = Persistence::Location.create({
-              :latitude => java_location.latitude,
-              :longitude => java_location.longitude,
-              :title => java_location.title,
-              :description => java_location.description
-            })
+            location = Persistence::Location.from_java java_location
 
             # join the appointment
             appointment.join(user, travelType, location)
@@ -190,16 +154,16 @@ module Server
 
     def _build_response(success, error_info=nil, payload=nil)
       if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
-        info = Java::Wire::ErrorInfo.new
-        info.code = error_info[:code]
-        info.message = error_info[:message]
-        error_info = info
+        error_info = Java::Wire::ErrorInfo.new.tap do |info|
+          info.code = error_info[:code]
+          info.message = error_info[:message]
+        end
       end
-      response = Java::Wire::Response.new
-      response.success = success
-      response.error = error_info
-      response.payload = payload
-      response
+      Java::Wire::Response.new.tap do |response|
+        response.success = success
+        response.error   = error_info
+        response.payload = payload
+      end
     end
 
     def _success_response(payload=nil)
