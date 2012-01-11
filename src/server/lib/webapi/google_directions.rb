@@ -2,8 +2,8 @@ require 'net/http'
 
 module Meet4Xmas
   module WebAPI
-    class GoogleDistanceMatrix
-      def initialise( options = {} )
+    class GoogleDirections
+      def initialize( options = {} )
         valid_modes = %w{ driving walking bicycling }
         @mode = options[:mode] ? options[:mode] : 'driving'
         raise "mode '#{@mode}' not in #{valid_modes}!" if not valid_modes.include? @mode
