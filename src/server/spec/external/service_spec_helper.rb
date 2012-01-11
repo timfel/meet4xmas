@@ -56,28 +56,67 @@ module Helpers
     users.each { |user| @client.deleteAccount(user) }
   end
 
-  def register_all
-    register_users @creator if defined?(@creator)
-    register_users(*@invitees) if defined?(@invitees)
-  end
-
   # appointment creation
 
+  def register_all
+    create_appointment_args
+    register_users creator
+    register_users(*invitees)
+  end
+
   def create_appointment_args
-    @creator ||= 'lysann.kessler@gmail.com'
-    @invitees ||= [ 'test@example.com', 'foo@example.com' ]
-    @location ||= Meet4Xmas::Persistence::Location.HPI
     @create_appointment_args ||= [
-      @creator, Meet4Xmas::Persistence::TravelType::ALL.first, @location.to_hash,
-      @invitees,
+      'lysann.kessler@gmail.com',
+      Meet4Xmas::Persistence::TravelType::ALL.first,
+      Meet4Xmas::Persistence::Location.HPI.to_hash,
+      [ 'test@example.com', 'foo@example.com' ],
       Meet4Xmas::Persistence::LocationType::ALL.first,
       'user message'
     ]
+  end
+  def creator
+    create_appointment_args[0]
+  end
+  def travel_type
+    create_appointment_args[1]
+  end
+  def location
+    create_appointment_args[2]
+  end
+  def invitees
+    create_appointment_args[3]
+  end
+  def location_type
+    create_appointment_args[4]
+  end
+  def user_message
+    create_appointment_args[5]
+  end
+  def participants
+    invitees.clone.tap { |a| a << creator }
   end
 
   def create_appointment(*args)
     args = create_appointment_args if args.empty?
     @client.createAppointment(*args)
+  end
+
+  def get_appointment(id=@appointment_id)
+    @client.getAppointment id
+  end
+
+  # accepting / declining invitations
+
+  def join_appointment(appointment_id, user_id, travel_type=Meet4Xmas::Persistence::TravelType::ALL.first, location=Meet4Xmas::Persistence::Location.HPI.to_hash)
+    @client.joinAppointment(appointment_id, user_id, travel_type, location)
+  end
+
+  def decline_appointment(appointment_id, user_id)
+    @client.declineAppointment(appointment_id, user_id)
+  end
+
+  def finalize_appointment(appointment_id)
+    @client.finalizeAppointment(appointment_id)
   end
 
   # handling responses

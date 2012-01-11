@@ -28,12 +28,12 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'fails if the creator is not registered' do
-      unregister_users @creator
+      unregister_users creator
       create_appointment.should return_error(0) # TODO: adjust error code
     end
 
     it 'succeeds even if an invitee is not registered' do
-      unregister_users @invitees.first
+      unregister_users invitees.first
       create_appointment.should be_successful
     end
 
@@ -53,7 +53,7 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'succeeds if there are no invitees' do
-      unregister_users(*@invitees) # optional for this test
+      unregister_users(*invitees) # optional for this test
       create_appointment_args[3] = []
       create_appointment.should be_successful
     end
