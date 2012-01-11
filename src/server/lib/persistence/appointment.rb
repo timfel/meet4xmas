@@ -129,7 +129,14 @@ module Persistence
     end
 
     def travel_plan(travel_type, current_location)
-      [current_location, location]
+      case travel_type
+      when TravelType::Car
+        WebAPI::GoogleDirections.new( :origin => current_location, :destination => location ).path
+      when TravelType::Walk
+        WebAPI::GoogleDirections.new( :mode => 'walking', :origin => current_location, :destination => location ).path
+      else
+        [current_location, location]
+      end
     end
   end
 
