@@ -34,7 +34,7 @@ module Meet4Xmas
         if result and result['routes'] and result['routes'].first and result['routes'].first['legs']
           step_number = 0
           result['routes'].first['legs'].first['steps'].map do |step|
-            Location.new :title => "Step ##{step_number += 1}",
+            Persistence::Location.new :title => "Step ##{step_number += 1}",
                          :description => step['html_instructions'],
                          :longitude => step['start_location']['lng'],
                          :latitude =>step['start_location']['lat']
