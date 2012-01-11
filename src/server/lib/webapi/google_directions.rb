@@ -41,7 +41,7 @@ module Meet4Xmas
           end
         else
           [ origin ]
-        end << location
+        end << @destination
       end
 
       def mode; @mode; end
