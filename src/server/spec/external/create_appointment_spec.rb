@@ -29,57 +29,43 @@ describe 'Meet4Xmas Service' do
 
     it 'fails if the creator is not registered' do
       unregister_users @creator
-      response = create_appointment
-      response.should_not be_successful
-      # TODO: test error code
+      create_appointment.should return_error(0) # TODO: adjust error code
     end
 
     it 'succeeds even if an invitee is not registered' do
       unregister_users @invitees.first
-      response = create_appointment
-      response.should be_successful
-      # TODO: test error code
+      create_appointment.should be_successful
     end
 
     it 'fails if the creator id is missing' do
       create_appointment_args[0] = nil
-      response = create_appointment
-      response.should_not be_successful
-      # TODO: test error code
+      create_appointment.should return_error(0) # TODO: adjust error code
     end
 
     it 'fails if the travel type is invalid' do
       create_appointment_args[1] = Meet4Xmas::Persistence::TravelType::ALL.reduce(:+) + 1
-      response = create_appointment
-      response.should_not be_successful
-      # TODO: test error code
+      create_appointment.should return_error(0) # TODO: adjust error code
     end
 
     it 'fails if the location is missing' do
       create_appointment_args[2] = nil
-      response = create_appointment
-      response.should_not be_successful
-      # TODO: test error code
+      create_appointment.should return_error(0) # TODO: adjust error code
     end
 
     it 'succeeds if there are no invitees' do
       unregister_users(*@invitees) # optional for this test
       create_appointment_args[3] = []
-      response = create_appointment
-      response.should be_successful
+      create_appointment.should be_successful
     end
 
     it 'fails if the location type is invalid' do
       create_appointment_args[4] = Meet4Xmas::Persistence::LocationType::ALL.reduce(:+) + 1
-      response = create_appointment
-      response.should_not be_successful
-      # TODO: test error code
+      create_appointment.should return_error(0) # TODO: adjust error code
     end
 
     it 'succeeds if the user message is missing' do
       create_appointment_args[5] = nil
-      response = create_appointment
-      response.should be_successful
+      create_appointment.should be_successful
     end
 
     describe 'validates the location: it' do
@@ -97,9 +83,7 @@ describe 'Meet4Xmas Service' do
           it "fails if location #{key} is invalid (#{value})" do
             location = create_appointment_args[2]
             location[key] = value
-            response = create_appointment
-            response.should_not be_successful
-            # TODO: test error code
+            create_appointment.should return_error(0) # TODO: adjust error code
           end
         end
       end
