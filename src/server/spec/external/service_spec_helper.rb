@@ -48,12 +48,20 @@ module Helpers
 
   # user registration
 
+  def register_account(user_id)
+    @client.registerAccount user_id
+  end
+
+  def delete_account(user_id)
+    @client.deleteAccount user_id
+  end
+
   def register_users(*users)
-    users.each { |user| @client.registerAccount(user) }
+    users.each { |user_id| register_account user_id }
   end
 
   def unregister_users(*users)
-    users.each { |user| @client.deleteAccount(user) }
+    users.each { |user_id| delete_account user_id }
   end
 
   # appointment creation
