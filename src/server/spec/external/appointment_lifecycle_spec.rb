@@ -13,14 +13,14 @@ describe 'Meet4Xmas Service' do
       location = Meet4Xmas::Persistence::Location.HPI
       @location_type = Meet4Xmas::Persistence::LocationType::ALL.first
       @user_message = 'user message'
-      
+
       create_appointment_args = [
         @creator, Meet4Xmas::Persistence::TravelType::ALL.first, location.to_hash,
         @invitees,
         @location_type,
         @user_message
       ]
-      
+
       register_users @creator
       register_users(*@invitees)
       @appointment_id = @client.createAppointment(*create_appointment_args)['payload']

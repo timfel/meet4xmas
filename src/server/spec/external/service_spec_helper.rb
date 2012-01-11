@@ -109,7 +109,7 @@ RSpec::Matchers.define :be_successful do
   end
 end
 
-# 
+#
 # global setup & teardown routines
 #
 
