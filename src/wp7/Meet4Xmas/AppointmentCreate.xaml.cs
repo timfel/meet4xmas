@@ -28,7 +28,21 @@ namespace Meet4Xmas
             var participants = from email in ContactList.Items select new Participant((string)email);
             Appointment.Create(Settings.Account, TravelPlan.TravelType.PublicTransport,
                 participants.ToArray<Participant>(), Location.LocationType.ChristmasMarket, SubjectBox.Text,
-                (Appointment apt) => { Settings.Appointments.Add(apt); App.ViewModel.LoadAppointments(); },
+                (Appointment apt) =>
+                {
+                    Settings.Appointments.Add(apt);
+                    apt.GetTravelPlan(TravelPlan.TravelType.PublicTransport,
+                        (TravelPlan tp) =>
+                        {
+                            TravelPlan t = tp;
+                        },
+                        (ErrorInfo ei) =>
+                        {
+                            MessageBox.Show("An error occured trying to find your travel plan." + ei.message);
+                        });
+                    Settings.Save();
+                    App.ViewModel.LoadAppointments();
+                },
                 (ErrorInfo errorInfo) =>
                 {
                     MessageBox.Show("An error occurred trying to create your appointment." + errorInfo.message);
