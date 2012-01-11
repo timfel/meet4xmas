@@ -25,13 +25,13 @@ run_java_test_client:
 	cd $(java_lib_dir) && make run_test
 
 
-external_spec:
+external_spec: java_libs_service
 	jruby --1.9 -S rake spec
 
 spec: external_spec
 
 
-external_coverage:
+external_coverage: java_libs_service
 	jruby --1.9 -S rake coverage
 
 coverage: external_coverage
