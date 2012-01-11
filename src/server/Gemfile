@@ -12,4 +12,4 @@ gem 'dm-validations'
 gem 'dm-sqlite-adapter'
 
 # for the tests
-gem 'rspec'
+gem 'rspec', '=2.7'
