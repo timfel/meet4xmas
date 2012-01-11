@@ -45,6 +45,7 @@ module Meet4Xmas
                          :latitude =>step['start_location']['lat']
           end
         else
+          puts result.to_yaml
           [ origin ]
         end << @destination
       end
