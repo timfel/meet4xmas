@@ -34,7 +34,7 @@ module Meet4Xmas
           result = JSON.parse(data)
         else
           puts "Unexpected response #{resp}"
-          return []
+          return [ origin, destination ]
         end
         if result and result['routes'] and result['routes'].first and result['routes'].first['legs']
           step_number = 0
