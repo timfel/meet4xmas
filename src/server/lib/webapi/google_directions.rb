@@ -40,7 +40,7 @@ module Meet4Xmas
           step_number = 0
           result['routes'].first['legs'].first['steps'].map do |step|
             Persistence::Location.new :title => "Step ##{step_number += 1}",
-                         :description => step['html_instructions'],
+                         :description => URI.escape(step['html_instructions']),
                          :longitude => step['start_location']['lng'],
                          :latitude =>step['start_location']['lat']
           end
