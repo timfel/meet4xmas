@@ -47,7 +47,7 @@ namespace Meet4Xmas
             }
         }
 
-        public void Save()
+        public static void Save()
         {
             Storage.Save();
         }

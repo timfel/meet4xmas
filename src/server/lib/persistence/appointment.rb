@@ -129,6 +129,7 @@ module Persistence
     end
 
     def travel_plan(travel_type, current_location)
+      update_location unless location
       case travel_type
       when TravelType::Car
         WebAPI::GoogleDirections.new( :origin => current_location, :destination => location ).path

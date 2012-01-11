@@ -66,15 +66,27 @@ namespace org.meet4xmas.wire
 
         public void GetTravelPlan(int travelType, Action<TravelPlan> cb, Action<ErrorInfo> errorCb)
         {
-            ServiceCall.Invoke(ServiceCallGetTravelPlan,
-                (Response result) =>
-                {
-                    if (!result.success) {
-                        errorCb(result.error);
-                    } else {
-                        cb((TravelPlan)result.payload);
-                    }
-                }, this.identifier, travelType, this.location);
+            withGpsLocationDo((Location loc) =>
+            {
+                ServiceCall.Invoke(ServiceCallGetTravelPlan,
+                    (Response result) =>
+                    {
+                        if (!result.success)
+                        {
+                            errorCb(result.error);
+                        }
+                        else
+                        {
+                            Location[] path = ((TravelPlan)result.payload).path;
+                            if (path.Length == 0) {
+                                errorCb(new ErrorInfo(-1, "Invalid TravelPlan. No path data."));
+                            } else {
+                                this.location = path[path.Length - 1];
+                                cb((TravelPlan)result.payload);
+                            }
+                        }
+                    }, this.identifier, travelType, loc);
+            }, errorCb);
         }
 
         public void Finalize(Action cb, Action<ErrorInfo> errorCb)

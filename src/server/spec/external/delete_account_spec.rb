@@ -5,7 +5,7 @@ describe 'Meet4Xmas Service' do
     before :each do
       @user_id = 'lysann.kessler@gmail.com'
     end
-    
+
     it 'succeeds if the account exists' do
       register_account @user_id
       delete_account(@user_id).should be_successful

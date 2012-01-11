@@ -44,6 +44,12 @@ describe 'Meet4Xmas Service' do
       it 'invitees can decline' do
         try_decline.should be_successful
       end
+
+      it 'give a nice travel plan' do
+        location = { 'longitude' => 1, 'latitude' => 0 }
+        travel_type = Meet4Xmas::Persistence::TravelType::ALL.first
+        @client.getTravelPlan( @appointment_id, travel_type, location ).size.should >= 2
+      end
     end
 
     describe 'After finalization' do

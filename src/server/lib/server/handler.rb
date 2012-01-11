@@ -86,7 +86,7 @@ module Server
       return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
 
       plan = Java::Wire::TravelPlan.new.tap do |java_plan|
-        java_plan.path = appointment.travel_plan(travelType, java_location).map(&:to_java)
+        java_plan.path = appointment.travel_plan(travelType, Persistence::Location.from_java(java_location)).map(&:to_java)
       end
 
       _success_response(plan)

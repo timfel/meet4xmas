@@ -171,7 +171,7 @@ RSpec::Matchers.define :return_error do |expected_code|
   end
 end
 
-# 
+#
 # global setup & teardown routines
 #
 
