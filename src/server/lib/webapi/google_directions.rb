@@ -21,8 +21,13 @@ module Meet4Xmas
       end
 
       def path
-        resp = Net::HTTP.get_response( URI.parse url )
-        result = nil
+        begin
+          resp = Net::HTTP.get_response( URI.parse url )
+        rescue
+          puts 'error while fetching google data'
+        ensure
+          result = nil
+        end
         case resp
         when Net::HTTPSuccess
           data = resp.body
