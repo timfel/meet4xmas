@@ -40,6 +40,7 @@ namespace Meet4Xmas
 
         public void LoadAppointments()
         {
+            Appointments.Clear();
             foreach (Appointment a in Settings.Appointments)
             {
                 string friends = "";
@@ -47,7 +48,7 @@ namespace Meet4Xmas
                 {
                     friends += (p.userId + " ");
                 }
-                Appointments.Add(new ItemViewModel() { LineOne = a.message, LineTwo = friends, LineThree = a.location.ToString() });
+                Appointments.Add(new ItemViewModel() { LineOne = a.message, LineTwo = friends, LineThree = String.Format("{0}", a.location) });
             }
         }
 
