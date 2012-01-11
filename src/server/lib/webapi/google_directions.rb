@@ -10,7 +10,7 @@ module Meet4Xmas
         @origin = options[:origin] ? options[:origin] : { :latitude => 0, :longitude => 0 }
         @destination = options[:destination] ? options[:destination] : { :latitude => 0, :longitude => 0 }
         @sensor = !!options[:sensor]
-        @baseURL = "http://maps.google.com/maps/api/directions/json?"
+        @base_url = "http://maps.google.com/maps/api/directions/json"
       end
 
       def uri
