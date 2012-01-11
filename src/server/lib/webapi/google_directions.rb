@@ -13,15 +13,15 @@ module Meet4Xmas
         @base_url = "http://maps.google.com/maps/api/directions/json"
       end
 
-      def uri
-        URI.parse "#{@base_url}?sensor=#{@sensor ? 'true' : 'false'}" +
+      def url
+        "#{@base_url}?sensor=#{@sensor ? 'true' : 'false'}" +
           "&origin=#{URI.escape "#{@origin.latitude},#{@origin.longitude}"}" +
           "&destination=#{URI.escape "#{@destination.latitude},#{@destination.longitude}"}" +
           "&mode=#{@mode}"
       end
 
       def path
-        resp = Net::HTTP.get_response(uri)
+        resp = Net::HTTP.get_response( URI.parse url )
         result = nil
         case resp
         when Net::HTTPSuccess
