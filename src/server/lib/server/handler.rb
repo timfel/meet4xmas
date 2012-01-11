@@ -57,8 +57,8 @@ module Server
           location = Persistence::Location.from_java(java_location)
 
           #XXX: create users which not yet exist, we should send them mails later
-          invitees.each do |user|
-            Persistence::User.first_or_create( :id => userId).save
+          invitees.each do |invitee|
+            Persistence::User.first_or_create(:id => invitee).save
           end
 
           # create appointment
