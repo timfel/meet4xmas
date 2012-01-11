@@ -45,9 +45,9 @@ describe 'Meet4Xmas Service' do
 
       it 'contains a list of appointment ids the user participates in' do
         @invitees = [ 'test@example.com', 'foo@example.com' ]
-        @location = { 'longitude' => 0, 'latitude' => 0, 'title' => 'title', 'description' => 'description' }
+        @location = Meet4Xmas::Persistence::Location.HPI
         @create_appointment_args = [
-          @user_id, Meet4Xmas::Persistence::TravelType::ALL.first, @location,
+          @user_id, Meet4Xmas::Persistence::TravelType::ALL.first, @location.to_hash,
           @invitees,
           Meet4Xmas::Persistence::LocationType::ALL.first,
           'user message'

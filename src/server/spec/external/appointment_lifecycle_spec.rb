@@ -10,12 +10,12 @@ describe 'Meet4Xmas Service' do
       @creator = 'lysann.kessler@gmail.com'
       @invitees = [ 'test@example.com', 'foo@example.com' ]
       @participants = [] + @invitees; @participants << @creator
-      location = { 'longitude' => 0, 'latitude' => 0 }
+      location = Meet4Xmas::Persistence::Location.HPI
       @location_type = Meet4Xmas::Persistence::LocationType::ALL.first
       @user_message = 'user message'
       
       create_appointment_args = [
-        @creator, Meet4Xmas::Persistence::TravelType::ALL.first, location,
+        @creator, Meet4Xmas::Persistence::TravelType::ALL.first, location.to_hash,
         @invitees,
         @location_type,
         @user_message
