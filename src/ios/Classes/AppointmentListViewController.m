@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "RegistrationViewController.h"
 #import "ServiceProtocols.h"
+#import "ServiceProxy.h"
 
 NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
@@ -144,18 +145,25 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<Appointment> appointment = [self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
-    if (appointment == nil) {
+    AppointmentId appointmentId = (AppointmentId)[self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
+    if (appointmentId == 0) {
         return nil;
     }
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentClassName];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentClassName];
+    
+    id<Appointment> appointment;
+    if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentClassName];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentClassName];
+        }
+        
+        cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];
+        
+        return cell;
+    } else {
+        //TODO: Error check?
+        return nil;
     }
-    
-    cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];
-    
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -168,8 +176,11 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    id<Appointment> appointment = [self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
-    //TODO: Present Appointment details view
+    AppointmentId appointmentId = (AppointmentId)[self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
+    id<Appointment> appointment;
+    if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
+        //TODO: Present Appointment details view
+    }
 }
 
 @end

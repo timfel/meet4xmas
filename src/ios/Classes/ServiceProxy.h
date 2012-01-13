@@ -24,9 +24,9 @@
              locationType:(LocationType)locationType
               userMessage:(NSString*)userMessage;
 
-+ (BOOL)getAppointment:(id<Appointment>)appointmentId;
++ (BOOL)getAppointment:(id<Appointment>) appointment forID: (AppointmentId)appointmentId;
 
-+ (BOOL)finalizeAppointment:(id<Appointment>)appointmentId;
++ (BOOL)finalizeAppointment:(AppointmentId)appointmentId;
 
 + (BOOL)joinAppointment:(AppointmentId)appointmentId
                  userId:(UserId)userId
