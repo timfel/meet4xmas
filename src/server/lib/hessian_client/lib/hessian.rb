@@ -182,8 +182,8 @@ module Hessian
       end
 
       def from_utf8(len = '*')
-        s = @data.unpack("U#{len}").pack('C*')
-        [ s, s.unpack('C*').pack('U*').length ]
+        s = @data.unpack("U#{len}").pack('U*')
+        [ s, s.force_encoding('UTF-8').bytesize ]
       end
 
       def parse_long
