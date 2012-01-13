@@ -68,8 +68,7 @@
 - (IBAction)registrationDone:(id)sender
 {
     NSArray* appointments;
-    //TODO: Get appointments with the call below
-    if (![ServiceProxy registerAccount:self.emailTextField.text]) {
+    if (![ServiceProxy registerAccount: appointments forUser:self.emailTextField.text]) {
         UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                           message:@"Something went wrong while registering your e-mail address. Please try again later." 
                                                          delegate:nil 
