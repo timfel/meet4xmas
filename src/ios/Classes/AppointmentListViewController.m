@@ -99,6 +99,13 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     }
 }
 
+#pragma mark - IBActions
+
+- (IBAction)createAppointment:(id)sender
+{
+    //TODO: Present CreateAppointmentView
+}
+
 #pragma mark - RegistrationViewControllerDelegate
 
 - (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointments

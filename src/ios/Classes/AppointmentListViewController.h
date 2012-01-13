@@ -12,4 +12,6 @@
 
 @interface AppointmentListViewController : UITableViewController <RegistrationViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
+- (IBAction)createAppointment:(id)sender;
+
 @end
