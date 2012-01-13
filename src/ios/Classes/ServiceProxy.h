@@ -11,7 +11,7 @@
 @interface ServiceProxy : NSObject
 
 #pragma mark Account
-+ (BOOL)registerAccount:(NSArray*) array forUser: (UserId)userId;
++ (BOOL)registerAccount:(UserId)userId receiveAppointments:(NSArray*)appointments;
 
 + (BOOL)deleteAccount:(UserId)userId;
 

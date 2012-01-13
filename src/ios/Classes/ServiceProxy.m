@@ -64,7 +64,7 @@
 
 #pragma mark Account
 
-+ (BOOL)registerAccount:(NSArray*)array forUser: (UserId)userId
++ (BOOL)registerAccount:(UserId)userId receiveAppointments:(NSArray*)appointments
 {
     id<Response> response = [[self sharedInstance].serviceProxy registerAccount:userId];
     
@@ -74,7 +74,7 @@
         }
         return NO;
     }
-    array = (NSArray*)response.payload;
+    appointments = (NSArray*)response.payload;
     return YES;
 }
 
