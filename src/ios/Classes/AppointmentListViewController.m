@@ -116,6 +116,14 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     //TODO: Present CreateAppointmentView
 }
 
+- (IBAction)logoutUser:(id)sender
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.currentUser = nil;
+    
+    [self presentRegistrationView];
+}
+
 #pragma mark - RegistrationViewControllerDelegate
 
 - (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointments

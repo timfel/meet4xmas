@@ -46,6 +46,7 @@
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:180</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -87,6 +88,7 @@
 							<string key="NSFrame">{{0, 64}, {768, 960}}</string>
 							<reference key="NSSuperview"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:745</string>
 							<object class="NSColor" key="IBUIBackgroundColor">
 								<int key="NSColorSpace">3</int>
@@ -105,7 +107,13 @@
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="911015022">
 							<reference key="IBUINavigationBar"/>
 							<string key="IBUITitle">Item</string>
-							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="658765332">
+							<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="704803146">
+								<string key="IBUITitle">Logout</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUINavigationItem" ref="911015022"/>
+							</object>
+							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="725169074">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUINavigationItem" ref="911015022"/>
@@ -172,10 +180,18 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">createAppointment:</string>
-						<reference key="source" ref="658765332"/>
+						<reference key="source" ref="725169074"/>
 						<reference key="destination" ref="758715540"/>
 					</object>
 					<int key="connectionID">18</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">logoutUser:</string>
+						<reference key="source" ref="704803146"/>
+						<reference key="destination" ref="758715540"/>
+					</object>
+					<int key="connectionID">20</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -229,7 +245,8 @@
 						<int key="objectID">11</int>
 						<reference key="object" ref="911015022"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="658765332"/>
+							<reference ref="725169074"/>
+							<reference ref="704803146"/>
 						</array>
 						<reference key="parent" ref="758715540"/>
 					</object>
@@ -245,7 +262,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
-						<reference key="object" ref="658765332"/>
+						<reference key="object" ref="725169074"/>
+						<reference key="parent" ref="911015022"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">19</int>
+						<reference key="object" ref="704803146"/>
 						<reference key="parent" ref="911015022"/>
 					</object>
 				</array>
@@ -260,6 +282,7 @@
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.CustomClassName">AppointmentListViewController</string>
@@ -270,7 +293,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">18</int>
+			<int key="maxID">20</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -296,17 +319,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">AppointmentListViewController</string>
 					<string key="superclassName">UITableViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">createAppointment:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">createAppointment:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="createAppointment:">id</string>
+						<string key="logoutUser:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="createAppointment:">
 							<string key="name">createAppointment:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="logoutUser:">
+							<string key="name">logoutUser:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AppointmentListViewController.h</string>

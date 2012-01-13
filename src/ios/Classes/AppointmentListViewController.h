@@ -13,5 +13,6 @@
 @interface AppointmentListViewController : UITableViewController <RegistrationViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (IBAction)createAppointment:(id)sender;
+- (IBAction)logoutUser:(id)sender;
 
 @end
