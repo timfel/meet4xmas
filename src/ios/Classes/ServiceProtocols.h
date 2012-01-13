@@ -50,7 +50,7 @@ OBJC_EXPORT NSString* const kLocationClassName;
 OBJC_EXPORT NSString* const kAppointmentClassName;
 @protocol Appointment 
 
-@property(nonatomic) int AppointmentId;
+@property(nonatomic) AppointmentId identifier;
 @property(strong, nonatomic) UserId creator;
 @property(nonatomic) LocationType locationType;
 @property(strong, nonatomic) id<Location> location;
