@@ -11,21 +11,22 @@
 @interface ServiceProxy : NSObject
 
 #pragma mark Account
-+ (NSArray*)registerAccount:(UserId)userId;
++ (BOOL)registerAccount:(NSArray*) array forUser: (UserId)userId;
 
 + (BOOL)deleteAccount:(UserId)userId;
 
 #pragma mark Appointment
-+ (AppointmentId)createAppointmentWithUser:(UserId)userId
-                                travelType:(TravelType)travelType
-                                  location:(id<Location>)location
-                                  invitees:(NSArray*)invitees
-                              locationType:(LocationType)locationType
-                               userMessage:(NSString*)userMessage;
++ (BOOL)createAppointment: (AppointmentId) appointmentId
+                 WithUser:(UserId)userId
+               travelType:(TravelType)travelType
+                location:(id<Location>)location
+                 invitees:(NSArray*)invitees
+             locationType:(LocationType)locationType
+              userMessage:(NSString*)userMessage;
 
-+ (id<Appointment>)getAppointment:(AppointmentId)appointmentId;
++ (BOOL)getAppointment:(id<Appointment>)appointmentId;
 
-+ (BOOL)finalizeAppointment:(AppointmentId)appointmentId;
++ (BOOL)finalizeAppointment:(id<Appointment>)appointmentId;
 
 + (BOOL)joinAppointment:(AppointmentId)appointmentId
                  userId:(UserId)userId
@@ -36,7 +37,7 @@
                     userId:(UserId)userId;
 
 #pragma mark TravelPlan
-+ (id<TravelPlan>)getTravelPlan:(AppointmentId)appointmentId
++ (BOOL)getTravelPlan: (id<TravelPlan>)travelplan for:(AppointmentId)appointmentId
                      travelType:(TravelType)travelType
                        location:(id<Location>)location;
 

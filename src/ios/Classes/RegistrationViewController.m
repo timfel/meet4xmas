@@ -67,7 +67,8 @@
 
 - (IBAction)registrationDone:(id)sender
 {
-    if (![ServiceProxy registerAccount:self.emailTextField.text]) {
+    NSArray* array;
+    if (![ServiceProxy registerAccount: array forUser:self.emailTextField.text]) {
         UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                           message:@"Something went wrong while registering your e-mail address. Please try again later." 
                                                          delegate:nil 
