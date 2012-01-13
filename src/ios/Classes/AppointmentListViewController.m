@@ -7,6 +7,7 @@
 //
 
 #import "AppointmentListViewController.h"
+#import "AppDelegate.h"
 #import "RegistrationViewController.h"
 #import "ServiceProtocols.h"
 
@@ -14,7 +15,9 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 @interface AppointmentListViewController()
 
-    @property (nonatomic, strong)NSArray* appointments;
+@property (nonatomic, strong)NSArray* appointments;
+
+- (void)presentRegistrationView;
 
 @end
 
@@ -61,22 +64,10 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 {
     [super viewDidAppear:animated];
     
-    //TODO: if (![user loggedIn]) {...
-    // Load the registration view modally. It will define a done button for the navigation controller.
-    RegistrationViewController* registrationViewController;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPhone" bundle:nil];
-    } else {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPad" bundle:nil];
-        // Only show a small form on the iPad, not full screen
-        registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.currentUser == nil) {
+        [self presentRegistrationView];
     }
-    registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    registrationViewController.delegate = self;
-    
-    // Create a navigation controller and present it modally.
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:registrationViewController];
-    [self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -99,6 +90,25 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     }
 }
 
+- (void)presentRegistrationView
+{
+    // Load the registration view modally. It will define a done button for the navigation controller.
+    RegistrationViewController* registrationViewController;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPhone" bundle:nil];
+    } else {
+        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPad" bundle:nil];
+        // Only show a small form on the iPad, not full screen
+        registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    registrationViewController.delegate = self;
+    
+    // Create a navigation controller and present it modally.
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:registrationViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)createAppointment:(id)sender
@@ -110,6 +120,8 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointments
 {
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.currentUser = email;
     self.appointments = appointments;
     //TODO: Should we really do that here?
     [self dismissModalViewControllerAnimated:YES];
