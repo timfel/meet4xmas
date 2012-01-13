@@ -8,16 +8,36 @@
 
 #import "AppointmentListViewController.h"
 #import "RegistrationViewController.h"
+#import "ServiceProtocols.h"
+
+NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
+
+@interface AppointmentListViewController()
+
+    @property (nonatomic, strong)NSArray* appointments;
+
+@end
 
 @implementation AppointmentListViewController
-							
+
+@synthesize appointments = _appointments;
+
+#pragma mark - Accessors
+
+- (void)setAppointments:(NSArray *)appointments
+{
+    _appointments = appointments;
+    [(UITableView*)self.view reloadData];
+}
+
+
+#pragma mark - View lifecycle
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -81,8 +101,9 @@
 
 #pragma mark - RegistrationViewControllerDelegate
 
-- (void)userRegisteredWithEmail:(NSString*)email
+- (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointments
 {
+    self.appointments = appointments;
     //TODO: Should we really do that here?
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -90,6 +111,38 @@
 - (void)registrationFailed
 {
     //TODO: Oops! What now?
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<Appointment> appointment = [self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
+    if (appointment == nil) {
+        return nil;
+    }
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentClassName];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentClassName];
+    }
+    
+    cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.appointments.count;
+}
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    id<Appointment> appointment = [self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
+    //TODO: Present Appointment details view
 }
 
 @end
