@@ -15,4 +15,4 @@ NSString* const kParticipantClassName = @"Participant";
 NSString* const kLocationClassName = @"Location";
 NSString* const kTravelPlanClassName = @"TravelPlan";
 NSString* const kErrorInfoClassName = @"ResponseBody$ErrorInfo";
-NSString* const kResponseBodyClassName = @"ResponseBody";
+NSString* const kResponseClassName = @"Response";

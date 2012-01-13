@@ -76,8 +76,8 @@ OBJC_EXPORT NSString* const kErrorInfoClassName;
 @end
 
 
-OBJC_EXPORT NSString* const kResponseBodyClassName;
-@protocol ResponseBody
+OBJC_EXPORT NSString* const kResponseClassName;
+@protocol Response
 
 @property(nonatomic) BOOL success;
 @property(strong, nonatomic) id<ErrorInfo> error;
@@ -90,7 +90,7 @@ OBJC_EXPORT NSString* const kResponseBodyClassName;
 
 - (void)registerAccount:(NSString*)userId;
 
-- (id<ResponseBody>)createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
-- (id<ResponseBody>)getAppointment:(int)aid;
+- (id<Response>)createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
+- (id<Response>)getAppointment:(int)aid;
 
 @end

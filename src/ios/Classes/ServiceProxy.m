@@ -72,7 +72,7 @@
 
 + (id<Appointment>)getAppointment:(int)identifier
 {
-    id<ResponseBody> response = [[self sharedInstance].serviceProxy getAppointment:identifier];
+    id<Response> response = [[self sharedInstance].serviceProxy getAppointment:identifier];
     id<Appointment> appointment = [response payload];
     return appointment;
 }
