@@ -14,5 +14,5 @@ NSString* const kAppointmentClassName = @"Appointment";
 NSString* const kParticipantClassName = @"Participant";
 NSString* const kLocationClassName = @"Location";
 NSString* const kTravelPlanClassName = @"TravelPlan";
-NSString* const kErrorInfoClassName = @"ResponseBody$ErrorInfo";
+NSString* const kErrorInfoClassName = @"Response$ErrorInfo";
 NSString* const kResponseClassName = @"Response";
