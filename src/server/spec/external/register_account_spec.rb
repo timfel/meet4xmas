@@ -8,31 +8,29 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'succeeds if the account does not exist yet' do
-      @client.registerAccount(@user_id).should be_successful
+      register_account(@user_id).should be_successful
     end
 
     it 'succeeds if the account does not exist anymore' do
-      @client.registerAccount(@user_id)
-      @client.deleteAccount(@user_id)
-      @client.registerAccount(@user_id).should be_successful
+      register_account @user_id
+      delete_account @user_id
+      register_account(@user_id).should be_successful
     end
 
     it 'succeeds if the account already exists' do
-      @client.registerAccount(@user_id)
-      @client.registerAccount(@user_id).should be_successful
+      register_account @user_id
+      register_account(@user_id).should be_successful
     end
 
     it 'fails if the account id is not an email address' do
       @user_id = 'lysann.kessler'
-      response = @client.registerAccount(@user_id)
-      response.should_not be_successful
-      # TODO: test error code
+      register_account(@user_id).should return_error 0 # TODO: adjust error code
     end
 
     describe 'response payload' do
       before :each do
-        @client.registerAccount(@user_id)
-        @response = @client.registerAccount(@user_id)
+        register_account @user_id
+        @response = register_account @user_id
       end
 
       it 'is a list' do
@@ -44,21 +42,14 @@ describe 'Meet4Xmas Service' do
       end
 
       it 'contains a list of appointment ids the user participates in' do
-        @invitees = [ 'test@example.com', 'foo@example.com' ]
-        @location = Meet4Xmas::Persistence::Location.HPI
-        @create_appointment_args = [
-          @user_id, Meet4Xmas::Persistence::TravelType::ALL.first, @location.to_hash,
-          @invitees,
-          Meet4Xmas::Persistence::LocationType::ALL.first,
-          'user message'
-        ]
-        @invitees.each { |user| @client.registerAccount(user) }
+        # create some appointments for this user
+        set_creator @user_id # make sure the user exists, as this is required by createAppointment
+        ids = [ create_appointment['payload'], create_appointment['payload'] ]
 
-        ids = []
-        ids << @client.createAppointment(*@create_appointment_args)['payload']
-        ids << @client.createAppointment(*@create_appointment_args)['payload']
-
-        returned_ids = @client.registerAccount(@user_id)['payload']
+        # invoke registerAccount
+        returned_ids = register_account(@user_id)['payload']
+        
+        # check result
         Set.new(returned_ids).should == Set.new(ids)
       end
     end
