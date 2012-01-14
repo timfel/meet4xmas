@@ -104,8 +104,8 @@ module Helpers
     @client.createAppointment(*args)
   end
 
-  def get_appointment(id=@appointment_id)
-    @client.getAppointment id
+  def get_appointment(appointment_id)
+    @client.getAppointment(appointment_id)
   end
 
   # accepting / declining invitations
