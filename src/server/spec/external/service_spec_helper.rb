@@ -43,7 +43,11 @@ module Helpers
   end
 
   def _cleanup_db
+    # recreate database
     DataMapper.auto_migrate!
+
+    # we must also reload caches that are built on top of the database
+    Meet4Xmas::Persistence::Location.clear_caches
   end
 
   # user registration

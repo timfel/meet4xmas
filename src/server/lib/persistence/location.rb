@@ -49,6 +49,12 @@ module Persistence
         end
     end
 
+    def self.clear_caches(type = nil)
+        if type == nil || type == LocationType::ChristmasMarket
+            @ChristmasMarketLocations = nil
+        end
+    end
+
     def to_hash
       { 'longitude' => longitude, 'latitude' => latitude, 'title' => title, 'description' => description }
     end
