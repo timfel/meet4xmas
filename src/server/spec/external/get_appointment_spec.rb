@@ -48,11 +48,11 @@ describe 'Meet4Xmas Service' do
         Set.new(returned_participant_ids).should == Set.new(participants)
       end
 
-      it 'some final state' do
+      it 'a valid final state' do
         [true, false].should include(@appointment['isFinal'])
       end
 
-      it 'participant states' do
+      it 'valid participant states' do
         returned_participants = @appointment['participants']
         returned_participants.each do |p|
           Meet4Xmas::Persistence::ParticipationStatus::ALL.should include(p['status'])
