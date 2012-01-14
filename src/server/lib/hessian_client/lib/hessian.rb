@@ -18,9 +18,27 @@ module Hessian
   end
 
   class HessianException < RuntimeError
-    attr_reader :code
-    def initialize(code)
+    attr_reader :code, :msg, :detail
+    def initialize(code, msg, detail)
       @code = code
+      @msg = msg
+      @detail = detail
+    end
+
+    def to_s
+      result = "#{@code}"
+      if @msg
+        result << ": " unless result.empty?
+        result << "#{@msg}"
+      end
+      if @detail
+        if result.empty?
+          result << "#{@detail}"
+        else
+          result << " (#{@detail})"
+        end
+      end
+      result
     end
   end
 
@@ -193,13 +211,13 @@ module Hessian
       end
 
       def raise_exception
-        # Skip code description.
-        parse_object
+        parse_object # Skip code description
         code = parse_object
-        # Skip message description
-        parse_object
+        parse_object # Skip message description
         msg = parse_object
-        raise HessianException.new(code), msg
+        parse_object # Skip detail description
+        detail = parse_object
+        raise HessianException.new(code, msg, detail)
       end
     end
   end
