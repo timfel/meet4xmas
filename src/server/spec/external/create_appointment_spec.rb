@@ -1,7 +1,7 @@
 require File.expand_path('../service_spec_helper', __FILE__)
 
 describe 'Meet4Xmas Service' do
-  describe '#deleteAccount' do
+  describe '#createAppointment' do
     before :each do
       create_appointment_args # load them so we can manipulate them later
       register_creator
