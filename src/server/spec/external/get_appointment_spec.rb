@@ -35,10 +35,10 @@ describe 'Meet4Xmas Service' do
 
       it 'the initial target location' do
         @appointment['location'].should == {
-          "longitude"=>13.299218,
-          "latitude"=>52.519812,
-          "title"=>"Weihnachtsmarkt vor dem Schloss Charlottenburg",
-          "description"=>"Spandauer Damm, 14059 Berlin"
+          "longitude"=>13.0951287,
+          "latitude"=>52.3941995,
+          "title"=>"B\xC3\xB6hmischer Weihnachtsmarkt",
+          "description"=>"Weberplatz, 14482 Potsdam-Babelsberg"
         }
       end
 
