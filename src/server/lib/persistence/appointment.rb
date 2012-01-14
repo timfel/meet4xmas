@@ -150,7 +150,7 @@ module Persistence
     # some participant properties specific to this very participation
     property :travel_type, Integer # use values of TravelType
     validates_within :travel_type, :set => TravelType::ALL, :allow_nil => true
-    belongs_to :location, :required => false, :allow_nil => true # XXX
+    belongs_to :location, 'Meet4Xmas::Persistence::Location', :required => false
     property :status, Integer, :required => true, :default => ParticipationStatus::Pending
     validates_within :status, :set => ParticipationStatus::ALL # use values of ParticipationStatus
   end
