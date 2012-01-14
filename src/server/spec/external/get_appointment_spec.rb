@@ -5,7 +5,7 @@ describe 'Meet4Xmas Service' do
   describe '#getAppointment' do
     before :each do
       # create an appointment
-      register_all
+      register_creator
       @appointment_id = create_appointment['payload']
     end
 

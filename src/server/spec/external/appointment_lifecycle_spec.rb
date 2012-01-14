@@ -5,7 +5,6 @@ describe 'Meet4Xmas Service' do
     def try_join
       join_appointment(@appointment_id, invitees.first)
     end
-
     def try_decline
       decline_appointment(@appointment_id, invitees.first)
     end
@@ -16,7 +15,7 @@ describe 'Meet4Xmas Service' do
 
     describe 'Right after creation' do
       before :each do
-        register_all
+        register_creator
         @appointment_id = create_appointment['payload']
         @appointment = get_appointment(@appointment_id)['payload']
       end
@@ -54,7 +53,7 @@ describe 'Meet4Xmas Service' do
 
     describe 'After finalization' do
       before :each do
-        register_all
+        register_creator
         @appointment_id = create_appointment['payload']
         finalize_appointment(@appointment_id)
         @appointment = get_appointment(@appointment_id)['payload']

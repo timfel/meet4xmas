@@ -4,7 +4,7 @@ describe 'Meet4Xmas Service' do
   describe '#deleteAccount' do
     before :each do
       create_appointment_args # load them so we can manipulate them later
-      register_all
+      register_creator
     end
 
     it 'succeeds if everything is alright' do
