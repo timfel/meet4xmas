@@ -122,6 +122,12 @@ module Helpers
     @client.finalizeAppointment(appointment_id)
   end
 
+  # travel plan
+
+  def get_travel_plan(appointment_id, travel_type=Meet4Xmas::Persistence::TravelType::ALL.first, location=Meet4Xmas::Persistence::Location.HPI.to_hash)
+    @client.getTravelPlan(appointment_id, travel_type, location)
+  end
+
   # handling responses
 
   def self._response_conssitent?(response)

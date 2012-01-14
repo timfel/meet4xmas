@@ -44,10 +44,11 @@ describe 'Meet4Xmas Service' do
         try_decline.should be_successful
       end
 
-      it 'give a nice travel plan' do
-        location = { 'longitude' => 1, 'latitude' => 0 }
-        travel_type = Meet4Xmas::Persistence::TravelType::ALL.first
-        @client.getTravelPlan( @appointment_id, travel_type, location ).size.should >= 2
+      it 'we can calculate a nice travel plan' do
+        # TODO: create many small tests for this one
+        response = get_travel_plan(@appointment_id)
+        response.should be_successful
+        response['payload']['path'].size.should >= 2
       end
     end
 
