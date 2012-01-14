@@ -1,16 +1,5 @@
 # load the wire classes
 require File.expand_path('../../java/init', __FILE__)
-module Java
-  module Wire
-    java_import   'org.meet4xmas.wire.Appointment'
-    java_import   'org.meet4xmas.wire.ErrorInfo'
-    java_import   'org.meet4xmas.wire.Location'
-    java_import   'org.meet4xmas.wire.Participant'
-    java_import   'org.meet4xmas.wire.Response'
-    java_import   'org.meet4xmas.wire.TravelPlan'
-  end
-end
-
 require 'lib/persistence/setup' # requires all models
 
 module Meet4Xmas

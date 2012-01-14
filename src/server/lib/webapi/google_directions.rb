@@ -21,25 +21,31 @@ module Meet4Xmas
       end
 
       def path
-        resp = Net::HTTP.get_response( URI.parse url )
-        result = nil
+        begin
+          resp = Net::HTTP.get_response( URI.parse url )
+        rescue
+          puts 'error while fetching google data'
+        ensure
+          result = nil
+        end
         case resp
         when Net::HTTPSuccess
           data = resp.body
           result = JSON.parse(data)
         else
           puts "Unexpected response #{resp}"
-          return []
+          return [ origin, destination ]
         end
         if result and result['routes'] and result['routes'].first and result['routes'].first['legs']
           step_number = 0
           result['routes'].first['legs'].first['steps'].map do |step|
             Persistence::Location.new :title => "Step ##{step_number += 1}",
-                         :description => step['html_instructions'],
+                         :description => URI.escape(step['html_instructions']),
                          :longitude => step['start_location']['lng'],
                          :latitude =>step['start_location']['lat']
           end
         else
+          puts result.to_yaml
           [ origin ]
         end << @destination
       end
