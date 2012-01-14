@@ -70,9 +70,14 @@ module Helpers
 
   # appointment creation
 
-  def register_all
+  def register_creator
     create_appointment_args
     register_users creator
+  end
+
+  def register_all
+    create_appointment_args
+    register_creator
     register_users(*invitees)
   end
 
