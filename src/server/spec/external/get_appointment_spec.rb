@@ -28,10 +28,18 @@ describe 'Meet4Xmas Service' do
 
       { 'creator' => creator,
         'locationType' => location_type,
-        #'location' => location, # TODO
         'message' => user_message
       }.each do |key, value|
         it "the #{key}" do @appointment[key].should == value end
+      end
+
+      it 'the initial target location' do
+        @appointment['location'].should == {
+          "longitude"=>13.299218,
+          "latitude"=>52.519812,
+          "title"=>"Weihnachtsmarkt vor dem Schloss Charlottenburg",
+          "description"=>"Spandauer Damm, 14059 Berlin"
+        }
       end
 
       it 'the participants (all invitees and the creator)' do
