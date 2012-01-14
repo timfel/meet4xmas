@@ -28,29 +28,37 @@ describe 'Meet4Xmas Service' do
     end
 
     describe 'response payload' do
-      before :each do
-        register_account @user_id
-        @response = register_account @user_id
+      describe '(if the user did not exists)' do
+        it 'is nil' do
+          register_account(@user_id)['payload'].should be_nil
+        end
       end
 
-      it 'is a list' do
-        @response['payload'].should be_kind_of(Array)
-      end
+      describe '(if the user did already exist)' do
+        before :each do
+          register_account @user_id
+          @response = register_account @user_id
+        end
 
-      it 'is empty if the user is new' do
-        @response['payload'].should be_empty
-      end
+        it 'is a list' do
+          @response['payload'].should be_kind_of(Array)
+        end
 
-      it 'contains a list of appointment ids the user participates in' do
-        # create some appointments for this user
-        set_creator @user_id # make sure the user exists, as this is required by createAppointment
-        ids = [ create_appointment['payload'], create_appointment['payload'] ]
+        it 'is empty if the user is new' do
+          @response['payload'].should be_empty
+        end
 
-        # invoke registerAccount
-        returned_ids = register_account(@user_id)['payload']
-        
-        # check result
-        Set.new(returned_ids).should == Set.new(ids)
+        it 'contains a list of appointment ids the user participates in' do
+          # create some appointments for this user
+          set_creator @user_id # make sure the user exists, as this is required by createAppointment
+          ids = [ create_appointment['payload'], create_appointment['payload'] ]
+
+          # invoke registerAccount
+          returned_ids = register_account(@user_id)['payload']
+
+          # check result
+          Set.new(returned_ids).should == Set.new(ids)
+        end
       end
     end
   end
