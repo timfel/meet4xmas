@@ -198,7 +198,7 @@ RSpec.configure do |config|
   end
 
   # clean up database before each test
-  config.before(:each) do
+  config.before :each do
     _cleanup_db
   end
 end
