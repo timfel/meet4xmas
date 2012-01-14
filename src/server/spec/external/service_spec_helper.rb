@@ -93,6 +93,7 @@ module Helpers
   end
   %w{creator travel_type location invitees location_type user_message}.each_with_index do |method, index|
     define_method method.to_sym do create_appointment_args[index] end
+    define_method "set_#{method}".to_sym do |value| create_appointment_args[index] = value end
   end
   def participants
     invitees.clone.tap { |a| a << creator }
