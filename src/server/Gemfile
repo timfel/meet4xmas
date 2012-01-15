@@ -2,7 +2,10 @@ source 'http://rubygems.org'
 
 # geocoding, map location calculations, ...
 gem 'geokit'
-gem 'json_pure' # XXX: required by geokit
+gem 'json_pure' # required by geokit
+
+# push notifications
+gem 'apns' # apple push notification service
 
 # persistence
 gem 'dm-core'
