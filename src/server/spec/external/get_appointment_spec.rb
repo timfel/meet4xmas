@@ -34,12 +34,7 @@ describe 'Meet4Xmas Service' do
       end
 
       it 'the initial target location' do
-        @appointment['location'].should == {
-          "longitude"=>13.0951287,
-          "latitude"=>52.3941995,
-          "title"=>"B\xC3\xB6hmischer Weihnachtsmarkt",
-          "description"=>"Weberplatz, 14482 Potsdam-Babelsberg"
-        }
+        @appointment['location'].should_not be_nil
       end
 
       it 'the participants (all invitees and the creator)' do
