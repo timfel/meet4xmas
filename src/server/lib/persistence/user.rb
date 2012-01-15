@@ -13,6 +13,7 @@ module Persistence
     has n, :created_appointments, 'Meet4Xmas::Persistence::Appointment', :child_key => [ :creator_id ]
     has n, :appointment_participations, :child_key => [ :participant_id ]
     has n, :appointments, :through => :appointment_participations, :via => :appointment
+    has n, :devices, 'Meet4Xmas::Persistence::Device'
 
     def create_appointment(travel_type, location, invitees, location_type, user_message)
       appointment = created_appointments.create({

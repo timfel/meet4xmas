@@ -21,5 +21,11 @@ module Persistence
 
     ALL = [ Pending, Accepted, Declined ]
   end
+
+  module DeviceType
+    iOS = 0
+
+    ALL = [ iOS ]
+  end
 end
 end
