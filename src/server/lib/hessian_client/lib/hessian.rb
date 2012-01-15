@@ -18,27 +18,17 @@ module Hessian
   end
 
   class HessianException < RuntimeError
-    attr_reader :code, :msg, :detail
-    def initialize(code, msg, detail)
-      @code = code
-      @msg = msg
-      @detail = detail
+    attr_reader :args
+    def initialize(args)
+      @args = args
     end
 
     def to_s
-      result = "#{@code}"
-      if @msg
-        result << ": " unless result.empty?
-        result << "#{@msg}"
-      end
-      if @detail
-        if result.empty?
-          result << "#{@detail}"
-        else
-          result << " (#{@detail})"
-        end
-      end
-      result
+      @args.to_s
+    end
+
+    def inspect
+      @args.inspect
     end
   end
 
@@ -150,6 +140,7 @@ module Hessian
       def parse_object
         t = @data.slice!(0, 1)
         case t
+        when '' then raise "unexpected end of stream"
         when 'f' then raise_exception
         when 's', 'S', 'x', 'X' then
           v = from_utf8(@data.slice!(0, 2).unpack('n')[0])
@@ -211,13 +202,15 @@ module Hessian
       end
 
       def raise_exception
-        parse_object # Skip code description
-        code = parse_object
-        parse_object # Skip message description
-        msg = parse_object
-        parse_object # Skip detail description
-        detail = parse_object
-        raise HessianException.new(code, msg, detail)
+        args = {}
+        while true
+          begin
+            args[parse_object()] = parse_object while not @data[0,1].empty?
+          rescue
+            break
+          end
+        end
+        raise HessianException.new args
       end
     end
   end
