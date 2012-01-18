@@ -11,7 +11,12 @@
 NSString* kDefaultCreateAppointmentViewNibNameIPhone = @"CreateAppointmentView_iPhone";
 NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPad";
 
+NSString* kInviteeCellReusableIdentifier = @"InviteeCell";
+NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
+
 @interface CreateAppointmentViewController()
+
+@property (nonatomic, strong) NSMutableArray* invitees;
 
 - (void)done:(id)sender;
 - (void)cancel:(id)sender;
@@ -22,6 +27,8 @@ NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPa
 
 @synthesize delegate = _delegate;
 @synthesize descriptionTextField = _descriptionTextField;
+
+@synthesize invitees = _invitees;
 
 - (CreateAppointmentViewController *)initWithDefaultNib
 {
@@ -91,6 +98,32 @@ NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPa
     if (self.delegate != nil) {
         [self.delegate creationCanceled];
     }
+}
+
+#pragma mark - UITableViewDataSource delegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell;
+    if ([indexPath indexAtPosition:0] == self.invitees.count) {
+        //This is the "Add invitee" row
+        cell = [tableView dequeueReusableCellWithIdentifier:kAddInviteeCellReusableIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAddInviteeCellReusableIdentifier];
+            cell.textLabel.text = @"Add invitee";
+            //TODO: This will be a plus icon that triggers the 'addInvitee' action
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+    } else {
+        //TODO: The ivitee rows
+    }
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // One more for the "Add invitee" row
+    return self.invitees.count + 1;
 }
 
 @end

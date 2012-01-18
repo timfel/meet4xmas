@@ -16,7 +16,7 @@
 
 @end
 
-@interface CreateAppointmentViewController : UIViewController
+@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) id<CreateAppointmentViewControllerDelegate> delegate;
 
