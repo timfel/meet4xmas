@@ -8,8 +8,8 @@
 
 #import "CreateAppointmentViewController.h"
 
-NSString* kDefaultNibNameIPhone = @"CreateAppointmentView_iPhone";
-NSString* kDefaultNibNameIPad = @"CreateAppointmentView_iPad";
+NSString* kDefaultCreateAppointmentViewNibNameIPhone = @"CreateAppointmentView_iPhone";
+NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPad";
 
 @interface CreateAppointmentViewController()
 
@@ -26,7 +26,7 @@ NSString* kDefaultNibNameIPad = @"CreateAppointmentView_iPad";
 - (CreateAppointmentViewController *)initWithDefaultNib
 {
     //TODO: iPad
-    return [self initWithNibName:kDefaultNibNameIPhone bundle:nil];
+    return [self initWithNibName:kDefaultCreateAppointmentViewNibNameIPhone bundle:nil];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

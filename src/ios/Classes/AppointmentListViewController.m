@@ -96,12 +96,9 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 - (void)presentRegistrationView
 {
     // Load the registration view modally. It will define a done button for the navigation controller.
-    RegistrationViewController* registrationViewController;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPhone" bundle:nil];
-    } else {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPad" bundle:nil];
-        // Only show a small form on the iPad, not full screen
+    RegistrationViewController* registrationViewController = [[RegistrationViewController alloc] initWithDefaultNib];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -114,9 +111,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (void)presentCreateAppointmentView
 {
-    // Load the registration view modally. It will define a done button for the navigation controller.
-    CreateAppointmentViewController* createAppointmentViewController;
-    createAppointmentViewController = [[CreateAppointmentViewController alloc] initWithDefaultNib];
+    CreateAppointmentViewController* createAppointmentViewController = [[CreateAppointmentViewController alloc] initWithDefaultNib];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         createAppointmentViewController.modalPresentationStyle = UIModalPresentationFormSheet;

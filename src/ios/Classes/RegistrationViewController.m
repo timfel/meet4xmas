@@ -11,6 +11,9 @@
 #import "HessianKit.h"
 #import "ServiceProxy.h"
 
+NSString* kDefaultRegistrationViewNibNameIPhone = @"RegistrationView_iPhone";
+NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
+
 @interface RegistrationViewController()
 
 - (IBAction) registrationDone:(id)sender;
@@ -22,6 +25,14 @@
 @synthesize delegate = _delegate;
 @synthesize emailTextField = _emailTextField;
 
+- (RegistrationViewController*)initWithDefaultNib
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return [self initWithNibName:kDefaultRegistrationViewNibNameIPhone bundle:nil];
+    } else {
+        return [self initWithNibName:kDefaultRegistrationViewNibNameIPad bundle:nil];
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
