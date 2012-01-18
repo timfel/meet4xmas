@@ -81,11 +81,13 @@ NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPa
 
 - (void)done:(id)sender
 {
-    
+    [self dismissModalViewControllerAnimated:YES];
+    //TODO
 }
 
 - (void)cancel:(id)sender
 {
+    [self dismissModalViewControllerAnimated:YES];
     if (self.delegate != nil) {
         [self.delegate creationCanceled];
     }

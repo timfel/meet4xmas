@@ -90,6 +90,7 @@ NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
             [self.delegate registrationFailed];
         }
     } else if (self.delegate != nil) {
+        [self dismissModalViewControllerAnimated:YES];
         [self.delegate userRegisteredWithEmail:self.emailTextField.text gotAppointments:appointments];
     }
 }

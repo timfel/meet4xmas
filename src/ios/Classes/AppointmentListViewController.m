@@ -147,8 +147,6 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.currentUser = email;
     self.appointments = appointments;
-    //TODO: Should we really do that here?
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)registrationFailed
@@ -161,12 +159,11 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 - (void)createdAppointment:(AppointmentId)appointmentId
 {
     //TODO: Do things with the new appointmentId
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)creationCanceled
 {
-    [self dismissModalViewControllerAnimated:YES];
+
 }
 
 #pragma mark - UITableViewDataSource methods
