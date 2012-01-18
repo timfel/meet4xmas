@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol RegistrationViewControllerDelegate <NSObject>
+@protocol RegistrationViewControllerDelegate
 
 - (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray*)appointments;
 - (void)registrationFailed;
