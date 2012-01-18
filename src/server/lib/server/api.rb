@@ -2,7 +2,7 @@
 module Meet4Xmas
 module Server
   module API
-    VERSION = 1
+    VERSION = 2
 
     ALL_MESSAGES = %w(registerAccount deleteAccount
         createAppointment getAppointment getTravelPlan

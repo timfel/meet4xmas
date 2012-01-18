@@ -5,18 +5,40 @@ require 'lib/persistence/setup' # requires all models
 module Meet4Xmas
 module Server
   class ServletHandler
-    def registerAccount(userId, notificationServiceInfo = nil)
+    def registerAccount(userId, notificationServiceInfo)
       _transaction do |t|
-        user = Persistence::User.first(:id => userId)
+        # get existing user
+        user = Persistence::User.first :id => userId
         if user
-          _success_response(user.appointments.map(&:id))
+          new_user = false
         else
+          new_user = true
+          # create new user
           user = Persistence::User.new :id => userId
+        end
+
+        # make sure the user is saved
+        if user.save
+          if notificationServiceInfo
+            # add notification service information to the user
+            user.update_notification_services notificationServiceInfo.deviceId, notificationServiceInfo.serviceType
+          end
+
+          # save and return
           if user.save
-            _success_response()
+            if new_user
+              payload = nil
+            else
+              # special: if the user already existed, return all his appointment ids
+              payload = user.appointments.map(&:id)
+            end
+            # return result
+            _success_response payload
           else
             _rollback_and_return_error(t, 0, "Unknown error while creating account")
           end
+        else
+          _rollback_and_return_error(t, 0, "Unknown error while creating account")
         end
       end
     end

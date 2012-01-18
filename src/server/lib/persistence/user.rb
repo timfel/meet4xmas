@@ -29,6 +29,11 @@ module Persistence
         raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
       end
     end
+
+    def update_notification_services(device_id, service_type)
+      # create a new entry in this user's notification_services list, if an equal entry does not exist yet
+      self.notification_services.first_or_create :device_id => device_id, :service_type => service_type
+    end
   end
 end
 end
