@@ -9,6 +9,7 @@
 #import "AppointmentListViewController.h"
 #import "AppDelegate.h"
 #import "RegistrationViewController.h"
+#import "CreateAppointmentViewController.h"
 #import "ServiceProtocols.h"
 #import "ServiceProxy.h"
 
@@ -19,6 +20,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 @property (nonatomic, strong)NSArray* appointments;
 
 - (void)presentRegistrationView;
+- (void)presentCreateAppointmentView;
 
 @end
 
@@ -110,11 +112,29 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     [self presentModalViewController:navigationController animated:YES];
 }
 
+- (void)presentCreateAppointmentView
+{
+    // Load the registration view modally. It will define a done button for the navigation controller.
+    CreateAppointmentViewController* createAppointmentViewController;
+    createAppointmentViewController = [[CreateAppointmentViewController alloc] initWithDefaultNib];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        createAppointmentViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    
+    createAppointmentViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    createAppointmentViewController.delegate = self;
+    
+    // Create a navigation controller and present it modally.
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:createAppointmentViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)createAppointment:(id)sender
 {
-    //TODO: Present CreateAppointmentView
+    [self presentCreateAppointmentView];
 }
 
 - (IBAction)logoutUser:(id)sender
@@ -139,6 +159,19 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 - (void)registrationFailed
 {
     //TODO: Oops! What now?
+}
+
+#pragma mark - CreateAppointmentViewControllerDelegate
+
+- (void)createdAppointment:(AppointmentId)appointmentId
+{
+    //TODO: Do things with the new appointmentId
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)creationCanceled
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource methods
