@@ -26,6 +26,12 @@ typedef enum {
     DECLINED
 } ParticipationStatus;
 
+typedef enum {
+    APNS, //Apple
+    MPNS, //Microsoft
+    C2DM  //Google
+} NotificationServiceType;
+
 typedef NSString* UserId;
 typedef int AppointmentId;
 
@@ -75,6 +81,13 @@ OBJC_EXPORT NSString* const kErrorInfoClassName;
 
 @end
 
+OBJC_EXPORT NSString* const kNotificationServiceInfoClassName;
+@protocol NotificationServiceInfo
+
+@property(nonatomic) NotificationServiceType serviceType;
+@property(strong, nonatomic) NSData* deviceId;
+
+@end
 
 OBJC_EXPORT NSString* const kResponseClassName;
 @protocol Response
@@ -89,6 +102,7 @@ OBJC_EXPORT NSString* const kResponseClassName;
 @protocol Service
 
 - (id<Response>)registerAccount:(UserId)userId;
+- (id<Response>)registerAccount:(UserId)userId :(id<NotificationServiceInfo>)notificationServiceInfo;
 - (id<Response>)deleteAccount:(UserId)userId;
 
 - (id<Response>)createAppointment:(UserId)userId :(TravelType)travelType :(id<Location>)location :(NSArray*)invitees :(LocationType)locationType :(NSString*)userMessage;

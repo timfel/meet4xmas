@@ -10,6 +10,7 @@
 
 #import "HessianKit.h"
 #import "ServiceProxy.h"
+#import "AppDelegate.h"
 
 NSString* kDefaultRegistrationViewNibNameIPhone = @"RegistrationView_iPhone";
 NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
@@ -79,7 +80,9 @@ NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
 - (IBAction)registrationDone:(id)sender
 {
     NSArray* appointments;
-    if (![ServiceProxy registerAccount: self.emailTextField.text receiveAppointments:appointments]) {
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+
+    if (![ServiceProxy registerAccount: self.emailTextField.text withDeviceToken:appDelegate.deviceToken receiveAppointments:appointments]) {
         UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                           message:@"Something went wrong while registering your e-mail address. Please try again later." 
                                                          delegate:nil 

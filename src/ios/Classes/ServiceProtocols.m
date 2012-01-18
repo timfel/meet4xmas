@@ -16,3 +16,4 @@ NSString* const kLocationClassName = @"Location";
 NSString* const kTravelPlanClassName = @"TravelPlan";
 NSString* const kErrorInfoClassName = @"Response$ErrorInfo";
 NSString* const kResponseClassName = @"Response";
+NSString* const kNotificationServiceInfoClassName = @"NotificationServiceInfo";
