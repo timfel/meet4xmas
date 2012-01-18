@@ -177,9 +177,9 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     
     id<Appointment> appointment;
     if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentClassName];
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentCellReusableIdentifier];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentClassName];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentCellReusableIdentifier];
         }
         
         cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];
