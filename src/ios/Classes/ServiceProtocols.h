@@ -50,7 +50,7 @@ OBJC_EXPORT NSString* const kLocationClassName;
 OBJC_EXPORT NSString* const kAppointmentClassName;
 @protocol Appointment 
 
-@property(nonatomic) int AppointmentId;
+@property(nonatomic) AppointmentId identifier;
 @property(strong, nonatomic) UserId creator;
 @property(nonatomic) LocationType locationType;
 @property(strong, nonatomic) id<Location> location;
@@ -76,8 +76,8 @@ OBJC_EXPORT NSString* const kErrorInfoClassName;
 @end
 
 
-OBJC_EXPORT NSString* const kResponseBodyClassName;
-@protocol ResponseBody
+OBJC_EXPORT NSString* const kResponseClassName;
+@protocol Response
 
 @property(nonatomic) BOOL success;
 @property(strong, nonatomic) id<ErrorInfo> error;
@@ -88,9 +88,17 @@ OBJC_EXPORT NSString* const kResponseBodyClassName;
 
 @protocol Service
 
-- (void)registerAccount:(NSString*)userId;
+- (id<Response>)registerAccount:(UserId)userId;
+- (id<Response>)deleteAccount:(UserId)userId;
 
-- (id<ResponseBody>)createAppointment:(NSString*)userId :(int)travelType :(id)location :(NSArray*)invitees :(int)locationType :(NSString*)userMessage;
-- (id<ResponseBody>)getAppointment:(int)aid;
+- (id<Response>)createAppointment:(UserId)userId :(TravelType)travelType :(id<Location>)location :(NSArray*)invitees :(LocationType)locationType :(NSString*)userMessage;
+- (id<Response>)getAppointment:(AppointmentId)appointmentId;
+- (id<Response>)finalizeAppointment:(AppointmentId)appointmentId;
+- (id<Response>)joinAppointment:(AppointmentId)appointmentId :(UserId)userId :(TravelType)travelType :(id<Location>)location;
+- (id<Response>)declineAppointment:(AppointmentId)appointmentId :(UserId)userId;
+
+- (id<Response>)getTravelPlan:(AppointmentId)appointmentId :(TravelType)travelType :(id<Location>)location;
+
+
 
 @end

@@ -13,6 +13,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize currentUser = _currentUser;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

@@ -67,7 +67,8 @@
 
 - (IBAction)registrationDone:(id)sender
 {
-    if (![ServiceProxy registerAccount:self.emailTextField.text]) {
+    NSArray* appointments;
+    if (![ServiceProxy registerAccount: self.emailTextField.text receiveAppointments:appointments]) {
         UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                           message:@"Something went wrong while registering your e-mail address. Please try again later." 
                                                          delegate:nil 
@@ -78,7 +79,7 @@
             [self.delegate registrationFailed];
         }
     } else if (self.delegate != nil) {
-        [self.delegate userRegisteredWithEmail:self.emailTextField.text];
+        [self.delegate userRegisteredWithEmail:self.emailTextField.text gotAppointments:appointments];
     }
 }
 

@@ -10,7 +10,7 @@
 
 @protocol RegistrationViewControllerDelegate <NSObject>
 
-- (void)userRegisteredWithEmail:(NSString*)email;
+- (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray*)appointments;
 - (void)registrationFailed;
 
 @end
