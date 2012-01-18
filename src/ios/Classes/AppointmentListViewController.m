@@ -9,6 +9,7 @@
 #import "AppointmentListViewController.h"
 #import "AppDelegate.h"
 #import "RegistrationViewController.h"
+#import "CreateAppointmentViewController.h"
 #import "ServiceProtocols.h"
 #import "ServiceProxy.h"
 
@@ -19,6 +20,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 @property (nonatomic, strong)NSArray* appointments;
 
 - (void)presentRegistrationView;
+- (void)presentCreateAppointmentView;
 
 @end
 
@@ -94,12 +96,9 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 - (void)presentRegistrationView
 {
     // Load the registration view modally. It will define a done button for the navigation controller.
-    RegistrationViewController* registrationViewController;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPhone" bundle:nil];
-    } else {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPad" bundle:nil];
-        // Only show a small form on the iPad, not full screen
+    RegistrationViewController* registrationViewController = [[RegistrationViewController alloc] initWithDefaultNib];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     }
     registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -110,11 +109,27 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     [self presentModalViewController:navigationController animated:YES];
 }
 
+- (void)presentCreateAppointmentView
+{
+    CreateAppointmentViewController* createAppointmentViewController = [[CreateAppointmentViewController alloc] initWithDefaultNib];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        createAppointmentViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    
+    createAppointmentViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    createAppointmentViewController.delegate = self;
+    
+    // Create a navigation controller and present it modally.
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:createAppointmentViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)createAppointment:(id)sender
 {
-    //TODO: Present CreateAppointmentView
+    [self presentCreateAppointmentView];
 }
 
 - (IBAction)logoutUser:(id)sender
@@ -132,13 +147,23 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.currentUser = email;
     self.appointments = appointments;
-    //TODO: Should we really do that here?
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)registrationFailed
 {
     //TODO: Oops! What now?
+}
+
+#pragma mark - CreateAppointmentViewControllerDelegate
+
+- (void)createdAppointment:(AppointmentId)appointmentId
+{
+    //TODO: Do things with the new appointmentId
+}
+
+- (void)creationCanceled
+{
+
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -152,9 +177,9 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     
     id<Appointment> appointment;
     if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentClassName];
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentCellReusableIdentifier];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentClassName];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentCellReusableIdentifier];
         }
         
         cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];

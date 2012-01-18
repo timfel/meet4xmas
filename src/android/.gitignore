@@ -1,0 +1,10 @@
+local.properties
+bin
+gen
+out
+.idea
+.classpath
+.project
+*.class
+*.swp
+*~
