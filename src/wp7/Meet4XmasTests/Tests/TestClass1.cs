@@ -12,11 +12,11 @@ namespace Meet4XmasTests.Tests
     [TestClass]
     public class TestClass1 : SilverlightTest
     {
-
         [TestInitialize]
         public void setUp()
         {
             ServiceCall.ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/1/";
+            //ServiceCall.ServiceUrl = "http://172.16.16.116:4567/1/";
             //ServiceCall.ServiceUrl = "http://172.16.18.83:4567/1/";
             //ServiceCall.ServiceUrl = "http://172.16.59.124:4567/1/";
             //ServiceCall.ServiceUrl = "http://172.16.18.55:4567/1/";
@@ -89,7 +89,7 @@ namespace Meet4XmasTests.Tests
             EnqueueCallback(() =>
             {
                 Assert.IsNotNull(tim);
-                Appointment.Create(tim, TravelPlan.TravelType.Walk, new Participant[] {},
+                Appointment.Create(tim, TravelPlan.TravelType.Walk, new Participant[] { },
                     Location.LocationType.ChristmasMarket, testMessage,
                     (Appointment a) => app = a,
                     (ErrorInfo e) => error = e);
@@ -139,7 +139,7 @@ namespace Meet4XmasTests.Tests
             EnqueueCallback(() =>
             {
                 Assert.IsNotNull(app, "Appointment creation failed");
-                app.GetTravelPlan(TravelPlan.TravelType.PublicTransport,
+                app.GetTravelPlan(TravelPlan.TravelType.Car,
                     (TravelPlan t) => travelPlan = t,
                     (ErrorInfo e) => error = e);
             });

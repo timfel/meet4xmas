@@ -23,9 +23,11 @@ namespace Meet4Xmas
         public MainViewModel()
         {
             this.Appointments = new ObservableCollection<ItemViewModel>();
+            this.ApplicationName = App.ApplicationName;
         }
 
         public ObservableCollection<ItemViewModel> Appointments { get; private set; }
+        public string ApplicationName { get; private set; }
 
         public bool IsDataLoaded { get; private set; }
 
