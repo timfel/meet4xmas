@@ -52,8 +52,8 @@ module Helpers
 
   # user registration
 
-  def register_account(user_id)
-    @client.registerAccount user_id
+  def register_account(user_id, notification_service_info=nil)
+    @client.registerAccount(user_id, notification_service_info)
   end
 
   def delete_account(user_id)
