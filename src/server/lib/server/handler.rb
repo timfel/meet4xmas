@@ -5,7 +5,7 @@ require 'lib/persistence/setup' # requires all models
 module Meet4Xmas
 module Server
   class ServletHandler
-    def registerAccount(userId)
+    def registerAccount(userId, notificationServiceInfo = nil)
       _transaction do |t|
         user = Persistence::User.first(:id => userId)
         if user
