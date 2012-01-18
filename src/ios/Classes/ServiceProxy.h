@@ -10,8 +10,37 @@
 
 @interface ServiceProxy : NSObject
 
-+ (BOOL)registerAccount:(NSString*)userId;
+#pragma mark Account
++ (BOOL)registerAccount:(UserId)userId receiveAppointments:(NSArray*)appointments;
 
-+ (id<Appointment>)getAppointment:(int)identifier;
++ (BOOL)deleteAccount:(UserId)userId;
+
+#pragma mark Appointment
++ (BOOL)createAppointment: (AppointmentId) appointmentId
+                 WithUser:(UserId)userId
+               travelType:(TravelType)travelType
+                location:(id<Location>)location
+                 invitees:(NSArray*)invitees
+             locationType:(LocationType)locationType
+              userMessage:(NSString*)userMessage;
+
++ (BOOL)getAppointment:(id<Appointment>) appointment forID: (AppointmentId)appointmentId;
+
++ (BOOL)finalizeAppointment:(AppointmentId)appointmentId;
+
++ (BOOL)joinAppointment:(AppointmentId)appointmentId
+                 userId:(UserId)userId
+             travelType:(TravelType)travelType
+               location:(id<Location>)location;
+
++ (BOOL)declineAppointment:(AppointmentId)appointmentId
+                    userId:(UserId)userId;
+
+#pragma mark TravelPlan
++ (BOOL)getTravelPlan: (id<TravelPlan>)travelplan for:(AppointmentId)appointmentId
+                     travelType:(TravelType)travelType
+                       location:(id<Location>)location;
 
 @end
+
+
