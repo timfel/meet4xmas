@@ -7,6 +7,7 @@ require 'dm-validations'
 require File.expand_path('../user', __FILE__)
 require File.expand_path('../appointment', __FILE__)
 require File.expand_path('../location', __FILE__)
+require File.expand_path('../notification_service', __FILE__)
 
 # not real models, but required to operate correctly
 require File.expand_path('../enums', __FILE__)
