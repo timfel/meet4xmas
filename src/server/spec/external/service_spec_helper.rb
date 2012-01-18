@@ -3,6 +3,7 @@
 #
 
 $MEET4XMAS_NO_LOGGING = true if $MEET4XMAS_NO_LOGGING == nil
+$MEET4XMAS_NO_DB_LOGGING = true if $MEET4XMAS_NO_DB_LOGGING == nil
 
 module Meet4Xmas
   module Persistence

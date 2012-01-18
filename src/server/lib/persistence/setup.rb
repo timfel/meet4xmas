@@ -16,7 +16,7 @@ require File.expand_path('../java_mapper', __FILE__)
 require File.join File.dirname(__FILE__), '..', 'webapi', 'setup'
 
 # debugging options
-DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_LOGGING
+DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_DB_LOGGING
 
 # open the database
 module Meet4Xmas
