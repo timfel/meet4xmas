@@ -27,14 +27,15 @@ namespace org.meet4xmas.wire
             if (Channel == null)
             {
                 Channel = new HttpNotificationChannel(ChannelName);
-                Channel.ChannelUriUpdated += HttpChannelChannelUriUpdated;
                 Channel.Open();
                 Channel.BindToShellToast();
                 Channel.BindToShellTile();
-                Channel.HttpNotificationReceived += HttpChannelHttpNotificationReceived;
-                Channel.ErrorOccurred += HttpChannelErrorOccurred;
-                Channel.ShellToastNotificationReceived += HttpChannelToastNotificationReceived;
             }
+            Channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(HttpChannelChannelUriUpdated);
+            Channel.HttpNotificationReceived += new EventHandler<HttpNotificationEventArgs>(HttpChannelHttpNotificationReceived);
+            Channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(HttpChannelErrorOccurred);
+            Channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(HttpChannelToastNotificationReceived);
+            Channel.ConnectionStatusChanged += new EventHandler<NotificationChannelConnectionEventArgs>(HttpChannelConnectionStatusChanged);
             UpdateChannelURI();
         }
 
@@ -83,6 +84,14 @@ namespace org.meet4xmas.wire
             UpdateChannelURI();
         }
 
+        private void HttpChannelConnectionStatusChanged(object sender, NotificationChannelConnectionEventArgs e)
+        {
+            if (Channel.ConnectionStatus == ChannelConnectionStatus.Disconnected)
+            {
+                ReopenNotificationChannel();
+            }
+        }
+
         private bool ChannelIsActive()
         {
             return Channel != null &&
@@ -93,14 +102,15 @@ namespace org.meet4xmas.wire
         private void UpdateChannelURI()
         {
             if (ChannelIsActive()) {
-                ServiceCall.Invoke(ServiceCallCreate,
-                    (Response result) =>
-                    {
-                        if (!result.success)
+                dispatcher.BeginInvoke(() =>
+                    ServiceCall.Invoke(ServiceCallCreate,
+                        (Response result) =>
                         {
-                            dispatcher.BeginInvoke(() => MessageBox.Show("Error establishing a channel for notifications"));
-                        }
-                    }, userId, new NotificationServiceInfo(Channel.ChannelUri));
+                            if (!result.success)
+                            {
+                                dispatcher.BeginInvoke(() => MessageBox.Show("Error establishing a channel for notifications"));
+                            }
+                        }, userId, new NotificationServiceInfo(Channel.ChannelUri)));
             }
         }
     }
