@@ -101,7 +101,6 @@ OBJC_EXPORT NSString* const kResponseClassName;
 
 @protocol Service
 
-- (id<Response>)registerAccount:(UserId)userId;
 - (id<Response>)registerAccount:(UserId)userId :(id<NotificationServiceInfo>)notificationServiceInfo;
 - (id<Response>)deleteAccount:(UserId)userId;
 

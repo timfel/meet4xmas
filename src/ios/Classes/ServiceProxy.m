@@ -70,7 +70,7 @@
 {
     id<Response> response;
     if (token == nil) {
-        response = [[self sharedInstance].serviceProxy registerAccount:userId];
+        response = [[self sharedInstance].serviceProxy registerAccount:userId :nil];
     } else {
         CWValueObject<NotificationServiceInfo>* serviceInfo = (CWValueObject<NotificationServiceInfo>*)[CWValueObject valueObjectWithProtocol:@protocol(NotificationServiceInfo)];
         serviceInfo.serviceType = APNS;
