@@ -8,6 +8,7 @@
 
 #import "ServiceProxy.h"
 #import "ServiceProtocols.h"
+#import "CWValueObject.h"
 
 #import "HessianKit.h"
 
@@ -56,6 +57,7 @@
         [self.connection.translator setProtocol:@protocol(TravelPlan)   forDistantTypeName:getFullClassName(kAppointmentClassName)];
         [self.connection.translator setProtocol:@protocol(Response)     forDistantTypeName:getFullClassName(kResponseClassName)];
         [self.connection.translator setProtocol:@protocol(ErrorInfo)    forDistantTypeName:getFullClassName(kErrorInfoClassName)];
+        [self.connection.translator setProtocol:@protocol(NotificationServiceInfo) forDistantTypeName:getFullClassName(kNotificationServiceInfoClassName)];
         
         self.serviceProxy = (id<Service>)[self.connection rootProxyWithProtocol:@protocol(Service)];
     }
@@ -64,9 +66,17 @@
 
 #pragma mark Account
 
-+ (BOOL)registerAccount:(UserId)userId receiveAppointments:(NSArray*)appointments
++ (BOOL)registerAccount:(UserId)userId withDeviceToken:(NSData *)token receiveAppointments:(NSArray *)appointments
 {
-    id<Response> response = [[self sharedInstance].serviceProxy registerAccount:userId];
+    id<Response> response;
+    if (token == nil) {
+        response = [[self sharedInstance].serviceProxy registerAccount:userId :nil];
+    } else {
+        CWValueObject<NotificationServiceInfo>* serviceInfo = (CWValueObject<NotificationServiceInfo>*)[CWValueObject valueObjectWithProtocol:@protocol(NotificationServiceInfo)];
+        serviceInfo.serviceType = APNS;
+        serviceInfo.deviceId = token;
+        response = [[self sharedInstance].serviceProxy registerAccount:userId :serviceInfo];
+    }
     
     if (!response.success) {
         if (response.error) {

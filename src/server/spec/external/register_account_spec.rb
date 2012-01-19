@@ -27,6 +27,48 @@ describe 'Meet4Xmas Service' do
       register_account(@user_id).should return_error 0 # TODO: adjust error code
     end
 
+    describe 'with notification service information' do
+      before :each do
+        @notification_service_info_apns = {
+          'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::APNS,
+          # "38dede2764b83e4827600c970c154543ea02e5c6d0b86ab7cf569920c9e63f52".scan(/../).map{|b|b.to_i(16)}.pack('C*')
+          'deviceId' => Hessian::Binary.new("8\336\336'd\270>H'`\f\227\f\025EC\352\002\345\306\320\270j\267\317V\231 \311\346?R")
+        }
+        @notification_service_info_apns2 = {
+          'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::APNS,
+          # "855ab705fb240d8ba34b9c74831670c461592ef96b7f4ab17d521df33d29551f".scan(/../).map{|b|b.to_i(16)}.pack('C*')
+          'deviceId' => Hessian::Binary.new("\205Z\267\005\373$\r\213\243K\234t\203\026p\304aY.\371k\177J\261}R\035\363=)U\037")
+        }
+        @notification_service_info_mpns = {
+          'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::MPNS,
+          'deviceId' => Hessian::Binary.new("http://example/channel/uri".unpack('U*'))
+        }
+      end
+
+      it 'is optional' do
+        register_account(@user_id, nil).should be_successful
+      end
+
+      it 'works if everything is alright' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+      end
+
+      it 'can register multiple services of the same service type' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+        register_account(@user_id, @notification_service_info_apns2).should be_successful
+      end
+
+      it 'can register the same service multiple times' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+      end
+
+      it 'can register multiple services of different service types' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+        register_account(@user_id, @notification_service_info_mpns).should be_successful
+      end
+    end
+
     describe 'response payload' do
       describe '(if the user did not exists)' do
         it 'is nil' do

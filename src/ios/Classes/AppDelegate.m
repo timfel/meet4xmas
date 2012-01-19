@@ -14,22 +14,26 @@
 
 @synthesize window = _window;
 @synthesize currentUser = _currentUser;
+@synthesize deviceToken = _deviceToken;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self.window makeKeyAndVisible];
   
-  [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound)];
   
     return YES;
 }
 
 - (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-  NSLog(@"Registered with APNS. Token: %@", deviceToken);
+#ifdef DEBUG
+    NSLog(@"Registered with APNS. Token: %@", deviceToken);
+#endif
+    self.deviceToken = deviceToken;
 }
 
 - (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-  NSLog(@"Failed to register with APNS. Error: %@", [error localizedDescription]);
+    NSLog(@"Failed to register with APNS. Error: %@", [error localizedDescription]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -1,5 +1,7 @@
 package org.meet4xmas.util;
 
+import java.util.Formatter;
+
 public class StringUtil {
   static String NULL_STRING = "<null>";
 
@@ -8,6 +10,11 @@ public class StringUtil {
       return NULL_STRING;
     } else if(testForString && obj instanceof String) {
       return "'" + obj + "'";
+    } else if(obj instanceof byte[]) {
+      Formatter formatter = new Formatter();
+      for (byte b : (byte[])obj)
+          formatter.format("%02x", b);
+      return formatter.toString();
     } else {
       return obj.toString();
     }

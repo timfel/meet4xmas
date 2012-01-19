@@ -22,10 +22,12 @@ module Persistence
     ALL = [ Pending, Accepted, Declined ]
   end
 
-  module DeviceType
-    iOS = 0
+  module NotificationServiceType
+    APNS = 0
+    MPNS = 1
+    C2DM = 2
 
-    ALL = [ iOS ]
+    ALL = [ APNS, MPNS, C2DM ]
   end
 end
 end

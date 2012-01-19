@@ -18,6 +18,7 @@ namespace Meet4Xmas
 {
     public partial class App : Application
     {
+        public const string ApplicationName = "Meet4Xmas";
         private static MainViewModel viewModel = null;
 
         /// <summary>
