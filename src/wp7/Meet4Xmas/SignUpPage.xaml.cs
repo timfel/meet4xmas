@@ -41,5 +41,15 @@ namespace Meet4Xmas
                     SignUpErrorInfo.Text = errorInfo.message;
                 });
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("W-w-w-w-wub");
+        }
+
+        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }
