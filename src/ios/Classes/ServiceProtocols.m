@@ -8,7 +8,7 @@
 
 #include "ServiceProtocols.h"
 
-NSString* const kClassPrefix = @"lib.java";
+NSString* const kClassPrefix = @"org.meet4xmas.wire";
 
 NSString* const kAppointmentClassName = @"Appointment";
 NSString* const kParticipantClassName = @"Participant";
