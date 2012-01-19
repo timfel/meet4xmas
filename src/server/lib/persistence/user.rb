@@ -54,6 +54,14 @@ module Persistence
     end
 
     def update_notification_services(device_id, service_type)
+      # convert binary to string
+      case notificationServiceInfo.serviceType
+      when Meet4Xmas::Persistence::NotificationServiceType::APNS
+        device_id = device_id.unpack('H*')[0]
+      when Meet4Xmas::Persistence::NotificationServiceType::MPNS, Meet4Xmas::Persistence::NotificationServiceType::C2DM
+        device_id = device_id.unpack('U*')[0]
+      end
+
       # create a new entry in this user's notification_services list, if an equal entry does not exist yet
       ns = self.notification_services.first_or_create :device_id => device_id, :service_type => service_type
       unless ns.save
