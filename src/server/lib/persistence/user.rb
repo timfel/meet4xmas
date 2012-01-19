@@ -22,7 +22,7 @@ module Persistence
       })
       appointment.update_participation_info self, :travel_type => travel_type, :location => location
       appointment.update_location # find the initial location
-      appointment.add_participants *invitees
+      appointment.add_participants(*invitees)
 
       send_notifications appointment
       if appointment.save
