@@ -35,7 +35,7 @@ module Persistence
   end
 
   def self.transient_transaction(&block)
-  	transaction = self.repository.transaction
+    transaction = self.repository.transaction
     begin
       transaction.begin
       rval = nil
