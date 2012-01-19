@@ -7,6 +7,7 @@
 //
 
 #import "CreateAppointmentViewController.h"
+#import "ServiceProxy.h"
 
 NSString* kDefaultCreateAppointmentViewNibNameIPhone = @"CreateAppointmentView_iPhone";
 NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPad";
@@ -27,6 +28,7 @@ NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
 
 @synthesize delegate = _delegate;
 @synthesize descriptionTextField = _descriptionTextField;
+@synthesize inviteeTableView = _inviteeTableView;
 
 @synthesize invitees = _invitees;
 
@@ -40,7 +42,7 @@ NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.invitees = [NSMutableArray array];
     }
     return self;
 }
@@ -69,6 +71,8 @@ NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
     self.navigationItem.title = @"Create Appointment";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    
+    [self.inviteeTableView setEditing:YES animated:NO];
 }
 
 - (void)viewDidUnload
@@ -100,22 +104,38 @@ NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
     }
 }
 
-#pragma mark - UITableViewDataSource delegate
+#pragma mark - UITableViewDelegate methods
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == self.invitees.count) {
+        return UITableViewCellEditingStyleInsert;
+    } else {
+        return UITableViewCellEditingStyleDelete;
+    }
+}
+
+#pragma mark - UITableViewDataSource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell;
-    if ([indexPath indexAtPosition:0] == self.invitees.count) {
+    if (indexPath.row == self.invitees.count) {
         //This is the "Add invitee" row
         cell = [tableView dequeueReusableCellWithIdentifier:kAddInviteeCellReusableIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAddInviteeCellReusableIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = @"Add invitee";
-            //TODO: This will be a plus icon that triggers the 'addInvitee' action
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     } else {
-        //TODO: The ivitee rows
+        cell = [tableView dequeueReusableCellWithIdentifier:kInviteeCellReusableIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kInviteeCellReusableIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            //cell.editing = YES;
+        }
+        cell.textLabel.text = [self.invitees objectAtIndex:indexPath.row];
     }
     return cell;
 }
@@ -124,6 +144,16 @@ NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
 {
     // One more for the "Add invitee" row
     return self.invitees.count + 1;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.invitees removeObjectAtIndex:indexPath.row];
+        [self.inviteeTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        //TODO: Add invitee
+    }
 }
 
 @end

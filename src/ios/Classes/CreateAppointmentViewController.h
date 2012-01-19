@@ -21,6 +21,7 @@
 @property (nonatomic, strong) id<CreateAppointmentViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) IBOutlet UITextField* descriptionTextField;
+@property (nonatomic, strong) IBOutlet UITableView* inviteeTableView;
 
 - (CreateAppointmentViewController*)initWithDefaultNib;
 
