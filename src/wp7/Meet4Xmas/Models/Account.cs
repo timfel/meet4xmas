@@ -42,5 +42,11 @@ namespace org.meet4xmas.wire
                     }
                 }, userId, null);
         }
+
+        // Should be called whenever this account is loaded from cold storage
+        public void Loaded()
+        {
+            OpenNotificationChannel();
+        }
     }
 }
