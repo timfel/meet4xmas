@@ -8,6 +8,8 @@
 
 #import "ServiceProxy.h"
 #import "AddInviteeViewController.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @protocol CreateAppointmentViewControllerDelegate
 
@@ -16,7 +18,7 @@
 
 @end
 
-@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, AddInviteeViewControllerDelegate>
+@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, AddInviteeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate>
 
 @property (nonatomic, strong) id<CreateAppointmentViewControllerDelegate> delegate;
 
