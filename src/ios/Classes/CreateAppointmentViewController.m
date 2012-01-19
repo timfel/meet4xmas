@@ -9,6 +9,7 @@
 #import "CreateAppointmentViewController.h"
 #import "ServiceProxy.h"
 #import "AddInviteeViewController.h"
+#import <AddressBookUI/AddressBookUI.h>
 
 NSString* kDefaultCreateAppointmentViewNibNameIPhone = @"CreateAppointmentView_iPhone";
 NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPad";
@@ -24,6 +25,8 @@ typedef enum {
 @interface CreateAppointmentViewController()
 
 @property (nonatomic, strong) NSMutableArray* invitees;
+
+- (void)addInviteeWithMail:(NSString*)email;
 
 - (void)done:(id)sender;
 - (void)cancel:(id)sender;
@@ -92,6 +95,14 @@ typedef enum {
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)addInviteeWithMail:(NSString*)email
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.invitees.count inSection:0];
+    [self.invitees addObject:email];
+    
+    [self.inviteeTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 #pragma mark - Actions
@@ -173,7 +184,12 @@ typedef enum {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == ADDRESS_BOOK) {
-        //TODO
+        ABPeoplePickerNavigationController* picker = [[ABPeoplePickerNavigationController alloc] init];
+        // Only show email addresses
+        picker.displayedProperties = [NSArray arrayWithObject:[NSNumber numberWithInt: kABPersonEmailProperty]];
+        
+        picker.peoplePickerDelegate = self;
+        [self presentModalViewController:picker animated:YES];        
     } else if (buttonIndex == EMAIL_ADDRESS) {
         AddInviteeViewController* addInviteeViewController = [[AddInviteeViewController alloc] initWithDefaultNib];
         addInviteeViewController.delegate = self;
@@ -187,10 +203,54 @@ typedef enum {
 
 - (void)inviteeAddedWithEmail:(NSString *)email
 {
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.invitees.count inSection:0];
-    [self.invitees addObject:email];
+    if ([self.invitees containsObject:email]) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:@"You already invited this person." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        return;
+    }
+    [self dismissModalViewControllerAnimated:YES];
+    [self addInviteeWithMail:email];
+}
+
+#pragma mark - ABPeoplePickerNavigationControllerDelegate methods
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+{
+    return YES;
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+{
+    ABMultiValueRef emails = ABRecordCopyValue(person, property);
+    NSString* email = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(emails, identifier);
     
-    [self.inviteeTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    if ([self.invitees containsObject:email]) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:@"You already invited this person." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        return NO;
+    }
+    
+    [self addInviteeWithMail:email];
+    [self dismissModalViewControllerAnimated:YES];
+    
+    return NO;
 }
 
 @end

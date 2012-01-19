@@ -60,6 +60,11 @@ NSString* kDefaultAddInviteeViewNibNameIPad = @"AddInviteeView_iPad";
 }
 */
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.emailTextField becomeFirstResponder];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -87,7 +92,6 @@ NSString* kDefaultAddInviteeViewNibNameIPad = @"AddInviteeView_iPad";
 
 - (IBAction)done:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
     if (self.delegate != nil) {
         [self.delegate inviteeAddedWithEmail:self.emailTextField.text];
     }
