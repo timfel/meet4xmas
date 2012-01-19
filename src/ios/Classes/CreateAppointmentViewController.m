@@ -8,12 +8,18 @@
 
 #import "CreateAppointmentViewController.h"
 #import "ServiceProxy.h"
+#import "AddInviteeViewController.h"
 
 NSString* kDefaultCreateAppointmentViewNibNameIPhone = @"CreateAppointmentView_iPhone";
 NSString* kDefaultCreateAppointmentViewNibNameIPad = @"CreateAppointmentView_iPad";
 
 NSString* kInviteeCellReusableIdentifier = @"InviteeCell";
 NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
+
+typedef enum {
+    ADDRESS_BOOK,
+    EMAIL_ADDRESS
+} ActionSheetButtonIndex;
 
 @interface CreateAppointmentViewController()
 
@@ -153,7 +159,38 @@ NSString* kAddInviteeCellReusableIdentifier = @"AddInviteeCell";
         [self.inviteeTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         //TODO: Add invitee
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Add invitee"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"From address book", @"By email address", nil];
+        [actionSheet showInView:self.view];
     }
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == ADDRESS_BOOK) {
+        //TODO
+    } else if (buttonIndex == EMAIL_ADDRESS) {
+        AddInviteeViewController* addInviteeViewController = [[AddInviteeViewController alloc] initWithDefaultNib];
+        addInviteeViewController.delegate = self;
+        // Create a navigation controller and present it modally.
+        UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:addInviteeViewController];
+        [self presentModalViewController:navigationController animated:YES];
+    }
+}
+
+#pragma mark - AddInviteeViewControllerDelegate methods
+
+- (void)inviteeAddedWithEmail:(NSString *)email
+{
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.invitees.count inSection:0];
+    [self.invitees addObject:email];
+    
+    [self.inviteeTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 @end

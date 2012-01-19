@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 HPI. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ServiceProxy.h"
+#import "AddInviteeViewController.h"
 
 @protocol CreateAppointmentViewControllerDelegate
 
@@ -16,7 +16,7 @@
 
 @end
 
-@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, AddInviteeViewControllerDelegate>
 
 @property (nonatomic, strong) id<CreateAppointmentViewControllerDelegate> delegate;
 
