@@ -87,7 +87,6 @@ NSString* kDefaultAddInviteeViewNibNameIPad = @"AddInviteeView_iPad";
 
 - (IBAction)done:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
     if (self.delegate != nil) {
         [self.delegate inviteeAddedWithEmail:self.emailTextField.text];
     }

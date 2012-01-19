@@ -203,6 +203,16 @@ typedef enum {
 
 - (void)inviteeAddedWithEmail:(NSString *)email
 {
+    if ([self.invitees containsObject:email]) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:@"You already invited this person." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        return;
+    }
+    [self dismissModalViewControllerAnimated:YES];
     [self addInviteeWithMail:email];
 }
 
@@ -226,8 +236,18 @@ typedef enum {
 {
     ABMultiValueRef emails = ABRecordCopyValue(person, property);
     NSString* email = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(emails, identifier);
-    [self addInviteeWithMail:email];
     
+    if ([self.invitees containsObject:email]) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:@"You already invited this person." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        return NO;
+    }
+    
+    [self addInviteeWithMail:email];
     [self dismissModalViewControllerAnimated:YES];
     
     return NO;
