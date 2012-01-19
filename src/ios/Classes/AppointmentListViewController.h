@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "RegistrationViewController.h"
+#import "CreateAppointmentViewController.h"
 
-@interface AppointmentListViewController : UITableViewController <RegistrationViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface AppointmentListViewController : UITableViewController <RegistrationViewControllerDelegate, CreateAppointmentViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (IBAction)createAppointment:(id)sender;
 - (IBAction)logoutUser:(id)sender;
