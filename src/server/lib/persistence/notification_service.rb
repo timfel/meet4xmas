@@ -16,14 +16,8 @@ module Meet4Xmas
       belongs_to :user, 'Meet4Xmas::Persistence::User'
 
       def self.configure_apns
-        # APNS.host = 'gateway.push.apple.com'
-        # gateway.sandbox.push.apple.com is default
-
-        APNS.pem = File.join File.dirname(__FILE__), '..', '..', 'config', 'apns.pem'
-        APNS.pass = 'S3H1E4G1A5L9K2I6N'
-
-        # this is also the default. Shouldn't ever have to set this, but just in case Apple goes crazy, you can.
-        # APNS.port = 2195
+        APNS.pem = File.join File.dirname(__FILE__), '..', '..', 'config', 'apns', 'dev.pem'
+        APNS.pass = 'lyric8\curie'
       end
 
       ##
@@ -34,12 +28,15 @@ module Meet4Xmas
       def send_push_notification( message, options = {} )
         case service_type
         when NotificationServiceType::APNS
-          apns_opts[:badge] = options.delete :badge if options[:badge]
-          apns_opts[:sound] = options.delete :sound if options[:sound]
-          apns_opts[:other] = options unless options.empty?
+          apns_opts = {}
+          apns_opts[:alert] = message
+          #apns_opts[:badge] = options.delete :badge
+          #apns_opts[:sound] = options.delete :sound
+          #apns_opts[:other] = options unless options.empty?
+          puts "sending APNS notification to '#{device_id}' with #{apns_opts}"
           APNS.send_notification(device_id, apns_opts)
         else
-          raise "can't send notification to unknown device id #{device_type}!"
+          raise "can't send notification to device type '#{device_type}'"
         end
       end
     end
