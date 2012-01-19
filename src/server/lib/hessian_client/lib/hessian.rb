@@ -13,7 +13,7 @@ module Hessian
   class Binary
     attr :data
     def initialize(data)
-      @data = data.to_s
+      @data = data.to_s.force_encoding('BINARY')
     end
   end
 
