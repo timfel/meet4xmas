@@ -55,7 +55,7 @@ module Persistence
 
     def update_notification_services(device_id, service_type)
       # convert binary to string
-      case notificationServiceInfo.serviceType
+      case service_type
       when Meet4Xmas::Persistence::NotificationServiceType::APNS
         device_id = device_id.unpack('H*')[0]
       when Meet4Xmas::Persistence::NotificationServiceType::MPNS, Meet4Xmas::Persistence::NotificationServiceType::C2DM

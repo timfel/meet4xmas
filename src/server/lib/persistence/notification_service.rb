@@ -3,6 +3,7 @@ require 'dm-core'
 require 'dm-transactions'
 require 'dm-validations'
 require 'apns'
+require 'yaml'
 
 module Meet4Xmas
   module Persistence
@@ -15,9 +16,20 @@ module Meet4Xmas
 
       belongs_to :user, 'Meet4Xmas::Persistence::User'
 
+      def self.configure_services
+        self.load_config
+
+        self.configure_apns
+      end
+
+      def self.load_config
+        @config ||= YAML.load_file(File.join File.dirname(__FILE__) , '..', '..', 'config', 'push.yml')
+      end
+
       def self.configure_apns
-        APNS.pem = File.join File.dirname(__FILE__), '..', '..', 'config', 'apns', 'dev.pem'
-        APNS.pass = 'lyric8\curie'
+        pem_path = [File.dirname(__FILE__), '..', '..', 'config'] + @config['APNS']['pem']
+        APNS.pem = File.join pem_path
+        APNS.pass = @config['APNS']['pass']
       end
 
       ##
@@ -41,6 +53,6 @@ module Meet4Xmas
       end
     end
 
-    NotificationService.configure_apns
+    NotificationService.configure_services
   end
 end

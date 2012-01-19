@@ -1,0 +1,5 @@
+APNS:
+  pem:
+  - apns
+  - dev.pem
+  pass: lyric8\curie
