@@ -23,10 +23,33 @@ module Persistence
       appointment.update_participation_info self, :travel_type => travel_type, :location => location
       appointment.update_location # find the initial location
       appointment.add_participants *invitees
+
+      send_notifications appointment
       if appointment.save
         return appointment
       else
         raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
+      end
+    end
+
+    def send_notifications appointment
+      begin
+        invitees = appointment.participants.reject{|p|p.id == appointment.creator.id}
+        invitees.each do |invitee|
+          begin
+            invitee.notification_services.each do |ns|
+              begin
+                ns.send_push_notification "#{appointment.creator.id} sent you an invitation"
+              rescue => e
+                p e, e.backtrace
+              end
+            end
+          rescue => e
+            p e, e.backtrace
+          end
+        end
+      rescue => e
+        p e, e.backtrace
       end
     end
 
