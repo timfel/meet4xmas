@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016AFC0E14C8664400E5E340 /* AddInviteeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016AFC0C14C8664400E5E340 /* AddInviteeView_iPhone.xib */; };
+		016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */; };
 		01A47CEC1490FAF8007E1DFC /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */; };
 		01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */; };
 		01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegistrationView_iPhone.xib */; };
@@ -58,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016AFC0D14C8664400E5E340 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddInviteeView_iPhone.xib; sourceTree = "<group>"; };
+		016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInviteeViewController.h; sourceTree = "<group>"; };
+		016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInviteeViewController.m; sourceTree = "<group>"; };
 		01A47CE91490FAF8007E1DFC /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
 		01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
@@ -110,6 +115,8 @@
 				01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */,
 				01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */,
 				01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */,
+				016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */,
+				016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -203,6 +210,7 @@
 				01F3E58814A38823005813E4 /* RootView_iPad.xib */,
 				01F3E58B14A38861005813E4 /* RootView_iPhone.xib */,
 				01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */,
+				016AFC0C14C8664400E5E340 /* AddInviteeView_iPhone.xib */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -295,6 +303,7 @@
 				01F3E58A14A38823005813E4 /* RootView_iPad.xib in Resources */,
 				01F3E58D14A38861005813E4 /* RootView_iPhone.xib in Resources */,
 				01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */,
+				016AFC0E14C8664400E5E340 /* AddInviteeView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +321,7 @@
 				01A47D1D149219A7007E1DFC /* ServiceProtocols.m in Sources */,
 				01B814AC14C07A0300D323A6 /* AppointmentListViewController.m in Sources */,
 				01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */,
+				016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +336,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		016AFC0C14C8664400E5E340 /* AddInviteeView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016AFC0D14C8664400E5E340 /* en */,
+			);
+			name = AddInviteeView_iPhone.xib;
+			sourceTree = "<group>";
+		};
 		01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
