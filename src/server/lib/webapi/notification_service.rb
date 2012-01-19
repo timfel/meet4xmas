@@ -44,6 +44,9 @@ module Meet4Xmas
           #ios_options[:sound] = options.delete :sound
           #ios_options[:other] = options unless options.empty?
           self.send_apns_notification notification_service.device_id, ios_options
+        when Meet4Xmas::Persistence::NotificationServiceType::MPNS
+          options.merge(:message => message)
+          self.send_wpns_notification notification_service.device_id, options, :toast, nil
         else
           raise "can't send notification to device type '#{notification_service.device_type}'"
         end
@@ -53,6 +56,11 @@ module Meet4Xmas
           self.configure_apns
           puts "sending APNS notification to '#{device_token}' with #{ios_options}"
           APNS.send_notification device_token, ios_options
+      end
+
+      def self.send_wpns_notification(channel_uri, params, type, delay)
+          puts "sending WPNS #{type} notification in the next #{delay} to '#{channel_uri}' with #{params}"
+          Wpns.send_notification channel_uri, params, type, delay
       end
     end
   end

@@ -59,7 +59,7 @@ module Persistence
       when Meet4Xmas::Persistence::NotificationServiceType::APNS
         device_id = device_id.unpack('H*')[0]
       when Meet4Xmas::Persistence::NotificationServiceType::MPNS, Meet4Xmas::Persistence::NotificationServiceType::C2DM
-        device_id = device_id.unpack('U*')[0]
+        # Nothing todo
       end
 
       # create a new entry in this user's notification_services list, if an equal entry does not exist yet
