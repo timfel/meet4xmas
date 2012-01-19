@@ -46,7 +46,7 @@ module Meet4Xmas
           #ios_options[:other] = options unless options.empty?
           self.send_apns_notification notification_service.device_id, ios_options
         when Meet4Xmas::Persistence::NotificationServiceType::MPNS
-          options.merge(:message => message)
+          options.merge!(:message => message)
           self.send_wpns_notification notification_service.device_id, options, :toast, nil
         else
           raise "can't send notification to device type '#{notification_service.device_type}'"
