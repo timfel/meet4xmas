@@ -55,7 +55,11 @@ module Persistence
 
     def update_notification_services(device_id, service_type)
       # create a new entry in this user's notification_services list, if an equal entry does not exist yet
-      self.notification_services.first_or_create :device_id => device_id, :service_type => service_type
+      ns = self.notification_services.first_or_create :device_id => device_id, :service_type => service_type
+      unless ns.save
+        raise "cannot save notification service information #{[device_id, service_type]} of user #{self}"
+      end
+      ns
     end
   end
 end
