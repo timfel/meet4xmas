@@ -16,10 +16,16 @@ module Meet4Xmas
       def self.configure_apns
         return if @apns_configured
         self.load_config
+        @apns_config = @config['APNS']
 
-        pem_path = [File.dirname(__FILE__), '..', '..', 'config'] + @config['APNS']['pem']
+        # override options for host and port
+        APNS.host = @apns_config['host'] if @apns_config['host']
+        APNS.port = @apns_config['port'] if @apns_config['port']
+
+        # certificate options
+        pem_path = [File.dirname(__FILE__), '..', '..', 'config'] + @apns_config['pem']
         APNS.pem = File.join pem_path
-        APNS.pass = @config['APNS']['pass']
+        APNS.pass = @apns_config['pass']
 
         @apns_configured = true
       end

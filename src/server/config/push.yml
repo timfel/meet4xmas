@@ -1,4 +1,5 @@
 APNS:
+  #host: gateway.push.apple.com
   pem:
   - apns
   - dev.pem
