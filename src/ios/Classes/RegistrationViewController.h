@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol RegistrationViewControllerDelegate <NSObject>
+@protocol RegistrationViewControllerDelegate
 
-- (void)userRegisteredWithEmail:(NSString*)email;
+- (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray*)appointments;
 - (void)registrationFailed;
 
 @end
@@ -21,5 +21,7 @@
 @property (strong, nonatomic) id<RegistrationViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UITextField* emailTextField;
+
+- (RegistrationViewController*)initWithDefaultNib;
 
 @end

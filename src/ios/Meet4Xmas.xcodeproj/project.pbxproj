@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		01A47CEC1490FAF8007E1DFC /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */; };
-		01A47CEF1490FBE1007E1DFC /* AppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEE1490FBE1007E1DFC /* AppointmentListViewController.m */; };
 		01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */; };
 		01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegistrationView_iPhone.xib */; };
 		01A47D0914911C36007E1DFC /* libStaticHessianKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A47D0414911C1D007E1DFC /* libStaticHessianKit.a */; };
 		01A47D1B14921832007E1DFC /* ServiceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47D1914920C56007E1DFC /* ServiceProxy.m */; };
 		01A47D1D149219A7007E1DFC /* ServiceProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47D1C149219A7007E1DFC /* ServiceProtocols.m */; };
+		01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */; };
+		01B814AC14C07A0300D323A6 /* AppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */; };
+		01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */; };
 		01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307B1490F05F00548992 /* UIKit.framework */; };
 		01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307D1490F05F00548992 /* Foundation.framework */; };
 		01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307F1490F05F00548992 /* CoreGraphics.framework */; };
@@ -58,7 +60,6 @@
 /* Begin PBXFileReference section */
 		01A47CE91490FAF8007E1DFC /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
 		01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
-		01A47CEE1490FBE1007E1DFC /* AppointmentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentListViewController.m; sourceTree = "<group>"; };
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
 		01A47CF61490FC90007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPhone.xib; sourceTree = "<group>"; };
 		01A47CF814911C1D007E1DFC /* HessianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HessianKit.xcodeproj; path = Libraries/HessianKit/HessianKit.xcodeproj; sourceTree = "<group>"; };
@@ -66,6 +67,10 @@
 		01A47D1814920C56007E1DFC /* ServiceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceProxy.h; sourceTree = "<group>"; };
 		01A47D1914920C56007E1DFC /* ServiceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProxy.m; sourceTree = "<group>"; };
 		01A47D1C149219A7007E1DFC /* ServiceProtocols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceProtocols.m; sourceTree = "<group>"; };
+		01B814A914C0787100D323A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAppointmentView_iPhone.xib; sourceTree = "<group>"; };
+		01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentListViewController.m; sourceTree = "<group>"; };
+		01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAppointmentViewController.h; sourceTree = "<group>"; };
+		01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAppointmentViewController.m; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -101,8 +106,10 @@
 			children = (
 				01A47CE91490FAF8007E1DFC /* RegistrationViewController.h */,
 				01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */,
-				01A47CEE1490FBE1007E1DFC /* AppointmentListViewController.m */,
 				01CE308D1490F05F00548992 /* AppointmentListViewController.h */,
+				01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */,
+				01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */,
+				01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -195,6 +202,7 @@
 				01CE30841490F05F00548992 /* InfoPlist.strings */,
 				01F3E58814A38823005813E4 /* RootView_iPad.xib */,
 				01F3E58B14A38861005813E4 /* RootView_iPhone.xib */,
+				01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -286,6 +294,7 @@
 				01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */,
 				01F3E58A14A38823005813E4 /* RootView_iPad.xib in Resources */,
 				01F3E58D14A38861005813E4 /* RootView_iPhone.xib in Resources */,
+				01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,8 +309,9 @@
 				01CE30881490F05F00548992 /* main.m in Sources */,
 				01CE308C1490F05F00548992 /* AppDelegate.m in Sources */,
 				01A47CEC1490FAF8007E1DFC /* RegistrationViewController.m in Sources */,
-				01A47CEF1490FBE1007E1DFC /* AppointmentListViewController.m in Sources */,
 				01A47D1D149219A7007E1DFC /* ServiceProtocols.m in Sources */,
+				01B814AC14C07A0300D323A6 /* AppointmentListViewController.m in Sources */,
+				01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +340,14 @@
 				01A47CF61490FC90007E1DFC /* en */,
 			);
 			name = RegistrationView_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01B814A914C0787100D323A6 /* en */,
+			);
+			name = CreateAppointmentView_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		01CE30841490F05F00548992 /* InfoPlist.strings */ = {

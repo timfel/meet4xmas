@@ -1,33 +1,44 @@
 # load the wire classes
 require File.expand_path('../../java/init', __FILE__)
-module Java
-  module Wire
-    java_import   'org.meet4xmas.wire.Appointment'
-    java_import   'org.meet4xmas.wire.ErrorInfo'
-    java_import   'org.meet4xmas.wire.Location'
-    java_import   'org.meet4xmas.wire.Participant'
-    java_import   'org.meet4xmas.wire.Response'
-    java_import   'org.meet4xmas.wire.TravelPlan'
-  end
-end
-
 require 'lib/persistence/setup' # requires all models
 
 module Meet4Xmas
 module Server
   class ServletHandler
-    def registerAccount(userId)
+    def registerAccount(userId, notificationServiceInfo)
       _transaction do |t|
-        user = Persistence::User.first(:id => userId)
+        # get existing user
+        user = Persistence::User.first :id => userId
         if user
-          _success_response(user.appointments.map { |a| a.id })
+          new_user = false
         else
+          new_user = true
+          # create new user
           user = Persistence::User.new :id => userId
+        end
+
+        # make sure the user is saved
+        if user.save
+          if notificationServiceInfo
+            # add notification service information to the user
+            user.update_notification_services notificationServiceInfo.deviceId, notificationServiceInfo.serviceType
+          end
+
+          # save and return
           if user.save
-            _success_response()
+            if new_user
+              payload = nil
+            else
+              # special: if the user already existed, return all his appointment ids
+              payload = user.appointments.map(&:id)
+            end
+            # return result
+            _success_response payload
           else
             _rollback_and_return_error(t, 0, "Unknown error while creating account")
           end
+        else
+          _rollback_and_return_error(t, 0, "Unknown error while creating account")
         end
       end
     end
@@ -54,14 +65,12 @@ module Server
         # fetch user
         user = Persistence::User.first(:id => userId)
         if user
+          location = Persistence::Location.from_java(java_location)
 
-          # build location object
-          location = Persistence::Location.create({
-            :latitude => java_location.latitude,
-            :longitude => java_location.longitude,
-            :title => java_location.title,
-            :description => java_location.description
-          })
+          #XXX: create users which not yet exist, we should send them mails later
+          invitees.each do |invitee|
+            Persistence::User.first_or_create(:id => invitee).save
+          end
 
           # create appointment
           appointment = user.create_appointment(travelType, location, invitees, locationType, userMessage)
@@ -80,28 +89,16 @@ module Server
       appointment = Persistence::Appointment.first(:id => appointmentId)
       return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
 
-      result = Java::Wire::Appointment.new
-      result.identifier = appointment.id
-      result.creator = appointment.creator.id
-      result.locationType = appointment.location_type
-      #result.location = nil # TODO
-      result.isFinal = appointment.is_final
-      result.participants = appointment.participations.map do |participation|
-        java_participant = Java::Wire::Participant.new
-        java_participant.userId = participation.participant.id
-        java_participant.status = participation.status
-        java_participant
-      end
-      result.message = appointment.user_message
-      _success_response(result)
+      _success_response(appointment.to_java)
     end
 
     def getTravelPlan(appointmentId, travelType, java_location)
       appointment = Persistence::Appointment.first(:id => appointmentId)
       return _error_response(0, "Appointment #{appointmentId} does not exist") unless appointment
 
-      plan = Java::Wire::TravelPlan.new
-      plan.path = [] # TODO
+      plan = Java::Wire::TravelPlan.new.tap do |java_plan|
+        java_plan.path = appointment.travel_plan(travelType, Persistence::Location.from_java(java_location)).map(&:to_java)
+      end
 
       _success_response(plan)
     end
@@ -117,12 +114,7 @@ module Server
           if user
 
             # build location object
-            location = Persistence::Location.create({
-              :latitude => java_location.latitude,
-              :longitude => java_location.longitude,
-              :title => java_location.title,
-              :description => java_location.description
-            })
+            location = Persistence::Location.from_java java_location
 
             # join the appointment
             appointment.join(user, travelType, location)
@@ -178,16 +170,16 @@ module Server
 
     def _build_response(success, error_info=nil, payload=nil)
       if error_info.kind_of?(Hash) && (error_info.has_key?(:code) || error_info.has_key?(:message))
-        info = Java::Wire::ErrorInfo.new
-        info.code = error_info[:code]
-        info.message = error_info[:message]
-        error_info = info
+        error_info = Java::Wire::ErrorInfo.new.tap do |info|
+          info.code = error_info[:code]
+          info.message = error_info[:message]
+        end
       end
-      response = Java::Wire::Response.new
-      response.success = success
-      response.error = error_info
-      response.payload = payload
-      response
+      Java::Wire::Response.new.tap do |response|
+        response.success = success
+        response.error   = error_info
+        response.payload = payload
+      end
     end
 
     def _success_response(payload=nil)

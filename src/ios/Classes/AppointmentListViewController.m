@@ -7,17 +7,43 @@
 //
 
 #import "AppointmentListViewController.h"
+#import "AppDelegate.h"
 #import "RegistrationViewController.h"
+#import "CreateAppointmentViewController.h"
+#import "ServiceProtocols.h"
+#import "ServiceProxy.h"
+
+NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
+
+@interface AppointmentListViewController()
+
+@property (nonatomic, strong)NSArray* appointments;
+
+- (void)presentRegistrationView;
+- (void)presentCreateAppointmentView;
+
+@end
 
 @implementation AppointmentListViewController
-							
+
+@synthesize appointments = _appointments;
+
+#pragma mark - Accessors
+
+- (void)setAppointments:(NSArray *)appointments
+{
+    _appointments = appointments;
+    [(UITableView*)self.view reloadData];
+}
+
+
+#pragma mark - View lifecycle
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -41,22 +67,10 @@
 {
     [super viewDidAppear:animated];
     
-    //TODO: if (![user loggedIn]) {...
-    // Load the registration view modally. It will define a done button for the navigation controller.
-    RegistrationViewController* registrationViewController;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPhone" bundle:nil];
-    } else {
-        registrationViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationView_iPad" bundle:nil];
-        // Only show a small form on the iPad, not full screen
-        registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.currentUser == nil) {
+        [self presentRegistrationView];
     }
-    registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    registrationViewController.delegate = self;
-    
-    // Create a navigation controller and present it modally.
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:registrationViewController];
-    [self presentModalViewController:navigationController animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -79,17 +93,119 @@
     }
 }
 
+- (void)presentRegistrationView
+{
+    // Load the registration view modally. It will define a done button for the navigation controller.
+    RegistrationViewController* registrationViewController = [[RegistrationViewController alloc] initWithDefaultNib];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        registrationViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    registrationViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    registrationViewController.delegate = self;
+    
+    // Create a navigation controller and present it modally.
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:registrationViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
+- (void)presentCreateAppointmentView
+{
+    CreateAppointmentViewController* createAppointmentViewController = [[CreateAppointmentViewController alloc] initWithDefaultNib];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        createAppointmentViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    }
+    
+    createAppointmentViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    createAppointmentViewController.delegate = self;
+    
+    // Create a navigation controller and present it modally.
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:createAppointmentViewController];
+    [self presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark - IBActions
+
+- (IBAction)createAppointment:(id)sender
+{
+    [self presentCreateAppointmentView];
+}
+
+- (IBAction)logoutUser:(id)sender
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.currentUser = nil;
+    
+    [self presentRegistrationView];
+}
+
 #pragma mark - RegistrationViewControllerDelegate
 
-- (void)userRegisteredWithEmail:(NSString*)email
+- (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointments
 {
-    //TODO: Should we really do that here?
-    [self dismissModalViewControllerAnimated:YES];
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.currentUser = email;
+    self.appointments = appointments;
 }
 
 - (void)registrationFailed
 {
     //TODO: Oops! What now?
+}
+
+#pragma mark - CreateAppointmentViewControllerDelegate
+
+- (void)createdAppointment:(AppointmentId)appointmentId
+{
+    //TODO: Do things with the new appointmentId
+}
+
+- (void)creationCanceled
+{
+
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AppointmentId appointmentId = (AppointmentId)[self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
+    if (appointmentId == 0) {
+        return nil;
+    }
+    
+    id<Appointment> appointment;
+    if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentCellReusableIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentCellReusableIdentifier];
+        }
+        
+        cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];
+        
+        return cell;
+    } else {
+        //TODO: Error check?
+        return nil;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.appointments.count;
+}
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    AppointmentId appointmentId = (AppointmentId)[self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
+    id<Appointment> appointment;
+    if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
+        //TODO: Present Appointment details view
+    }
 }
 
 @end

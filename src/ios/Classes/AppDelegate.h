@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceProtocols.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
+
+@property (strong, nonatomic) UserId currentUser;
+@property (strong, nonatomic) NSData* deviceToken;
 
 @end

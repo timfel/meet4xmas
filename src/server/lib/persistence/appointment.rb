@@ -13,6 +13,7 @@ module Persistence
     property :created_at, DateTime, :required => true
     property :user_message, String
     property :location_type, Integer, :required => true, :default => LocationType::ChristmasMarket
+    belongs_to :location, 'Meet4Xmas::Persistence::Location', :required => false # TODO: validate presence if: there is a location with this location_type, and there are any active participants
     validates_within :location_type, :set => LocationType::ALL # use values of LocationType
     property :is_final, Boolean, :required => true, :default => false
 
@@ -22,7 +23,7 @@ module Persistence
 
     def initialize(*args, &block)
       super
-      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
 
       # add the creator to the participants
       add_participants creator
@@ -40,7 +41,7 @@ module Persistence
         end
         participations.create(:participant => invitee)
       end
-      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
     end
 
     def update_participation_info(participant, attributes)
@@ -56,7 +57,17 @@ module Persistence
       raise "User '#{participant.id}' does not participate in appointment #{id}" unless participation
       participation.update attributes
 
-      raise "Failed to save the appointment. Errors:\n#{participation.errors.inspect}" unless participation.save()
+      raise "Failed to save the appointment. Errors:\n#{participation.errors.inspect}" unless participation.save
+    end
+
+    def update_location
+      origins = self.participations.map(&:location).compact
+      dm = WebAPI::GoogleDistanceMatrix.new(origins, Location.from_type(location_type))
+      target_location = dm.closest_to_all
+      if target_location
+        self.location = target_location
+        raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
+      end
     end
 
     def join(participant, travel_type, location) # participant is either a User or its id
@@ -73,7 +84,19 @@ module Persistence
 
     def finalize()
       self.is_final = true
-      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save()
+      raise "Failed to save the appointment. Errors:\n#{errors.inspect}" unless save
+    end
+
+    def travel_plan(travel_type, current_location)
+      update_location unless location
+      case travel_type
+      when TravelType::Car
+        WebAPI::GoogleDirections.new( :origin => current_location, :destination => location ).path
+      when TravelType::Walk
+        WebAPI::GoogleDirections.new( :mode => 'walking', :origin => current_location, :destination => location ).path
+      else
+        [current_location, location]
+      end
     end
   end
 
@@ -86,7 +109,7 @@ module Persistence
     # some participant properties specific to this very participation
     property :travel_type, Integer # use values of TravelType
     validates_within :travel_type, :set => TravelType::ALL, :allow_nil => true
-    has 1, :location
+    belongs_to :location, 'Meet4Xmas::Persistence::Location', :required => false
     property :status, Integer, :required => true, :default => ParticipationStatus::Pending
     validates_within :status, :set => ParticipationStatus::ALL # use values of ParticipationStatus
   end

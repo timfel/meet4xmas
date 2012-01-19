@@ -8,58 +8,99 @@ describe 'Meet4Xmas Service' do
     end
 
     it 'succeeds if the account does not exist yet' do
-      @client.registerAccount(@user_id).should be_successful
+      register_account(@user_id).should be_successful
     end
 
     it 'succeeds if the account does not exist anymore' do
-      @client.registerAccount(@user_id)
-      @client.deleteAccount(@user_id)
-      @client.registerAccount(@user_id).should be_successful
+      register_account @user_id
+      delete_account @user_id
+      register_account(@user_id).should be_successful
     end
 
     it 'succeeds if the account already exists' do
-      @client.registerAccount(@user_id)
-      @client.registerAccount(@user_id).should be_successful
+      register_account @user_id
+      register_account(@user_id).should be_successful
     end
 
     it 'fails if the account id is not an email address' do
       @user_id = 'lysann.kessler'
-      response = @client.registerAccount(@user_id)
-      response.should_not be_successful
-      # TODO: test error code
+      register_account(@user_id).should return_error 0 # TODO: adjust error code
+    end
+
+    describe 'with notification service information' do
+      before :each do
+        @notification_service_info_apns = {
+          'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::APNS,
+          # "38dede2764b83e4827600c970c154543ea02e5c6d0b86ab7cf569920c9e63f52".scan(/../).map{|b|b.to_i(16)}.pack('C*')
+          'deviceId' => Hessian::Binary.new("8\336\336'd\270>H'`\f\227\f\025EC\352\002\345\306\320\270j\267\317V\231 \311\346?R")
+        }
+        @notification_service_info_apns2 = {
+          'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::APNS,
+          # "855ab705fb240d8ba34b9c74831670c461592ef96b7f4ab17d521df33d29551f".scan(/../).map{|b|b.to_i(16)}.pack('C*')
+          'deviceId' => Hessian::Binary.new("\205Z\267\005\373$\r\213\243K\234t\203\026p\304aY.\371k\177J\261}R\035\363=)U\037")
+        }
+        @notification_service_info_mpns = {
+          'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::MPNS,
+          'deviceId' => Hessian::Binary.new("http://example/channel/uri".unpack('U*'))
+        }
+      end
+
+      it 'is optional' do
+        register_account(@user_id, nil).should be_successful
+      end
+
+      it 'works if everything is alright' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+      end
+
+      it 'can register multiple services of the same service type' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+        register_account(@user_id, @notification_service_info_apns2).should be_successful
+      end
+
+      it 'can register the same service multiple times' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+      end
+
+      it 'can register multiple services of different service types' do
+        register_account(@user_id, @notification_service_info_apns).should be_successful
+        register_account(@user_id, @notification_service_info_mpns).should be_successful
+      end
     end
 
     describe 'response payload' do
-      before :each do
-        @client.registerAccount(@user_id)
-        @response = @client.registerAccount(@user_id)
+      describe '(if the user did not exists)' do
+        it 'is nil' do
+          register_account(@user_id)['payload'].should be_nil
+        end
       end
 
-      it 'is a list' do
-        @response['payload'].should be_kind_of(Array)
-      end
+      describe '(if the user did already exist)' do
+        before :each do
+          register_account @user_id
+          @response = register_account @user_id
+        end
 
-      it 'is empty if the user is new' do
-        @response['payload'].should be_empty
-      end
+        it 'is a list' do
+          @response['payload'].should be_kind_of(Array)
+        end
 
-      it 'contains a list of appointment ids the user participates in' do
-        @invitees = [ 'test@example.com', 'foo@example.com' ]
-        @location = { 'longitude' => 0, 'latitude' => 0, 'title' => 'title', 'description' => 'description' }
-        @create_appointment_args = [
-          @user_id, Meet4Xmas::Persistence::TravelType::ALL.first, @location,
-          @invitees,
-          Meet4Xmas::Persistence::LocationType::ALL.first,
-          'user message'
-        ]
-        @invitees.each { |user| @client.registerAccount(user) }
+        it 'is empty if the user is new' do
+          @response['payload'].should be_empty
+        end
 
-        ids = []
-        ids << @client.createAppointment(*@create_appointment_args)['payload']
-        ids << @client.createAppointment(*@create_appointment_args)['payload']
+        it 'contains a list of appointment ids the user participates in' do
+          # create some appointments for this user
+          set_creator @user_id # make sure the user exists, as this is required by createAppointment
+          ids = [ create_appointment['payload'], create_appointment['payload'] ]
 
-        returned_ids = @client.registerAccount(@user_id)['payload']
-        Set.new(returned_ids).should == Set.new(ids)
+          # invoke registerAccount
+          returned_ids = register_account(@user_id)['payload']
+
+          # check result
+          Set.new(returned_ids).should == Set.new(ids)
+        end
       end
     end
   end

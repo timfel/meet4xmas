@@ -2,7 +2,10 @@ source 'http://rubygems.org'
 
 # geocoding, map location calculations, ...
 gem 'geokit'
-gem 'json_pure' # XXX: required by geokit
+gem 'json_pure' # required by geokit
+
+# push notifications
+gem 'apns' # apple push notification service
 
 # persistence
 gem 'dm-core'
@@ -12,4 +15,4 @@ gem 'dm-validations'
 gem 'dm-sqlite-adapter'
 
 # for the tests
-gem 'rspec'
+gem 'rspec', '=2.7'

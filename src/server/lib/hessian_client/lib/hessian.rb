@@ -9,7 +9,7 @@ module Hessian
       @hessian_type, @object = hessian_type, object
     end
   end
-  
+
   class Binary
     attr :data
     def initialize(data)
@@ -18,9 +18,17 @@ module Hessian
   end
 
   class HessianException < RuntimeError
-    attr_reader :code
-    def initialize(code)
-      @code = code
+    attr_reader :args
+    def initialize(args)
+      @args = args
+    end
+
+    def to_s
+      @args.to_s
+    end
+
+    def inspect
+      @args.inspect
     end
   end
 
@@ -33,7 +41,7 @@ module Hessian
       raise "Unsupported Hessian protocol: #@scheme" unless @scheme == 'http' || @scheme == 'https'
       @proxy = proxy
     end
-    
+
     def method_missing(id, *args)
       return invoke(id.id2name, args)
     end
@@ -64,10 +72,10 @@ module Hessian
       def write_object(val, hessian_type = nil)
         return 'N' if val.nil?
         case val
-        when TypeWrapper: write_object(val.object, val.hessian_type)
-        when Struct: write_object(val.members.inject({}) { |map, m| map[m] = val[m]; map })
-        when Binary: [ 'B', val.data.length ].pack('an') << val.data
-        when String: [ 'S', val.length ].pack('an') << val.unpack('C*').pack('U*')
+        when TypeWrapper then write_object(val.object, val.hessian_type)
+        when Struct then write_object(val.members.inject({}) { |map, m| map[m] = val[m]; map })
+        when Binary then [ 'B', val.data.length ].pack('an') << val.data
+        when String then [ 'S', val.length ].pack('an') << val.unpack('C*').pack('U*')
         when Integer
           # Max and min values for integers in Java.
           if val >= -0x80000000 && val <= 0x7fffffff
@@ -75,10 +83,10 @@ module Hessian
           else
             "L%s" % to_long(val)
           end
-        when Float: [ 'D', val ].pack('aG')
-        when Time: "d%s" % to_long((val.to_f * 1000).to_i)
-        when TrueClass: 'T'
-        when FalseClass: 'F'
+        when Float then [ 'D', val ].pack('aG')
+        when Time then "d%s" % to_long((val.to_f * 1000).to_i)
+        when TrueClass then 'T'
+        when FalseClass then 'F'
         when Array
           ref = write_ref val; return ref if ref
           t = hessian_type_string(hessian_type, val)
@@ -94,14 +102,14 @@ module Hessian
           raise "Not implemented for #{val.class}"
         end
       end
-      
+
       def hessian_type_string(hessian_type, object)
         if hessian_type.nil? && object.respond_to?(:hessian_type)
           hessian_type = object.hessian_type
-        end        
+        end
         hessian_type ? [ hessian_type.length, hessian_type ].pack('na*') : "\000\000"
       end
-      
+
       def to_long(val)
         str, pos = " " * 8, 0
         56.step(0, -8) { |o| str[pos] = val >> o & 0x00000000000000ff; pos += 1 }
@@ -132,8 +140,9 @@ module Hessian
       def parse_object
         t = @data.slice!(0, 1)
         case t
-        when 'f': raise_exception
-        when 's', 'S', 'x', 'X'
+        when '' then raise "unexpected end of stream"
+        when 'f' then raise_exception
+        when 's', 'S', 'x', 'X' then
           v = from_utf8(@data.slice!(0, 2).unpack('n')[0])
           @data.slice!(0, v[1])
           @chunks << v[0]
@@ -142,7 +151,7 @@ module Hessian
           else
             str = @chunks.join; @chunks.clear; str
           end
-        when 'b', 'B'
+        when 'b', 'B' then
           v = @data.slice!(0, @data.slice!(0, 2).unpack('n')[0])
           @chunks << v
           if t == 'b'
@@ -150,14 +159,14 @@ module Hessian
           else
             bytes = @chunks.join; @chunks.clear; Binary.new bytes
           end
-        when 'I': @data.slice!(0, 4).unpack('N')[0]
-        when 'L': parse_long
-        when 'd': l = parse_long; Time.at(l / 1000, l % 1000 * 1000)
-        when 'D': @data.slice!(0, 8).unpack('G')[0]
-        when 'T': true
-        when 'F': false
-        when 'N': nil
-        when 'R': @refs[@data.slice!(0, 4).unpack('N')[0]]
+        when 'I' then @data.slice!(0, 4).unpack('N')[0]
+        when 'L' then parse_long
+        when 'd' then l = parse_long; Time.at(l / 1000, l % 1000 * 1000)
+        when 'D' then @data.slice!(0, 8).unpack('G')[0]
+        when 'T' then true
+        when 'F' then false
+        when 'N' then nil
+        when 'R' then @refs[@data.slice!(0, 4).unpack('N')[0]]
         when 'V'
           # Skip type + type length (2 bytes) if specified.
           @data.slice!(0, 3 + @data.unpack('an')[1]) if @data[0,1] == 't'
@@ -168,7 +177,7 @@ module Hessian
           # Get rid of the 'z'.
           @data.slice!(0, 1)
           list
-        when 'M'
+        when 'M' then
           # Skip type + type length (2 bytes) if specified.
           @data.slice!(0, 3 + @data.unpack('an')[1]) if @data[0,1] == 't'
           @refs << (map = {})
@@ -180,10 +189,10 @@ module Hessian
           raise "Invalid type: '#{t}'"
         end
       end
-      
+
       def from_utf8(len = '*')
-        s = @data.unpack("U#{len}").pack('C*')
-        [ s, s.unpack('C*').pack('U*').length ]
+        s = @data.unpack("U#{len}").pack('U*')
+        [ s, s.force_encoding('UTF-8').bytesize ]
       end
 
       def parse_long
@@ -193,13 +202,15 @@ module Hessian
       end
 
       def raise_exception
-        # Skip code description.
-        parse_object
-        code = parse_object
-        # Skip message description
-        parse_object
-        msg = parse_object
-        raise HessianException.new(code), msg
+        args = {}
+        while true
+          begin
+            args[parse_object()] = parse_object while not @data[0,1].empty?
+          rescue
+            break
+          end
+        end
+        raise HessianException.new args
       end
     end
   end
