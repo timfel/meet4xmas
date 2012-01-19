@@ -55,7 +55,10 @@ namespace Meet4Xmas
             var task = new EmailAddressChooserTask();
             task.Completed += new EventHandler<EmailResult>((object searchSender, EmailResult csea) =>
             {
-                ContactList.Items.Add(csea.Email);
+                if (csea.TaskResult == TaskResult.OK)
+                {
+                    ContactList.Items.Add(csea.Email);
+                }
             });
             task.Show();
         }
