@@ -39,7 +39,7 @@ module Persistence
           begin
             invitee.notification_services.each do |ns|
               begin
-                ns.send_push_notification "#{appointment.creator.id} sent you an invitation"
+                Meet4Xmas::WebAPI::NotificationService.send_notification ns, "#{appointment.creator.id} sent you an invitation"
               rescue => e
                 p e, e.backtrace
               end
