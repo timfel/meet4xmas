@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'yaml'
 require 'apns'
+require 'wpns'
 
 module Meet4Xmas
   module WebAPI
