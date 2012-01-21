@@ -17,7 +17,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 @interface AppointmentListViewController()
 
-@property (nonatomic, strong)NSArray* appointments;
+@property (nonatomic, strong)NSMutableArray* appointments;
 
 - (void)presentRegistrationView;
 - (void)presentCreateAppointmentView;
@@ -30,7 +30,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 #pragma mark - Accessors
 
-- (void)setAppointments:(NSArray *)appointments
+- (void)setAppointments:(NSMutableArray *)appointments
 {
     _appointments = appointments;
     [(UITableView*)self.view reloadData];
@@ -67,10 +67,10 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 {
     [super viewDidAppear:animated];
     
-    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (appDelegate.currentUser == nil) {
-        [self presentRegistrationView];
-    }
+//    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    if (appDelegate.currentUser == nil) {
+//        [self presentRegistrationView];
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -142,11 +142,22 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 #pragma mark - RegistrationViewControllerDelegate
 
-- (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointments
+- (void)userRegisteredWithEmail:(NSString*)email gotAppointments:(NSArray *)appointmentIds
 {
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     appDelegate.currentUser = email;
-    self.appointments = appointments;
+    
+    self.appointments = [[NSMutableArray alloc] init];
+    
+    for (AppointmentId appointmentId in appointmentIds) {
+        id<Response> response = [ServiceProxy getAppointmentForID:appointmentId];
+        if (response.success) {
+            [self.appointments addObject:response.payload];
+        }
+    }
+    
+    [(UITableView*)self.view reloadData];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)registrationFailed
@@ -158,37 +169,37 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (void)createdAppointment:(AppointmentId)appointmentId
 {
-    //TODO: Do things with the new appointmentId
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:self.appointments.count inSection:0];
+    
+    id<Response> response = [ServiceProxy getAppointmentForID:appointmentId];
+    if (response.success) {
+        [self.appointments addObject:response.payload];
+    } else {
+        //TODO: Error handling
+    }
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [(UITableView*)self.view insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 - (void)creationCanceled
 {
-
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AppointmentId appointmentId = (AppointmentId)[self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
-    if (appointmentId == 0) {
-        return nil;
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentCellReusableIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentCellReusableIdentifier];
     }
     
-    id<Appointment> appointment;
-    if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentCellReusableIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentCellReusableIdentifier];
-        }
-        
-        cell.textLabel.text = [[NSString alloc] initWithFormat:@"%d:%@", appointment.identifier, appointment.message];
-        
-        return cell;
-    } else {
-        //TODO: Error check?
-        return nil;
-    }
+    id<Appointment> appointment = [self.appointments objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[NSString alloc] initWithFormat:@"%@:%@", appointment.identifier, appointment.message];
+    
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -201,11 +212,8 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    AppointmentId appointmentId = (AppointmentId)[self.appointments objectAtIndex:[indexPath indexAtPosition:0]];
-    id<Appointment> appointment;
-    if([ServiceProxy getAppointment:appointment forID:appointmentId]) {
-        //TODO: Present Appointment details view
-    }
+    id<Appointment> appointment = [self.appointments objectAtIndex:indexPath.row];
+    //TODO: Present Appointment details view
 }
 
 @end
