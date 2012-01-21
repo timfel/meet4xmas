@@ -46,8 +46,8 @@ OBJC_EXPORT NSString* const kParticipantClassName;
 OBJC_EXPORT NSString* const kLocationClassName;
 @protocol Location
 
-@property(nonatomic) double latitude;
-@property(nonatomic) double longitude;
+@property(strong, nonatomic) NSNumber* /*double*/ latitude;
+@property(strong, nonatomic) NSNumber* /*double*/ longitude;
 @property(strong, nonatomic) NSString* title;
 @property(strong, nonatomic) NSString* desciption;
 
