@@ -80,7 +80,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to register account: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to register account: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -92,7 +92,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to delete account: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to delete account: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -111,7 +111,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to create appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to create appointment: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -123,7 +123,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to get appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to get appointment: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -135,7 +135,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to finalize appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to finalize appointment: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -150,7 +150,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to join appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to join appointment: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -162,7 +162,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to decline appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to decline appointment: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;
@@ -178,7 +178,7 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to decline appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to decline appointment: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;

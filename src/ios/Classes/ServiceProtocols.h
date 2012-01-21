@@ -76,7 +76,7 @@ OBJC_EXPORT NSString* const kTravelPlanClassName;
 OBJC_EXPORT NSString* const kErrorInfoClassName;
 @protocol ErrorInfo
 
-@property(nonatomic) int code;
+@property(strong, nonatomic) NSNumber* code;
 @property(strong, nonatomic) NSString* message;
 
 @end
