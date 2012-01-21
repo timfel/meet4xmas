@@ -1,0 +1,6 @@
+APNS:
+  #host: gateway.push.apple.com
+  pem:
+  - apns
+  - dev.pem
+  pass: lyric8\curie

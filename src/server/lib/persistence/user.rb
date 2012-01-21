@@ -39,7 +39,7 @@ module Persistence
           begin
             invitee.notification_services.each do |ns|
               begin
-                ns.send_push_notification "#{appointment.creator.id} sent you an invitation"
+                Meet4Xmas::WebAPI::NotificationService.send_notification ns, "#{appointment.creator.id} sent you an invitation"
               rescue => e
                 p e, e.backtrace
               end
@@ -55,11 +55,11 @@ module Persistence
 
     def update_notification_services(device_id, service_type)
       # convert binary to string
-      case notificationServiceInfo.serviceType
+      case service_type
       when Meet4Xmas::Persistence::NotificationServiceType::APNS
         device_id = device_id.unpack('H*')[0]
       when Meet4Xmas::Persistence::NotificationServiceType::MPNS, Meet4Xmas::Persistence::NotificationServiceType::C2DM
-        device_id = device_id.unpack('U*')[0]
+        # Nothing todo
       end
 
       # create a new entry in this user's notification_services list, if an equal entry does not exist yet
