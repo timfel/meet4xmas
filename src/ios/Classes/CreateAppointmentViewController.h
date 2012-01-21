@@ -22,8 +22,9 @@
 
 @property (nonatomic, strong) id<CreateAppointmentViewControllerDelegate> delegate;
 
-@property (nonatomic, strong) IBOutlet UITextField* descriptionTextField;
-@property (nonatomic, strong) IBOutlet UITableView* inviteeTableView;
+@property (weak, nonatomic) IBOutlet UITextField* descriptionTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl* travelType;
+@property (weak, nonatomic) IBOutlet UITableView* inviteeTableView;
 
 - (CreateAppointmentViewController*)initWithDefaultNib;
 

@@ -8,7 +8,9 @@
 
 #import "CreateAppointmentViewController.h"
 #import "ServiceProxy.h"
+#import "AppDelegate.h"
 #import "AddInviteeViewController.h"
+#import "CWValueObject.h"
 #import <AddressBookUI/AddressBookUI.h>
 
 NSString* kDefaultCreateAppointmentViewNibNameIPhone = @"CreateAppointmentView_iPhone";
@@ -37,6 +39,7 @@ typedef enum {
 
 @synthesize delegate = _delegate;
 @synthesize descriptionTextField = _descriptionTextField;
+@synthesize travelType = _travelType;
 @synthesize inviteeTableView = _inviteeTableView;
 
 @synthesize invitees = _invitees;
@@ -86,6 +89,7 @@ typedef enum {
 
 - (void)viewDidUnload
 {
+    [self setTravelType:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -109,13 +113,39 @@ typedef enum {
 
 - (void)done:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
-    //TODO
+    UserId userId = [(AppDelegate*)[[UIApplication sharedApplication] delegate] currentUser];
+    TravelType travelType = [self.travelType selectedSegmentIndex];
+    CWValueObject<Location>* location = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
+    //TODO: Stub
+    location.latitude = [NSNumber numberWithDouble:52.393957];
+    location.longitude = [NSNumber numberWithDouble:13.132473];
+    LocationType locationType = WEIHNACHTSMARKT;
+    NSString* userMessage = self.descriptionTextField.text;
+    
+    id<Response> response = [ServiceProxy createAppointmentWithUser:userId
+                                                travelType:travelType
+                                                  location:location
+                                                  invitees:self.invitees
+                                              locationType:locationType
+                                               userMessage:userMessage];
+    if (!response.success) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                          message:@"Failed to create appointment." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        return;
+    }
+    
+    if (self.delegate != nil) {
+        AppointmentId newAppointment = (AppointmentId)response.payload;
+        [self.delegate createdAppointment:newAppointment];
+    }
 }
 
 - (void)cancel:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
     if (self.delegate != nil) {
         [self.delegate creationCanceled];
     }
