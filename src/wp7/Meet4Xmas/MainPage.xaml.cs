@@ -29,6 +29,10 @@ namespace Meet4Xmas
             {
                 NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
             }
+            else
+            {
+                Settings.Account.Loaded();
+            }
         }
 
         private void CreateAppointmentButtonClick(object sender, RoutedEventArgs e)
