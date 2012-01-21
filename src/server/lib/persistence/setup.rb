@@ -22,7 +22,7 @@ DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_DB_LOGGING
 module Meet4Xmas
 module Persistence
   CONFIG_FILE = File.expand_path("../../../config/database.yml", __FILE__)
-  CONFIG = YAML.load_file(CONFIG_FILE) if File.exist? CONFIG_FILE
+  CONFIG = File.exist?(CONFIG_FILE) ? YAML.load_file(CONFIG_FILE) : {}
   DB_FILE ||= (CONFIG["DB_FILE"] || 'sqlite3://' + File.expand_path('../meet4xmas.sqlite', __FILE__))
   REPOSITORY_NAME = :default
 
