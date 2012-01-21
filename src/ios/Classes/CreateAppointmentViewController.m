@@ -29,6 +29,7 @@ typedef enum {
 @property (nonatomic, strong) NSMutableArray* invitees;
 
 - (void)addInviteeWithMail:(NSString*)email;
+- (void)enableBackButton;
 
 - (void)done:(id)sender;
 - (void)cancel:(id)sender;
@@ -82,6 +83,7 @@ typedef enum {
     [super viewDidLoad];
     self.navigationItem.title = @"Create Appointment";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     
     [self.inviteeTableView setEditing:YES animated:NO];
@@ -107,6 +109,16 @@ typedef enum {
     [self.invitees addObject:email];
     
     [self.inviteeTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    [self enableBackButton];
+}
+
+- (void)enableBackButton
+{
+    if (self.descriptionTextField.text == nil || self.invitees.count == 0) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }
 }
 
 #pragma mark - Actions
@@ -149,6 +161,10 @@ typedef enum {
     if (self.delegate != nil) {
         [self.delegate creationCanceled];
     }
+}
+
+- (IBAction)desciptionChanged:(UITextField*)desciptionField {
+    [self enableBackButton];
 }
 
 #pragma mark - UITableViewDelegate methods
