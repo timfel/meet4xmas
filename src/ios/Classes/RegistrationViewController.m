@@ -85,10 +85,11 @@ NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
 
 - (IBAction)registrationDone:(id)sender
 {
-    NSArray* appointments;
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    id<Response> response = [ServiceProxy registerAccount:self.emailTextField.text withDeviceToken:appDelegate.deviceToken];
 
-    if (![ServiceProxy registerAccount: self.emailTextField.text withDeviceToken:appDelegate.deviceToken receiveAppointments:appointments]) {
+    if (!response.success) {
         UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                           message:@"Something went wrong while registering your e-mail address. Please try again later." 
                                                          delegate:nil 
@@ -99,7 +100,7 @@ NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
             [self.delegate registrationFailed];
         }
     } else if (self.delegate != nil) {
-        [self dismissModalViewControllerAnimated:YES];
+        NSArray* appointments = (NSArray*)response.payload;
         [self.delegate userRegisteredWithEmail:self.emailTextField.text gotAppointments:appointments];
     }
 }
