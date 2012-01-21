@@ -17,7 +17,7 @@
 
 #pragma mark Appointment
 + (BOOL)createAppointment: (AppointmentId) appointmentId
-                 WithUser:(UserId)userId
+                 withUser:(UserId)userId
                travelType:(TravelType)travelType
                 location:(id<Location>)location
                  invitees:(NSArray*)invitees
