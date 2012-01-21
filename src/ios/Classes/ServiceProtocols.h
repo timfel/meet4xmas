@@ -33,7 +33,7 @@ typedef enum {
 } NotificationServiceType;
 
 typedef NSString* UserId;
-typedef int AppointmentId;
+typedef NSNumber* AppointmentId;
 
 OBJC_EXPORT NSString* const kParticipantClassName;
 @protocol Participant
@@ -56,7 +56,7 @@ OBJC_EXPORT NSString* const kLocationClassName;
 OBJC_EXPORT NSString* const kAppointmentClassName;
 @protocol Appointment 
 
-@property(nonatomic) AppointmentId identifier;
+@property(strong, nonatomic) AppointmentId identifier;
 @property(strong, nonatomic) UserId creator;
 @property(nonatomic) LocationType locationType;
 @property(strong, nonatomic) id<Location> location;
