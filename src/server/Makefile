@@ -42,5 +42,4 @@ clean:
 
 
 irb:
-	jruby --1.9 -S irb
-
+	jruby --1.9 -S irb -r./interactive_client.rb
