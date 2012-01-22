@@ -1,5 +1,6 @@
 # ruby test script using the hessian client
-# You get the best effect if you require this file in irb.
+# You get the best effect if you require this file in irb, e.g.
+#   $ jruby --1.9 -S irb -r './interactive_client'
 
 # load some general server API information
 require File.expand_path('../lib/server/api', __FILE__)
