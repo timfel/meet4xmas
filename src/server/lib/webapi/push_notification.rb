@@ -62,8 +62,8 @@ module Meet4Xmas
       def send
         # sort devices by notification service type
         services = @recipients.each do |recipient|
-          recipient.notification_services.each do |ns|
-            build_notification_args(ns)
+          recipient.devices.each do |device|
+            build_notification_args(device)
           end
         end
         # send notifications of one type in batches
@@ -78,12 +78,12 @@ module Meet4Xmas
         puts e.backtrace
       end
 
-      def build_notification_args(ns)
-        service_name = SERVICE_TYPE_MAP[ns.service_type]
-        adjusted_payload = adjust_payload(service_name).call(ns, @payloads[service_name])
-        @notification_args[service_name] << [ns.device_id, adjusted_payload]
+      def build_notification_args(device)
+        service_name = SERVICE_TYPE_MAP[device.notification_service_type]
+        adjusted_payload = adjust_payload(service_name).call(device, @payloads[service_name])
+        @notification_args[service_name] << [device.device_id, adjusted_payload]
       rescue => e
-        puts "Error in PushNotification.build_notification_args(#{ns}) - #{e}"
+        puts "Error in PushNotification.build_notification_args(#{device}) - #{e}"
         puts e.backtrace
       end
 
