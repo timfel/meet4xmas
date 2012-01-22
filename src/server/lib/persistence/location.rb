@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'dm-core'
+require 'csv'
 require File.join File.dirname(__FILE__), '..', 'geo'
 
 module Meet4Xmas
@@ -34,7 +35,6 @@ module Persistence
     end
 
     def self.from_type(type)
-        require 'csv'
         case type
         when LocationType::ChristmasMarket then
             csv_filename = File.join(File.dirname(__FILE__),'..','..','OpenData','weihnachtsmaerkte_geo.csv')
