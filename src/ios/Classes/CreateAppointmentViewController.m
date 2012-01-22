@@ -86,6 +86,11 @@ typedef enum {
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(enableEditing)
+                                                 name:kLocationSetNotification
+                                               object:nil];
+    
     [self.inviteeTableView setEditing:YES animated:NO];
 }
 
@@ -114,7 +119,8 @@ typedef enum {
 
 - (void)enableBackButton
 {
-    if (self.descriptionTextField.text == nil || self.invitees.count == 0) {
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (self.descriptionTextField.text == nil || self.invitees.count == 0 || appDelegate.currentLocation == nil) {
         self.navigationItem.rightBarButtonItem.enabled = NO;
     } else {
         self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -125,12 +131,19 @@ typedef enum {
 
 - (void)done:(id)sender
 {
-    UserId userId = [(AppDelegate*)[[UIApplication sharedApplication] delegate] currentUser];
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    UserId userId = appDelegate.currentUser;
     TravelType travelType = [self.travelType selectedSegmentIndex];
     CWValueObject<Location>* location = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
-    //TODO: Stub
+#if TARGET_IPHONE_SIMULATOR
+    // Stub
     location.latitude = [NSNumber numberWithDouble:52.393957];
     location.longitude = [NSNumber numberWithDouble:13.132473];
+#else
+    location.latitude = [NSNumber numberWithDouble: appDelegate.currentLocation.coordinate.latitude];
+    location.longitude = [NSNumber numberWithDouble: appDelegate.currentLocation.coordinate.longitude];
+#endif
     LocationType locationType = WEIHNACHTSMARKT;
     NSString* userMessage = self.descriptionTextField.text;
     

@@ -14,6 +14,7 @@
 		016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */; };
 		016AFC1414C8743A00E5E340 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016AFC1214C8743A00E5E340 /* AddressBook.framework */; };
 		016AFC1514C8743A00E5E340 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016AFC1314C8743A00E5E340 /* AddressBookUI.framework */; };
+		01976B0714CC4C65000DCDCF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01976B0614CC4C65000DCDCF /* CoreLocation.framework */; };
 		01A47CEC1490FAF8007E1DFC /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */; };
 		01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */; };
 		01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegistrationView_iPhone.xib */; };
@@ -73,6 +74,7 @@
 		016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInviteeViewController.m; sourceTree = "<group>"; };
 		016AFC1214C8743A00E5E340 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		016AFC1314C8743A00E5E340 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		01976B0614CC4C65000DCDCF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		01A47CE91490FAF8007E1DFC /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
 		01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01976B0714CC4C65000DCDCF /* CoreLocation.framework in Frameworks */,
 				016AFC1414C8743A00E5E340 /* AddressBook.framework in Frameworks */,
 				016AFC1514C8743A00E5E340 /* AddressBookUI.framework in Frameworks */,
 				01A47D0914911C36007E1DFC /* libStaticHessianKit.a in Frameworks */,
@@ -178,6 +181,7 @@
 		01CE307A1490F05F00548992 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01976B0614CC4C65000DCDCF /* CoreLocation.framework */,
 				016AFC1214C8743A00E5E340 /* AddressBook.framework */,
 				016AFC1314C8743A00E5E340 /* AddressBookUI.framework */,
 				01CE307B1490F05F00548992 /* UIKit.framework */,
