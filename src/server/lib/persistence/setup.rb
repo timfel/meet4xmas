@@ -7,18 +7,23 @@ require 'dm-validations'
 require File.expand_path('../user', __FILE__)
 require File.expand_path('../appointment', __FILE__)
 require File.expand_path('../location', __FILE__)
+require File.expand_path('../notification_service', __FILE__)
 
-# not a real model, but required to operate correctly
+# not real models, but required to operate correctly
 require File.expand_path('../enums', __FILE__)
+require File.expand_path('../java_mapper', __FILE__)
 
+require File.join File.dirname(__FILE__), '..', 'webapi', 'setup'
 
 # debugging options
-DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_LOGGING
+DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_DB_LOGGING
 
 # open the database
 module Meet4Xmas
 module Persistence
-  DB_FILE ||= 'sqlite3://' + File.expand_path('../meet4xmas.sqlite', __FILE__)
+  CONFIG_FILE = File.expand_path("../../../config/database.yml", __FILE__)
+  CONFIG = File.exist?(CONFIG_FILE) ? YAML.load_file(CONFIG_FILE) : {}
+  DB_FILE ||= (CONFIG["DB_FILE"] || 'sqlite3://' + File.expand_path('../meet4xmas.sqlite', __FILE__))
   REPOSITORY_NAME = :default
 
   def self.repository
@@ -30,7 +35,7 @@ module Persistence
   end
 
   def self.transient_transaction(&block)
-  	transaction = self.repository.transaction
+    transaction = self.repository.transaction
     begin
       transaction.begin
       rval = nil

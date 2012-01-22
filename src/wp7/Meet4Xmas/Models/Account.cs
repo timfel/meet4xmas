@@ -3,7 +3,7 @@ using Meet4Xmas;
 
 namespace org.meet4xmas.wire
 {
-    public class Account : Participant
+    public partial class Account : Participant
     {
         const string ServiceCallCreate = "registerAccount";
         const string ServiceCallDelete = "deleteAccount";
@@ -37,9 +37,16 @@ namespace org.meet4xmas.wire
                     } else {
                         Account a = new Account();
                         a.userId = userId;
+                        a.OpenNotificationChannel();
                         callback(a);
                     }
-                }, userId);
+                }, userId, null);
+        }
+
+        // Should be called whenever this account is loaded from cold storage
+        public void Loaded()
+        {
+            OpenNotificationChannel();
         }
     }
 }

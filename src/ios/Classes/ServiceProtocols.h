@@ -26,8 +26,14 @@ typedef enum {
     DECLINED
 } ParticipationStatus;
 
+typedef enum {
+    APNS, //Apple
+    MPNS, //Microsoft
+    C2DM  //Google
+} NotificationServiceType;
+
 typedef NSString* UserId;
-typedef int AppointmentId;
+typedef NSNumber* AppointmentId;
 
 OBJC_EXPORT NSString* const kParticipantClassName;
 @protocol Participant
@@ -40,8 +46,8 @@ OBJC_EXPORT NSString* const kParticipantClassName;
 OBJC_EXPORT NSString* const kLocationClassName;
 @protocol Location
 
-@property(nonatomic) double latitude;
-@property(nonatomic) double longitude;
+@property(strong, nonatomic) NSNumber* /*double*/ latitude;
+@property(strong, nonatomic) NSNumber* /*double*/ longitude;
 @property(strong, nonatomic) NSString* title;
 @property(strong, nonatomic) NSString* desciption;
 
@@ -50,7 +56,7 @@ OBJC_EXPORT NSString* const kLocationClassName;
 OBJC_EXPORT NSString* const kAppointmentClassName;
 @protocol Appointment 
 
-@property(nonatomic) AppointmentId identifier;
+@property(strong, nonatomic) AppointmentId identifier;
 @property(strong, nonatomic) UserId creator;
 @property(nonatomic) LocationType locationType;
 @property(strong, nonatomic) id<Location> location;
@@ -70,11 +76,18 @@ OBJC_EXPORT NSString* const kTravelPlanClassName;
 OBJC_EXPORT NSString* const kErrorInfoClassName;
 @protocol ErrorInfo
 
-@property(nonatomic) int code;
+@property(strong, nonatomic) NSNumber* code;
 @property(strong, nonatomic) NSString* message;
 
 @end
 
+OBJC_EXPORT NSString* const kNotificationServiceInfoClassName;
+@protocol NotificationServiceInfo
+
+@property(nonatomic) NotificationServiceType serviceType;
+@property(strong, nonatomic) NSData* deviceId;
+
+@end
 
 OBJC_EXPORT NSString* const kResponseClassName;
 @protocol Response
@@ -88,7 +101,7 @@ OBJC_EXPORT NSString* const kResponseClassName;
 
 @protocol Service
 
-- (id<Response>)registerAccount:(UserId)userId;
+- (id<Response>)registerAccount:(UserId)userId :(id<NotificationServiceInfo>)notificationServiceInfo;
 - (id<Response>)deleteAccount:(UserId)userId;
 
 - (id<Response>)createAppointment:(UserId)userId :(TravelType)travelType :(id<Location>)location :(NSArray*)invitees :(LocationType)locationType :(NSString*)userMessage;

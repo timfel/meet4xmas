@@ -51,7 +51,10 @@
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Interop" />
-    <Reference Include="SilverHessian, Version=1.3.4367.30573, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SilverHessian, Version=1.3.4367.30573, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\SilverHessian.dll</HintPath>
+    </Reference>
     <Reference Include="System.Device" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -75,6 +78,8 @@
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\NotificationServiceInfo.cs" />
+    <Compile Include="org.meet4xmas.wire\NotificationServiceInfo.cs" />
     <Compile Include="Utils\Gps.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="Utils\PushNotifications.cs" />

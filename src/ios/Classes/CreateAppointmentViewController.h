@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 HPI. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ServiceProxy.h"
+#import "AddInviteeViewController.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @protocol CreateAppointmentViewControllerDelegate
 
@@ -16,11 +18,13 @@
 
 @end
 
-@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CreateAppointmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, AddInviteeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate>
 
 @property (nonatomic, strong) id<CreateAppointmentViewControllerDelegate> delegate;
 
-@property (nonatomic, strong) IBOutlet UITextField* descriptionTextField;
+@property (weak, nonatomic) IBOutlet UITextField* descriptionTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl* travelType;
+@property (weak, nonatomic) IBOutlet UITableView* inviteeTableView;
 
 - (CreateAppointmentViewController*)initWithDefaultNib;
 

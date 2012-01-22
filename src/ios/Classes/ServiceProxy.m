@@ -8,6 +8,7 @@
 
 #import "ServiceProxy.h"
 #import "ServiceProtocols.h"
+#import "CWValueObject.h"
 
 #import "HessianKit.h"
 
@@ -56,6 +57,7 @@
         [self.connection.translator setProtocol:@protocol(TravelPlan)   forDistantTypeName:getFullClassName(kAppointmentClassName)];
         [self.connection.translator setProtocol:@protocol(Response)     forDistantTypeName:getFullClassName(kResponseClassName)];
         [self.connection.translator setProtocol:@protocol(ErrorInfo)    forDistantTypeName:getFullClassName(kErrorInfoClassName)];
+        [self.connection.translator setProtocol:@protocol(NotificationServiceInfo) forDistantTypeName:getFullClassName(kNotificationServiceInfoClassName)];
         
         self.serviceProxy = (id<Service>)[self.connection rootProxyWithProtocol:@protocol(Service)];
     }
@@ -64,89 +66,82 @@
 
 #pragma mark Account
 
-+ (BOOL)registerAccount:(UserId)userId receiveAppointments:(NSArray*)appointments
++ (id<Response>)registerAccount:(UserId)userId withDeviceToken:(NSData *)token
 {
-    id<Response> response = [[self sharedInstance].serviceProxy registerAccount:userId];
+    id<Response> response;
+    if (token == nil) {
+        response = [[self sharedInstance].serviceProxy registerAccount:userId :nil];
+    } else {
+        CWValueObject<NotificationServiceInfo>* serviceInfo = (CWValueObject<NotificationServiceInfo>*)[CWValueObject valueObjectWithProtocol:@protocol(NotificationServiceInfo)];
+        serviceInfo.serviceType = APNS;
+        serviceInfo.deviceId = token;
+        response = [[self sharedInstance].serviceProxy registerAccount:userId :serviceInfo];
+    }
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to register account: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to register account: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    appointments = (NSArray*)response.payload;
-    return YES;
+    return response;
 }
 
-+ (BOOL)deleteAccount:(UserId)userId
++ (id<Response>)deleteAccount:(UserId)userId
 {
     id<Response> response = [[self sharedInstance].serviceProxy deleteAccount:userId];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to delete account: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to delete account: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    
-    return YES;
+    return response;
 }
 
 #pragma mark Appointment
 
-+ (BOOL)createAppointment: (AppointmentId) appointmentId 
-                 WithUser:(UserId)userId
-               travelType:(TravelType)travelType
-                 location:(id<Location>)location
-                 invitees:(NSArray *)invitees
-             locationType:(LocationType)locationType
-              userMessage:(NSString *)userMessage
++ (id<Response>)createAppointmentWithUser:(UserId)userId
+                               travelType:(TravelType)travelType
+                                 location:(id<Location>)location
+                                 invitees:(NSArray *)invitees
+                             locationType:(LocationType)locationType
+                              userMessage:(NSString *)userMessage
 {
     id<Response> response = [[self sharedInstance].serviceProxy createAppointment:userId :travelType :location :invitees :locationType :userMessage];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to create appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to create appointment: [%@]%@.", response.error.code, response.error.message);
         }
-        //TODO: What to return if creation failed?
-        return NO;
     }
-    
-    appointmentId = (AppointmentId)response.payload;
-    
-    return YES;
+    return response;
 }
 
-+ (BOOL)getAppointment:(id<Appointment>) appointment forID: (AppointmentId)appointmentId
++ (id<Response>)getAppointmentForID: (AppointmentId)appointmentId
 {
     id<Response> response =  [[self sharedInstance].serviceProxy getAppointment:appointmentId];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to get appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to get appointment: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    
-    appointment = (id<Appointment>) response.payload;
-    return YES;
+    return response;
 }
 
-+ (BOOL)finalizeAppointment:(AppointmentId)appointmentId
++ (id<Response>)finalizeAppointment:(AppointmentId)appointmentId
 {
     id<Response> response = [[self sharedInstance].serviceProxy finalizeAppointment:appointmentId];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to finalize appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to finalize appointment: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    
-    return YES;
+    return response;
 }
 
-+ (BOOL)joinAppointment:(AppointmentId)appointmentId
++ (id<Response>)joinAppointment:(AppointmentId)appointmentId
                  userId:(UserId)userId
              travelType:(TravelType)travelType
                location:(id<Location>)location
@@ -155,45 +150,38 @@
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to join appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to join appointment: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    
-    return YES;
+    return response;
 }
 
-+ (BOOL)declineAppointment:(AppointmentId)appointmentId userId:(UserId)userId
++ (id<Response>)declineAppointment:(AppointmentId)appointmentId userId:(UserId)userId
 {
     id<Response> response = [[self sharedInstance].serviceProxy declineAppointment:appointmentId :userId];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to decline appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to decline appointment: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    
-    return YES;
+    return response;
 }
 
 #pragma mark TravelPlan
 
-+ (BOOL)getTravelPlan: (id<TravelPlan>)travelplan for: (AppointmentId)appointmentId
-                     travelType:(TravelType)travelType
-                       location:(id<Location>)location
++ (id<Response>)getTravelPlanForAppointmentId: (AppointmentId)appointmentId
+                                   travelType:(TravelType)travelType
+                                     location:(id<Location>)location
 {
     id<Response> response = [[self sharedInstance].serviceProxy getTravelPlan:appointmentId :travelType :location];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to decline appointment: [%d]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to decline appointment: [%@]%@.", response.error.code, response.error.message);
         }
-        return NO;
     }
-    
-    travelplan = (id<TravelPlan>)response.payload;
-    return YES;
+    return response;
 }
 
 @end

@@ -5,24 +5,20 @@ describe 'Meet4Xmas Service' do
     before :each do
       @user_id = 'lysann.kessler@gmail.com'
     end
-    
+
     it 'succeeds if the account exists' do
-      @client.registerAccount(@user_id)
-      @client.deleteAccount(@user_id).should be_successful
+      register_account @user_id
+      delete_account(@user_id).should be_successful
     end
 
     it 'fails if the account does not exist yet' do
-      response = @client.deleteAccount(@user_id)
-      response.should_not be_successful
-      # TODO: test error code
+      delete_account(@user_id).should return_error 0 # TODO: adjust error code
     end
 
     it 'fails if the account does not exist anymore' do
-      @client.registerAccount(@user_id)
-      @client.deleteAccount(@user_id)
-      response = @client.deleteAccount(@user_id)
-      response.should_not be_successful
-      # TODO: test error code
+      register_account @user_id
+      delete_account @user_id
+      delete_account(@user_id).should return_error 0 # TODO: adjust error code
     end
   end
 end

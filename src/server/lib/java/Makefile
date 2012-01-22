@@ -8,6 +8,7 @@ service_classes= \
 	$(source_dir)/wire/ErrorInfo.$(class_ext) \
 	$(source_dir)/wire/IServiceAPI.$(class_ext) \
 	$(source_dir)/wire/Location.$(class_ext) \
+	$(source_dir)/wire/NotificationServiceInfo.$(class_ext) \
 	$(source_dir)/wire/Participant.$(class_ext) \
 	$(source_dir)/wire/Response.$(class_ext) \
 	$(source_dir)/wire/TravelPlan.$(class_ext) \

@@ -11,47 +11,65 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Notification;
 using System.Text;
 using System.Windows.Threading;
+using Meet4Xmas;
 
-namespace Meet4Xmas.Utils
+namespace org.meet4xmas.wire
 {
-    public class PushNotifications
+    public partial class Account : Participant
     {
-        public static Dispatcher dispatcher = Deployment.Current.Dispatcher;
+        private static Dispatcher dispatcher = Deployment.Current.Dispatcher;
         private const string ChannelName = App.ApplicationName + "Channel";
-        public HttpNotificationChannel Channel { get; set; }
-        public bool ChannelIsActive { get; set; }
+        private HttpNotificationChannel Channel { get; set; }
 
-        private void EstablishNotificationChannel()
+        private void OpenNotificationChannel()
         {
-            Channel = HttpNotificationChannel.Find(ChannelName);
+            FindNotificationChannel();
             if (Channel == null)
             {
                 Channel = new HttpNotificationChannel(ChannelName);
-                Channel.ChannelUriUpdated += HttpChannelChannelUriUpdated;
                 Channel.Open();
                 Channel.BindToShellToast();
-                Channel.HttpNotificationReceived += HttpChannelHttpNotificationReceived;
-                Channel.ErrorOccurred += HttpChannelErrorOccurred;
-                Channel.ShellToastNotificationReceived += HttpChannelToastNotificationReceived;
+                Channel.BindToShellTile();
             }
-            UpdateChannelIsActive();
+            Channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(HttpChannelChannelUriUpdated);
+            Channel.HttpNotificationReceived += new EventHandler<HttpNotificationEventArgs>(HttpChannelHttpNotificationReceived);
+            Channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(HttpChannelErrorOccurred);
+            Channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(HttpChannelToastNotificationReceived);
+            Channel.ConnectionStatusChanged += new EventHandler<NotificationChannelConnectionEventArgs>(HttpChannelConnectionStatusChanged);
+            UpdateChannelURI();
         }
 
-        public void HttpChannelHttpNotificationReceived(object sender, HttpNotificationEventArgs e)
+        private void FindNotificationChannel()
+        {
+            Channel = HttpNotificationChannel.Find(ChannelName);
+        }
+
+        private void CloseNotificationChannel()
+        {
+            FindNotificationChannel();
+            if (Channel != null) {
+                Channel.Close();
+            }
+        }
+
+        private void ReopenNotificationChannel()
+        {
+            CloseNotificationChannel();
+            OpenNotificationChannel();
+        }
+
+        private void HttpChannelHttpNotificationReceived(object sender, HttpNotificationEventArgs e)
         {
             // TODO: e.ToString();
         }
 
-        public void HttpChannelErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
+        private void HttpChannelErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
         {
             // TODO: e.ToString();
-            Channel.Close();
-            Channel = null;
-            UpdateChannelIsActive();
-            EstablishNotificationChannel();
+            ReopenNotificationChannel(); // Often, MS advice is to reopen the channel
         }
 
-        public void HttpChannelToastNotificationReceived(object sender, NotificationEventArgs e)
+        private void HttpChannelToastNotificationReceived(object sender, NotificationEventArgs e)
         {
             var sb = new StringBuilder();
             foreach (var kvp in e.Collection)
@@ -61,16 +79,39 @@ namespace Meet4Xmas.Utils
             dispatcher.BeginInvoke(() => MessageBox.Show(sb.ToString()));
         }
 
-        void HttpChannelChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
+        private void HttpChannelChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
         {
-            UpdateChannelIsActive();
+            UpdateChannelURI();
         }
 
-        void UpdateChannelIsActive()
+        private void HttpChannelConnectionStatusChanged(object sender, NotificationChannelConnectionEventArgs e)
         {
-            ChannelIsActive = Channel != null &&
+            if (Channel.ConnectionStatus == ChannelConnectionStatus.Disconnected)
+            {
+                ReopenNotificationChannel();
+            }
+        }
+
+        private bool ChannelIsActive()
+        {
+            return Channel != null &&
                 Channel.ChannelUri != null &&
                 !string.IsNullOrEmpty(Channel.ChannelUri.OriginalString);
+        }
+
+        private void UpdateChannelURI()
+        {
+            if (ChannelIsActive()) {
+                dispatcher.BeginInvoke(() =>
+                    ServiceCall.Invoke(ServiceCallCreate,
+                        (Response result) =>
+                        {
+                            if (!result.success)
+                            {
+                                dispatcher.BeginInvoke(() => MessageBox.Show("Error establishing a channel for notifications"));
+                            }
+                        }, userId, new NotificationServiceInfo(Channel.ChannelUri)));
+            }
         }
     }
 }

@@ -10,13 +10,13 @@ java_libs_service:
 
 
 run_server: java_libs_service
-	ruby lib/server.rb
+	jruby --debug --1.9 lib/server.rb
 
 run: run_server
 
 
 run_ruby_interactive_test_client:
-	irb -r 'interactive_client'
+	jruby --1.9 -S irb -r 'interactive_client'
 
 run_client: run_ruby_interactive_test_client
 
@@ -25,11 +25,22 @@ run_java_test_client:
 	cd $(java_lib_dir) && make run_test
 
 
-external_spec:
-	rake spec
+external_spec: java_libs_service
+	jruby --1.9 -S rake spec
 
 spec: external_spec
 
 
+external_coverage: java_libs_service
+	jruby --1.9 -S rake coverage
+
+coverage: external_coverage
+
+
 clean:
 	cd $(java_lib_dir) && make clean
+
+
+irb:
+	jruby --1.9 -S irb
+

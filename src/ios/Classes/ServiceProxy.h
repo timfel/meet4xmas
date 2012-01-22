@@ -11,35 +11,34 @@
 @interface ServiceProxy : NSObject
 
 #pragma mark Account
-+ (BOOL)registerAccount:(UserId)userId receiveAppointments:(NSArray*)appointments;
++ (id<Response>)registerAccount:(UserId)userId withDeviceToken:(NSData*)token;
 
-+ (BOOL)deleteAccount:(UserId)userId;
++ (id<Response>)deleteAccount:(UserId)userId;
 
 #pragma mark Appointment
-+ (BOOL)createAppointment: (AppointmentId) appointmentId
-                 WithUser:(UserId)userId
-               travelType:(TravelType)travelType
-                location:(id<Location>)location
-                 invitees:(NSArray*)invitees
-             locationType:(LocationType)locationType
-              userMessage:(NSString*)userMessage;
++ (id<Response>)createAppointmentWithUser:(UserId)userId
+                               travelType:(TravelType)travelType
+                                 location:(id<Location>)location
+                                 invitees:(NSArray *)invitees
+                             locationType:(LocationType)locationType
+                              userMessage:(NSString *)userMessage;
 
-+ (BOOL)getAppointment:(id<Appointment>) appointment forID: (AppointmentId)appointmentId;
++ (id<Response>)getAppointmentForID: (AppointmentId)appointmentId;
 
-+ (BOOL)finalizeAppointment:(AppointmentId)appointmentId;
++ (id<Response>)finalizeAppointment:(AppointmentId)appointmentId;
 
-+ (BOOL)joinAppointment:(AppointmentId)appointmentId
++ (id<Response>)joinAppointment:(AppointmentId)appointmentId
                  userId:(UserId)userId
              travelType:(TravelType)travelType
                location:(id<Location>)location;
 
-+ (BOOL)declineAppointment:(AppointmentId)appointmentId
++ (id<Response>)declineAppointment:(AppointmentId)appointmentId
                     userId:(UserId)userId;
 
 #pragma mark TravelPlan
-+ (BOOL)getTravelPlan: (id<TravelPlan>)travelplan for:(AppointmentId)appointmentId
-                     travelType:(TravelType)travelType
-                       location:(id<Location>)location;
++ (id<Response>)getTravelPlanForAppointmentId: (AppointmentId)appointmentId
+                                   travelType:(TravelType)travelType
+                                     location:(id<Location>)location;
 
 @end
 
