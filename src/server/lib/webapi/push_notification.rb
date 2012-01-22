@@ -243,11 +243,11 @@ module Meet4Xmas
     class InvitationPushNotification < PushNotification
       def initialize(appointment)
         @appointment = appointment
-        short_message = "#{@appointment.creator.id} sent you an invitation"
+        short_message = "Invitation from #{@appointment.creator.id}"
         super({
           :payloads => {
             :apns => {
-              :alert => @appointment.user_message ? "#{@appointment.user_message}: #{short_message}" : short_message
+              :alert => @appointment.user_message ? @appointment.user_message : short_message
             },
             :mpns => {
               :type => :toast,
