@@ -41,6 +41,7 @@ end
 end
 
 if __FILE__ == $0
+  puts "Using #{RUBY_PLATFORM}-#{RUBY_VERSION}"
   port = ARGV.first.to_i.to_s == ARGV.first.to_s ? ARGV.first.to_i : nil
   Meet4Xmas::Server::run port
   puts "Server living at port #{port} - api version: #{Meet4Xmas::Server::API::VERSION}"

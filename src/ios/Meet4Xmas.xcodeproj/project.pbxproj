@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0167975C14CC3306001979E6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975B14CC3306001979E6 /* icon.png */; };
+		0167975E14CC3310001979E6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975D14CC3310001979E6 /* icon@2x.png */; };
+		0167976014CC331C001979E6 /* icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975F14CC331B001979E6 /* icon~ipad.png */; };
 		016AFC0E14C8664400E5E340 /* AddInviteeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016AFC0C14C8664400E5E340 /* AddInviteeView_iPhone.xib */; };
 		016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */; };
 		016AFC1414C8743A00E5E340 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016AFC1214C8743A00E5E340 /* AddressBook.framework */; };
@@ -62,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0167975B14CC3306001979E6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		0167975D14CC3310001979E6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		0167975F14CC331B001979E6 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon~ipad.png"; sourceTree = "<group>"; };
 		016AFC0D14C8664400E5E340 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddInviteeView_iPhone.xib; sourceTree = "<group>"; };
 		016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInviteeViewController.h; sourceTree = "<group>"; };
 		016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInviteeViewController.m; sourceTree = "<group>"; };
@@ -205,6 +211,9 @@
 		01CE30B21490F1D800548992 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0167975F14CC331B001979E6 /* icon~ipad.png */,
+				0167975D14CC3310001979E6 /* icon@2x.png */,
+				0167975B14CC3306001979E6 /* icon.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -312,6 +321,9 @@
 				01F3E58D14A38861005813E4 /* RootView_iPhone.xib in Resources */,
 				01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */,
 				016AFC0E14C8664400E5E340 /* AddInviteeView_iPhone.xib in Resources */,
+				0167975C14CC3306001979E6 /* icon.png in Resources */,
+				0167975E14CC3310001979E6 /* icon@2x.png in Resources */,
+				0167976014CC331C001979E6 /* icon~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
