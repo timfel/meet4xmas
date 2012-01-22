@@ -172,7 +172,9 @@ module Meet4Xmas
       # (instead of stopping if a single notification cannot be sent).
       #
       def send_notifications(service_name, notifications)
+        return if notifications.empty?
         puts "sending #{service_name} notifications: #{notifications}"
+
         case service_name
         when :apns
           self.class.configure_apns
