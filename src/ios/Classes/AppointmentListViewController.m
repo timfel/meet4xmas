@@ -67,10 +67,10 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 {
     [super viewDidAppear:animated];
     
-//    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//    if (appDelegate.currentUser == nil) {
-//        [self presentRegistrationView];
-//    }
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.currentUser == nil) {
+        [self presentRegistrationView];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
