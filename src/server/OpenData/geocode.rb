@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'csv'
-require File.join File.dirname(__FILE__), '..', 'lib', 'geo'
+require File.join File.dirname(__FILE__), '..', 'lib', 'webapi', 'google_geocoding'
 
 def geocode_file(input_file, output_file)
 	CSV.open(output_file, 'wb') do |output_csv|
@@ -10,7 +10,7 @@ def geocode_file(input_file, output_file)
 				row['Longitude'] = 'Longitude'
 				output_csv << row
 			else
-				coords = Meet4Xmas::Geo.get_coords(row['Street'], row['City'])
+				coords = Meet4Xmas::WebAPI::GoogleGeocoding.get_coords(row['Street'], row['City'])
 				if coords != nil
 					row['Latitude'] = coords['lat']
 					row['Longitude'] = coords['lng']
