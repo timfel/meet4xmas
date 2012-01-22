@@ -31,14 +31,23 @@ module Meet4Xmas
       # The optional options hash could be composed as follows:
       #
       # options = {
-      #   :payloads => {
-      #     :apns => {
-      #       :alert => "alert",
+      #   :payloads => { # all service types are optional
+      #
+      #     :apns => { # one notification; all keys are optional
+      #       :alert => "alert"|{:body => "alert", ...},
       #       :badge => 1234,
       #       :sound => "default",
       #       :other => { :custom => :content }
       #     },
-      #     :mpns => {
+      #
+      #     :c2dm => {
+      #       # TODO
+      #     },
+      #
+      #     :mpns => { # one notification; all keys are optional, except:
+      #                # - should set at least one of title or message for :toast
+      #                # - should set image for :tile
+      #                # - should set message for :raw
       #       :type => :toast|:tile|:raw,       # default: :raw
       #       :delay => 0|:delay450|:delay900,  # default: 0
       #       :title => "title",                # for :toast and :tile
@@ -51,10 +60,34 @@ module Meet4Xmas
       #       :back_title => "back title",      # for :tile
       #       :back_content => "back content"   # for :tile
       #     },
-      #     :c2dm => {
-      #       # TODO
+      #     # or:
+      #     :mpns => { # specifying more than one type sends more than one
+      #                # notification per device
+      #       :toast => {
+      #         :title => "title",
+      #         :message => "message",
+      #         :param => "param",
+      #         :delay => 0|:delay450|:delay900, # default: 0
+      #       },
+      #       :tile => {
+      #         :title => "title",
+      #         :image => "image",
+      #         :count => 123,
+      #         :title => "title",
+      #         :back_image => "back image",
+      #         :back_title => "back title",
+      #         :back_content => "back content",
+      #         :delay => 0|:delay450|:delay900, # default: 0
+      #       },
+      #       :raw => {
+      #         :message => "raw payload",
+      #         :delay => 0|:delay450|:delay900, # default: 0
+      #       },
+      #       # option to set default delay for all notification types:
+      #       :delay => 0|:delay450|:delay900
       #     }
       #   },
+      #
       #   :recipients => [] # Meet4Xmas::Persistence::Users
       # }
       #
@@ -65,7 +98,7 @@ module Meet4Xmas
       # to all their registered devices.
       #
       def initialize(options = {})
-        @payloads = options.delete(:payloads) || {:apns => {}, :mpns => {}, :c2dm => {}}
+        @payloads = options.delete(:payloads) || {}
         @recipients = options.delete(:recipients) || []
         @notification_args = {:apns => [], :mpns => [], :c2dm => []}
         
@@ -89,7 +122,8 @@ module Meet4Xmas
       #   It should be a Proc that takes two arguments (the device and the standard payload).
       #   The default implementation is:
       #     notification.adjust_payload :apns do |device, payload| payload end
-      # @returns the new value of the adjust_payload routine (or the existing one if none was given).
+      # @returns the new value of the adjust_payload routine (or the existing one if
+      #   none was given).
       #
       def adjust_payload(service_name, &block)
         @adjust_payload[service_name] = block if block_given?
@@ -99,7 +133,7 @@ module Meet4Xmas
       #
       # Send the notification to all devices of all recipients.
       #
-      # See also: #build_notification_args, #build_sendable_notification, #send_notifications
+      # See also: #build_notification_args, #build_sendable_notifications, #send_notifications
       #
       def send
         # sort devices by notification service type
@@ -112,7 +146,9 @@ module Meet4Xmas
         @notification_args.each do |service_name, notifications|
           self.send_notifications(
             service_name,
-            notifications.compact.map{|n|self.build_sendable_notification(service_name, *n)}.compact
+            notifications.compact.map do |notification|
+              self.build_sendable_notifications(service_name, *notification)
+            end.flatten(1).compact
           )
         end
       rescue => e
@@ -127,35 +163,56 @@ module Meet4Xmas
       #
       def build_notification_args(device)
         service_name = SERVICE_TYPE_MAP[device.notification_service_type]
-        adjusted_payload = adjust_payload(service_name).call(device, @payloads[service_name])
-        @notification_args[service_name] << [device.device_id, adjusted_payload]
+        payload = @payloads[service_name]
+        payload = adjust_payload(service_name).call(device, payload) unless payload == nil
+        @notification_args[service_name] << [device.device_id, payload] unless payload == nil
       rescue => e
         puts "Error in PushNotification.build_notification_args(#{device}) - #{e}"
         puts e.backtrace
       end
 
       #
-      # Map from the payload Hash--which is independent of the notification
-      # service client implementation--to a representation which can be passed to the
-      # client.
+      # Map from the payload Hash for a single service type to a representation which
+      # can be passed to the client. I.e. the payload Hash (which is independent of
+      # the service client implementation) is mapped to a (implementation-specific)
+      # argument for the service client.
+      #
+      # It might also create multiple notifications per device, i.e. this method
+      # returns a list of notifications.
       #
       # See also: #send_notifications
       #
-      def build_sendable_notification(service_name, device_id, payload)
+      def build_sendable_notifications(service_name, device_id, payload)
         case service_name
         when :apns
-          APNS::Notification.new(device_id, payload)
+          [APNS::Notification.new(device_id, payload)]
         when :mpns
-          type = payload.delete(:type) || :raw
-          delay = payload.delete :delay
-          [device_id, payload, type, delay]
+          # if type is given, only one notification is built
+          type = payload.delete :type
+          if type
+            delay = payload.delete :delay
+            [[device_id, payload, type, delay]]
+          else
+            # can send multiple notification types
+            [:toast, :tile, :raw].map do |type|
+              type_payload = payload.delete type
+              if type_payload
+                # type-specific delay overrides global delay
+                delay = type_payload.key?(:delay) ? type_payload.delete(:delay) : payload[:delay]
+                [device_id, type_payload, type, delay]
+              else
+                nil
+              end
+            end.compact
+          end
         when :c2dm
           # TODO
+          []
         else
           puts "Error: unsupported notification service type: #{service_name}"
         end
       rescue => e
-        puts "Error in PushNotification.build_sendable_notification(#{service_name}, #{device_id}, #{payload}) - #{e}"
+        puts "Error in PushNotification.build_sendable_notifications(#{service_name}, #{device_id}, #{payload}) - #{e}"
         puts e.backtrace
       end
 
