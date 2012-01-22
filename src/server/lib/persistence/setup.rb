@@ -3,16 +3,10 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
 
-# load models
-require File.expand_path('../user', __FILE__)
-require File.expand_path('../appointment', __FILE__)
-require File.expand_path('../location', __FILE__)
-require File.expand_path('../notification_service', __FILE__)
+# require all models
+Dir.glob(File.dirname(__FILE__) + '/*.rb', &method(:require))
 
-# not real models, but required to operate correctly
-require File.expand_path('../enums', __FILE__)
-require File.expand_path('../java_mapper', __FILE__)
-
+# require the WebAPI
 require File.join File.dirname(__FILE__), '..', 'webapi', 'setup'
 
 # debugging options
