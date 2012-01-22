@@ -39,3 +39,8 @@ coverage: external_coverage
 
 clean:
 	cd $(java_lib_dir) && make clean
+
+
+irb:
+	jruby --1.9 -S irb
+

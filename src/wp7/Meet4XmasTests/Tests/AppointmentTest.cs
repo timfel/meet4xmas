@@ -10,7 +10,7 @@ using Meet4Xmas;
 namespace Meet4XmasTests.Tests
 {
     [TestClass]
-    public class TestClass1 : SilverlightTest
+    public class AppointmentTest : SilverlightTest
     {
         [TestInitialize]
         public void setUp()
@@ -25,51 +25,6 @@ namespace Meet4XmasTests.Tests
         public string getNewName()
         {
             return String.Format("Tim{0}@example.com", DateTime.Now.Ticks.ToString());
-        }
-
-        [TestMethod]
-        [Asynchronous]
-        public void TestAccCreate()
-        {
-            object result = null;
-            string name = getNewName();
-            EnqueueCallback(() => Account.Create(name,
-                                                (Account ac) => result = ac,
-                                                (ErrorInfo ei) => result = ei));
-            EnqueueConditional(() => result != null);
-            EnqueueCallback(() =>
-            {
-                Assert.IsInstanceOfType(result, typeof(Account));
-                Assert.AreEqual(((Account)result).userId, name);
-            });
-            EnqueueTestComplete();
-        }
-
-        [TestMethod]
-        [Asynchronous]
-        public void TestAccDelete()
-        {
-            string name = getNewName();
-            Account tim = null;
-            ErrorInfo error = null;
-            EnqueueCallback(() => Account.Create(name,
-                                                (Account ac) => tim = ac,
-                                                (ErrorInfo ei) => error = ei));
-            EnqueueConditional(() => tim != null || error != null);
-            EnqueueCallback(() =>
-            {
-                Assert.IsNotNull(tim);
-                assertNoError(error);
-                tim.Delete(() => tim = null,
-                           (ErrorInfo ei) => error = ei);
-            });
-            EnqueueConditional(() => tim == null || error != null);
-            EnqueueCallback(() =>
-            {
-                assertNoError(error);
-                Assert.IsNull(tim);
-            });
-            EnqueueTestComplete();
         }
 
         [TestMethod]

@@ -21,7 +21,9 @@ DataMapper::Logger.new(STDERR, :debug) unless $MEET4XMAS_NO_DB_LOGGING
 # open the database
 module Meet4Xmas
 module Persistence
-  DB_FILE ||= 'sqlite3://' + File.expand_path('../meet4xmas.sqlite', __FILE__)
+  CONFIG_FILE = File.expand_path("../../../config/database.yml", __FILE__)
+  CONFIG = File.exist?(CONFIG_FILE) ? YAML.load_file(CONFIG_FILE) : {}
+  DB_FILE ||= (CONFIG["DB_FILE"] || 'sqlite3://' + File.expand_path('../meet4xmas.sqlite', __FILE__))
   REPOSITORY_NAME = :default
 
   def self.repository
@@ -33,7 +35,7 @@ module Persistence
   end
 
   def self.transient_transaction(&block)
-  	transaction = self.repository.transaction
+    transaction = self.repository.transaction
     begin
       transaction.begin
       rval = nil

@@ -37,10 +37,13 @@
             </Grid.RowDefinitions>
             <!-- Progress Bar -->
             <ProgressBar x:Name="SignUpProgressBar" IsIndeterminate="True" Grid.Row="1" Visibility="Collapsed"></ProgressBar>
-            <TextBox Name="SignUpTextInput" Text="" IsEnabled="True" Grid.ColumnSpan="1" Grid.Row="2" AcceptsReturn="True" />
+            <TextBox Name="SignUpTextInput" Text="" InputScope="EmailUserName" IsEnabled="True" Grid.Row="2" AcceptsReturn="True" />
             <Button Content="Sign me up!" Name="SignUpButton" Click="SignUpButtonClick" Grid.Row="3" DataContext="{Binding}" />
             <TextBlock Name="textBlock1" Text="You have to create an account first. Choose a username and click &quot;Sign me up!&quot;" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" />
             <TextBlock Name="SignUpErrorInfo" Text="" VerticalAlignment="Top" TextWrapping="Wrap" TextAlignment="Left" Grid.ColumnSpan="1" Grid.Row="4" FontWeight="Bold" FontStretch="Expanded" />
+            <Button Grid.Row="2" Height="66" HorizontalAlignment="Right" Name="button1" VerticalAlignment="Top" Width="83" Click="button1_Click" BorderThickness="0">
+                <Image Source="Images\appbar.add.rest.png" Width="40" Height="40"/>
+            </Button>
         </Grid>
     </Grid>
  

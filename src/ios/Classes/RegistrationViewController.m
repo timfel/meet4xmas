@@ -54,6 +54,12 @@ NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
 
 #pragma mark - View lifecycle
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.emailTextField becomeFirstResponder];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

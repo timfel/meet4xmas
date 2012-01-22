@@ -31,17 +31,15 @@ describe 'Meet4Xmas Service' do
       before :each do
         @notification_service_info_apns = {
           'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::APNS,
-          # "38dede2764b83e4827600c970c154543ea02e5c6d0b86ab7cf569920c9e63f52".scan(/../).map{|b|b.to_i(16)}.pack('C*')
-          'deviceId' => Hessian::Binary.new("8\336\336'd\270>H'`\f\227\f\025EC\352\002\345\306\320\270j\267\317V\231 \311\346?R")
+          'deviceId' => Hessian::Binary.new("38dede2764b83e4827600c970c154543ea02e5c6d0b86ab7cf569920c9e63f52".scan(/../).map{|b|b.to_i(16)}.pack('C*'))
         }
         @notification_service_info_apns2 = {
           'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::APNS,
-          # "855ab705fb240d8ba34b9c74831670c461592ef96b7f4ab17d521df33d29551f".scan(/../).map{|b|b.to_i(16)}.pack('C*')
-          'deviceId' => Hessian::Binary.new("\205Z\267\005\373$\r\213\243K\234t\203\026p\304aY.\371k\177J\261}R\035\363=)U\037")
+          'deviceId' => Hessian::Binary.new("855ab705fb240d8ba34b9c74831670c461592ef96b7f4ab17d521df33d29551f".scan(/../).map{|b|b.to_i(16)}.pack('C*'))
         }
         @notification_service_info_mpns = {
           'serviceType' => Meet4Xmas::Persistence::NotificationServiceType::MPNS,
-          'deviceId' => Hessian::Binary.new("http://example/channel/uri".unpack('U*'))
+          'deviceId' => Hessian::Binary.new("http://db3.notify.live.net/throttledthirdparty/01.00/AAHgDEhLQN9-Tq9OIXlhODkrAgAAAAADQAAAAAQUZm52OkJCMjg1QTg1QkZDMkUxREQ".unpack('U*'))
         }
       end
 
