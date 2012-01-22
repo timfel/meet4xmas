@@ -167,6 +167,10 @@ typedef enum {
     [self enableBackButton];
 }
 
+- (IBAction)descriptionEditingEnded:(UITextField*)desciptionField {
+    [desciptionField resignFirstResponder];
+}
+
 #pragma mark - UITableViewDelegate methods
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
