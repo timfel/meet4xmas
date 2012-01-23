@@ -7,4 +7,8 @@
     <string name="sign_up_info">You have to create an account first. Choose a user name and click "Sign me up!"</string>
     <string name="app_name">Meet</string>
 
+    <string name="menu_title">Meet4xmas</string>
+    <string name="menu_create_appointment">Create Appointment</string>
+    <string name="menu_logout">Logout</string>
+
 </resources>
