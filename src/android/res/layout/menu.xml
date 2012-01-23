@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+    <TextView
+        android:padding="20sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:text="@string/menu_title" />
+
+    <Button
+        android:id="@+id/menuCreateAppointment"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_create_appointment"/>
+
+    <Button
+        android:id="@+id/menuLogout"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_logout"/>
+</LinearLayout>
