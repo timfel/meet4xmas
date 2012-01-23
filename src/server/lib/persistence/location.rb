@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'dm-core'
 require 'csv'
-require File.join File.dirname(__FILE__), '..', 'geo'
 
 module Meet4Xmas
 module Persistence
@@ -26,7 +25,7 @@ module Persistence
     end
 
     def self.from_address(*address)
-        result = Geo.geocode *address
+        result = Meet4Xmas::WebAPI::GoogleGeocoding.geocode *address
         return nil unless result and result.size > 0
         self.new :title => address.first || '',
                  :description => result[0]['formatted_address'] || '',

@@ -2,7 +2,8 @@ require 'json'
 require 'net/http'
 
 module Meet4Xmas
-  module Geo
+module WebAPI
+  module GoogleGeocoding
     def self.geocode(*address)
       address = address.map{|a|URI.escape(a)}.join(',')
       base_url = "http://maps.googleapis.com/maps/api/geocode/json"
@@ -37,4 +38,5 @@ module Meet4Xmas
       end
     end
   end
+end
 end
