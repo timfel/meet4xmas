@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class MenuActivity extends Activity {
 
+    protected MenuActivity self = this;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,8 @@ public class MenuActivity extends Activity {
         final Button button = (Button) findViewById(R.id.menuLogout);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, SignUpActivity.class));
+                new Preferences(self).setUser(null);
+                startActivity(new Intent(self, SignUpActivity.class));
             }
         });
     }

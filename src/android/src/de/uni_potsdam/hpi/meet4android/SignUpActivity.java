@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 public class SignUpActivity extends Activity {
 
+    protected SignUpActivity self = this;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +30,11 @@ public class SignUpActivity extends Activity {
                 String email = ((TextView) findViewById(R.id.signUpEmail)).getText().toString();
                 Response response = new Service(getApplicationContext()).getAPI().registerAccount(email, null);
                 if (response.success) {
-                    startActivity(new Intent(SignUpActivity.this, MenuActivity.class));
+                    Preferences pref = new Preferences(self);
+                    pref.setUser(email);
+                    startActivity(new Intent(self, MenuActivity.class));
                 } else {
-                    Toast.makeText(SignUpActivity.this,
+                    Toast.makeText(self,
                             "Error " + response.error.code + ": " + response.error.message, Toast.LENGTH_LONG).show();
                 }
             }
