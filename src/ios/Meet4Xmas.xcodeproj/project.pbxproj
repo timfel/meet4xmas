@@ -24,6 +24,7 @@
 		01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */; };
 		01B814AC14C07A0300D323A6 /* AppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */; };
 		01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */; };
+		01CB975D14CD5AAF00D593CE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01CB975C14CD5AAF00D593CE /* Settings.bundle */; };
 		01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307B1490F05F00548992 /* UIKit.framework */; };
 		01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307D1490F05F00548992 /* Foundation.framework */; };
 		01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307F1490F05F00548992 /* CoreGraphics.framework */; };
@@ -88,6 +89,7 @@
 		01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentListViewController.m; sourceTree = "<group>"; };
 		01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAppointmentViewController.h; sourceTree = "<group>"; };
 		01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAppointmentViewController.m; sourceTree = "<group>"; };
+		01CB975C14CD5AAF00D593CE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -194,6 +196,7 @@
 		01CE30821490F05F00548992 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01CB975C14CD5AAF00D593CE /* Settings.bundle */,
 				01CE30831490F05F00548992 /* Meet4Xmas-Info.plist */,
 				01CE30871490F05F00548992 /* main.m */,
 				01CE30891490F05F00548992 /* Meet4Xmas-Prefix.pch */,
@@ -328,6 +331,7 @@
 				0167975C14CC3306001979E6 /* icon.png in Resources */,
 				0167975E14CC3310001979E6 /* icon@2x.png in Resources */,
 				0167976014CC331C001979E6 /* icon~ipad.png in Resources */,
+				01CB975D14CD5AAF00D593CE /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

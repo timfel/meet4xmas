@@ -45,7 +45,10 @@
 - (id)init {
     self = [super init];
     if (self) {
-        NSString* urlString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serviceUrl"];
+        NSString* urlString = [[NSUserDefaults standardUserDefaults] stringForKey:@"serviceUrl"];
+        if (urlString == nil) {
+            urlString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serviceUrl"];
+        }
         NSURL* serviceUrl = [NSURL URLWithString:urlString];
         
         self.connection = [[CWHessianConnection alloc] initWithServiceURL:serviceUrl];
