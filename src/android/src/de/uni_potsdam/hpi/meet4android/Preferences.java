@@ -15,9 +15,17 @@ public class Preferences {
     public void setUser(final String name) {
         editorDo(new Change() {
             public void edit(SharedPreferences.Editor editor) {
-                editor.putString("user", name);
+                if (name == null) {
+                    editor.remove(name);
+                } else {
+                    editor.putString("user", name);
+                }
             }
         });
+    }
+
+    public boolean isUser() {
+        return pref.contains("user");
     }
 
     public String getUser() {
