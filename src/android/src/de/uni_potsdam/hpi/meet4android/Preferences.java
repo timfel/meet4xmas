@@ -30,7 +30,7 @@ public class Preferences {
         editor.commit();
     }
 
-    interface Change {
+    static interface Change {
         public void edit(SharedPreferences.Editor editor);
     }
 }
