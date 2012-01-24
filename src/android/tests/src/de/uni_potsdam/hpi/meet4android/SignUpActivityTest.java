@@ -1,6 +1,11 @@
 package de.uni_potsdam.hpi.meet4android;
 
 import android.test.ActivityInstrumentationTestCase2;
+import junit.framework.Assert;
+import org.meet4xmas.Service;
+import org.meet4xmas.wire.IServiceAPI;
+import org.meet4xmas.wire.NotificationServiceInfo;
+import org.meet4xmas.wire.Response;
 
 /**
  * This is a simple framework for a test of an Application.  See
@@ -14,8 +19,33 @@ import android.test.ActivityInstrumentationTestCase2;
  */
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpActivity> {
 
+    private Service service;
+
     public SignUpActivityTest() {
         super("de.uni_potsdam.hpi.meet4android", SignUpActivity.class);
     }
 
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+
+        this.service = new Service(getActivity(), "http://tessi.fornax.uberspace.de/xmas/2/");
+    }
+
+    public void testSignUp() {
+        IServiceAPI api = getService().getAPI();
+        Response response = api.registerAccount("hans@wur.st", null);
+
+        Assert.assertTrue(response.success);
+    }
+
+    public void testSignUpWithNotification() {
+        NotificationServiceInfo notificationServiceInfo = new NotificationServiceInfo();
+        notificationServiceInfo.serviceType = NotificationServiceInfo.NotificationServiceType.C2DM;
+        notificationServiceInfo.deviceId = new byte[]{0,0,7};
+    }
+
+    public Service getService() {
+        return service;
+    }
 }

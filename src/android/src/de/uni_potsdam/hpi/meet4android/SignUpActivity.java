@@ -28,7 +28,7 @@ public class SignUpActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String email = ((TextView) findViewById(R.id.signUpEmail)).getText().toString();
-                Response response = new Service(getApplicationContext()).getAPI().registerAccount(email, null);
+                Response response = new Service(self).getAPI().registerAccount(email, null);
                 if (response.success) {
                     Preferences pref = new Preferences(self);
                     pref.setUser(email);
