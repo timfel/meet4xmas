@@ -16,7 +16,7 @@ public class Preferences {
         editorDo(new Change() {
             public void edit(SharedPreferences.Editor editor) {
                 if (name == null) {
-                    editor.remove(name);
+                    editor.remove("user");
                 } else {
                     editor.putString("user", name);
                 }
