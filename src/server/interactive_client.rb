@@ -1,12 +1,15 @@
 # ruby test script using the hessian client
-# You get the best effect if you require this file in irb.
+# You get the best effect if you require this file in irb, e.g.
+#   $ jruby --1.9 -S irb -r './interactive_client'
 
 # load some general server API information
 require File.expand_path('../lib/server/api', __FILE__)
 puts "Meet4Xmas API version #{Meet4Xmas::Server::API::VERSION}"
 
-# load models
+# optional: load models
 require File.join File.dirname(__FILE__), 'lib', 'persistence', 'setup'
+# optional: include Meet4Xmas::Persistence for easier access to model classes
+include Meet4Xmas::Persistence
 
 # create the hessian client instance
 require File.expand_path('../lib/hessian_client/lib/hessian', __FILE__)

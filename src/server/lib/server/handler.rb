@@ -21,7 +21,7 @@ module Server
         if user.save
           if notificationServiceInfo
             # add notification service information to the user
-            user.update_notification_services(
+            user.update_devices(
               String.from_java_bytes(notificationServiceInfo.deviceId),
               notificationServiceInfo.serviceType
             )

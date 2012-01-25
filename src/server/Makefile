@@ -15,12 +15,6 @@ run_server: java_libs_service
 run: run_server
 
 
-run_ruby_interactive_test_client:
-	jruby --1.9 -S irb -r 'interactive_client'
-
-run_client: run_ruby_interactive_test_client
-
-
 run_java_test_client:
 	cd $(java_lib_dir) && make run_test
 
@@ -42,5 +36,4 @@ clean:
 
 
 irb:
-	jruby --1.9 -S irb
-
+	jruby --1.9 -S irb -r./interactive_client.rb

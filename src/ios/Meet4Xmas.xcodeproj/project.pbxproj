@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0167975C14CC3306001979E6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975B14CC3306001979E6 /* icon.png */; };
+		0167975E14CC3310001979E6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975D14CC3310001979E6 /* icon@2x.png */; };
+		0167976014CC331C001979E6 /* icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975F14CC331B001979E6 /* icon~ipad.png */; };
 		016AFC0E14C8664400E5E340 /* AddInviteeView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016AFC0C14C8664400E5E340 /* AddInviteeView_iPhone.xib */; };
 		016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */; };
 		016AFC1414C8743A00E5E340 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016AFC1214C8743A00E5E340 /* AddressBook.framework */; };
 		016AFC1514C8743A00E5E340 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016AFC1314C8743A00E5E340 /* AddressBookUI.framework */; };
+		01976B0714CC4C65000DCDCF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01976B0614CC4C65000DCDCF /* CoreLocation.framework */; };
 		01A47CEC1490FAF8007E1DFC /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */; };
 		01A47CF41490FC5A007E1DFC /* RegistrationView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF21490FC5A007E1DFC /* RegistrationView_iPad.xib */; };
 		01A47CF71490FC90007E1DFC /* RegistrationView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A47CF51490FC90007E1DFC /* RegistrationView_iPhone.xib */; };
@@ -20,6 +24,7 @@
 		01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */; };
 		01B814AC14C07A0300D323A6 /* AppointmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */; };
 		01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */; };
+		01CB975D14CD5AAF00D593CE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01CB975C14CD5AAF00D593CE /* Settings.bundle */; };
 		01CE307C1490F05F00548992 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307B1490F05F00548992 /* UIKit.framework */; };
 		01CE307E1490F05F00548992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307D1490F05F00548992 /* Foundation.framework */; };
 		01CE30801490F05F00548992 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CE307F1490F05F00548992 /* CoreGraphics.framework */; };
@@ -62,11 +67,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0167975B14CC3306001979E6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		0167975D14CC3310001979E6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		0167975F14CC331B001979E6 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon~ipad.png"; sourceTree = "<group>"; };
 		016AFC0D14C8664400E5E340 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddInviteeView_iPhone.xib; sourceTree = "<group>"; };
 		016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInviteeViewController.h; sourceTree = "<group>"; };
 		016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInviteeViewController.m; sourceTree = "<group>"; };
 		016AFC1214C8743A00E5E340 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		016AFC1314C8743A00E5E340 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		01976B0614CC4C65000DCDCF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		01A47CE91490FAF8007E1DFC /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
 		01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
 		01A47CF31490FC5A007E1DFC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RegistrationView_iPad.xib; sourceTree = "<group>"; };
@@ -80,6 +89,7 @@
 		01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentListViewController.m; sourceTree = "<group>"; };
 		01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAppointmentViewController.h; sourceTree = "<group>"; };
 		01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAppointmentViewController.m; sourceTree = "<group>"; };
+		01CB975C14CD5AAF00D593CE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ../Settings.bundle; sourceTree = "<group>"; };
 		01CE30771490F05F00548992 /* Meet4Xmas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meet4Xmas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01CE307B1490F05F00548992 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		01CE307D1490F05F00548992 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01976B0714CC4C65000DCDCF /* CoreLocation.framework in Frameworks */,
 				016AFC1414C8743A00E5E340 /* AddressBook.framework in Frameworks */,
 				016AFC1514C8743A00E5E340 /* AddressBookUI.framework in Frameworks */,
 				01A47D0914911C36007E1DFC /* libStaticHessianKit.a in Frameworks */,
@@ -172,6 +183,7 @@
 		01CE307A1490F05F00548992 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01976B0614CC4C65000DCDCF /* CoreLocation.framework */,
 				016AFC1214C8743A00E5E340 /* AddressBook.framework */,
 				016AFC1314C8743A00E5E340 /* AddressBookUI.framework */,
 				01CE307B1490F05F00548992 /* UIKit.framework */,
@@ -184,6 +196,7 @@
 		01CE30821490F05F00548992 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01CB975C14CD5AAF00D593CE /* Settings.bundle */,
 				01CE30831490F05F00548992 /* Meet4Xmas-Info.plist */,
 				01CE30871490F05F00548992 /* main.m */,
 				01CE30891490F05F00548992 /* Meet4Xmas-Prefix.pch */,
@@ -205,6 +218,9 @@
 		01CE30B21490F1D800548992 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0167975F14CC331B001979E6 /* icon~ipad.png */,
+				0167975D14CC3310001979E6 /* icon@2x.png */,
+				0167975B14CC3306001979E6 /* icon.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -312,6 +328,10 @@
 				01F3E58D14A38861005813E4 /* RootView_iPhone.xib in Resources */,
 				01B814AA14C0787100D323A6 /* CreateAppointmentView_iPhone.xib in Resources */,
 				016AFC0E14C8664400E5E340 /* AddInviteeView_iPhone.xib in Resources */,
+				0167975C14CC3306001979E6 /* icon.png in Resources */,
+				0167975E14CC3310001979E6 /* icon@2x.png in Resources */,
+				0167976014CC331C001979E6 /* icon~ipad.png in Resources */,
+				01CB975D14CD5AAF00D593CE /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

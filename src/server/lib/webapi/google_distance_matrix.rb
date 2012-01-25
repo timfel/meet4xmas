@@ -8,11 +8,11 @@ module Meet4Xmas
       def initialize( origins, destinations, options = {} )
         @origins = origins; raise "origins is missing" unless @origins
         @destinations = destinations; raise "destinations is missing" unless @destinations
-        
+
         valid_modes = %w{ driving walking bicycling }
         @mode = options[:mode] ? options[:mode] : 'driving'
         raise "mode '#{@mode}' not in #{valid_modes}!" unless valid_modes.include? @mode
-        
+
         @sensor = !!options[:sensor]
 
         raise 'this implementation can currently handle at most 50 origins' if @origins.count > 50
@@ -79,7 +79,7 @@ module Meet4Xmas
             distance_sums[index] += element['duration']['value']
           end
         end
-        
+
         # find destination index with smallest distance to all origins
         # this will be the index of the distance_sums entry with the lowest value
         min_distance = Float::INFINITY

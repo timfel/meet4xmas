@@ -3,21 +3,20 @@
     package="de.uni_potsdam.hpi.meet4android"
     android:versionCode="1"
     android:versionName="1.0" >
-    <uses-permission
-        android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-sdk android:minSdkVersion="10" />
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
-        <activity
-            android:name=".Meet4androidActivity"
-            android:label="@string/app_name" >
+        <activity android:name=".SignUpActivity" android:label="Sign-up" />
+        <activity android:name=".MenuActivity" android:label="Meet4xmas"/>
+        <activity android:name=".SplashActivity" android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
