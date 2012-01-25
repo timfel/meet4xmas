@@ -4,7 +4,7 @@
     <string name="service_url">http://tessi.fornax.uberspace.de/xmas/2/</string>
 
     <string name="sign_up_title">Sign Up</string>
-    <string name="sign_up_info">You have to create an account first. Choose a user name and click "Sign me up!"</string>
+    <string name="sign_up_info">You have to create an account first. Choose a user name and click &quot;Sign me up!&quot;</string>
     <string name="app_name">Meet</string>
 
     <string name="menu_title">Meet4xmas</string>
