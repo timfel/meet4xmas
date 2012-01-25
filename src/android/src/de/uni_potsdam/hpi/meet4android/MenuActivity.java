@@ -15,7 +15,17 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        setupAppointmentButton();
         setupLogoutButton();
+    }
+
+    protected void setupAppointmentButton() {
+        final Button button = (Button) findViewById(R.id.menuCreateAppointment);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(self, AppointmentActivity.class));
+            }
+        });
     }
 
     protected void setupLogoutButton() {
