@@ -2,6 +2,7 @@ package de.uni_potsdam.hpi.meet4android;
 
 import android.content.Intent;
 import org.meet4xmas.Service;
+import org.meet4xmas.ServiceException;
 import org.meet4xmas.wire.Response;
 
 import android.app.Activity;
@@ -28,14 +29,12 @@ public class SignUpActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String email = ((TextView) findViewById(R.id.signUpEmail)).getText().toString();
-                Response response = new Service(self).getAPI().registerAccount(email, null);
-                if (response.success) {
-                    Preferences pref = new Preferences(self);
-                    pref.setUser(email);
+                try {
+                    new Service(self).signUp(email);
+                    new Preferences(self).setUser(email);
                     startActivity(new Intent(self, MenuActivity.class));
-                } else {
-                    Toast.makeText(self,
-                            "Error " + response.error.code + ": " + response.error.message, Toast.LENGTH_LONG).show();
+                } catch (ServiceException e) {
+                    Toast.makeText(self, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
