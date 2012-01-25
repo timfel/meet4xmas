@@ -39,12 +39,6 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
         Assert.assertTrue(response.success);
     }
 
-    public void testSignUpWithNotification() {
-        NotificationServiceInfo notificationServiceInfo = new NotificationServiceInfo();
-        notificationServiceInfo.serviceType = NotificationServiceInfo.NotificationServiceType.C2DM;
-        notificationServiceInfo.deviceId = new byte[]{0,0,7};
-    }
-
     public Service getService() {
         return service;
     }
