@@ -11,4 +11,15 @@
     <string name="menu_create_appointment">Create Appointment</string>
     <string name="menu_logout">Logout</string>
 
+    <string name="appointment_title">Appointment</string>
+    <string name="appointment_what">What?</string>
+    <string name="appointment_where">Where?</string>
+    <string name="appointment_who">Who?</string>
+    <string name="appointment_where_prompt">Select a location</string>
+    <string-array name="appointment_where_options">
+        <item>Christmas Market</item>
+    </string-array>
+    <string-array name="appointment_who_add">
+        <item>Add Contact</item>
+    </string-array>
 </resources>
