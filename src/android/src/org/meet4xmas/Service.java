@@ -4,9 +4,12 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import com.caucho.hessian.client.HessianProxyFactory;
 import de.uni_potsdam.hpi.meet4android.R;
+import org.meet4xmas.wire.ErrorInfo;
 import org.meet4xmas.wire.IServiceAPI;
 import org.meet4xmas.wire.NotificationServiceInfo;
+import org.meet4xmas.wire.Response;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 
 public class Service {
@@ -28,15 +31,30 @@ public class Service {
         this(context, context.getResources().getString(R.string.service_url));
     }
 
-    public void signUp(String email) {
+    /**
+     * Registers the given email with the Meet4Xmas server.
+     *
+     * @param email The email to be registered.
+     * @throws ServiceException When registration fails.
+     */
+    public void signUp(String email) throws ServiceException {
         NotificationServiceInfo notificationServiceInfo = new NotificationServiceInfo();
         notificationServiceInfo.serviceType = NotificationServiceInfo.NotificationServiceType.C2DM;
-        notificationServiceInfo.deviceId = new byte[]{0,0,7};
+        notificationServiceInfo.deviceId = getBytes(getDeviceId());
+
+        Response response = getAPI().registerAccount(email, notificationServiceInfo);
+        if (!response.success) {
+            raise("Sign-up failed", response.error);
+        }
     }
 
+    /**
+     * Negotiates a registration ID with the Google servers.
+     *
+     * @return A registration ID usable to send push notifications to this device.
+     */
     public String getDeviceId() {
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getDeviceId();
+        return "@TODO";
     }
 
     public IServiceAPI getAPI() {
@@ -44,6 +62,24 @@ public class Service {
             return (IServiceAPI) hessianFactory.create(IServiceAPI.class, getURL());
         } catch (MalformedURLException e) {
             throw new RuntimeException("Invalid Service URL: " + e.getMessage());
+        }
+    }
+
+    protected void raise(String msg, ErrorInfo error) throws ServiceException {
+        String errorMessage;
+        if (error != null) {
+            errorMessage = msg + String.format(" Cause: Error %d (%s)", error.code, error.message);
+        } else {
+            errorMessage = msg + " Cause: unknown";
+        }
+        throw new ServiceException(errorMessage);
+    }
+
+    protected byte[] getBytes(String str) {
+        try {
+            return str.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("Don't think so.", e);
         }
     }
 
