@@ -1,6 +1,7 @@
 ﻿using System;
 using Meet4Xmas;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace org.meet4xmas.wire
 {
@@ -12,6 +13,16 @@ namespace org.meet4xmas.wire
         const string ServiceCallJoin = "joinAppointment";
         const string ServiceCallDecline = "declineAppointment";
         const string ServiceCallFinalize = "finalizeAppointment";
+
+        public string MessageString { get { return message; } }
+        public string ParticipantsString
+        {
+            get
+            {
+                IEnumerable<string> list = from p in participants select p.userId;
+                return creator + " " + list.Aggregate((acc, next) => acc + " " + next);
+            }
+        }
 
         /// <summary>
         /// Create a new Appointment

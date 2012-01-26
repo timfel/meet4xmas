@@ -22,12 +22,13 @@ namespace Meet4Xmas
     {
         public MainViewModel()
         {
-            this.Appointments = new ObservableCollection<ItemViewModel>();
+            this.Appointments = new ObservableCollection<Appointment>();
             this.ApplicationName = App.ApplicationName;
         }
 
-        public ObservableCollection<ItemViewModel> Appointments { get; private set; }
+        public ObservableCollection<Appointment> Appointments { get; private set; }
         public string ApplicationName { get; private set; }
+        public string AccountName { get { return Settings.Account == null ? "" : Settings.Account.userId; } }
 
         public bool IsDataLoaded { get; private set; }
 
@@ -45,12 +46,7 @@ namespace Meet4Xmas
             Appointments.Clear();
             foreach (Appointment a in Settings.Appointments)
             {
-                string friends = "";
-                foreach (Participant p in a.participants)
-                {
-                    friends += (p.userId + " ");
-                }
-                Appointments.Add(new ItemViewModel() { LineOne = a.message, LineTwo = friends, LineThree = String.Format("{0}", a.location) });
+                Appointments.Add(a);
             }
         }
 
