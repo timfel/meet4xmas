@@ -23,6 +23,8 @@ namespace org.meet4xmas.wire
                 return creator + " " + list.Aggregate((acc, next) => acc + " " + next);
             }
         }
+        public TravelPlan TravelPlan { get; private set; }
+        public int TravelType { get; private set; }
 
         /// <summary>
         /// Create a new Appointment
@@ -93,6 +95,8 @@ namespace org.meet4xmas.wire
                                 errorCb(new ErrorInfo(-1, "Invalid TravelPlan. No path data."));
                             } else {
                                 this.location = path[path.Length - 1];
+                                this.TravelPlan = result.payload as TravelPlan;
+                                this.TravelType = travelType;
                                 cb((TravelPlan)result.payload);
                             }
                         }
