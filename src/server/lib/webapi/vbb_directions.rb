@@ -34,7 +34,7 @@ module Meet4Xmas
           http = Net::HTTP.new(@host)
           response = http.post(@url_path, request_body)
           case response
-          when Net::HTTPSuccess, String
+          when Net::HTTPSuccess
             response = Nokogiri::XML(response.body)
             con_res = response.xpath('/ResC/ConRes').first
             raise 'Missing ConRes' unless con_res
