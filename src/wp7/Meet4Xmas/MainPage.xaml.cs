@@ -23,17 +23,22 @@ namespace Meet4Xmas
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
+            if (!App.ViewModel.IsDataLoaded) {
                 App.ViewModel.LoadData();
             }
-            if (Settings.Account == null)
-            {
+            if (Settings.Account == null) {
                 NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
-            }
-            else
-            {
+            } else {
                 Settings.Account.Loaded();
+            }
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string appointmentId = "";
+            if (NavigationContext.QueryString.TryGetValue("appointmentId", out appointmentId)) {
+                Account.HandleAppointmentToast(appointmentId);
             }
         }
 
@@ -50,15 +55,24 @@ namespace Meet4Xmas
 
         private void AppointmentsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var src = e.OriginalSource;
-            if (src is TextBlock)
-            {
-                var block = (TextBlock)src;
-                MessageBox.Show(block.Text);
-            }
-            else
-            {
-                MessageBox.Show("Dunno");
+            var appointment = (sender as ListBox).SelectedValue;
+            NavigationService.Navigate(new Uri(String.Format("/AppointmentShow.xaml?appointmentId={0}",
+                                                            (appointment as Appointment).identifier),
+                                               UriKind.Relative));
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string header = (sender as MenuItem).Header.ToString();
+
+            ListBoxItem selectedListBoxItem = AppointmentsList.ItemContainerGenerator.ContainerFromItem((sender as MenuItem).DataContext) as ListBoxItem;
+            if (selectedListBoxItem == null) return;
+            Appointment selectedAppointment = selectedListBoxItem.DataContext as Appointment;
+
+            if (header.StartsWith("Remove")) {
+                Settings.Appointments.Remove(selectedAppointment);
+                Settings.Save();
+                App.ViewModel.LoadAppointments();
             }
         }
     }

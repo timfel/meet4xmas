@@ -7,6 +7,8 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:Meet4Xmas"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -25,26 +27,34 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem x:Name="MyAccountPanoramaItem" Header="My Account">
-                <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
-                    <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
-                    <Button BorderBrush="#00000000">Settings</Button>
-                    <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
-                </ListBox>
+                <Grid>
+                    <TextBlock Height="30" HorizontalAlignment="Left" Margin="90,-45,0,0" Name="accountName" Text="{Binding AccountName}" VerticalAlignment="Top" />
+                    <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
+                        <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
+                        <Button BorderBrush="#00000000">Settings</Button>
+                        <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
+                    </ListBox>
+                </Grid>
             </controls:PanoramaItem>
  
             <!--Panorama item two-->
             <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem x:Name="AppointmentsList" Header="Appointments" IsEnabled="True">
+            <controls:PanoramaItem Header="Appointments" IsEnabled="True">
                 <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Appointments}">
+                <ListBox x:Name="AppointmentsList" Margin="0,0,-12,0" ItemsSource="{Binding Appointments}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17" local:TiltEffect.IsTiltEnabled="True">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="Remove This Appointment" Click="MenuItem_Click"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
                                 <!--Replace rectangle with image-->
                                 <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
                                 <StackPanel Width="311">                                    
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <TextBlock Text="{Binding MessageString}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding ParticipantsString}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

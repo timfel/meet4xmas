@@ -1,11 +1,10 @@
 package de.uni_potsdam.hpi.meet4android;
 
-import android.content.Intent;
 import org.meet4xmas.Service;
 import org.meet4xmas.ServiceException;
-import org.meet4xmas.wire.Response;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;

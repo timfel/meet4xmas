@@ -22,12 +22,13 @@ namespace Meet4Xmas
     {
         public MainViewModel()
         {
-            this.Appointments = new ObservableCollection<ItemViewModel>();
+            this.Appointments = new ObservableCollection<Appointment>();
             this.ApplicationName = App.ApplicationName;
         }
 
-        public ObservableCollection<ItemViewModel> Appointments { get; private set; }
+        public ObservableCollection<Appointment> Appointments { get; private set; }
         public string ApplicationName { get; private set; }
+        public string AccountName { get { return Settings.Account == null ? "" : Settings.Account.userId; } }
 
         public bool IsDataLoaded { get; private set; }
 
@@ -40,17 +41,20 @@ namespace Meet4Xmas
             this.IsDataLoaded = true;
         }
 
+        /// <summary>
+        /// Cleanup the appointments
+        /// This will clear appointment cache if the account is null (user logged out)
+        /// This will add all appointments from the cache to the visible list
+        /// </summary>
         public void LoadAppointments()
         {
             Appointments.Clear();
-            foreach (Appointment a in Settings.Appointments)
-            {
-                string friends = "";
-                foreach (Participant p in a.participants)
-                {
-                    friends += (p.userId + " ");
+            if (Settings.Account == null) {
+                Settings.Appointments.Clear();
+            } else {
+                foreach (Appointment a in Settings.Appointments) {
+                    Appointments.Add(a);
                 }
-                Appointments.Add(new ItemViewModel() { LineOne = a.message, LineTwo = friends, LineThree = String.Format("{0}", a.location) });
             }
         }
 

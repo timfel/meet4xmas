@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="Meet4Xmas.AppointmentCreate"
+    x:Class="Meet4Xmas.AppointmentShow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -24,11 +24,17 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{Binding ApplicationName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="New Appointment" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="52" />
+            <TextBlock x:Name="PageTitle" Text="{Binding MessageString}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="52" DataContext="{Binding}" />
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition MinHeight="200"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <Grid.Resources>
                 <DataTemplate x:Name="PickerItemTemplate">
                     <TextBlock Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
@@ -37,25 +43,25 @@
                     <TextBlock Margin="16 21 0 20" Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
                 </DataTemplate>
             </Grid.Resources>
-
-            <TextBlock Name="textBlock1" Text="What?" VerticalAlignment="Top" />
-            <TextBox Name="SubjectBox" Text="" VerticalAlignment="Top" Margin="0,22,0,0" />
-            <TextBlock Margin="0,100,0,0" Name="textBlock2" Text="Where?" VerticalAlignment="Top" />
-            <toolkit:ListPicker Margin="12,122,12,0"
+            <TextBlock Grid.Row="1" Name="textBlock2" Text="Where?" VerticalAlignment="Top" DataContext="{Binding}" Foreground="#FF949294" />            
+            <TextBlock Grid.Row="3" Name="textBlock3" Text="Who?" VerticalAlignment="Top" Foreground="#FFA5A2A5" />
+            <ListBox Grid.Row="4" Name="ContactList" />
+            <Grid x:Name="MapGrid" Grid.Row="2"></Grid>
+            <toolkit:ListPicker Grid.Row="0" 
                                 x:Name="listPicker" ItemTemplate="{StaticResource PickerItemTemplate}"
                                 FullModeItemTemplate="{StaticResource PickerFullModeItemTemplate}"
-                                FullModeHeader="Location"
-                                CacheMode="BitmapCache" Padding="2" />
-            <TextBlock Margin="0,231,0,0" Name="textBlock3" Text="Who?" VerticalAlignment="Top" />
-            <ListBox Name="ContactList" Margin="0,264,0,78" />
-            <Button Content="Create" Name="createButton" VerticalAlignment="Bottom" Click="createButton_Click" />
+                                Header="Transport"
+                                FullModeHeader="Transport"
+                                CacheMode="BitmapCache" Padding="2" Margin="0" />
         </Grid>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Add Invitee" Click="ApplicationBarIconButton_Click"/>
+            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Join" Click="ApplicationBarJoinButton_Click"/>
+            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Leave" Click="ApplicationBarLeaveButton_Click"/>
+            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Bing Navigation" Click="ApplicationBarMapButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
