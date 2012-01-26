@@ -21,6 +21,9 @@ namespace Meet4Xmas
         public AppointmentCreate()
         {
             InitializeComponent();
+            List<string> source = new List<string>();
+            source.Add("Christmas Market");
+            listPicker.ItemsSource = source;
         }
 
         private void createButton_Click(object sender, RoutedEventArgs e)

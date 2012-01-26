@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -28,12 +29,25 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBox Name="SubjectBox" Text="" VerticalAlignment="Top" Margin="0,22,0,0" />
-            <TextBox Margin="0,122,0,0" Name="LocationBox" Text="Christmas Market" VerticalAlignment="Top" IsEnabled="False" />
+            <Grid.Resources>
+                <DataTemplate x:Name="PickerItemTemplate">
+                    <TextBlock Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
+                </DataTemplate>
+                <DataTemplate x:Name="PickerFullModeItemTemplate">
+                    <TextBlock Margin="16 21 0 20" Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
+                </DataTemplate>
+            </Grid.Resources>
+
             <TextBlock Name="textBlock1" Text="What?" VerticalAlignment="Top" />
+            <TextBox Name="SubjectBox" Text="" VerticalAlignment="Top" Margin="0,22,0,0" />
             <TextBlock Margin="0,100,0,0" Name="textBlock2" Text="Where?" VerticalAlignment="Top" />
-            <ListBox Name="ContactList" Margin="0,264,0,78" />
+            <toolkit:ListPicker Margin="12,122,12,0"
+                                x:Name="listPicker" ItemTemplate="{StaticResource PickerItemTemplate}"
+                                FullModeItemTemplate="{StaticResource PickerFullModeItemTemplate}"
+                                FullModeHeader="Location"
+                                CacheMode="BitmapCache" Padding="2" />
             <TextBlock Margin="0,231,0,0" Name="textBlock3" Text="Who?" VerticalAlignment="Top" />
+            <ListBox Name="ContactList" Margin="0,264,0,78" />
             <Button Content="Create" Name="createButton" VerticalAlignment="Bottom" Click="createButton_Click" />
         </Grid>
     </Grid>
