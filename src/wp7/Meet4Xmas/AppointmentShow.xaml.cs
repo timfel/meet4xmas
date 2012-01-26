@@ -26,6 +26,7 @@ namespace Meet4Xmas
         {
             InitializeComponent();
             listPicker.ItemsSource = source;
+            listPicker.SelectionChanged += new SelectionChangedEventHandler(listPicker_SelectionChanged);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -58,9 +59,16 @@ namespace Meet4Xmas
                 () => MessageBox.Show("You joined this appointment"),
                 (ErrorInfo ei) =>
                 {
-                    MessageBox.Show("An error occured trying to join this appointment." + ei.message);
+                    MessageBox.Show("An error occurred trying to join this appointment." + ei.message);
                 }
             );
+        }
+
+        private void listPicker_SelectionChanged(object sender, EventArgs e)
+        {
+            (this.DataContext as Appointment).GetTravelPlan(listPicker.SelectedIndex + 1,
+                (TravelPlan t) => MessageBox.Show("Travel type updated"),
+                (ErrorInfo ei) => MessageBox.Show("An error occurred trying to update your travel plan." + ei.message));
         }
     }
 }
