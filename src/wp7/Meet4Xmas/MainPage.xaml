@@ -25,18 +25,21 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem x:Name="MyAccountPanoramaItem" Header="My Account">
-                <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
-                    <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
-                    <Button BorderBrush="#00000000">Settings</Button>
-                    <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
-                </ListBox>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock Height="30" HorizontalAlignment="Left" Margin="90,-45,0,0" Name="accountName" Text="{Binding AccountName}" VerticalAlignment="Top" />
+                    <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
+                        <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
+                        <Button BorderBrush="#00000000">Settings</Button>
+                        <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
+                    </ListBox>
+                </StackPanel>
             </controls:PanoramaItem>
  
             <!--Panorama item two-->
             <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem x:Name="AppointmentsList" Header="Appointments" IsEnabled="True">
+            <controls:PanoramaItem Header="Appointments" IsEnabled="True">
                 <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Appointments}">
+                <ListBox x:Name="AppointmentsList" Margin="0,0,-12,0" ItemsSource="{Binding Appointments}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,17">

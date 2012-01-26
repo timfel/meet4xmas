@@ -50,16 +50,10 @@ namespace Meet4Xmas
 
         private void AppointmentsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var src = e.OriginalSource;
-            if (src is TextBlock)
-            {
-                var block = (TextBlock)src;
-                MessageBox.Show(block.Text);
-            }
-            else
-            {
-                MessageBox.Show("Dunno");
-            }
+            var appointment = (sender as ListBox).SelectedValue;
+            NavigationService.Navigate(new Uri(String.Format("/AppointmentShow.xaml?appointmentId={0}",
+                                                            (appointment as Appointment).identifier),
+                                               UriKind.Relative));
         }
     }
 }
