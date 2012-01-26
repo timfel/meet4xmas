@@ -12,6 +12,15 @@ module Meet4Xmas
         @destination = options[:destination]
       end
 
+      def journey_attribute(jouney_node, attribute_name)
+        jouney_node.xpath('./JourneyAttributeList').children.find do |c|
+          if c.name == 'JourneyAttribute'
+            a = c.xpath('./Attribute').attr('type')
+            a.value  == attribute_name if a
+          end
+        end
+      end
+
       def path
         begin
           time = Time.now
@@ -52,12 +61,7 @@ module Meet4Xmas
               travel_info = if conSection.children.map {|c| c.name}.include? "GisRoute"
                 conSection.xpath('./GisRoute').attr('type').value == 'FOOT' ? "Walk some time - #{conSection.xpath('./GisRoute/Duration/Time').text.strip}" : ""
               else
-                name_attribute = conSection.xpath('./Journey/JourneyAttributeList').children.find do |c|
-                  if c.name == 'JourneyAttribute'
-                    a = c.xpath('./Attribute').attr('type')
-                    a.value  == 'NAME' if a
-                  end
-                end
+                name_attribute = journey_attribute conSection.xpath('./Journey'), 'NAME'
                 stop_count = conSection.xpath('./Journey/PassList').children.size - 1
                 "Go with #{name_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip} for #{stop_count} stop#{'s' if stop_count > 1}"
               end
