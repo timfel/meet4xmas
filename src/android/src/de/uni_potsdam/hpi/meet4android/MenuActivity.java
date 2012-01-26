@@ -15,6 +15,7 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        setTitle(new Preferences(this).getUser());
         setupAppointmentButton();
         setupLogoutButton();
     }
