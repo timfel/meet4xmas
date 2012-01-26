@@ -10,6 +10,16 @@ module Meet4Xmas
         @url_path = "/bin/pub/vbb-fahrinfo/relaunch2011/extxml.exe/"
         @origin = options[:origin]
         @destination = options[:destination]
+        @debug = !!options[:debug]
+      end
+
+      def journey_attribute(jouney_node, attribute_name)
+        jouney_node.xpath('./JourneyAttributeList').children.find do |c|
+          if c.name == 'JourneyAttribute'
+            a = c.xpath('./Attribute').attr('type')
+            a.value  == attribute_name if a
+          end
+        end
       end
 
       def path
@@ -31,11 +41,11 @@ module Meet4Xmas
                           </ConReq>
                           </ReqC>"
 
-          http = Net::HTTP.new(@host)
-          response = http.post(@url_path, request_body)
+          http = Net::HTTP.new(@host) if !@debug
+          response = !@debug ? http.post(@url_path, request_body) : File.open( File.join File.dirname(__FILE__), 'vbb_example.response' ).read
           case response
-          when Net::HTTPSuccess, String
-            response = Nokogiri::XML(response.body)
+          when Net::HTTPSuccess,String
+            response = Nokogiri::XML( !@debug ? response.body : response )
             con_res = response.xpath('/ResC/ConRes').first
             raise 'Missing ConRes' unless con_res
             puts "Warning: unknown ConRes dir '#{con_res['dir']}'" unless con_res['dir'] == 'O'
@@ -52,25 +62,21 @@ module Meet4Xmas
               travel_info = if conSection.children.map {|c| c.name}.include? "GisRoute"
                 conSection.xpath('./GisRoute').attr('type').value == 'FOOT' ? "Walk some time - #{conSection.xpath('./GisRoute/Duration/Time').text.strip}" : ""
               else
-                name_attribute = conSection.xpath('./Journey/JourneyAttributeList').children.find do |c|
-                  if c.name == 'JourneyAttribute'
-                    a = c.xpath('./Attribute').attr('type')
-                    a.value  == 'NAME' if a
-                  end
-                end
+                name_attribute = journey_attribute conSection.xpath('./Journey'), 'NAME'
+                direction_attribute = journey_attribute conSection.xpath('./Journey'), 'DIRECTION'
                 stop_count = conSection.xpath('./Journey/PassList').children.size - 1
-                "Go with #{name_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip} for #{stop_count} stop#{'s' if stop_count > 1}"
+                "Go with #{name_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip} (#{direction_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip}) for #{stop_count} stop#{'s' if stop_count > 1}"
               end
               if stop.children.map {|c| c.name}.include? 'Address'
                 path << (Persistence::Location.new :title => "#{stop.xpath('./Address').attr('name').value}",
                          :description => "#{travel_info}",
-                         :longitude => stop.xpath('./Address').attr('x').value.to_i / 1000000,
-                         :latitude => stop.xpath('./Address').attr('y').value.to_i / 1000000)
+                         :longitude => stop.xpath('./Address').attr('x').value.to_f / 1000000,
+                         :latitude => stop.xpath('./Address').attr('y').value.to_f / 1000000)
               else
                 path << (Persistence::Location.new :title => "Station #{stop.xpath('./Station').attr('name').value}",
                          :description => "#{travel_info}",
-                         :longitude => stop.xpath('./Station').attr('x').value.to_i / 1000000,
-                         :latitude => stop.xpath('./Station').attr('y').value.to_i / 1000000)
+                         :longitude => stop.xpath('./Station').attr('x').value.to_f / 1000000,
+                         :latitude => stop.xpath('./Station').attr('y').value.to_f / 1000000)
               end
             end
           else
