@@ -35,6 +35,7 @@
 		01F3E58D14A38861005813E4 /* RootView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F3E58B14A38861005813E4 /* RootView_iPhone.xib */; };
 		B040D1C414D023750080C3D0 /* AppointmentDetailView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B040D1C214D023750080C3D0 /* AppointmentDetailView_iPhone.xib */; };
 		B040D1C714D025550080C3D0 /* AppointmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */; };
+		B092F82714D190DC003F65D3 /* AppointmentDetailView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		B040D1C314D023750080C3D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AppointmentDetailView_iPhone.xib; sourceTree = "<group>"; };
 		B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentDetailViewController.h; sourceTree = "<group>"; };
 		B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailViewController.m; sourceTree = "<group>"; };
+		B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentDetailView_iPad.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 				01B814A814C0787100D323A6 /* CreateAppointmentView_iPhone.xib */,
 				016AFC0C14C8664400E5E340 /* AddInviteeView_iPhone.xib */,
 				B040D1C214D023750080C3D0 /* AppointmentDetailView_iPhone.xib */,
+				B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				0167976014CC331C001979E6 /* icon~ipad.png in Resources */,
 				01CB975D14CD5AAF00D593CE /* Settings.bundle in Resources */,
 				B040D1C414D023750080C3D0 /* AppointmentDetailView_iPhone.xib in Resources */,
+				B092F82714D190DC003F65D3 /* AppointmentDetailView_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

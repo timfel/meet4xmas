@@ -2,7 +2,7 @@
 //  AppointmentDetailViewController.m
 //  Meet4Xmas
 //
-//  Created by T3 on 25.01.12.
+//  Created by Tobias on 25.01.12.
 //  Copyright (c) 2012 HPI. All rights reserved.
 //
 
