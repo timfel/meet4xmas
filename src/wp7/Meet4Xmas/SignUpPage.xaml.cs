@@ -31,6 +31,19 @@ namespace Meet4Xmas
                     SignUpProgressBar.Visibility = Visibility.Collapsed;
                     SignUpErrorInfo.Text = "Success";
                     Settings.Account = account;
+
+                    // Load the user's appointments
+                    Settings.Appointments.Clear();
+                    foreach (int id in account.AppointmentIds) {
+                        Appointment.Find(id, (a) =>
+                        {
+                            Settings.Appointments.Add(a);
+                            Settings.Save();
+                            App.ViewModel.LoadAppointments();
+                        }, (ei) => { });
+                    }
+
+                    Settings.Save();
                     new Timer((state) => Dispatcher.BeginInvoke(() =>
                             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative))),
                             null, 1000, Timeout.Infinite);
