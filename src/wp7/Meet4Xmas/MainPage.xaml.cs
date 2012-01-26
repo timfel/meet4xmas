@@ -23,16 +23,12 @@ namespace Meet4Xmas
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
+            if (!App.ViewModel.IsDataLoaded) {
                 App.ViewModel.LoadData();
             }
-            if (Settings.Account == null)
-            {
+            if (Settings.Account == null) {
                 NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
-            }
-            else
-            {
+            } else {
                 Settings.Account.Loaded();
             }
         }
@@ -54,6 +50,21 @@ namespace Meet4Xmas
             NavigationService.Navigate(new Uri(String.Format("/AppointmentShow.xaml?appointmentId={0}",
                                                             (appointment as Appointment).identifier),
                                                UriKind.Relative));
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string header = (sender as MenuItem).Header.ToString();
+
+            ListBoxItem selectedListBoxItem = AppointmentsList.ItemContainerGenerator.ContainerFromItem((sender as MenuItem).DataContext) as ListBoxItem;
+            if (selectedListBoxItem == null) return;
+            Appointment selectedAppointment = selectedListBoxItem.DataContext as Appointment;
+
+            if (header.StartsWith("Remove")) {
+                Settings.Appointments.Remove(selectedAppointment);
+                Settings.Save();
+                App.ViewModel.LoadAppointments();
+            }
         }
     }
 }
