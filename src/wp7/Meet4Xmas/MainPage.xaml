@@ -25,14 +25,14 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem x:Name="MyAccountPanoramaItem" Header="My Account">
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid>
                     <TextBlock Height="30" HorizontalAlignment="Left" Margin="90,-45,0,0" Name="accountName" Text="{Binding AccountName}" VerticalAlignment="Top" />
                     <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
                         <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
                         <Button BorderBrush="#00000000">Settings</Button>
                         <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
                     </ListBox>
-                </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
  
             <!--Panorama item two-->
