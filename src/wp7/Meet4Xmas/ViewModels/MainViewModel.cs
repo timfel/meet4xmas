@@ -41,12 +41,20 @@ namespace Meet4Xmas
             this.IsDataLoaded = true;
         }
 
+        /// <summary>
+        /// Cleanup the appointments
+        /// This will clear appointment cache if the account is null (user logged out)
+        /// This will add all appointments from the cache to the visible list
+        /// </summary>
         public void LoadAppointments()
         {
             Appointments.Clear();
-            foreach (Appointment a in Settings.Appointments)
-            {
-                Appointments.Add(a);
+            if (Settings.Account == null) {
+                Settings.Appointments.Clear();
+            } else {
+                foreach (Appointment a in Settings.Appointments) {
+                    Appointments.Add(a);
+                }
             }
         }
 
