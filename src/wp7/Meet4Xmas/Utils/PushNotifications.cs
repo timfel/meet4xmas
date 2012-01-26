@@ -12,6 +12,7 @@ using Microsoft.Phone.Notification;
 using System.Text;
 using System.Windows.Threading;
 using Meet4Xmas;
+using System.Linq;
 
 namespace org.meet4xmas.wire
 {
@@ -36,7 +37,6 @@ namespace org.meet4xmas.wire
             Channel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(HttpChannelErrorOccurred);
             Channel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(HttpChannelToastNotificationReceived);
             Channel.ConnectionStatusChanged += new EventHandler<NotificationChannelConnectionEventArgs>(HttpChannelConnectionStatusChanged);
-            UpdateChannelURI();
         }
 
         private void FindNotificationChannel()
@@ -74,9 +74,19 @@ namespace org.meet4xmas.wire
             var sb = new StringBuilder();
             foreach (var kvp in e.Collection)
             {
-                sb.Append(kvp.Value + "\n");
+                if (kvp.Key.CompareTo("wp:Param") == 0) {
+                    foreach(string item in new Uri(kvp.Value).Query.Split('&')) {
+                        string[] parts = item.Replace("?", "").Split('=');
+                        if (parts[0].CompareTo("appointmentId") == 0) {
+                            HandleAppointmentToast(parts[1]);
+                            break;
+                        }
+                    }
+                } else {
+                    sb.Append(kvp.Value + "\n");
+                } 
             }
-            dispatcher.BeginInvoke(() => MessageBox.Show(sb.ToString()));
+            dispatcher.BeginInvoke(() => MessageBox.Show("Received an appointment update!\n" + sb.ToString()));
         }
 
         private void HttpChannelChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
@@ -113,5 +123,24 @@ namespace org.meet4xmas.wire
                         }, userId, new NotificationServiceInfo(Channel.ChannelUri)));
             }
         }
+
+        public static void HandleAppointmentToast(string appointmentId)
+        {
+            var app = from a in Settings.Appointments where a.identifier.ToString() == appointmentId select a;
+            if (app.Count() == 0) { // New appointment, cache it
+                Appointment.Find(Convert.ToInt32(appointmentId),
+                (a) =>
+                {
+                    Settings.Appointments.Add(a);
+                    Settings.Save();
+                    App.ViewModel.Appointments.Add(a);
+                },
+                (ei) =>
+                {
+                    dispatcher.BeginInvoke(() => MessageBox.Show("Failed to load appointment." + ei.message));
+                });
+            }
+        }
+
     }
 }

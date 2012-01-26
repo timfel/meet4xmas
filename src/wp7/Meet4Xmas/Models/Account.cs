@@ -1,5 +1,6 @@
 ﻿using System;
 using Meet4Xmas;
+using System.Collections.Generic;
 
 namespace org.meet4xmas.wire
 {
@@ -7,6 +8,8 @@ namespace org.meet4xmas.wire
     {
         const string ServiceCallCreate = "registerAccount";
         const string ServiceCallDelete = "deleteAccount";
+
+        public List<int> AppointmentIds { get; set; }
 
         public void Delete(Action callback, Action<ErrorInfo> errorCallback)
         {
@@ -36,6 +39,7 @@ namespace org.meet4xmas.wire
                         errorCallback(result.error);
                     } else {
                         Account a = new Account();
+                        a.AppointmentIds = new List<int>(result.payload as int[]);
                         a.userId = userId;
                         a.OpenNotificationChannel();
                         callback(a);

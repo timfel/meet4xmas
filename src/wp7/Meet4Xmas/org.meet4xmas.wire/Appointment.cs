@@ -7,7 +7,7 @@ namespace org.meet4xmas.wire
         public int identifier;
         public string creator; // userId
         public int locationType; // use values in Location.LocationType
-        public Location location;
+        public Location location; // target location
         public Participant[] participants;
         public string message;
         public bool isFinal;

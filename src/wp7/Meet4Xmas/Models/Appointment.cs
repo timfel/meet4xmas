@@ -1,6 +1,7 @@
 ﻿using System;
 using Meet4Xmas;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace org.meet4xmas.wire
 {
@@ -12,6 +13,18 @@ namespace org.meet4xmas.wire
         const string ServiceCallJoin = "joinAppointment";
         const string ServiceCallDecline = "declineAppointment";
         const string ServiceCallFinalize = "finalizeAppointment";
+
+        public string MessageString { get { return message; } }
+        public string ParticipantsString
+        {
+            get
+            {
+                IEnumerable<string> list = from p in participants select p.userId;
+                return creator + " " + list.Aggregate((acc, next) => acc + " " + next);
+            }
+        }
+        public TravelPlan TravelPlan { get; private set; }
+        public int TravelType { get; private set; }
 
         /// <summary>
         /// Create a new Appointment
@@ -82,6 +95,8 @@ namespace org.meet4xmas.wire
                                 errorCb(new ErrorInfo(-1, "Invalid TravelPlan. No path data."));
                             } else {
                                 this.location = path[path.Length - 1];
+                                this.TravelPlan = result.payload as TravelPlan;
+                                this.TravelType = travelType;
                                 cb((TravelPlan)result.payload);
                             }
                         }
