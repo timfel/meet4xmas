@@ -85,6 +85,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\NotificationServiceInfo.cs" />
     <Compile Include="org.meet4xmas.wire\NotificationServiceInfo.cs" />
+    <Compile Include="TiltEffect.cs" />
     <Compile Include="Utils\Gps.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="Utils\PushNotifications.cs" />
