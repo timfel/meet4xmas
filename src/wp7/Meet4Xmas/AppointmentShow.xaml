@@ -31,7 +31,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="200"/>
+                <RowDefinition MinHeight="200"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -43,10 +43,10 @@
                     <TextBlock Margin="16 21 0 20" Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
                 </DataTemplate>
             </Grid.Resources>
-            <TextBlock Grid.Row="1" Name="textBlock2" Text="Where?" VerticalAlignment="Top" DataContext="{Binding}" Foreground="#FF949294" />
-            <Grid x:Name="MapGrid" Grid.Row="2"></Grid>
+            <TextBlock Grid.Row="1" Name="textBlock2" Text="Where?" VerticalAlignment="Top" DataContext="{Binding}" Foreground="#FF949294" />            
             <TextBlock Grid.Row="3" Name="textBlock3" Text="Who?" VerticalAlignment="Top" Foreground="#FFA5A2A5" />
             <ListBox Grid.Row="4" Name="ContactList" />
+            <Grid x:Name="MapGrid" Grid.Row="2"></Grid>
             <toolkit:ListPicker Grid.Row="0" 
                                 x:Name="listPicker" ItemTemplate="{StaticResource PickerItemTemplate}"
                                 FullModeItemTemplate="{StaticResource PickerFullModeItemTemplate}"
@@ -61,6 +61,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Join" Click="ApplicationBarJoinButton_Click"/>
             <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Leave" Click="ApplicationBarLeaveButton_Click"/>
+            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Bing Navigation" Click="ApplicationBarMapButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
