@@ -70,13 +70,13 @@ module Meet4Xmas
               if stop.children.map {|c| c.name}.include? 'Address'
                 path << (Persistence::Location.new :title => "#{stop.xpath('./Address').attr('name').value}",
                          :description => "#{travel_info}",
-                         :longitude => stop.xpath('./Address').attr('x').value.to_i / 1000000,
-                         :latitude => stop.xpath('./Address').attr('y').value.to_i / 1000000)
+                         :longitude => stop.xpath('./Address').attr('x').value.to_f / 1000000,
+                         :latitude => stop.xpath('./Address').attr('y').value.to_f / 1000000)
               else
                 path << (Persistence::Location.new :title => "Station #{stop.xpath('./Station').attr('name').value}",
                          :description => "#{travel_info}",
-                         :longitude => stop.xpath('./Station').attr('x').value.to_i / 1000000,
-                         :latitude => stop.xpath('./Station').attr('y').value.to_i / 1000000)
+                         :longitude => stop.xpath('./Station').attr('x').value.to_f / 1000000,
+                         :latitude => stop.xpath('./Station').attr('y').value.to_f / 1000000)
               end
             end
           else
