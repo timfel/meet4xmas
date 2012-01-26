@@ -1,8 +1,6 @@
 source 'http://rubygems.org'
 
-# geocoding, map location calculations, ...
-gem 'geokit'
-gem 'json_pure' # required by geokit
+gem 'nokogiri'
 
 # push notifications
 gem 'apns' # apple push notification service

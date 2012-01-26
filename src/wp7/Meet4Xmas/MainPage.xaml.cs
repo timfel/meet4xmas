@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Phone.Controls;
 using org.meet4xmas.wire;
 using System.Windows.Controls.Primitives;
+using System.Windows.Controls;
 
 namespace Meet4Xmas
 {
@@ -16,6 +17,7 @@ namespace Meet4Xmas
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+            AppointmentsList.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(AppointmentsList_Tap);
         }
 
         // Load data for the ViewModel Items
@@ -44,6 +46,20 @@ namespace Meet4Xmas
         {
             Settings.Account = null;
             NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
+        }
+
+        private void AppointmentsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var src = e.OriginalSource;
+            if (src is TextBlock)
+            {
+                var block = (TextBlock)src;
+                MessageBox.Show(block.Text);
+            }
+            else
+            {
+                MessageBox.Show("Dunno");
+            }
         }
     }
 }

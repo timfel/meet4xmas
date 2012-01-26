@@ -1,0 +1,3710 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://demo.hafas.de/xml/vbb/dai/hafasXMLInterface.xsd" ver="1.1" prod="5.31.VBB.Relaunch-2012-1.0 [Jan 19 2012]" lang="EN">
+<ConRes dir="O">
+ <ConnectionList type="OEV">
+ <Connection id="C1-0">
+ <Overview>
+<Date>20120123</Date>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d17:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+</Departure>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+</BasicStop>
+</Arrival>
+<Transfers>3</Transfers>
+<Duration>
+<Time>00d01:06:00</Time>
+</Duration>
+ <ServiceDays>
+<RegularServiceText>
+<Text>Mo - Fr</Text>
+</RegularServiceText>
+<IrregularServiceText>
+<Text>not 6., 9. Apr, 1., 17., 28. May, 3. Oct</Text>
+</IrregularServiceText>
+</ServiceDays>
+ <Products>
+<Product cat="Bus " />
+<Product cat="S " />
+</Products>
+</Overview>
+ <ConSectionList>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d17:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>23</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+</BasicStop>
+</Arrival>
+</ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Dep getIn="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="1489" cycle="0" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 155 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="OPERATOR">(...)</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>155</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>Weißensee, Piesporter Str.</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+</JourneyAttributeList>
+ <PassList>
+ <BasicStop index="13" type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="Tschaikowskistr. (Berlin)" x="13398610" y="52576081" type="WGS84" externalId="009131505#86" externalStationNr="009131505" />
+ <Arr getOut="YES">
+<Time>00d17:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d17:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="Bürgerpark Pankow (Berlin)" x="13398143" y="52571200" type="WGS84" externalId="009131004#86" externalStationNr="009131004" />
+ <Arr getOut="YES">
+<Time>00d17:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d17:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+ <BasicStop index="16" type="NORMAL">
+<Station name="Rathaus Pankow (Berlin)" x="13403455" y="52569384" type="WGS84" externalId="009130501#86" externalStationNr="009130501" />
+ <Arr getOut="YES">
+<Time>00d18:01:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:01:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+ <BasicStop index="17" type="NORMAL">
+<Station name="Mühlenstr. (Berlin)" x="13406584" y="52565357" type="WGS84" externalId="009130018#86" externalStationNr="009130018" />
+ <Arr getOut="YES">
+<Time>00d18:02:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:02:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+ <BasicStop index="18" type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+</BasicStop>
+</PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+</BasicStop>
+</Arrival>
+</ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Dep getIn="YES">
+<Time>00d18:09:00</Time>
+<Platform>
+<Text>2 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="26065" cycle="3" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="8">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S8</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-1</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S8</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Zeuthen</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="7" type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="8" type="NORMAL">
+<Station name="S Bornholmer Str. (Berlin)" x="13397846" y="52555028" type="WGS84" externalId="009110011#86" externalStationNr="009110011" />
+ <Arr getOut="YES">
+<Time>00d18:11:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="9" type="NORMAL">
+<Station name="S+U Schönhauser Allee (Berlin)" x="13415141" y="52549338" type="WGS84" externalId="009110001#86" externalStationNr="009110001" />
+ <Arr getOut="YES">
+<Time>00d18:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:15:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="10" type="NORMAL">
+<Station name="S Prenzlauer Allee (Berlin)" x="13427744" y="52544880" type="WGS84" externalId="009110002#86" externalStationNr="009110002" />
+ <Arr getOut="YES">
+<Time>00d18:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="11" type="NORMAL">
+<Station name="S Greifswalder Str. (Berlin)" x="13439241" y="52540430" type="WGS84" externalId="009110003#86" externalStationNr="009110003" />
+ <Arr getOut="YES">
+<Time>00d18:18:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:18:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="12" type="NORMAL">
+<Station name="S Landsberger Allee (Berlin)" x="13455943" y="52528771" type="WGS84" externalId="009110004#86" externalStationNr="009110004" />
+ <Arr getOut="YES">
+<Time>00d18:20:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:21:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="13" type="NORMAL">
+<Station name="S Storkower Str. (Berlin)" x="13464888" y="52524195" type="WGS84" externalId="009110012#86" externalStationNr="009110012" />
+ <Arr getOut="YES">
+<Time>00d18:22:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:23:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="S+U Frankfurter Allee (Berlin)" x="13475297" y="52513615" type="WGS84" externalId="009120001#86" externalStationNr="009120001" />
+ <Arr getOut="YES">
+<Time>00d18:24:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:25:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:27:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:28:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:27:00</Time>
+<Platform>
+<Text>11 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+</ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Dep getIn="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text>3 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="24923" cycle="1" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S5</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-9</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S5</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Hoppegarten</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="19" type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="20" type="NORMAL">
+<Station name="S Nöldnerplatz (Berlin)" x="13484295" y="52503439" type="WGS84" externalId="009160003#86" externalStationNr="009160003" />
+ <Arr getOut="YES">
+<Time>00d18:33:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:34:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="21" type="NORMAL">
+<Station name="S+U Lichtenberg Bhf (Berlin)" x="13499056" y="52510532" type="WGS84" externalId="009160004#86" externalStationNr="009160004" />
+ <Arr getOut="YES">
+<Time>00d18:36:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:36:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="22" type="NORMAL">
+<Station name="S Friedrichsfelde Ost (Berlin)" x="13520045" y="52513750" type="WGS84" externalId="009171002#86" externalStationNr="009171002" />
+ <Arr getOut="YES">
+<Time>00d18:38:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:39:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="23" type="NORMAL">
+<Station name="S Biesdorf (Berlin)" x="13556793" y="52513229" type="WGS84" externalId="009171001#86" externalStationNr="009171001" />
+ <Arr getOut="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:42:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="24" type="NORMAL">
+<Station name="S+U Wuhletal (Berlin)" x="13575482" y="52512536" type="WGS84" externalId="009175001#86" externalStationNr="009175001" />
+ <Arr getOut="YES">
+<Time>00d18:43:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:44:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="25" type="NORMAL">
+<Station name="S Kaulsdorf (Berlin)" x="13589029" y="52512123" type="WGS84" externalId="009175002#86" externalStationNr="009175002" />
+ <Arr getOut="YES">
+<Time>00d18:46:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:46:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="26" type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d18:48:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:49:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d18:48:00</Time>
+<Platform>
+<Text>3 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+</ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Dep getIn="YES">
+<Time>00d18:53:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="2823" cycle="3" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 195 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>195</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Marzahn</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="0" type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Dep getIn="YES">
+<Time>00d18:53:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="1" type="NORMAL">
+<Station name="Linderhofstr. (Berlin)" x="13614846" y="52517436" type="WGS84" externalId="009176513#86" externalStationNr="009176513" />
+ <Arr getOut="YES">
+<Time>00d18:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="2" type="NORMAL">
+<Station name="Karlshafener Str. (Berlin)" x="13617659" y="52520393" type="WGS84" externalId="009176514#86" externalStationNr="009176514" />
+ <Arr getOut="YES">
+<Time>00d18:56:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:56:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="3" type="NORMAL">
+<Station name="Am Rosenhag (Berlin)" x="13621803" y="52524762" type="WGS84" externalId="009176006#86" externalStationNr="009176006" />
+ <Arr getOut="YES">
+<Time>00d18:57:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:57:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="4" type="NORMAL">
+<Station name="Wildrosengehölz (Berlin)" x="13624635" y="52527773" type="WGS84" externalId="009176550#86" externalStationNr="009176550" />
+ <Arr getOut="YES">
+<Time>00d18:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="5" type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+</ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">(...)</BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>37</Distance>
+</GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+</BasicStop>
+</Arrival>
+</ConSection>
+</ConSectionList>
+</Connection>
+ <Connection id="C1-1">
+ <Overview>
+<Date>20120123</Date>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d17:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:17:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+<Transfers>2</Transfers>
+<Duration>
+<Time>00d01:23:00</Time>
+</Duration>
+ <ServiceDays>
+<RegularServiceText>
+<Text>Mo - Fr</Text>
+</RegularServiceText>
+<IrregularServiceText>
+<Text>not 6., 9. Apr, 1., 17., 28. May, 3. Oct</Text>
+</IrregularServiceText>
+ </ServiceDays>
+<Products>
+<Product cat="Bus " />
+</Products>
+ </Overview>
+ <ConSectionList>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d17:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>23</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Dep getIn="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="1489" cycle="0" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 155 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>155</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>Weißensee, Piesporter Str.</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="13" type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d17:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="Tschaikowskistr. (Berlin)" x="13398610" y="52576081" type="WGS84" externalId="009131505#86" externalStationNr="009131505" />
+ <Arr getOut="YES">
+<Time>00d17:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d17:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="Bürgerpark Pankow (Berlin)" x="13398143" y="52571200" type="WGS84" externalId="009131004#86" externalStationNr="009131004" />
+ <Arr getOut="YES">
+<Time>00d17:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d17:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="16" type="NORMAL">
+<Station name="Rathaus Pankow (Berlin)" x="13403455" y="52569384" type="WGS84" externalId="009130501#86" externalStationNr="009130501" />
+ <Arr getOut="YES">
+<Time>00d18:01:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:01:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="17" type="NORMAL">
+<Station name="Mühlenstr. (Berlin)" x="13406584" y="52565357" type="WGS84" externalId="009130018#86" externalStationNr="009130018" />
+ <Arr getOut="YES">
+<Time>00d18:02:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:02:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="18" type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Dep getIn="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="12838" cycle="0" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="35">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus X54 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="35">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="35">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="35">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>X54</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="35">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>U Hellersdorf</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="35">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="1" type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="2" type="NORMAL">
+<Station name="S+U Pankow/Granitzstr. (Berlin)" x="13413056" y="52566283" type="WGS84" externalId="009130500#86" externalStationNr="009130500" />
+ <Arr getOut="YES">
+<Time>00d18:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="3" type="NORMAL">
+<Station name="Granitzstr./Neumannstr. (Berlin)" x="13419007" y="52569213" type="WGS84" externalId="009130508#86" externalStationNr="009130508" />
+ <Arr getOut="YES">
+<Time>00d18:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Retzbacher Weg (Berlin)" x="0" y="0" type="WGS84" externalId="009130507#" externalStationNr="009130507" />
+</BasicStop>
+ <BasicStop index="4" type="NORMAL">
+<Station name="Prenzlauer Promenade/Granitzstr. (Berlin)" x="13427843" y="52571991" type="WGS84" externalId="009130014#86" externalStationNr="009130014" />
+ <Arr getOut="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="5" type="NORMAL">
+<Station name="Heinersdorf Kirche (Berlin)" x="13440392" y="52568162" type="WGS84" externalId="009141002#86" externalStationNr="009141002" />
+ <Arr getOut="YES">
+<Time>00d18:15:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:15:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="6" type="NORMAL">
+<Station name="Straße 16 (Berlin)" x="13445210" y="52565069" type="WGS84" externalId="009141508#86" externalStationNr="009141508" />
+ <Arr getOut="YES">
+<Time>00d18:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Rennbahnstr./Gustav-Adolf-Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009140008#" externalStationNr="009140008" />
+</BasicStop>
+ <BasicStop index="7" type="NORMAL">
+<Station name="Pasedagplatz (Berlin)" x="13460114" y="52559775" type="WGS84" externalId="009140002#86" externalStationNr="009140002" />
+ <Arr getOut="YES">
+<Time>00d18:19:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:19:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="8" type="NORMAL">
+<Station name="Rathaus Weißensee (Berlin)" x="13466667" y="52559289" type="WGS84" externalId="009140018#86" externalStationNr="009140018" />
+ <Arr getOut="YES">
+<Time>00d18:21:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:21:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Neumagener Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009140515#" externalStationNr="009140515" />
+</BasicStop>
+ <BasicStop index="9" type="NORMAL">
+<Station name="Piesporter Str. (Berlin)" x="13476708" y="52560485" type="WGS84" externalId="009140001#86" externalStationNr="009140001" />
+ <Arr getOut="YES">
+<Time>00d18:22:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:22:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="10" type="NORMAL">
+<Station name="Darßer Str./Piesporter Str. (Berlin)" x="13478309" y="52566813" type="WGS84" externalId="009140020#86" externalStationNr="009140020" />
+ <Arr getOut="YES">
+<Time>00d18:23:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:23:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Perler Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009150021#" externalStationNr="009150021" />
+</BasicStop>
+ <BasicStop index="11" type="NORMAL">
+<Station name="Darßer Str./Ribnitzer Str. (Berlin)" x="13493437" y="52565006" type="WGS84" externalId="009150022#86" externalStationNr="009150022" />
+ <Arr getOut="YES">
+<Time>00d18:25:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:25:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Barther Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009151010#" externalStationNr="009151010" />
+</BasicStop>
+ <BasicStop index="12" type="NORMAL">
+<Station name="Prerower Platz (Berlin)" x="13505060" y="52563218" type="WGS84" externalId="009151006#86" externalStationNr="009151006" />
+ <Arr getOut="YES">
+<Time>00d18:28:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:28:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="13" type="NORMAL">
+<Station name="S Hohenschönhausen Bhf (Berlin)" x="13513699" y="52566553" type="WGS84" externalId="009152001#86" externalStationNr="009152001" />
+ <Arr getOut="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Falkenberger Ch./Prendener Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009152006#" externalStationNr="009152006" />
+</BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="Vincent-van-Gogh-Str. (Berlin)" x="13524675" y="52564836" type="WGS84" externalId="009152502#86" externalStationNr="009152502" />
+ <Arr getOut="YES">
+<Time>00d18:34:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:34:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Seehausener Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009152501#" externalStationNr="009152501" />
+</BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Zu den Krugwiesen (Berlin)" x="0" y="0" type="WGS84" externalId="009152500#" externalStationNr="009152500" />
+</BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Klettwitzer Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009170536#" externalStationNr="009170536" />
+</BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Boxberger Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009170535#" externalStationNr="009170535" />
+</BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="Bitterfelder Str./Wolfener Str. (Berlin)" x="13545323" y="52553662" type="WGS84" externalId="009170534#86" externalStationNr="009170534" />
+ <Arr getOut="YES">
+<Time>00d18:38:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:38:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Walter-Felsenstein-Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009170533#" externalStationNr="009170533" />
+</BasicStop>
+ <BasicStop index="16" type="NORMAL">
+<Station name="S Raoul-Wallenberg-Str. (Berlin)" x="13548388" y="52550750" type="WGS84" externalId="009170002#86" externalStationNr="009170002" />
+ <Arr getOut="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Paul-Dessau-Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009170518#" externalStationNr="009170518" />
+</BasicStop>
+ <BasicStop index="17" type="NORMAL">
+<Station name="Jan-Petersen-Str. (Berlin)" x="13561701" y="52547352" type="WGS84" externalId="009170517#86" externalStationNr="009170517" />
+ <Arr getOut="YES">
+<Time>00d18:44:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:44:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="18" type="NORMAL">
+<Station name="Landsberger Allee/Blumberger Damm (Berlin)" x="13572039" y="52546120" type="WGS84" externalId="009170013#86" externalStationNr="009170013" />
+ <Arr getOut="YES">
+<Time>00d18:47:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:47:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Brodowiner Ring (Berlin)" x="0" y="0" type="WGS84" externalId="009170524#" externalStationNr="009170524" />
+</BasicStop>
+ <BasicStop index="19" type="NORMAL">
+<Station name="Betriebshof Marzahn (Berlin)" x="13583716" y="52549006" type="WGS84" externalId="009170010#86" externalStationNr="009170010" />
+ <Arr getOut="YES">
+<Time>00d18:49:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:49:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+<BasicStop type="VIRTUAL">
+<Station name="Landsberger Chaussee/Zossener Str. (Berlin)" x="0" y="0" type="WGS84" externalId="009175510#" externalStationNr="009175510" />
+</BasicStop>
+ <BasicStop index="20" type="NORMAL">
+<Station name="Teupitzer Str. (Berlin)" x="13599573" y="52547262" type="WGS84" externalId="009175554#86" externalStationNr="009175554" />
+ <Arr getOut="YES">
+<Time>00d18:52:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:52:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="21" type="NORMAL">
+<Station name="Stendaler Str./Quedlinburger Str. (Berlin)" x="13604517" y="52538956" type="WGS84" externalId="009175011#86" externalStationNr="009175011" />
+ <Arr getOut="YES">
+<Time>00d18:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="22" type="NORMAL">
+<Station name="U Hellersdorf (Berlin)" x="13605794" y="52535944" type="WGS84" externalId="009175007#86" externalStationNr="009175007" />
+ <Arr getOut="YES">
+<Time>00d18:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="U Hellersdorf (Berlin)" x="13605794" y="52535944" type="WGS84" externalId="009175007#86" externalStationNr="009175007" />
+ <Arr getOut="YES">
+<Time>00d18:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="U Hellersdorf (Berlin)" x="13605794" y="52535944" type="WGS84" externalId="009175007#86" externalStationNr="009175007" />
+ <Dep getIn="YES">
+<Time>00d19:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="2757" cycle="10" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="8">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 195 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>195</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>Myslowitzer Str. via S Mahlsdorf</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="12" type="NORMAL">
+<Station name="U Hellersdorf (Berlin)" x="13605794" y="52535944" type="WGS84" externalId="009175007#86" externalStationNr="009175007" />
+ <Arr getOut="YES">
+<Time>00d19:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="13" type="NORMAL">
+<Station name="Janusz-Korczak-Str. (Berlin)" x="13607645" y="52538911" type="WGS84" externalId="009175517#86" externalStationNr="009175517" />
+ <Arr getOut="YES">
+<Time>00d19:06:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:06:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="Naumburger Ring (Berlin)" x="13610801" y="52539891" type="WGS84" externalId="009175551#86" externalStationNr="009175551" />
+ <Arr getOut="YES">
+<Time>00d19:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="Oschatzer Ring (Berlin)" x="13617902" y="52540870" type="WGS84" externalId="009175508#86" externalStationNr="009175508" />
+ <Arr getOut="YES">
+<Time>00d19:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="16" type="NORMAL">
+<Station name="U Louis-Lewin-Str. (Berlin)" x="13619709" y="52539136" type="WGS84" externalId="009175015#86" externalStationNr="009175015" />
+ <Arr getOut="YES">
+<Time>00d19:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="17" type="NORMAL">
+<Station name="Schwarzheider Str. (Berlin)" x="13622738" y="52535845" type="WGS84" externalId="009175507#86" externalStationNr="009175507" />
+ <Arr getOut="YES">
+<Time>00d19:11:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:11:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="18" type="NORMAL">
+<Station name="Branitzer Str. (Berlin)" x="13621794" y="52532501" type="WGS84" externalId="009175516#86" externalStationNr="009175516" />
+ <Arr getOut="YES">
+<Time>00d19:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="19" type="NORMAL">
+<Station name="Riesaer Str./Louis-Lewin-Str. (Berlin)" x="13622388" y="52530326" type="WGS84" externalId="009175014#86" externalStationNr="009175014" />
+ <Arr getOut="YES">
+<Time>00d19:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="20" type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d19:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d19:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Dep getIn="YES">
+<Time>00d19:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>37</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:17:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ </ConSectionList>
+</Connection>
+ <Connection id="C1-2">
+ <Overview>
+<Date>20120123</Date>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d17:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+<Transfers>4</Transfers>
+<Duration>
+<Time>00d01:01:00</Time>
+</Duration>
+ <ServiceDays>
+<RegularServiceText>
+<Text>Mo - Fr</Text>
+</RegularServiceText>
+<IrregularServiceText>
+<Text>not 6., 9. Apr, 1., 17., 28. May, 3. Oct</Text>
+</IrregularServiceText>
+ </ServiceDays>
+ <Products>
+<Product cat="Bus " />
+<Product cat="S " />
+ </Products>
+ </Overview>
+ <ConSectionList>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d17:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>23</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d18:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Dep getIn="YES">
+<Time>00d18:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="1342" cycle="0" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="4">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 150 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="4">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="4">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="4">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>150</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="4">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>U Osloer Str.</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="4">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="29" type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d18:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="30" type="NORMAL">
+<Station name="Heinrich-Mann-Str. (Berlin)" x="13390223" y="52574571" type="WGS84" externalId="009131520#86" externalStationNr="009131520" />
+ <Arr getOut="YES">
+<Time>00d18:01:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:01:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="31" type="NORMAL">
+<Station name="Hermann-Hesse-Str. (Berlin)" x="13384911" y="52572971" type="WGS84" externalId="009131503#86" externalStationNr="009131503" />
+ <Arr getOut="YES">
+<Time>00d18:02:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:02:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="32" type="NORMAL">
+<Station name="Frühlingstr. (Berlin)" x="13380479" y="52574769" type="WGS84" externalId="009131502#86" externalStationNr="009131502" />
+ <Arr getOut="YES">
+<Time>00d18:03:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:03:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="33" type="NORMAL">
+<Station name="S Schönholz (Berlin)" x="13380344" y="52571856" type="WGS84" externalId="009085201#86" externalStationNr="009085201" />
+ <Arr getOut="YES">
+<Time>00d18:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Schönholz (Berlin)" x="13380344" y="52571856" type="WGS84" externalId="009085201#86" externalStationNr="009085201" />
+ <Arr getOut="YES">
+<Time>00d18:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Schönholz (Berlin)" x="13380344" y="52571856" type="WGS84" externalId="009085201#86" externalStationNr="009085201" />
+ <Dep getIn="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text>4 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="23913" cycle="29" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="2">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S25</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="2">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-6</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="2">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="2">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S25</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="2">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Teltow Stadt</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="2">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="2">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="7" type="NORMAL">
+<Station name="S Schönholz (Berlin)" x="13380344" y="52571856" type="WGS84" externalId="009085201#86" externalStationNr="009085201" />
+ <Arr getOut="YES">
+<Time>00d18:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="8" type="NORMAL">
+<Station name="S Wollankstr. (Berlin)" x="13393154" y="52564971" type="WGS84" externalId="009130003#86" externalStationNr="009130003" />
+ <Arr getOut="YES">
+<Time>00d18:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="9" type="NORMAL">
+<Station name="S Bornholmer Str. (Berlin)" x="13397846" y="52555028" type="WGS84" externalId="009110011#86" externalStationNr="009110011" />
+ <Arr getOut="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:13:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Bornholmer Str. (Berlin)" x="13397846" y="52555028" type="WGS84" externalId="009110011#86" externalStationNr="009110011" />
+ <Arr getOut="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text>1 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Bornholmer Str. (Berlin)" x="13397846" y="52555028" type="WGS84" externalId="009110011#86" externalStationNr="009110011" />
+ <Dep getIn="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text>2 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="26065" cycle="3" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S8</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-1</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S8</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Zeuthen</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="8" type="NORMAL">
+<Station name="S Bornholmer Str. (Berlin)" x="13397846" y="52555028" type="WGS84" externalId="009110011#86" externalStationNr="009110011" />
+ <Arr getOut="YES">
+<Time>00d18:11:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:12:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="9" type="NORMAL">
+<Station name="S+U Schönhauser Allee (Berlin)" x="13415141" y="52549338" type="WGS84" externalId="009110001#86" externalStationNr="009110001" />
+ <Arr getOut="YES">
+<Time>00d18:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:15:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="10" type="NORMAL">
+<Station name="S Prenzlauer Allee (Berlin)" x="13427744" y="52544880" type="WGS84" externalId="009110002#86" externalStationNr="009110002" />
+ <Arr getOut="YES">
+<Time>00d18:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:16:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="11" type="NORMAL">
+<Station name="S Greifswalder Str. (Berlin)" x="13439241" y="52540430" type="WGS84" externalId="009110003#86" externalStationNr="009110003" />
+ <Arr getOut="YES">
+<Time>00d18:18:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:18:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="12" type="NORMAL">
+<Station name="S Landsberger Allee (Berlin)" x="13455943" y="52528771" type="WGS84" externalId="009110004#86" externalStationNr="009110004" />
+ <Arr getOut="YES">
+<Time>00d18:20:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:21:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="13" type="NORMAL">
+<Station name="S Storkower Str. (Berlin)" x="13464888" y="52524195" type="WGS84" externalId="009110012#86" externalStationNr="009110012" />
+ <Arr getOut="YES">
+<Time>00d18:22:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:23:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="S+U Frankfurter Allee (Berlin)" x="13475297" y="52513615" type="WGS84" externalId="009120001#86" externalStationNr="009120001" />
+ <Arr getOut="YES">
+<Time>00d18:24:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:25:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:27:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:28:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:27:00</Time>
+<Platform>
+<Text>11 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Dep getIn="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text>3 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="24923" cycle="1" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S5</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-9</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S5</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Hoppegarten</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="19" type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="20" type="NORMAL">
+<Station name="S Nöldnerplatz (Berlin)" x="13484295" y="52503439" type="WGS84" externalId="009160003#86" externalStationNr="009160003" />
+ <Arr getOut="YES">
+<Time>00d18:33:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:34:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="21" type="NORMAL">
+<Station name="S+U Lichtenberg Bhf (Berlin)" x="13499056" y="52510532" type="WGS84" externalId="009160004#86" externalStationNr="009160004" />
+ <Arr getOut="YES">
+<Time>00d18:36:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:36:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="22" type="NORMAL">
+<Station name="S Friedrichsfelde Ost (Berlin)" x="13520045" y="52513750" type="WGS84" externalId="009171002#86" externalStationNr="009171002" />
+ <Arr getOut="YES">
+<Time>00d18:38:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:39:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="23" type="NORMAL">
+<Station name="S Biesdorf (Berlin)" x="13556793" y="52513229" type="WGS84" externalId="009171001#86" externalStationNr="009171001" />
+ <Arr getOut="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:42:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="24" type="NORMAL">
+<Station name="S+U Wuhletal (Berlin)" x="13575482" y="52512536" type="WGS84" externalId="009175001#86" externalStationNr="009175001" />
+ <Arr getOut="YES">
+<Time>00d18:43:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:44:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="25" type="NORMAL">
+<Station name="S Kaulsdorf (Berlin)" x="13589029" y="52512123" type="WGS84" externalId="009175002#86" externalStationNr="009175002" />
+ <Arr getOut="YES">
+<Time>00d18:46:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:46:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="26" type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d18:48:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:49:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d18:48:00</Time>
+<Platform>
+<Text>3 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Dep getIn="YES">
+<Time>00d18:53:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="2823" cycle="3" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 195 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>195</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Marzahn</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="0" type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Dep getIn="YES">
+<Time>00d18:53:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="1" type="NORMAL">
+<Station name="Linderhofstr. (Berlin)" x="13614846" y="52517436" type="WGS84" externalId="009176513#86" externalStationNr="009176513" />
+ <Arr getOut="YES">
+<Time>00d18:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:55:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="2" type="NORMAL">
+<Station name="Karlshafener Str. (Berlin)" x="13617659" y="52520393" type="WGS84" externalId="009176514#86" externalStationNr="009176514" />
+ <Arr getOut="YES">
+<Time>00d18:56:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:56:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="3" type="NORMAL">
+<Station name="Am Rosenhag (Berlin)" x="13621803" y="52524762" type="WGS84" externalId="009176006#86" externalStationNr="009176006" />
+ <Arr getOut="YES">
+<Time>00d18:57:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:57:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="4" type="NORMAL">
+<Station name="Wildrosengehölz (Berlin)" x="13624635" y="52527773" type="WGS84" externalId="009176550#86" externalStationNr="009176550" />
+ <Arr getOut="YES">
+<Time>00d18:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="5" type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Dep getIn="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>37</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:00:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ </ConSectionList>
+</Connection>
+ <Connection id="C1-3">
+ <Overview>
+<Date>20120123</Date>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d18:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+<Transfers>3</Transfers>
+<Duration>
+<Time>00d01:06:00</Time>
+</Duration>
+ <ServiceDays>
+<RegularServiceText>
+<Text>Mo - Fr</Text>
+</RegularServiceText>
+<IrregularServiceText>
+<Text>not 6., 9. Apr, 1., 17., 28. May, 3. Oct</Text>
+</IrregularServiceText>
+ </ServiceDays>
+ <Products>
+<Product cat="Bus " />
+<Product cat="S " />
+ </Products>
+ </Overview>
+ <ConSectionList>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13392749" y="52575722" type="WGS84" />
+ <Dep getIn="YES">
+<Time>00d18:04:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>23</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Dep getIn="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="1503" cycle="0" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 155 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>155</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>Heinersdorf Kirche</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="13" type="NORMAL">
+<Station name="Homeyerstr. (Berlin)" x="13392749" y="52575731" type="WGS84" externalId="009131522#86" externalStationNr="009131522" />
+ <Arr getOut="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="14" type="NORMAL">
+<Station name="Tschaikowskistr. (Berlin)" x="13398610" y="52576081" type="WGS84" externalId="009131505#86" externalStationNr="009131505" />
+ <Arr getOut="YES">
+<Time>00d18:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="15" type="NORMAL">
+<Station name="Bürgerpark Pankow (Berlin)" x="13398143" y="52571200" type="WGS84" externalId="009131004#86" externalStationNr="009131004" />
+ <Arr getOut="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="16" type="NORMAL">
+<Station name="Rathaus Pankow (Berlin)" x="13403455" y="52569384" type="WGS84" externalId="009130501#86" externalStationNr="009130501" />
+ <Arr getOut="YES">
+<Time>00d18:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="17" type="NORMAL">
+<Station name="Mühlenstr. (Berlin)" x="13406584" y="52565357" type="WGS84" externalId="009130018#86" externalStationNr="009130018" />
+ <Arr getOut="YES">
+<Time>00d18:11:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:11:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="18" type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Arr getOut="YES">
+<Time>00d18:14:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Dep getIn="YES">
+<Time>00d18:19:00</Time>
+<Platform>
+<Text>1 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="26160" cycle="16" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="8">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S9</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-6</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S9</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Flughafen Berlin-Schönefeld Bhf</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="8">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="0" type="NORMAL">
+<Station name="S+U Pankow (Berlin)" x="13412283" y="52567281" type="WGS84" externalId="009130002#86" externalStationNr="009130002" />
+ <Dep getIn="YES">
+<Time>00d18:19:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="1" type="NORMAL">
+<Station name="S Bornholmer Str. (Berlin)" x="13397846" y="52555028" type="WGS84" externalId="009110011#86" externalStationNr="009110011" />
+ <Arr getOut="YES">
+<Time>00d18:21:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:22:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="2" type="NORMAL">
+<Station name="S+U Schönhauser Allee (Berlin)" x="13415141" y="52549338" type="WGS84" externalId="009110001#86" externalStationNr="009110001" />
+ <Arr getOut="YES">
+<Time>00d18:24:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:25:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="3" type="NORMAL">
+<Station name="S Prenzlauer Allee (Berlin)" x="13427744" y="52544880" type="WGS84" externalId="009110002#86" externalStationNr="009110002" />
+ <Arr getOut="YES">
+<Time>00d18:26:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:26:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="4" type="NORMAL">
+<Station name="S Greifswalder Str. (Berlin)" x="13439241" y="52540430" type="WGS84" externalId="009110003#86" externalStationNr="009110003" />
+ <Arr getOut="YES">
+<Time>00d18:28:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:28:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="5" type="NORMAL">
+<Station name="S Landsberger Allee (Berlin)" x="13455943" y="52528771" type="WGS84" externalId="009110004#86" externalStationNr="009110004" />
+ <Arr getOut="YES">
+<Time>00d18:30:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:31:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="6" type="NORMAL">
+<Station name="S Storkower Str. (Berlin)" x="13464888" y="52524195" type="WGS84" externalId="009110012#86" externalStationNr="009110012" />
+ <Arr getOut="YES">
+<Time>00d18:32:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:33:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="7" type="NORMAL">
+<Station name="S+U Frankfurter Allee (Berlin)" x="13475297" y="52513615" type="WGS84" externalId="009120001#86" externalStationNr="009120001" />
+ <Arr getOut="YES">
+<Time>00d18:34:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:35:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="8" type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:37:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:38:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:37:00</Time>
+<Platform>
+<Text>11 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Dep getIn="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text>3 </Text>
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="24669" cycle="0" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>S5</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="CATEGORY" code="0">
+<AttributeVariant type="SHORT">
+<Text>S-7</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>S </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>DBS</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>S-Bahn Berlin GmbH</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>S5</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Strausberg Bhf</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="1" code="bv">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="7">
+<Attribute priority="350" code="FB">
+<AttributeVariant type="NORMAL">
+<Text>Fahrradmitnahme möglich</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="19" type="NORMAL">
+<Station name="S Ostkreuz (Berlin)" x="13469095" y="52502846" type="WGS84" externalId="009120003#86" externalStationNr="009120003" />
+ <Arr getOut="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:41:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="20" type="NORMAL">
+<Station name="S Nöldnerplatz (Berlin)" x="13484295" y="52503439" type="WGS84" externalId="009160003#86" externalStationNr="009160003" />
+ <Arr getOut="YES">
+<Time>00d18:43:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:44:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="21" type="NORMAL">
+<Station name="S+U Lichtenberg Bhf (Berlin)" x="13499056" y="52510532" type="WGS84" externalId="009160004#86" externalStationNr="009160004" />
+ <Arr getOut="YES">
+<Time>00d18:46:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:46:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="22" type="NORMAL">
+<Station name="S Friedrichsfelde Ost (Berlin)" x="13520045" y="52513750" type="WGS84" externalId="009171002#86" externalStationNr="009171002" />
+ <Arr getOut="YES">
+<Time>00d18:48:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:49:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="23" type="NORMAL">
+<Station name="S Biesdorf (Berlin)" x="13556793" y="52513229" type="WGS84" externalId="009171001#86" externalStationNr="009171001" />
+ <Arr getOut="YES">
+<Time>00d18:51:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:52:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="24" type="NORMAL">
+<Station name="S+U Wuhletal (Berlin)" x="13575482" y="52512536" type="WGS84" externalId="009175001#86" externalStationNr="009175001" />
+ <Arr getOut="YES">
+<Time>00d18:53:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:54:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="25" type="NORMAL">
+<Station name="S Kaulsdorf (Berlin)" x="13589029" y="52512123" type="WGS84" externalId="009175002#86" externalStationNr="009175002" />
+ <Arr getOut="YES">
+<Time>00d18:56:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:56:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="26" type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d18:58:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d18:59:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d18:58:00</Time>
+<Platform>
+<Text>3 </Text>
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Dep getIn="YES">
+<Time>00d19:03:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <Journey>
+<JHandle tNr="2794" cycle="2" puic="86" />
+ <JourneyAttributeList>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NAME">
+<AttributeVariant type="NORMAL">
+<Text>Bus 195 </Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="CATEGORY" code="3">
+<AttributeVariant type="SHORT">
+<Text>B</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>Bus </Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Bus </Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+ <Attribute type="OPERATOR">
+<AttributeVariant type="SHORT">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="NORMAL">
+<Text>BVG</Text>
+</AttributeVariant>
+<AttributeVariant type="LONG">
+<Text>Berliner Verkehrsbetriebe</Text>
+</AttributeVariant>
+ </Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="NUMBER">
+<AttributeVariant type="NORMAL">
+<Text>195</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute type="DIRECTION">
+<AttributeVariant type="NORMAL">
+<Text>S Marzahn</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+<JourneyAttribute from="0" to="5">
+<Attribute priority="1" code="bf">
+<AttributeVariant type="NORMAL">
+<Text>barrierefrei</Text>
+</AttributeVariant>
+</Attribute>
+</JourneyAttribute>
+ </JourneyAttributeList>
+ <PassList>
+ <BasicStop index="7" type="NORMAL">
+<Station name="S Mahlsdorf (Berlin)" x="13612212" y="52511961" type="WGS84" externalId="009176001#86" externalStationNr="009176001" />
+ <Arr getOut="YES">
+<Time>00d19:03:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:03:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="8" type="NORMAL">
+<Station name="Linderhofstr. (Berlin)" x="13614846" y="52517436" type="WGS84" externalId="009176513#86" externalStationNr="009176513" />
+ <Arr getOut="YES">
+<Time>00d19:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:05:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="9" type="NORMAL">
+<Station name="Karlshafener Str. (Berlin)" x="13617659" y="52520393" type="WGS84" externalId="009176514#86" externalStationNr="009176514" />
+ <Arr getOut="YES">
+<Time>00d19:06:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:06:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="10" type="NORMAL">
+<Station name="Am Rosenhag (Berlin)" x="13621803" y="52524762" type="WGS84" externalId="009176006#86" externalStationNr="009176006" />
+ <Arr getOut="YES">
+<Time>00d19:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:07:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="11" type="NORMAL">
+<Station name="Wildrosengehölz (Berlin)" x="13624635" y="52527773" type="WGS84" externalId="009176550#86" externalStationNr="009176550" />
+ <Arr getOut="YES">
+<Time>00d19:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:08:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ <BasicStop index="12" type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d19:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ <Dep getIn="YES">
+<Time>00d19:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+ </PassList>
+ </Journey>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Arr getOut="YES">
+<Time>00d19:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ <ConSection>
+<Departure>
+ <BasicStop type="NORMAL">
+<Station name="Hönower Str./Riesaer Str. (Berlin)" x="13625848" y="52529068" type="WGS84" externalId="009176009#86" externalStationNr="009176009" />
+ <Dep getIn="YES">
+<Time>00d19:09:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Dep>
+ </BasicStop>
+</Departure>
+ <GisRoute type="FOOT">
+<Duration>
+<Time>00d00:01:00</Time>
+</Duration>
+<Distance>37</Distance>
+ </GisRoute>
+<Arrival>
+ <BasicStop type="NORMAL">
+<Address name="unknown" x="13625848" y="52529059" type="WGS84" />
+ <Arr getOut="YES">
+<Time>00d19:10:00</Time>
+<Platform>
+<Text />
+</Platform>
+ </Arr>
+ </BasicStop>
+</Arrival>
+ </ConSection>
+ </ConSectionList>
+</Connection>
+ </ConnectionList>
+</ConRes>
+</ResC>

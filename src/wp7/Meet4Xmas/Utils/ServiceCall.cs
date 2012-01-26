@@ -19,7 +19,7 @@ namespace Meet4Xmas
     public class ServiceCall
     {
         private static Dispatcher UIDispatcher = Deployment.Current.Dispatcher;
-        public static String ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/1/";
+        public static String ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/2/";
         private static CHessianProxyFactory m_proxyFactory = null;
         private static CHessianProxyFactory ProxyFactory
         {
