@@ -37,14 +37,14 @@
                     <TextBlock Margin="16 21 0 20" Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
                 </DataTemplate>
             </Grid.Resources>
+            <TextBlock Name="textBlock2" Text="Where?" VerticalAlignment="Top" DataContext="{Binding}" Margin="0,108,0,0" Foreground="#FF949294" />
+            <TextBlock Margin="0,231,0,0" Name="textBlock3" Text="Who?" VerticalAlignment="Top" Foreground="#FFA5A2A5" />
+            <ListBox Name="ContactList" Margin="0,264,0,0" />
             <toolkit:ListPicker x:Name="listPicker" ItemTemplate="{StaticResource PickerItemTemplate}"
                                 FullModeItemTemplate="{StaticResource PickerFullModeItemTemplate}"
                                 Header="Transport"
                                 FullModeHeader="Transport"
                                 CacheMode="BitmapCache" Padding="2" Margin="0" />
-            <TextBlock Name="textBlock2" Text="Where?" VerticalAlignment="Top" DataContext="{Binding}" Margin="0,108,0,0" Foreground="#FF949294" />
-            <TextBlock Margin="0,231,0,0" Name="textBlock3" Text="Who?" VerticalAlignment="Top" Foreground="#FFA5A2A5" />
-            <ListBox Name="ContactList" Margin="0,264,0,0" />
         </Grid>
     </Grid>
  
