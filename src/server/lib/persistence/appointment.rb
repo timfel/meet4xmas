@@ -94,6 +94,8 @@ module Persistence
         WebAPI::GoogleDirections.new( :origin => current_location, :destination => location ).path
       when TravelType::Walk
         WebAPI::GoogleDirections.new( :mode => 'walking', :origin => current_location, :destination => location ).path
+      when TravelType::PublicTransport
+        WebAPI::VBBDirections.new( :origin => current_location, :destination => location ).path
       else
         [current_location, location]
       end

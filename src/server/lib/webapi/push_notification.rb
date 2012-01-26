@@ -101,7 +101,7 @@ module Meet4Xmas
         @payloads = options.delete(:payloads) || {}
         @recipients = options.delete(:recipients) || []
         @notification_args = {:apns => [], :mpns => [], :c2dm => []}
-        
+
         default_handler = Proc.new { |device, payload| payload }
         @adjust_payload = {
           :apns => default_handler,
@@ -307,9 +307,14 @@ module Meet4Xmas
               :alert => @appointment.user_message ? @appointment.user_message : short_message
             },
             :mpns => {
-              :type => :toast,
-              :title => @appointment.user_message || "Invitation",
-              :message => short_message
+              :toast => {
+                :title => @appointment.user_message || "Invitation",
+                :message => short_message
+              },
+              :tile => {
+                :back_title => "#{@appointment.creator.id} says:",
+                :back_content => @appointment.user_message || "Invitation!"
+              },
             },
             :c2dm => {
               # TODO
