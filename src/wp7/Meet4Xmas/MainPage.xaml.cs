@@ -33,6 +33,15 @@ namespace Meet4Xmas
             }
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string appointmentId = "";
+            if (NavigationContext.QueryString.TryGetValue("appointmentId", out appointmentId)) {
+                Account.HandleAppointmentToast(appointmentId);
+            }
+        }
+
         private void CreateAppointmentButtonClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/AppointmentCreate.xaml", UriKind.Relative));
