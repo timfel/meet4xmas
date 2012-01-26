@@ -35,10 +35,7 @@ namespace Meet4Xmas
                 {
                     Settings.Appointments.Add(apt);
                     apt.GetTravelPlan(TravelPlan.TravelType.PublicTransport,
-                        (TravelPlan tp) =>
-                        {
-                            TravelPlan t = tp;
-                        },
+                        (TravelPlan tp) => Settings.Save(),
                         (ErrorInfo ei) =>
                         {
                             MessageBox.Show("An error occured trying to find your travel plan." + ei.message);
