@@ -62,8 +62,9 @@ module Meet4Xmas
                 conSection.xpath('./GisRoute').attr('type').value == 'FOOT' ? "Walk some time - #{conSection.xpath('./GisRoute/Duration/Time').text.strip}" : ""
               else
                 name_attribute = journey_attribute conSection.xpath('./Journey'), 'NAME'
+                direction_attribute = journey_attribute conSection.xpath('./Journey'), 'DIRECTION'
                 stop_count = conSection.xpath('./Journey/PassList').children.size - 1
-                "Go with #{name_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip} for #{stop_count} stop#{'s' if stop_count > 1}"
+                "Go with #{name_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip} (#{direction_attribute.xpath('./Attribute/AttributeVariant/Text').text.strip}) for #{stop_count} stop#{'s' if stop_count > 1}"
               end
               if stop.children.map {|c| c.name}.include? 'Address'
                 path << (Persistence::Location.new :title => "#{stop.xpath('./Address').attr('name').value}",
