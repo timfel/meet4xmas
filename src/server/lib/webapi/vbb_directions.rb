@@ -10,6 +10,7 @@ module Meet4Xmas
         @url_path = "/bin/pub/vbb-fahrinfo/relaunch2011/extxml.exe/"
         @origin = options[:origin]
         @destination = options[:destination]
+        @debug = !!options[:debug]
       end
 
       def journey_attribute(jouney_node, attribute_name)
@@ -40,11 +41,11 @@ module Meet4Xmas
                           </ConReq>
                           </ReqC>"
 
-          http = Net::HTTP.new(@host)
-          response = http.post(@url_path, request_body)
+          http = Net::HTTP.new(@host) if !@debug
+          response = !@debug ? http.post(@url_path, request_body) : File.open( File.join File.dirname(__FILE__), 'vbb_example.response' ).read
           case response
-          when Net::HTTPSuccess
-            response = Nokogiri::XML(response.body)
+          when Net::HTTPSuccess,String
+            response = Nokogiri::XML( !@debug ? response.body : response )
             con_res = response.xpath('/ResC/ConRes').first
             raise 'Missing ConRes' unless con_res
             puts "Warning: unknown ConRes dir '#{con_res['dir']}'" unless con_res['dir'] == 'O'
