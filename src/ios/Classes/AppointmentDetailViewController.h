@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceProtocols.h"
 
 @interface AppointmentDetailViewController : UIViewController
 
-- (AppointmentDetailViewController*) initWithDefaultNib;
+@property (nonatomic, strong) id<Appointment> appointment;
+
+- (AppointmentDetailViewController*) initWithDefaultNibAndAppointment:(id<Appointment>)appointment;
 
 @end

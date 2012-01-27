@@ -131,7 +131,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (void)presentAppointmentDetailView: (id<Appointment>) appointment
 {
-    AppointmentDetailViewController* appointmentDetailViewController = [[AppointmentDetailViewController alloc] initWithDefaultNib];
+    AppointmentDetailViewController* appointmentDetailViewController = [[AppointmentDetailViewController alloc] initWithDefaultNibAndAppointment:appointment];
     
     [self.navigationController pushViewController:appointmentDetailViewController animated:YES];
 }

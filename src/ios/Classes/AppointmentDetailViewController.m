@@ -13,12 +13,21 @@ NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPa
 
 @implementation AppointmentDetailViewController
 
+@synthesize appointment = _appointment;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
+    return self;
+}
+
+- (AppointmentDetailViewController*) initWithDefaultNibAndAppointment:(id<Appointment>)appointment
+{
+    self = (AppointmentDetailViewController*)[self initWithNibName:kDefaultAppointmentDetailViewNibNameIPhone bundle:nil];
+    self.appointment = appointment;
     return self;
 }
 
@@ -39,17 +48,11 @@ NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPa
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-*/
-
-- (AppointmentDetailViewController*) initWithDefaultNib
-{
-    return [ (AppointmentDetailViewController*) self initWithNibName:kDefaultAppointmentDetailViewNibNameIPhone bundle:nil];
+    self.navigationItem.title = self.appointment.message;
 }
 
 - (void)viewDidUnload
