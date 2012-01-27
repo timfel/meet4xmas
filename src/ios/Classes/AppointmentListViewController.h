@@ -10,6 +10,8 @@
 
 #import "RegistrationViewController.h"
 #import "CreateAppointmentViewController.h"
+#import "AppointmentDetailViewController.h"
+
 
 @interface AppointmentListViewController : UITableViewController <RegistrationViewControllerDelegate, CreateAppointmentViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
