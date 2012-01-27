@@ -22,7 +22,6 @@ namespace Meet4Xmas
 {
     public partial class AppointmentShow : PhoneApplicationPage
     {
-        public List<string> source = new List<string>(new string[] { "Car", "Walk", "Public Transport" });
         private Map map { get; set; }
 
         public AppointmentShow()
@@ -81,7 +80,7 @@ namespace Meet4Xmas
 
         private void InitializeTravelTypes()
         {
-            listPicker.ItemsSource = source;
+            listPicker.ItemsSource = new List<string>(TravelPlan.TravelType.TypesList);
             listPicker.SelectedIndex = (DataContext as Appointment).TravelType;
             listPicker.SelectionChanged += new SelectionChangedEventHandler(listPicker_SelectionChanged);
         }
