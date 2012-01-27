@@ -90,6 +90,7 @@ namespace Meet4Xmas
             if (NavigationContext.QueryString.TryGetValue("appointmentId", out appointmentId)) {
                 var app = from a in Settings.Appointments where a.identifier.ToString() == appointmentId select a;
                 this.DataContext = app.First();
+                ContactList.Items.Clear();
                 foreach (Participant p in app.First().participants) {
                     ContactList.Items.Add(p.userId);
                 }
