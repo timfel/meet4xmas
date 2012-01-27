@@ -42,6 +42,7 @@ namespace Meet4Xmas
                             App.ViewModel.LoadAppointments();
                         }, (ei) => { });
                     }
+                    App.ViewModel.LoadAppointments();
 
                     Settings.Save();
                     new Timer((state) => Dispatcher.BeginInvoke(() =>
