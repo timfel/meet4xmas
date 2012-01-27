@@ -28,8 +28,6 @@ namespace Meet4Xmas
             }
             if (Settings.Account == null) {
                 NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
-            } else {
-                Settings.Account.Loaded();
             }
         }
 
@@ -80,6 +78,12 @@ namespace Meet4Xmas
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(String.Format("{0} {1}\nDeveloped by Tim Felgentreff, Markus Kahl\nContact: timfelgentreff@hotmail.com",
+                                           App.ApplicationName, App.Version));
         }
     }
 }

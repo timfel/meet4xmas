@@ -87,7 +87,7 @@ namespace Meet4Xmas
             get
             {
                 if (!Storage.Contains("AllowPushNotifications"))
-                    Storage["AllowPushNotifications"] = true;
+                    Storage["AllowPushNotifications"] = false;
                 return (bool?)Storage["AllowPushNotifications"];
             }
             set

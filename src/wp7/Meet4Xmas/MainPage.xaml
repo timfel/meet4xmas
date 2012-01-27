@@ -22,7 +22,6 @@
         <controls:Panorama x:Name="Panorama" Title="{Binding ApplicationName}">
             <controls:Panorama.Background>
                 <LinearGradientBrush></LinearGradientBrush>
-                <!--<ImageBrush ImageSource="PanoramaBackground.png"/>-->
             </controls:Panorama.Background>
  
             <!--Panorama item one-->
@@ -32,6 +31,7 @@
                     <ListBox HorizontalAlignment="Stretch" Name="AccountActionsList" VerticalAlignment="Stretch" ItemsSource="{Binding}">
                         <Button Name="CreateAppointmentButton" Click="CreateAppointmentButtonClick" DataContext="{Binding}" BorderBrush="#00000000">Create Appointment</Button>
                         <Button BorderBrush="#00000000" Click="SettingsButton_Click">Settings</Button>
+                        <Button Name="AboutButton"  BorderBrush="#00000000" Click="AboutButton_Click">About</Button>
                         <Button Name="LogOutButton"  BorderBrush="#00000000" Click="LogOutButton_Click">Log Out</Button>
                     </ListBox>
                 </Grid>
