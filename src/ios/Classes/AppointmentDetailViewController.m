@@ -7,6 +7,7 @@
 //
 
 #import "AppointmentDetailViewController.h"
+#import "AppDelegate.h"
 
 NSString* kDefaultAppointmentDetailViewNibNameIPhone = @"AppointmentDetailView_iPhone";
 NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPad";
@@ -16,6 +17,7 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
 @implementation AppointmentDetailViewController
 
 @synthesize appointment = _appointment;
+@synthesize acceptButton, declineButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +57,13 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = self.appointment.message;
+    
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    // If it's one of our appointments, change the button labels
+    if ([self.appointment.creator isEqualToString:appDelegate.currentUser]) {
+        self.acceptButton.titleLabel.text = @"Start";
+        self.declineButton.titleLabel.text = @"Cancel";
+    }
 }
 
 - (void)viewDidUnload
