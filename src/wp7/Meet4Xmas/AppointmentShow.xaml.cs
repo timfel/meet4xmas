@@ -13,7 +13,6 @@ using Microsoft.Phone.Controls;
 using org.meet4xmas.wire;
 using System.Windows.Controls.Primitives;
 using Microsoft.Phone.Tasks;
-using System.Linq;
 using Microsoft.Phone.Controls.Maps;
 using System.Device.Location;
 
@@ -43,6 +42,7 @@ namespace Meet4Xmas
                 a.GetTravelPlan(Settings.PreferredTravelType,
                     (travelPlan) => {
                         Settings.Save();
+                        listPicker.SelectedIndex = (DataContext as Appointment).TravelType;
                         InitializeMapWaypoints();
                     },
                     (ei) => MessageBox.Show("Error refreshing travel plan" + ei.message));

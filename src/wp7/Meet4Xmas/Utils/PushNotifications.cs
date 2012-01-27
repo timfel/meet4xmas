@@ -22,9 +22,13 @@ namespace org.meet4xmas.wire
         private const string ChannelName = App.ApplicationName + "Channel";
         private HttpNotificationChannel Channel { get; set; }
 
-        private void OpenNotificationChannel()
+        public void OpenNotificationChannel()
         {
             FindNotificationChannel();
+            if (!(bool)Settings.AllowPushNotifications) {
+                if (Channel != null) Channel.Close();
+                return;
+            }
             if (Channel == null)
             {
                 Channel = new HttpNotificationChannel(ChannelName);
@@ -44,7 +48,7 @@ namespace org.meet4xmas.wire
             Channel = HttpNotificationChannel.Find(ChannelName);
         }
 
-        private void CloseNotificationChannel()
+        public void CloseNotificationChannel()
         {
             FindNotificationChannel();
             if (Channel != null) {
