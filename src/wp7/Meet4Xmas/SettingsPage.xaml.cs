@@ -25,6 +25,12 @@ namespace Meet4Xmas
         {
             InitializeComponent();
             InitializeTravelTypes();
+            InitializeGpsCheckbox();
+        }
+
+        private void InitializeGpsCheckbox()
+        {
+            gpsCheckBox.IsChecked = Settings.AllowUsingLocation;
         }
 
         private void InitializeTravelTypes()
@@ -41,7 +47,13 @@ namespace Meet4Xmas
 
         private void gpsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            Settings.AllowUsingLocation = gpsCheckBox.IsChecked;
+            Settings.AllowUsingLocation = (sender as CheckBox).IsChecked;
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Save();
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
     }
 }

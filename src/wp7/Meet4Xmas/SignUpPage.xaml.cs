@@ -17,9 +17,12 @@ namespace Meet4Xmas
             InitializeComponent();
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            e.Cancel = true;
+            base.OnNavigatedTo(e);
+            while (NavigationService.CanGoBack) {
+                NavigationService.RemoveBackEntry(); // Clear the back stack
+            }
         }
 
         private void SignUpButtonClick(object sender, RoutedEventArgs e)
@@ -46,7 +49,7 @@ namespace Meet4Xmas
 
                     Settings.Save();
                     new Timer((state) => Dispatcher.BeginInvoke(() =>
-                            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative))),
+                            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative))),
                             null, 1000, Timeout.Infinite);
                 },
                 (ErrorInfo errorInfo) =>
@@ -58,12 +61,7 @@ namespace Meet4Xmas
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("W-w-w-w-wub");
-        }
-
-        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-
+            // MessageBox.Show("W-w-w-w-wub");
         }
     }
 }
