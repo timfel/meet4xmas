@@ -11,6 +11,8 @@
 NSString* kDefaultAppointmentDetailViewNibNameIPhone = @"AppointmentDetailView_iPhone";
 NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPad";
 
+NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
+
 @implementation AppointmentDetailViewController
 
 @synthesize appointment = _appointment;
@@ -66,6 +68,41 @@ NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPa
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:kParticipantCellReusableIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kParticipantCellReusableIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    id<Participant> participant = [self.appointment.participants objectAtIndex:indexPath.row];
+    cell.textLabel.text = participant.userId;
+    switch (participant.status) {
+        case PENDING:
+            cell.backgroundColor = [UIColor yellowColor];
+            break;
+        case JOINED:
+            cell.backgroundColor = [UIColor greenColor];
+            break;
+        case DECLINED:
+            cell.backgroundColor = [UIColor redColor];
+            break;
+        default:
+            break;
+    }
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.appointment.participants.count;
 }
 
 @end

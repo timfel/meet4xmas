@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ServiceProtocols.h"
 
-@interface AppointmentDetailViewController : UIViewController
+@interface AppointmentDetailViewController : UIViewController <UITableViewDataSource>
 
 @property (nonatomic, strong) id<Appointment> appointment;
 
