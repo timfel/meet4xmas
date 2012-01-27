@@ -34,7 +34,7 @@ namespace Meet4Xmas
                 (Appointment apt) =>
                 {
                     Settings.Appointments.Add(apt);
-                    apt.GetTravelPlan(TravelPlan.TravelType.PublicTransport,
+                    apt.GetTravelPlan(Settings.PreferredTravelType,
                         (TravelPlan tp) => Settings.Save(),
                         (ErrorInfo ei) =>
                         {

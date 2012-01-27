@@ -56,6 +56,7 @@ namespace Meet4Xmas
         private void AppointmentsList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var appointment = (sender as ListBox).SelectedValue;
+            if (appointment == null) return;
             NavigationService.Navigate(new Uri(String.Format("/AppointmentShow.xaml?appointmentId={0}",
                                                             (appointment as Appointment).identifier),
                                                UriKind.Relative));
@@ -74,6 +75,11 @@ namespace Meet4Xmas
                 Settings.Save();
                 App.ViewModel.LoadAppointments();
             }
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
     }
 }

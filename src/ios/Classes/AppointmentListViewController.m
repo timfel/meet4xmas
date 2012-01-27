@@ -9,6 +9,7 @@
 #import "AppointmentListViewController.h"
 #import "AppDelegate.h"
 #import "RegistrationViewController.h"
+#import "AppointmentDetailViewController.h"
 #import "CreateAppointmentViewController.h"
 #import "ServiceProtocols.h"
 #import "ServiceProxy.h"
@@ -21,6 +22,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (void)presentRegistrationView;
 - (void)presentCreateAppointmentView;
+- (void)presentAppointmentDetailView: (id<Appointment>) appointment;
 
 @end
 
@@ -125,6 +127,14 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     [self presentModalViewController:navigationController animated:YES];
 }
 
+- (void)presentAppointmentDetailView: (id<Appointment>) appointment
+{
+    AppointmentDetailViewController* appointmentDetailViewController = [[AppointmentDetailViewController alloc] initWithDefaultNib];
+    
+    [self presentModalViewController: appointmentDetailViewController animated:YES];
+
+}
+
 #pragma mark - IBActions
 
 - (IBAction)createAppointment:(id)sender
@@ -214,6 +224,8 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     id<Appointment> appointment = [self.appointments objectAtIndex:indexPath.row];
     //TODO: Present Appointment details view
+    
+    [self presentAppointmentDetailView: appointment];
 }
 
 @end

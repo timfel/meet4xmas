@@ -1,6 +1,7 @@
 ﻿using System;
 using Meet4Xmas;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace org.meet4xmas.wire
 {
@@ -39,7 +40,14 @@ namespace org.meet4xmas.wire
                         errorCallback(result.error);
                     } else {
                         Account a = new Account();
-                        a.AppointmentIds = new List<int>(result.payload as int[]);
+                        if (result.payload != null) {
+                            var ids = from id in (result.payload as List<Object>)
+                                      where (id != null)
+                                      select (Convert.ToInt32(id));
+                            a.AppointmentIds = new List<int>(ids);
+                        } else {
+                            a.AppointmentIds = new List<int>();
+                        }
                         a.userId = userId;
                         a.OpenNotificationChannel();
                         callback(a);

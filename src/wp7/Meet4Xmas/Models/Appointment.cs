@@ -20,11 +20,11 @@ namespace org.meet4xmas.wire
             get
             {
                 IEnumerable<string> list = from p in participants select p.userId;
-                return creator + " " + list.Aggregate((acc, next) => acc + " " + next);
+                return list.Aggregate((acc, next) => acc + " " + next);
             }
         }
-        public TravelPlan TravelPlan { get; private set; }
-        public int TravelType { get; private set; }
+        public TravelPlan TravelPlan;
+        public int TravelType;
 
         /// <summary>
         /// Create a new Appointment

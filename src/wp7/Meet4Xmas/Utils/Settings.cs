@@ -47,6 +47,21 @@ namespace Meet4Xmas
             }
         }
 
+        public static int PreferredTravelType
+        {
+            get
+            {
+                if (!Storage.Contains("PreferredTravelType"))
+                    Storage["PreferredTravelType"] = TravelPlan.TravelType.PublicTransport;
+                return (int)Storage["PreferredTravelType"];
+            }
+            set
+            {
+                Storage["PreferredTravelType"] = value;
+                Storage.Save();
+            }
+        }
+
         public static void Save()
         {
             Storage.Save();

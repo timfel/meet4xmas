@@ -22,28 +22,29 @@ namespace Meet4Xmas
 {
     public partial class AppointmentShow : PhoneApplicationPage
     {
-        public List<string> source = new List<string>(new string[] { "Car", "Public Transport", "Walk" });
         private Map map { get; set; }
 
         public AppointmentShow()
         {
             InitializeComponent();
-            InitializeTravelTypes();
         }
 
         private void InitializeBingMap()
         {
             Appointment a = DataContext as Appointment;
             map = new Map();
-            //map.CredentialsProvider = new ApplicationIdCredentialsProvider("Bing Maps Key");
+            map.CredentialsProvider = new ApplicationIdCredentialsProvider("Apfv3gXG8OSAuKQ9vsfnJ7l-BpX4g_XGV6cIi_xKY0zsZmYZK9upBYQtGwfkjo1J");
 
             // Set the center coordinate and zoom level
             Location center = a.location;
 
             // Create pushpins to put at the waypoints
             if (a.TravelPlan == null) {
-                a.GetTravelPlan(0,
-                    (travelPlan) => InitializeMapWaypoints(),
+                a.GetTravelPlan(Settings.PreferredTravelType,
+                    (travelPlan) => {
+                        Settings.Save();
+                        InitializeMapWaypoints();
+                    },
                     (ei) => MessageBox.Show("Error refreshing travel plan" + ei.message));
             } else {
                 InitializeMapWaypoints();
@@ -79,7 +80,8 @@ namespace Meet4Xmas
 
         private void InitializeTravelTypes()
         {
-            listPicker.ItemsSource = source;
+            listPicker.ItemsSource = new List<string>(TravelPlan.TravelType.TypesList);
+            listPicker.SelectedIndex = (DataContext as Appointment).TravelType;
             listPicker.SelectionChanged += new SelectionChangedEventHandler(listPicker_SelectionChanged);
         }
 
@@ -90,9 +92,11 @@ namespace Meet4Xmas
             if (NavigationContext.QueryString.TryGetValue("appointmentId", out appointmentId)) {
                 var app = from a in Settings.Appointments where a.identifier.ToString() == appointmentId select a;
                 this.DataContext = app.First();
+                ContactList.Items.Clear();
                 foreach (Participant p in app.First().participants) {
                     ContactList.Items.Add(p.userId);
                 }
+                InitializeTravelTypes();
                 InitializeBingMap();
             }
         }
@@ -122,9 +126,12 @@ namespace Meet4Xmas
         private void listPicker_SelectionChanged(object sender, EventArgs e)
         {
             Appointment a = DataContext as Appointment;
-            if (a.TravelType != listPicker.SelectedIndex + 1) {
-                a.GetTravelPlan(listPicker.SelectedIndex + 1,
-                    (TravelPlan t) => InitializeMapWaypoints(),
+            if (a.TravelType != listPicker.SelectedIndex) {
+                a.GetTravelPlan(listPicker.SelectedIndex,
+                    (TravelPlan t) => {
+                        Settings.Save();
+                        InitializeMapWaypoints();
+                    },
                     (ErrorInfo ei) => MessageBox.Show("An error occurred trying to update your travel plan." + ei.message));
             }
         }
@@ -133,7 +140,7 @@ namespace Meet4Xmas
         {
             Location end = (DataContext as Appointment).location;
             var task = new BingMapsDirectionsTask();
-            task.End = new LabeledMapLocation("", new GeoCoordinate(end.latitude, end.longitude));
+            task.End = new LabeledMapLocation(end.title, new GeoCoordinate(end.latitude, end.longitude));
             task.Show();
         }
     }
