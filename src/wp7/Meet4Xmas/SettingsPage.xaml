@@ -11,7 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -24,15 +24,11 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{Binding ApplicationName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="{Binding MessageString}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="52" DataContext="{Binding}" />
+            <TextBlock x:Name="PageTitle" Text="Settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="52" DataContext="{Binding}" />
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition MinHeight="200"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.Resources>
@@ -43,26 +39,12 @@
                     <TextBlock Margin="16 21 0 20" Name="LocationBox" Text="{Binding}" VerticalAlignment="Top" />
                 </DataTemplate>
             </Grid.Resources>
-            <TextBlock Grid.Row="1" Name="textBlock2" Text="Where?" VerticalAlignment="Top" DataContext="{Binding}" Foreground="#FF949294" />            
-            <TextBlock Grid.Row="3" Name="textBlock3" Text="Who?" VerticalAlignment="Top" Foreground="#FFA5A2A5" />
-            <ListBox Grid.Row="4" Name="ContactList" />
-            <Grid x:Name="MapGrid" Grid.Row="2"></Grid>
             <toolkit:ListPicker Grid.Row="0" 
                                 x:Name="listPicker" ItemTemplate="{StaticResource PickerItemTemplate}"
                                 FullModeItemTemplate="{StaticResource PickerFullModeItemTemplate}"
-                                Header="Transport"
-                                FullModeHeader="Transport"
+                                Header="Preferred Mode of Transport"
+                                FullModeHeader="Preferred Mode of Transport"
                                 CacheMode="BitmapCache" Padding="2" Margin="0" />
         </Grid>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Join" Click="ApplicationBarJoinButton_Click"/>
-            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Leave" Click="ApplicationBarLeaveButton_Click"/>
-            <shell:ApplicationBarIconButton IconUri="Images\appbar.add.rest.png" Text="Bing Navigation" Click="ApplicationBarMapButton_Click"/>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
-
 </phone:PhoneApplicationPage>

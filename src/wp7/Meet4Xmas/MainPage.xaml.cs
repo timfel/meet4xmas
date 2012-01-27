@@ -76,5 +76,10 @@ namespace Meet4Xmas
                 App.ViewModel.LoadAppointments();
             }
         }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
     }
 }
