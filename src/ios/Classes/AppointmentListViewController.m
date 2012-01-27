@@ -22,7 +22,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 
 - (void)presentRegistrationView;
 - (void)presentCreateAppointmentView;
-- (void)presentAppointmentDetailView: (id<Appointment>) appointment;
+- (void)presentAppointmentDetailView:(id<Appointment>)appointment animated:(BOOL)animated;
 
 @end
 
@@ -129,11 +129,11 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     [self presentModalViewController:navigationController animated:YES];
 }
 
-- (void)presentAppointmentDetailView: (id<Appointment>) appointment
+- (void)presentAppointmentDetailView: (id<Appointment>) appointment animated:(BOOL)animated
 {
     AppointmentDetailViewController* appointmentDetailViewController = [[AppointmentDetailViewController alloc] initWithDefaultNibAndAppointment:appointment];
     
-    [self.navigationController pushViewController:appointmentDetailViewController animated:YES];
+    [self.navigationController pushViewController:appointmentDetailViewController animated:animated];
 }
 
 #pragma mark - IBActions
@@ -189,8 +189,10 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
         //TODO: Error handling
     }
     
+    [(UITableView*)self.view insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self presentAppointmentDetailView:response.payload animated:NO];
+    
     [self dismissModalViewControllerAnimated:YES];
-    [(UITableView*)self.view insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 - (void)creationCanceled
@@ -227,7 +229,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     id<Appointment> appointment = [self.appointments objectAtIndex:indexPath.row];
     //TODO: Present Appointment details view
     
-    [self presentAppointmentDetailView: appointment];
+    [self presentAppointmentDetailView: appointment animated:YES];
 }
 
 @end
