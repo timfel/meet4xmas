@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Meet4XmasTests.Tests
 {
-    [TestClass]
+    //[TestClass]
     public class NotificationTest : SilverlightTest
     {
         public static Dispatcher dispatcher = Deployment.Current.Dispatcher;
