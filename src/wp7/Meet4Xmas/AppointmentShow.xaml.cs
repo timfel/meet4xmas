@@ -134,7 +134,7 @@ namespace Meet4Xmas
         {
             Location end = (DataContext as Appointment).location;
             var task = new BingMapsDirectionsTask();
-            task.End = new LabeledMapLocation("", new GeoCoordinate(end.latitude, end.longitude));
+            task.End = new LabeledMapLocation(end.title, new GeoCoordinate(end.latitude, end.longitude));
             task.Show();
         }
     }
