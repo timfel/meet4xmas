@@ -40,7 +40,7 @@ namespace Meet4Xmas
 
             // Create pushpins to put at the waypoints
             if (a.TravelPlan == null) {
-                a.GetTravelPlan(0,
+                a.GetTravelPlan(Settings.PreferredTravelType,
                     (travelPlan) => {
                         Settings.Save();
                         InitializeMapWaypoints();
