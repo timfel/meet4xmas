@@ -69,6 +69,8 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 {
     [super viewDidAppear:animated];
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if (appDelegate.currentUser == nil) {
         [self presentRegistrationView];
@@ -131,8 +133,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
 {
     AppointmentDetailViewController* appointmentDetailViewController = [[AppointmentDetailViewController alloc] initWithDefaultNib];
     
-    [self presentModalViewController: appointmentDetailViewController animated:YES];
-
+    [self.navigationController pushViewController:appointmentDetailViewController animated:YES];
 }
 
 #pragma mark - IBActions

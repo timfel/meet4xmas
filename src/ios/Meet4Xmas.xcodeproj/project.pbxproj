@@ -137,12 +137,12 @@
 				01A47CEA1490FAF8007E1DFC /* RegistrationViewController.m */,
 				01CE308D1490F05F00548992 /* AppointmentListViewController.h */,
 				01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */,
+				B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */,
+				B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */,
 				01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */,
 				01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */,
 				016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */,
 				016AFC1014C86A8400E5E340 /* AddInviteeViewController.m */,
-				B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */,
-				B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
