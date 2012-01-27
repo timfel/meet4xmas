@@ -19,6 +19,7 @@ namespace Meet4Xmas
     public partial class App : Application
     {
         public const string ApplicationName = "Meet4Xmas";
+        public const string Version = "12.01";
         private static MainViewModel viewModel = null;
 
         /// <summary>
@@ -83,6 +84,9 @@ namespace Meet4Xmas
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            if (Settings.Account != null) {
+                Settings.Account.Loaded();
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)

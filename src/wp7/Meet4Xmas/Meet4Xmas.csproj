@@ -144,7 +144,6 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="PanoramaBackground.png" />
     <Resource Include="Images\appbar.add.rest.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>

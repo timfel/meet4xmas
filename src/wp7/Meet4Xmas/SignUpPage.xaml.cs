@@ -47,7 +47,8 @@ namespace Meet4Xmas
                     }
                     App.ViewModel.LoadAppointments();
 
-                    Settings.Save();
+                    ResetSettings();
+                    account.Loaded();
                     new Timer((state) => Dispatcher.BeginInvoke(() =>
                             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative))),
                             null, 1000, Timeout.Infinite);
@@ -57,6 +58,11 @@ namespace Meet4Xmas
                     SignUpProgressBar.Visibility = Visibility.Collapsed;
                     SignUpErrorInfo.Text = errorInfo.message;
                 });
+        }
+
+        private void ResetSettings()
+        {
+            Settings.AllowPushNotifications = false;
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
