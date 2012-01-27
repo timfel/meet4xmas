@@ -15,11 +15,11 @@ namespace Meet4XmasTests.Tests
         [TestInitialize]
         public void setUp()
         {
-            // ServiceCall.ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/1/";
+            ServiceCall.ServiceUrl = "http://tessi.fornax.uberspace.de/xmas/2/";
             //ServiceCall.ServiceUrl = "http://172.16.16.116:4567/1/";
             //ServiceCall.ServiceUrl = "http://172.16.18.83:4567/1/";
             //ServiceCall.ServiceUrl = "http://172.16.59.124:4567/1/";
-            ServiceCall.ServiceUrl = "http://172.16.18.55:4567/2/";
+            // ServiceCall.ServiceUrl = "http://172.16.18.55:4567/2/";
         }
 
         public string getNewName()
