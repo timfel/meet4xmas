@@ -22,13 +22,12 @@ namespace Meet4Xmas
 {
     public partial class AppointmentShow : PhoneApplicationPage
     {
-        public List<string> source = new List<string>(new string[] { "Car", "Public Transport", "Walk" });
+        public List<string> source = new List<string>(new string[] { "Car", "Walk", "Public Transport" });
         private Map map { get; set; }
 
         public AppointmentShow()
         {
             InitializeComponent();
-            InitializeTravelTypes();
         }
 
         private void InitializeBingMap()
@@ -43,7 +42,10 @@ namespace Meet4Xmas
             // Create pushpins to put at the waypoints
             if (a.TravelPlan == null) {
                 a.GetTravelPlan(0,
-                    (travelPlan) => InitializeMapWaypoints(),
+                    (travelPlan) => {
+                        Settings.Save();
+                        InitializeMapWaypoints();
+                    },
                     (ei) => MessageBox.Show("Error refreshing travel plan" + ei.message));
             } else {
                 InitializeMapWaypoints();
@@ -80,6 +82,7 @@ namespace Meet4Xmas
         private void InitializeTravelTypes()
         {
             listPicker.ItemsSource = source;
+            listPicker.SelectedIndex = (DataContext as Appointment).TravelType;
             listPicker.SelectionChanged += new SelectionChangedEventHandler(listPicker_SelectionChanged);
         }
 
@@ -94,6 +97,7 @@ namespace Meet4Xmas
                 foreach (Participant p in app.First().participants) {
                     ContactList.Items.Add(p.userId);
                 }
+                InitializeTravelTypes();
                 InitializeBingMap();
             }
         }
@@ -123,9 +127,12 @@ namespace Meet4Xmas
         private void listPicker_SelectionChanged(object sender, EventArgs e)
         {
             Appointment a = DataContext as Appointment;
-            if (a.TravelType != listPicker.SelectedIndex + 1) {
-                a.GetTravelPlan(listPicker.SelectedIndex + 1,
-                    (TravelPlan t) => InitializeMapWaypoints(),
+            if (a.TravelType != listPicker.SelectedIndex) {
+                a.GetTravelPlan(listPicker.SelectedIndex,
+                    (TravelPlan t) => {
+                        Settings.Save();
+                        InitializeMapWaypoints();
+                    },
                     (ErrorInfo ei) => MessageBox.Show("An error occurred trying to update your travel plan." + ei.message));
             }
         }
