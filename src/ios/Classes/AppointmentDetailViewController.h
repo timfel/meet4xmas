@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) id<Appointment> appointment;
 
+@property (nonatomic, strong) IBOutlet UIScrollView* scrollView;
 @property (nonatomic, strong) IBOutlet UIButton* acceptButton;
 @property (nonatomic, strong) IBOutlet UIButton* declineButton;
 

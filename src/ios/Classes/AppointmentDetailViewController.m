@@ -17,7 +17,7 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
 @implementation AppointmentDetailViewController
 
 @synthesize appointment = _appointment;
-@synthesize acceptButton, declineButton;
+@synthesize scrollView, acceptButton, declineButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +57,9 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = self.appointment.message;
+    
+    CGSize size = ((UIView*)[self.scrollView.subviews objectAtIndex:0]).bounds.size;
+    [self.scrollView setContentSize:size];
     
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     // If it's one of our appointments, change the button labels
