@@ -13,7 +13,6 @@ using Microsoft.Phone.Controls;
 using org.meet4xmas.wire;
 using System.Windows.Controls.Primitives;
 using Microsoft.Phone.Tasks;
-using System.Linq;
 using Microsoft.Phone.Controls.Maps;
 using System.Device.Location;
 
