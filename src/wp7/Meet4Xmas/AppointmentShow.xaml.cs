@@ -35,7 +35,7 @@ namespace Meet4Xmas
         {
             Appointment a = DataContext as Appointment;
             map = new Map();
-            //map.CredentialsProvider = new ApplicationIdCredentialsProvider("Bing Maps Key");
+            map.CredentialsProvider = new ApplicationIdCredentialsProvider("Apfv3gXG8OSAuKQ9vsfnJ7l-BpX4g_XGV6cIi_xKY0zsZmYZK9upBYQtGwfkjo1J");
 
             // Set the center coordinate and zoom level
             Location center = a.location;
