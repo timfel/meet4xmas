@@ -42,6 +42,7 @@ namespace Meet4Xmas
                 a.GetTravelPlan(Settings.PreferredTravelType,
                     (travelPlan) => {
                         Settings.Save();
+                        listPicker.SelectedIndex = (DataContext as Appointment).TravelType;
                         InitializeMapWaypoints();
                     },
                     (ei) => MessageBox.Show("Error refreshing travel plan" + ei.message));
