@@ -66,5 +66,20 @@ namespace Meet4Xmas
         {
             Storage.Save();
         }
+
+        public static bool? AllowUsingLocation
+        {
+            get
+            {
+                if (!Storage.Contains("AllowUsingLocation"))
+                    Storage["AllowUsingLocation"] = true;
+                return (bool?)Storage["AllowUsingLocation"];
+            }
+            set
+            {
+                Storage["AllowUsingLocation"] = value;
+                Storage.Save();
+            }
+        }
     }
 }

@@ -38,5 +38,10 @@ namespace Meet4Xmas
         {
             Settings.PreferredTravelType = listPicker.SelectedIndex;
         }
+
+        private void gpsCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.AllowUsingLocation = gpsCheckBox.IsChecked;
+        }
     }
 }

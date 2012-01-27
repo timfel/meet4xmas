@@ -29,7 +29,9 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <DataTemplate x:Name="PickerItemTemplate">
@@ -45,6 +47,8 @@
                                 Header="Preferred Mode of Transport"
                                 FullModeHeader="Preferred Mode of Transport"
                                 CacheMode="BitmapCache" Padding="2" Margin="0" />
+            <TextBlock Grid.Row="2" Text="If you don't allow using your location, the application won't be very useful. Effective selection of meeting places and creation of travel plans depend on it." TextWrapping="Wrap" />
+            <CheckBox Content="Allow using my location" Grid.Row="1" Height="72" HorizontalAlignment="Stretch" Name="gpsCheckBox" VerticalAlignment="Top" Checked="gpsCheckBox_Checked" IsChecked="True" />
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>

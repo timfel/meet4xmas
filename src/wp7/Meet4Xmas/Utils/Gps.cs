@@ -17,11 +17,15 @@ namespace Meet4Xmas
         private void FromGps(Action<Location> cb)
         {
             this.callback = cb;
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default); // using high accuracy
-            watcher.MovementThreshold = 20; // use MovementThreshold to ignore noise in the signal
-            watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
-            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
-            watcher.Start();
+            if (!((bool)Settings.AllowUsingLocation)) {
+                callback.Invoke(null);
+            } else {
+                watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default); // using high accuracy
+                watcher.MovementThreshold = 20; // use MovementThreshold to ignore noise in the signal
+                watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
+                watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
+                watcher.Start();
+            }
         }
 
         public void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
