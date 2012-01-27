@@ -205,6 +205,7 @@ NSString* kAppointmentCellReusableIdentifier = @"AppointmentCell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kAppointmentCellReusableIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kAppointmentCellReusableIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     id<Appointment> appointment = [self.appointments objectAtIndex:indexPath.row];
