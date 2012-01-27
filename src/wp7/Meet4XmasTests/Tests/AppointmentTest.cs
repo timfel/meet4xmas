@@ -115,7 +115,6 @@ namespace Meet4XmasTests.Tests
             Account tim = null;
             ErrorInfo error = null;
             Appointment app = null;
-            TravelPlan travelPlan = null;
             string testMessage = "Test Appointment";
 
             EnqueueCallback(() => Account.Create(name, (Account ac) => tim = ac, (ErrorInfo ei) => error = ei));
