@@ -23,8 +23,8 @@ namespace org.meet4xmas.wire
                 return list.Aggregate((acc, next) => acc + " " + next);
             }
         }
-        public TravelPlan TravelPlan { get; private set; }
-        public int TravelType { get; private set; }
+        public TravelPlan TravelPlan;
+        public int TravelType;
 
         /// <summary>
         /// Create a new Appointment
