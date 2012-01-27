@@ -33,6 +33,8 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.Resources>
                     <DataTemplate x:Name="PickerItemTemplate">
@@ -48,8 +50,10 @@
                                     Header="Preferred Mode of Transport"
                                     FullModeHeader="Preferred Mode of Transport"
                                     CacheMode="BitmapCache" Padding="2" Margin="0" />
-                <CheckBox Content="Allow using my location" Grid.Row="1" Height="72" HorizontalAlignment="Stretch" Name="gpsCheckBox" VerticalAlignment="Top" Click="gpsCheckBox_Checked" />
+                <CheckBox Content="Allow using my location" Grid.Row="1" Height="72" HorizontalAlignment="Stretch" x:Name="gpsCheckBox" VerticalAlignment="Top" />
                 <TextBlock Grid.Row="2" Text="If you don't allow using your location, the application won't be very useful. Effective selection of meeting places and creation of travel plans depend on it." TextWrapping="Wrap" />
+                <CheckBox Content="Receive notifications" Grid.Row="3" Height="72" HorizontalAlignment="Stretch" x:Name="notificationsCheckBox" VerticalAlignment="Top" />
+                <TextBlock Grid.Row="4" Text="Allow Meet4Xmas to use push notifications to inform you of appointments you have been invited to, as well as changes to appointments you are participating in." TextWrapping="Wrap" />
             </Grid>
             <Button Content="Save" Height="72" HorizontalAlignment="Stretch" Name="saveButton" VerticalAlignment="Bottom" Click="saveButton_Click" />
         </Grid>

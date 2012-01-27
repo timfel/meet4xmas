@@ -81,5 +81,20 @@ namespace Meet4Xmas
                 Storage.Save();
             }
         }
+
+        public static bool? AllowPushNotifications
+        {
+            get
+            {
+                if (!Storage.Contains("AllowPushNotifications"))
+                    Storage["AllowPushNotifications"] = true;
+                return (bool?)Storage["AllowPushNotifications"];
+            }
+            set
+            {
+                Storage["AllowPushNotifications"] = value;
+                Storage.Save();
+            }
+        }
     }
 }
