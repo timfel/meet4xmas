@@ -15,8 +15,8 @@
 			<string>IBProxyObject</string>
 			<string>IBUILabel</string>
 			<string>IBMKMapView</string>
-			<string>IBUITableView</string>
 			<string>IBUITextView</string>
+			<string>IBUITableView</string>
 			<string>IBUIButton</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -218,7 +218,7 @@
 										<reference key="IBUIFont" ref="675945331"/>
 									</object>
 								</array>
-								<string key="NSFrame">{{0, -40}, {320, 516}}</string>
+								<string key="NSFrame">{{0, -164}, {320, 765}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="909810138"/>
@@ -277,6 +277,11 @@ AAgACAAIAAEAAQABAAE</bytes>
 										<reference key="NSColor" ref="272804970"/>
 									</object>
 									<string key="IBUIColorCocoaTouchKeyPath">groupTableViewBackgroundColor</string>
+								</object>
+								<int key="IBUIContentMode">1</int>
+								<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
+									<string key="IBUISimulatedSizeMetricsClass">IBUISimulatedFreeformSizeMetricsSentinel</string>
+									<string key="IBUIDisplayName">Freeform</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -4695,19 +4700,19 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 			<array class="NSMutableArray" key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="191373211"/>
-					</object>
-					<int key="connectionID">26</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="191373211"/>
 					</object>
 					<int key="connectionID">3</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">scrollView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="191373211"/>
+					</object>
+					<int key="connectionID">26</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -4773,19 +4778,29 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="objectID">14</int>
 						<reference key="object" ref="699235572"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="767815826"/>
 							<reference ref="1011625169"/>
 							<reference ref="711251206"/>
 							<reference ref="909810138"/>
 							<reference ref="1057265189"/>
 							<reference ref="545446668"/>
 							<reference ref="67886200"/>
+							<reference ref="767815826"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="767815826"/>
+						<int key="objectID">15</int>
+						<reference key="object" ref="1011625169"/>
+						<reference key="parent" ref="699235572"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="711251206"/>
+						<reference key="parent" ref="699235572"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">30</int>
+						<reference key="object" ref="909810138"/>
 						<reference key="parent" ref="699235572"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -4804,18 +4819,8 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<reference key="parent" ref="699235572"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">15</int>
-						<reference key="object" ref="1011625169"/>
-						<reference key="parent" ref="699235572"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="711251206"/>
-						<reference key="parent" ref="699235572"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">30</int>
-						<reference key="object" ref="909810138"/>
+						<int key="objectID">16</int>
+						<reference key="object" ref="767815826"/>
 						<reference key="parent" ref="699235572"/>
 					</object>
 				</array>

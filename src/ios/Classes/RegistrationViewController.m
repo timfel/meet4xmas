@@ -66,6 +66,8 @@ NSString* kDefaultRegistrationViewNibNameIPad = @"RegistrationView_iPad";
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"Register";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(registrationDone:)];
+    
+    [self.emailTextField addTarget:self action: @selector(registrationDone:) forControlEvents: UIControlEventEditingDidEndOnExit];
 }
 
 - (void)viewDidUnload
