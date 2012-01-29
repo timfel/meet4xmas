@@ -16,7 +16,10 @@
 @property (nonatomic, strong) IBOutlet UIScrollView* scrollView;
 @property (nonatomic, strong) IBOutlet UIButton* acceptButton;
 @property (nonatomic, strong) IBOutlet UIButton* declineButton;
+@property (nonatomic, strong) NSDictionary* participantGroups;
 
 - (AppointmentDetailViewController*) initWithDefaultNibAndAppointment:(id<Appointment>)appointment;
+- (void) updateParticipantGroups;
+- (id<Participant>) getParticipantNr: (NSInteger) number ofGroup: (NSInteger) groupNumber;
 
 @end

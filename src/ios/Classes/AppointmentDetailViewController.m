@@ -14,15 +14,19 @@ NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPa
 
 NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
 
+NSArray *sectionGroups;
+
 @implementation AppointmentDetailViewController
 
 @synthesize appointment = _appointment;
 @synthesize scrollView, acceptButton, declineButton;
+@synthesize participantGroups;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        sectionGroups = [NSArray arrayWithObjects: @"Accepted", @"Undecided", @"Declined", nil];
         // Custom initialization
     }
     return self;
@@ -32,6 +36,7 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
 {
     self = (AppointmentDetailViewController*)[self initWithNibName:kDefaultAppointmentDetailViewNibNameIPhone bundle:nil];
     self.appointment = appointment;
+    [self updateParticipantGroups];
     return self;
 }
 
@@ -93,11 +98,14 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    id<Participant> participant = [self.appointment.participants objectAtIndex:indexPath.row];
+    //id<Participant> participant = [self.appointment.participants objectAtIndex:indexPath.row];
+    id<Participant> participant = [self getParticipantNr: indexPath.row ofGroup: indexPath.section ];
+    //indexPath.section
+    
     cell.textLabel.text = participant.userId;
     switch (participant.status) {
         case PENDING:
-            cell.backgroundColor = [UIColor yellowColor];
+            cell.backgroundColor = [UIColor grayColor];
             break;
         case JOINED:
             cell.backgroundColor = [UIColor greenColor];
@@ -112,9 +120,60 @@ NSString* kParticipantCellReusableIdentifier = @"ParticipantCell";
     return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	
+    return [sectionGroups count];
+	
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	
+	return [sectionGroups objectAtIndex: section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	
+    return [[self.participantGroups objectForKey: [sectionGroups objectAtIndex: section]] count];
+}
+
+/*- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.appointment.participants.count;
+}*/
+
+- (void) updateParticipantGroups{
+    
+    //Setup grouping fo participants
+    self.participantGroups = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects: [NSMutableArray new],[NSMutableArray new],[NSMutableArray new],nil ] forKeys: sectionGroups];
+    
+    NSEnumerator *participantE = [self.appointment.participants objectEnumerator];
+    id<Participant> participant;
+    while(participant = (id<Participant>)[participantE nextObject]){
+
+        NSString* groupName;
+        
+        switch (participant.status) {
+            case JOINED:
+                groupName = [sectionGroups objectAtIndex: 0];
+                break;
+            case DECLINED:
+                groupName = [sectionGroups objectAtIndex: 2];
+                break;
+            default:
+                groupName = [sectionGroups objectAtIndex: 1];
+                break;
+        }
+        
+        NSMutableArray* group = [self.participantGroups objectForKey: (id)groupName];        
+        [group addObject: participant];
+    }
+}
+
+- (id<Participant>) getParticipantNr: (NSInteger) number ofGroup: (NSInteger) groupNumber{
+    NSString* groupName = [sectionGroups objectAtIndex: groupNumber];
+    NSArray* group = [self.participantGroups objectForKey: groupName];   
+    id<Participant> participant = [group objectAtIndex: number];
+    return participant;
 }
 
 @end
