@@ -1,11 +1,19 @@
 package de.uni_potsdam.hpi.meet4android;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.*;
+import android.provider.ContactsContract.Contacts;
 
 public class AppointmentActivity extends Activity {
+
+    private AppointmentActivity self = this;
+    private ArrayAdapter contacts;
+    private static final int CONTACT_PICKER_RESULT = 1001;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -15,13 +23,51 @@ public class AppointmentActivity extends Activity {
         setupListView();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CONTACT_PICKER_RESULT:
+                    String contactId = data.getData().getLastPathSegment();
+                    Cursor cursor = managedQuery(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
+                            new String[]{contactId}, null);
+                    if (cursor.moveToNext()) {
+                        String email = cursor.getString(cursor.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Email.DATA));
+                        contacts.add(email);
+                        break;
+                    }
+                default:
+                    Toast.makeText(self, "Contact has no email address", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     protected void setupListView() {
-        final ListView list = (ListView) findViewById(R.id.who_list);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-                        Toast.LENGTH_SHORT).show();
+        contacts = new ArrayAdapter<String>(this, R.layout.appointment_item);
+
+        ListView list = (ListView) findViewById(R.id.who_list);
+        View footer = getLayoutInflater().inflate(R.layout.add_contact, null);
+        Button add = (Button) footer.findViewById(R.id.add_contact_button);
+
+        list.addFooterView(footer, null, true);
+        list.setAdapter(contacts);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI);
+                startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
             }
         });
+
+        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == list.get) {
+                    Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI);
+                    startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
+                }
+            }
+        });*/
     }
 }

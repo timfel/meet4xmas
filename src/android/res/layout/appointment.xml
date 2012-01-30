@@ -61,6 +61,5 @@
         android:paddingBottom="5sp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/appointment_who_add"
     />
 </LinearLayout>
