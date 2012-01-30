@@ -8,11 +8,31 @@
 
 #import "MapPin.h"
 #import <MapKit/MapKit.h>
-#import <UIKit/UIKit.h>
+
 
 @implementation MapPin
 
-@synthesize coordinate;
+@synthesize title = _title;
+@synthesize subtitle = _subtile;
+@synthesize coordinate = _coordinate;
 
+- (id)initWithTitle:(NSString*)title subtitle:(NSString*)subtitle coordinate:(CLLocationCoordinate2D)coordinate {
+    self = [super init];
+    
+    if (self) {
+        _title = [title copy];
+        _subtitle = [subtitle copy];
+        _coordinate = coordinate;
+    }
+    return self;
+}
+
+- (NSString *)title {
+    return _title;
+}
+
+- (NSString *)subtitle {
+    return _subtile;
+}
 
 @end

@@ -8,7 +8,9 @@
 
 #import "AppointmentDetailViewController.h"
 #import "AppDelegate.h"
+#import "MapPin.h"
 #import <MapKit/MapKit.h>
+
 
 NSString* kDefaultAppointmentDetailViewNibNameIPhone = @"AppointmentDetailView_iPhone";
 NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPad";
@@ -187,13 +189,18 @@ NSArray *sectionGroups;
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = [self.appointment.location.latitude doubleValue];
     zoomLocation.longitude = [self.appointment.location.longitude doubleValue];
-    // 2
+
+    
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*1000, 0.5*1000);
     MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [self.locationMap dequeueReusableAnnotationViewWithIdentifier: @"Super"];
-   
-    // 3
+      
+    MapPin *annotation = [[MapPin alloc] initWithTitle: @"Treffpunkt" subtitle: @"Super hier" coordinate: zoomLocation];
+    
+    [self.locationMap addAnnotation: annotation];
+    
+
     MKCoordinateRegion adjustedRegion = [self.locationMap regionThatFits:viewRegion];                
-    // 4
+
     [self.locationMap setRegion:adjustedRegion animated:YES];        
 
     NSLog(@"hier %@", self.appointment.location.longitude);
