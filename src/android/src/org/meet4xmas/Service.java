@@ -1,6 +1,8 @@
 package org.meet4xmas;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.location.*;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -33,6 +35,19 @@ public class Service {
 
     public Service(Context context) {
         this(context, context.getResources().getString(R.string.service_url));
+    }
+
+    public void registerWithC2DM() {
+        Intent registrationIntent = new Intent("com.google.android.c2dm.intent.REGISTER");
+        registrationIntent.putExtra("app", PendingIntent.getBroadcast(context, 0, new Intent(), 0));
+        registrationIntent.putExtra("sender", context.getText(R.string.meet4xmas_account));
+        context.startService(registrationIntent);
+    }
+
+    public void unregisterWithC2DM() {
+        Intent unregIntent = new Intent("com.google.android.c2dm.intent.UNREGISTER");
+        unregIntent.putExtra("app", PendingIntent.getBroadcast(context, 0, new Intent(), 0));
+        context.startService(unregIntent);
     }
 
     /**
@@ -80,19 +95,16 @@ public class Service {
             throw new ServiceException("No appropriate location provider found (in: " + mngr.getAllProviders() + ").");
         }
         android.location.Location dloc = mngr.getLastKnownLocation(locProvider);
-        if (dloc == null) {
+        if (dloc == null && false) {
             final List<android.location.Location> locs = new LinkedList<android.location.Location>();
             mngr.requestSingleUpdate(locProvider, new LocationListener() {
                 public void onLocationChanged(android.location.Location location) {
-                    Log.d("xmas", "added location");
                     locs.add(location);
                 }
-                public void onStatusChanged(String s, int i, Bundle bundle) { Log.d("xmas", "status changed " + s + ", " + i); }
-                public void onProviderEnabled(String s) { Log.d("xmas", "provider " + s + " enabled"); }
-                public void onProviderDisabled(String s) { Log.d("xmas", "provider " + s + " disabled"); }
+                public void onStatusChanged(String s, int i, Bundle bundle) { }
+                public void onProviderEnabled(String s) { }
+                public void onProviderDisabled(String s) { }
             }, null);
-            Log.d("xmas", "meeeeh");
-            try { Thread.sleep(1000); } catch (Exception e) { }
             if (locs.size() == 0) {
                 throw new ServiceException("Location Provider disabled");
             } else {
@@ -103,8 +115,8 @@ public class Service {
         Location loc = new Location();
         loc.title = "current location";
         loc.description = "where I am right now";
-        loc.latitude = dloc.getLatitude();
-        loc.longitude = dloc.getLongitude();
+        loc.latitude = 52d; // dloc.getLatitude();
+        loc.longitude = 13d; // dloc.getLongitude();
 
         return loc;
     }
