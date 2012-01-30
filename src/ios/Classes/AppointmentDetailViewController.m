@@ -70,6 +70,9 @@ NSArray *sectionGroups;
     CGSize size = ((UIView*)[self.scrollView.subviews objectAtIndex:0]).bounds.size;
     [self.scrollView setContentSize:size];
     
+    NSLog(@"%@", self.view.frame.origin.x);
+    
+    
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     // If it's one of our appointments, change the button labels
     if ([self.appointment.creator isEqualToString:appDelegate.currentUser]) {
