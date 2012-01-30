@@ -16,10 +16,13 @@
     <string name="appointment_where">Where?</string>
     <string name="appointment_who">Who?</string>
     <string name="appointment_where_prompt">Select a location</string>
+    <string name="appointment_who_add">Add Contact</string>
+    <string name="appointment_no_email">Contact has no email address</string>
+    <string name="appointment_remove_contact">Remove Contact?</string>
     <string-array name="appointment_where_options">
         <item>Christmas Market</item>
     </string-array>
-    <string-array name="appointment_who_add">
-        <item>Add Contact</item>
-    </string-array>
+
+    <string name="label_yes">Yes</string>
+    <string name="label_no">No</string>
 </resources>
