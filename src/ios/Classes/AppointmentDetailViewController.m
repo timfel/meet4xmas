@@ -8,6 +8,7 @@
 
 #import "AppointmentDetailViewController.h"
 #import "AppDelegate.h"
+#import <MapKit/MapKit.h>
 
 NSString* kDefaultAppointmentDetailViewNibNameIPhone = @"AppointmentDetailView_iPhone";
 NSString* kDefaultAppointmentDetailViewNibNameIPad = @"AppointmentDetailView_iPad";
@@ -20,6 +21,7 @@ NSArray *sectionGroups;
 
 @synthesize appointment = _appointment;
 @synthesize scrollView, acceptButton, declineButton;
+@synthesize locationMap;
 @synthesize participantGroups;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -72,10 +74,13 @@ NSArray *sectionGroups;
         self.acceptButton.titleLabel.text = @"Start";
         self.declineButton.titleLabel.text = @"Cancel";
     }
+    
+    [self adjustMapView];
 }
 
 - (void)viewDidUnload
 {
+    [self setLocationMap:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -151,7 +156,7 @@ NSArray *sectionGroups;
     while(participant = (id<Participant>)[participantE nextObject]){
 
         NSString* groupName;
-        
+              
         switch (participant.status) {
             case JOINED:
                 groupName = [sectionGroups objectAtIndex: 0];
@@ -176,4 +181,21 @@ NSArray *sectionGroups;
     return participant;
 }
 
+
+- (void) adjustMapView{
+        
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = [self.appointment.location.latitude doubleValue];
+    zoomLocation.longitude = [self.appointment.location.longitude doubleValue];
+    // 2
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*1000, 0.5*1000);
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [self.locationMap dequeueReusableAnnotationViewWithIdentifier: @"Super"];
+   
+    // 3
+    MKCoordinateRegion adjustedRegion = [self.locationMap regionThatFits:viewRegion];                
+    // 4
+    [self.locationMap setRegion:adjustedRegion animated:YES];        
+
+    NSLog(@"hier %@", self.appointment.location.longitude);
+}
 @end

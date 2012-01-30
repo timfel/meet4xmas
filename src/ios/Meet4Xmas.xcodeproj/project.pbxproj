@@ -37,6 +37,7 @@
 		B040D1C414D023750080C3D0 /* AppointmentDetailView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B040D1C214D023750080C3D0 /* AppointmentDetailView_iPhone.xib */; };
 		B040D1C714D025550080C3D0 /* AppointmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */; };
 		B092F82714D190DC003F65D3 /* AppointmentDetailView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */; };
+		D743877C14D6756900CE3B96 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = D743877B14D6756900CE3B96 /* MapPin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentDetailViewController.h; sourceTree = "<group>"; };
 		B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailViewController.m; sourceTree = "<group>"; };
 		B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentDetailView_iPad.xib; sourceTree = "<group>"; };
+		D743877A14D6756900CE3B96 /* MapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
+		D743877B14D6756900CE3B96 /* MapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,8 @@
 				01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */,
 				B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */,
 				B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */,
+				D743877A14D6756900CE3B96 /* MapPin.h */,
+				D743877B14D6756900CE3B96 /* MapPin.m */,
 				01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */,
 				01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */,
 				016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */,
@@ -368,6 +373,7 @@
 				01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */,
 				016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */,
 				B040D1C714D025550080C3D0 /* AppointmentDetailViewController.m in Sources */,
+				D743877C14D6756900CE3B96 /* MapPin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
