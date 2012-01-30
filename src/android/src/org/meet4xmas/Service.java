@@ -4,13 +4,11 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import com.caucho.hessian.client.HessianProxyFactory;
 import de.uni_potsdam.hpi.meet4android.R;
-import org.meet4xmas.wire.ErrorInfo;
-import org.meet4xmas.wire.IServiceAPI;
-import org.meet4xmas.wire.NotificationServiceInfo;
-import org.meet4xmas.wire.Response;
+import org.meet4xmas.wire.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.util.Collection;
 
 public class Service {
 
@@ -48,13 +46,29 @@ public class Service {
         }
     }
 
+    public void createAppointment(String user, String what, Collection<String> invitees,
+                                  int travelType) throws ServiceException {
+
+        Response response = getAPI().createAppointment(user, travelType, getLocation(),
+                invitees.toArray(new String[invitees.size()]), Location.LocationType.ChristmasMarket, what);
+        if (!response.success) {
+            raise("Appointment Creation failed", response.error);
+        }
+    }
+
     /**
      * Negotiates a registration ID with the Google servers.
      *
      * @return A registration ID usable to send push notifications to this device.
      */
     public String getDeviceId() {
-        return "@TODO";
+        return "@TODO"; // @TODO
+    }
+
+    public Location getLocation() {
+        Location loc = new Location();
+        // @TODO
+        return loc;
     }
 
     public IServiceAPI getAPI() {
