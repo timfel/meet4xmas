@@ -39,7 +39,7 @@ public class AppointmentActivity extends Activity {
                         break;
                     }
                 default:
-                    Toast.makeText(self, "Contact has no email address", Toast.LENGTH_LONG).show();
+                    Toast.makeText(self, self.getText(R.string.appointment_no_email), Toast.LENGTH_LONG).show();
             }
         }
     }
