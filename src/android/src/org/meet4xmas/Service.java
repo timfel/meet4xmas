@@ -1,14 +1,20 @@
 package org.meet4xmas;
 
 import android.content.Context;
+import android.location.*;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import com.caucho.hessian.client.HessianProxyFactory;
 import de.uni_potsdam.hpi.meet4android.R;
 import org.meet4xmas.wire.*;
+import org.meet4xmas.wire.Location;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Service {
 
@@ -65,10 +71,49 @@ public class Service {
         return "@TODO"; // @TODO
     }
 
-    public Location getLocation() {
+    public Location getLocation() throws ServiceException {
+
+        LocationManager mngr = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        String locProvider = selectProvider(mngr);
+
+        if (locProvider == null) {
+            throw new ServiceException("No appropriate location provider found (in: " + mngr.getAllProviders() + ").");
+        }
+        android.location.Location dloc = mngr.getLastKnownLocation(locProvider);
+        if (dloc == null) {
+            final List<android.location.Location> locs = new LinkedList<android.location.Location>();
+            mngr.requestSingleUpdate(locProvider, new LocationListener() {
+                public void onLocationChanged(android.location.Location location) {
+                    Log.d("xmas", "added location");
+                    locs.add(location);
+                }
+                public void onStatusChanged(String s, int i, Bundle bundle) { Log.d("xmas", "status changed " + s + ", " + i); }
+                public void onProviderEnabled(String s) { Log.d("xmas", "provider " + s + " enabled"); }
+                public void onProviderDisabled(String s) { Log.d("xmas", "provider " + s + " disabled"); }
+            }, null);
+            Log.d("xmas", "meeeeh");
+            try { Thread.sleep(1000); } catch (Exception e) { }
+            if (locs.size() == 0) {
+                throw new ServiceException("Location Provider disabled");
+            } else {
+                dloc = locs.get(0);
+            }
+        }
+
         Location loc = new Location();
-        // @TODO
+        loc.title = "current location";
+        loc.description = "where I am right now";
+        loc.latitude = dloc.getLatitude();
+        loc.longitude = dloc.getLongitude();
+
         return loc;
+    }
+
+    protected String selectProvider(LocationManager manager) {
+        Criteria crit = new Criteria();
+        crit.setHorizontalAccuracy(Criteria.ACCURACY_FINE);
+
+        return manager.getBestProvider(crit, true);
     }
 
     public IServiceAPI getAPI() {
