@@ -22,6 +22,9 @@
 @property (nonatomic, strong) NSDictionary* participantGroups;
 
 - (AppointmentDetailViewController*) initWithDefaultNibAndAppointment:(id<Appointment>)appointment;
+
+- (IBAction)declineAppointment:(UIButton*)sender;
+
 - (void) updateParticipantGroups;
 - (id<Participant>) getParticipantNr: (NSInteger) number ofGroup: (NSInteger) groupNumber;
 - (void) adjustMapView;

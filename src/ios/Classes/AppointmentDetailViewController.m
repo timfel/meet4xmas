@@ -8,6 +8,7 @@
 
 #import "AppointmentDetailViewController.h"
 #import "AppDelegate.h"
+#import "ServiceProxy.h"
 #import "MapPin.h"
 #import <MapKit/MapKit.h>
 
@@ -92,6 +93,26 @@ NSArray *sectionGroups;
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - IBActions
+
+- (IBAction)declineAppointment:(UIButton*)sender
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    id<Response> response = [ServiceProxy declineAppointment:self.appointment.identifier userId:appDelegate.currentUser];
+    if (!response.success) {
+        UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
+                                                          message:@"Something went wrong declining the appointment." 
+                                                         delegate:nil 
+                                                cancelButtonTitle:@"Ok" 
+                                                otherButtonTitles:nil];
+        [message show];
+        return;
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource methods
