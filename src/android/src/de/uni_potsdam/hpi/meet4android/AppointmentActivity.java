@@ -41,11 +41,15 @@ public class AppointmentActivity extends Activity {
                     Cursor cursor = managedQuery(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
                             new String[]{contactId}, null);
-                    if (cursor.moveToNext()) {
-                        String email = cursor.getString(cursor.getColumnIndex(
-                                ContactsContract.CommonDataKinds.Email.DATA));
-                        contacts.add(email);
-                        break;
+                    try {
+                        if (cursor.moveToNext()) {
+                            String email = cursor.getString(cursor.getColumnIndex(
+                                    ContactsContract.CommonDataKinds.Email.DATA));
+                            contacts.add(email);
+                            break;
+                        }
+                    } finally {
+                        cursor.close();
                     }
                 default:
                     Toast.makeText(self, self.getText(R.string.appointment_no_email), Toast.LENGTH_LONG).show();
