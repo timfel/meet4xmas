@@ -23,6 +23,7 @@
 
 - (AppointmentDetailViewController*) initWithDefaultNibAndAppointment:(id<Appointment>)appointment;
 
+- (IBAction)joinAppointment:(UIButton*)sender;
 - (IBAction)declineAppointment:(UIButton*)sender;
 
 - (void) updateParticipantGroups;
