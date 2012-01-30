@@ -1,6 +1,8 @@
 package de.uni_potsdam.hpi.meet4android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -61,13 +63,21 @@ public class AppointmentActivity extends Activity {
             }
         });
 
-        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == list.get) {
-                    Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI);
-                    startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
-                }
+                final String email = (String) contacts.getItem(position);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(self);
+                dialog.setMessage(self.getText(R.string.appointment_remove_contact));
+                dialog.setPositiveButton(self.getText(R.string.label_yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        contacts.remove(email);
+                    }
+                });
+                dialog.setNegativeButton(self.getText(R.string.label_no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) { }
+                });
+                dialog.create().show();
             }
-        });*/
+        });
     }
 }
