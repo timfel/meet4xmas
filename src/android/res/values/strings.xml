@@ -2,6 +2,7 @@
 <resources>
 
     <string name="service_url">http://tessi.fornax.uberspace.de/xmas/2/</string>
+    <string name="meet4xmas_account">meet4xmas@googlemail.com</string>
 
     <string name="sign_up_title">Sign Up</string>
     <string name="sign_up_info">Please provide your email address for log in/register.</string>
