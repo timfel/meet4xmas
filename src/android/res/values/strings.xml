@@ -27,4 +27,13 @@
 
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
+
+    <string name="error_account_missing">Missing Account. You need to setup a Google account on this phone.</string>
+    <string name="error_service_not_available">Push notification service unavailable</string>
+    <string name="error_authentication_failed">Authentication failed, bad password.</string>
+    <string name="error_too_many_registrations">Too many push registrations. You might want to uninstall some messy Apps.</string>
+    <string name="error_invalid_sender">
+        Invalid sender. The Meet4xmas team screwed up. Please contact them. They\'ll know what to do.
+    </string>
+    <string name="error_phone_registration_error">This phone does not seem to support push notifications.</string>
 </resources>
