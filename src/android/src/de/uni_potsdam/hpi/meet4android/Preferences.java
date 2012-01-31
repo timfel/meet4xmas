@@ -8,8 +8,8 @@ public class Preferences {
 
     private SharedPreferences pref;
 
-    public Preferences(Activity activity) {
-        pref = activity.getSharedPreferences("meet4xmas", Context.MODE_PRIVATE);
+    public Preferences(Context context) {
+        pref = context.getSharedPreferences("meet4xmas", Context.MODE_PRIVATE);
     }
 
     public void setUser(final String name) {
@@ -30,6 +30,26 @@ public class Preferences {
 
     public String getUser() {
         return pref.getString("user", null);
+    }
+
+    public void setRegistrationId(final String id) {
+        editorDo(new Change() {
+            public void edit(SharedPreferences.Editor editor) {
+                if (id == null) {
+                    editor.remove("registration_id");
+                } else {
+                    editor.putString("registration_id", id);
+                }
+            }
+        });
+    }
+
+    public boolean isRegistrationId() {
+        return pref.contains("registration_id");
+    }
+
+    public String getRegistrationId() {
+        return pref.getString("registration_id", null);
     }
 
     private void editorDo(Change change) {
