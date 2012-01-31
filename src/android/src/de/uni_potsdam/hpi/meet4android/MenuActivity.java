@@ -3,8 +3,11 @@ package de.uni_potsdam.hpi.meet4android;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+import org.meet4xmas.Service;
 
 public class MenuActivity extends Activity {
 
@@ -15,9 +18,19 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        setTitle(new Preferences(this).getUser());
+        Preferences pref = new Preferences(this);
+
+        setTitle(pref.getUser());
         setupAppointmentButton();
         setupLogoutButton();
+
+        if (!pref.isRegistrationId()) {
+            new Thread(new Runnable() {
+                public void run() {
+                    new Service(self).registerWithC2DM();
+                }
+            }).start();
+        }
     }
 
     protected void setupAppointmentButton() {
@@ -33,7 +46,14 @@ public class MenuActivity extends Activity {
         final Button button = (Button) findViewById(R.id.menuLogout);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new Preferences(self).setUser(null);
+                new Thread(new Runnable() {
+                    public void run() {
+                        Preferences pref = new Preferences(self);
+                        pref.setUser(null);
+                        pref.setRegistrationId(null);
+                        new Service(self).unregisterWithC2DM();
+                    }
+                }).start();
                 startActivity(new Intent(self, SignUpActivity.class));
             }
         });
