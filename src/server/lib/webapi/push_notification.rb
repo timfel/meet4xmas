@@ -209,7 +209,6 @@ module Meet4Xmas
             end.compact
           end
         when :c2dm
-          puts 'create c2dm notification'
           collapse_key = payload.delete :collapse_key
           [{ :registration_id => device_id, :data => payload, :collapse_key => collapse_key }]
         else
@@ -260,7 +259,6 @@ module Meet4Xmas
             end
           end
         when :c2dm
-          puts 'send c2dm notification'
           c2dm = C2DM.new('meet4xmas@googlemail.com', 'WerWillSichMitMirTreffen?', 'HPIStudents-Meet4Xmas-0.1')
           notifications.each do |notification|
             begin
