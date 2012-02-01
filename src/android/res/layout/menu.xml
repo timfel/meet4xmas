@@ -20,6 +20,14 @@
         android:text="@string/menu_create_appointment"/>
 
     <Button
+        android:id="@+id/menuSettings"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_settings"/>
+
+    <Button
         android:id="@+id/menuLogout"
         android:layout_marginLeft="17sp"
         android:layout_marginRight="17sp"
