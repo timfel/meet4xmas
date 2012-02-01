@@ -329,7 +329,8 @@ module Meet4Xmas
               },
             },
             :c2dm => {
-              :message => @appointment.user_message ? @appointment.user_message : short_message
+              :message => @appointment.user_message ? @appointment.user_message : short_message,
+              :appointmentId => @appointment.id
             }
           },
           :recipients => @appointment.participants.reject{|p|p.id == @appointment.creator.id}
