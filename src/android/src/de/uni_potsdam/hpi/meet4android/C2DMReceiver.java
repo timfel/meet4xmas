@@ -37,7 +37,8 @@ public class C2DMReceiver extends BroadcastReceiver {
 
     public void handleMessage(Context context, Intent intent) {
         String msg = intent.getExtras().getString("message");
-        Toast.makeText(context, "Received notification: " + msg, Toast.LENGTH_LONG).show();
+        String appointmentId = intent.getExtras().getString("appointmentId");
+        Toast.makeText(context, "Appointment " + appointmentId + ": " + msg, Toast.LENGTH_LONG).show();
         Log.d("xmas", "Received notification: " + msg);
     }
 
