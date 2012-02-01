@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.*;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.caucho.hessian.client.HessianProxyFactory;
+import de.uni_potsdam.hpi.meet4android.Preferences;
 import de.uni_potsdam.hpi.meet4android.R;
 import org.meet4xmas.wire.*;
 import org.meet4xmas.wire.Location;
@@ -57,9 +59,15 @@ public class Service {
      * @throws ServiceException When registration fails.
      */
     public void signUp(String email) throws ServiceException {
-        NotificationServiceInfo notificationServiceInfo = new NotificationServiceInfo();
-        notificationServiceInfo.serviceType = NotificationServiceInfo.NotificationServiceType.C2DM;
-        notificationServiceInfo.deviceId = getBytes(getDeviceId());
+        String deviceId = getDeviceId();
+        NotificationServiceInfo notificationServiceInfo;
+        if (deviceId != null) {
+            notificationServiceInfo = new NotificationServiceInfo();
+            notificationServiceInfo.serviceType = NotificationServiceInfo.NotificationServiceType.C2DM;
+            notificationServiceInfo.deviceId = getBytes(getDeviceId());
+        } else {
+            notificationServiceInfo = null;
+        }
 
         Response response = getAPI().registerAccount(email, notificationServiceInfo);
         if (!response.success) {
@@ -83,7 +91,7 @@ public class Service {
      * @return A registration ID usable to send push notifications to this device.
      */
     public String getDeviceId() {
-        return "@TODO"; // @TODO
+        return new Preferences(context).getRegistrationId();
     }
 
     public Location getLocation() throws ServiceException {
