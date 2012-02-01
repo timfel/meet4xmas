@@ -22,6 +22,7 @@ public class MenuActivity extends Activity {
 
         setTitle(pref.getUser());
         setupAppointmentButton();
+        setupSettingsButton();
         setupLogoutButton();
 
         if (!pref.isRegistrationId()) {
@@ -42,6 +43,15 @@ public class MenuActivity extends Activity {
         });
     }
 
+    protected void setupSettingsButton() {
+        final Button button = (Button) findViewById(R.id.menuSettings);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(self, SettingsActivity.class));
+            }
+        });
+    }
+
     protected void setupLogoutButton() {
         final Button button = (Button) findViewById(R.id.menuLogout);
         button.setOnClickListener(new View.OnClickListener() {
@@ -50,8 +60,6 @@ public class MenuActivity extends Activity {
                     public void run() {
                         Preferences pref = new Preferences(self);
                         pref.setUser(null);
-                        pref.setRegistrationId(null);
-                        new Service(self).unregisterWithC2DM();
                     }
                 }).start();
                 startActivity(new Intent(self, SignUpActivity.class));
