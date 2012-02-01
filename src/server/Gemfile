@@ -5,6 +5,7 @@ gem 'nokogiri'
 # push notifications
 gem 'apns' # apple push notification service
 gem 'wpns' # WP7 push notification service
+gem 'c2dm' # Andoid push notification (or call it cloud to device messaging if you're the business guy)
 
 # persistence
 gem 'dm-core'
