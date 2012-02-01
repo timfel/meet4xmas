@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AppointmentActivity" android:label="Create Appointment"/>
-        <activity android:name=".SettingsActivity" android:label="Mee4Xmas Settings"/>
+        <activity android:name=".SettingsActivity" android:label="Meet4Xmas Settings"/>
 
         <receiver android:name="de.uni_potsdam.hpi.meet4android.C2DMReceiver"
                   android:permission="com.google.android.c2dm.permission.SEND">
