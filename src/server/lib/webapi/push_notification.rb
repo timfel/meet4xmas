@@ -321,7 +321,7 @@ module Meet4Xmas
               :toast => {
                 :title => @appointment.user_message || "Invitation",
                 :message => short_message,
-                :param => "/MainPage.xaml?appointmentId=#{@appointment.identifier}"
+                :param => "/MainPage.xaml?appointmentId=#{@appointment.id}"
               },
               :tile => {
                 :back_title => "#{@appointment.creator.id} says:",
