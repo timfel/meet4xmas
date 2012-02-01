@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'nokogiri'
+gem 'json'
 
 # push notifications
 gem 'apns' # apple push notification service
