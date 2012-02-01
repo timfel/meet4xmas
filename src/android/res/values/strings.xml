@@ -27,6 +27,15 @@
         <item>Christmas Market</item>
     </string-array>
 
+    <string name="settings_registration_id">C2DM Registration ID</string>
+    <string name="settings_travel_type">Default Travel Type</string>
+
+    <string-array name="settings_travel_types">
+        <item>Public Transportation</item>
+        <item>Car</item>
+        <item>Walk</item>
+    </string-array>
+
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
 
