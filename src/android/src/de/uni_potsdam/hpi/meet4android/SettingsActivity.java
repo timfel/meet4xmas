@@ -16,7 +16,6 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
 
-        setupApplyButton();
         setupCloseButton();
         setupRegistrationId();
     }
@@ -24,15 +23,6 @@ public class SettingsActivity extends Activity {
     protected void setupRegistrationId() {
         final TextView view = (TextView) findViewById(R.id.registrationIdView);
         view.setText(new Preferences(self).getRegistrationId());
-    }
-
-    protected void setupApplyButton() {
-        final Button button = (Button) findViewById(R.id.applySettingsButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new Service(self).unregisterWithC2DM();
-            }
-        });
     }
 
     protected void setupCloseButton() {
