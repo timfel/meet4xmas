@@ -2,6 +2,7 @@ require 'rubygems'
 require 'yaml'
 require 'apns'
 require 'wpns'
+require 'c2dm'
 
 module Meet4Xmas
   module WebAPI
@@ -41,7 +42,9 @@ module Meet4Xmas
       #     },
       #
       #     :c2dm => {
-      #       # TODO
+      #       :message => "some message",
+      #       :collapse_key => "arbitrary string", # the messages are grouped on the device by that string
+      #       <you may add custom key/value pairs as you like>
       #     },
       #
       #     :mpns => { # one notification; all keys are optional, except:
@@ -206,8 +209,9 @@ module Meet4Xmas
             end.compact
           end
         when :c2dm
-          # TODO
-          []
+          puts 'create c2dm notification'
+          collapse_key = payload.delete :collapse_key
+          [{ :registration_id => device_id, :data => payload, :collapse_key => collapse_key }]
         else
           puts "Error: unsupported notification service type: #{service_name}"
         end
@@ -256,7 +260,16 @@ module Meet4Xmas
             end
           end
         when :c2dm
-          # TODO
+          puts 'send c2dm notification'
+          c2dm = C2DM.new('meet4xmas@googlemail.com', 'WerWillSichMitMirTreffen?', 'HPIStudents-Meet4Xmas-0.1')
+          notifications.each do |notification|
+            begin
+              c2dm.send_notification(notification)
+            rescue => e
+              puts "Error in while sending #{service_name} notification (#{notification}) - #{e}"
+              puts e.backtrace
+            end
+          end
         else
           puts "Error: unsupported notification service type: #{service_name}"
         end
