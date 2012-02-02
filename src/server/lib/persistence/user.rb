@@ -20,7 +20,11 @@ module Persistence
         :created_at => DateTime.now,
         :location_type => location_type, :user_message => user_message
       })
-      appointment.update_participation_info self, :travel_type => travel_type, :location => location
+      appointment.update_participation_info(
+        self,
+        :travel_type => travel_type,
+        :location => location
+      )
       appointment.update_location # find the initial location
       appointment.add_participants(*invitees)
 
@@ -39,7 +43,7 @@ module Persistence
       when Meet4Xmas::Persistence::NotificationServiceType::APNS
         device_id = device_id.unpack('H*')[0]
       when Meet4Xmas::Persistence::NotificationServiceType::MPNS, Meet4Xmas::Persistence::NotificationServiceType::C2DM
-        # Nothing todo
+        # Nothing to do
       end
 
       # create a new entry in this user's notification_services list, if an equal entry does not exist yet
