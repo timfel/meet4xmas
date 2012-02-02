@@ -76,10 +76,14 @@ module Persistence
         :travel_type => travel_type,
         :location => location
       })
+
+      Meet4Xmas::WebAPI::JoinPushNotification.new(self, participant).send
     end
 
     def decline(participant) # participant is either a User or its id
       update_participation_info(participant, :status => ParticipationStatus::Declined)
+
+      Meet4Xmas::WebAPI::DeclinePushNotification.new(self, participant).send
     end
 
     def finalize()

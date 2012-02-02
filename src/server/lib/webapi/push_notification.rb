@@ -337,5 +337,59 @@ module Meet4Xmas
         })
       end
     end
+
+    #
+    # Notifies all participants when one participant changes his/her status.
+    #
+    class ParticipationStatusPushNotification < PushNotification
+      def initialize(appointment, participant)
+        @appointment = appointment
+        @participant = participant
+
+        msg = self.short_message
+
+        super({
+          :payloads => {
+            :apns => {
+              :alert => msg
+            },
+            :mpns => {
+              :toast => {
+                :title => @appointment.user_message || "Appointment",
+                :message => msg,
+                :param => "/MainPage.xaml?appointmentId=#{@appointment.id}"
+              },
+              :tile => {
+                :back_title => @appointment.user_message || "Appointment",
+                :back_content => msg
+              },
+            },
+            :c2dm => {
+              :message => msg,
+              :appointmentId => @appointment.id
+            }
+          },
+          :recipients => @appointment.participants.reject{|p|p.id == @participant.id}
+        })
+      end
+    end
+
+    #
+    # Notifies all participants when one participant joins.
+    #
+    class JoinPushNotification < ParticipationStatusPushNotification
+      def short_message
+        "#{@participant.id} joined the appointment"
+      end
+    end
+
+    #
+    # Notifies all participants when one participant declines.
+    #
+    class DeclinePushNotification < ParticipationStatusPushNotification
+      def short_message
+        "#{@participant.id} declined the appointment"
+      end
+    end
   end
 end
