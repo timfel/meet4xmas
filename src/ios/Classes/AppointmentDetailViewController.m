@@ -169,9 +169,7 @@ NSArray *sectionGroups;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    //id<Participant> participant = [self.appointment.participants objectAtIndex:indexPath.row];
     id<Participant> participant = [self getParticipantNr: indexPath.row ofGroup: indexPath.section ];
-    //indexPath.section
     
     cell.textLabel.text = participant.userId;
     switch (participant.status) {
@@ -206,11 +204,6 @@ NSArray *sectionGroups;
 	
     return [[self.participantGroups objectForKey: [sectionGroups objectAtIndex: section]] count];
 }
-
-/*- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.appointment.participants.count;
-}*/
 
 - (void) updateParticipantGroups{
     
