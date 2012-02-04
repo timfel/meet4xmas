@@ -105,12 +105,16 @@
 
 + (id<Response>)createAppointmentWithUser:(UserId)userId
                                travelType:(TravelType)travelType
-                                 location:(id<Location>)location
+                                 location:(CLLocation*)location
                                  invitees:(NSArray *)invitees
                              locationType:(LocationType)locationType
                               userMessage:(NSString *)userMessage
 {
-    id<Response> response = [[self sharedInstance].serviceProxy createAppointment:userId :travelType :location :invitees :locationType :userMessage];
+    CWValueObject<Location>* locationObject = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
+    locationObject.latitude = [NSNumber numberWithDouble: location.coordinate.latitude];
+    locationObject.longitude = [NSNumber numberWithDouble: location.coordinate.longitude];
+    
+    id<Response> response = [[self sharedInstance].serviceProxy createAppointment:userId :travelType :locationObject :invitees :locationType :userMessage];
     
     if (!response.success) {
         if (response.error) {
@@ -147,9 +151,13 @@
 + (id<Response>)joinAppointment:(AppointmentId)appointmentId
                  userId:(UserId)userId
              travelType:(TravelType)travelType
-               location:(id<Location>)location
+               location:(CLLocation*)location
 {
-    id<Response> response = [[self sharedInstance].serviceProxy joinAppointment:appointmentId :userId :travelType :location];
+    CWValueObject<Location>* locationObject = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
+    locationObject.latitude = [NSNumber numberWithDouble: location.coordinate.latitude];
+    locationObject.longitude = [NSNumber numberWithDouble: location.coordinate.longitude];
+    
+    id<Response> response = [[self sharedInstance].serviceProxy joinAppointment:appointmentId :userId :travelType :locationObject];
     
     if (!response.success) {
         if (response.error) {
@@ -175,13 +183,17 @@
 
 + (id<Response>)getTravelPlanForAppointmentId: (AppointmentId)appointmentId
                                    travelType:(TravelType)travelType
-                                     location:(id<Location>)location
+                                     location:(CLLocation*)location
 {
-    id<Response> response = [[self sharedInstance].serviceProxy getTravelPlan:appointmentId :travelType :location];
+    CWValueObject<Location>* locationObject = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
+    locationObject.latitude = [NSNumber numberWithDouble: location.coordinate.latitude];
+    locationObject.longitude = [NSNumber numberWithDouble: location.coordinate.longitude];
+    
+    id<Response> response = [[self sharedInstance].serviceProxy getTravelPlan:appointmentId :travelType :locationObject];
     
     if (!response.success) {
         if (response.error) {
-            NSLog(@"Failed to decline appointment: [%@]%@.", response.error.code, response.error.message);
+            NSLog(@"Failed to get travel plan: [%@]%@.", response.error.code, response.error.message);
         }
     }
     return response;

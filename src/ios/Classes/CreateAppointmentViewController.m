@@ -135,21 +135,12 @@ typedef enum {
     
     UserId userId = appDelegate.currentUser;
     TravelType travelType = [self.travelType selectedSegmentIndex];
-    CWValueObject<Location>* location = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
-#if TARGET_IPHONE_SIMULATOR
-    // Stub
-    location.latitude = [NSNumber numberWithDouble:52.393957];
-    location.longitude = [NSNumber numberWithDouble:13.132473];
-#else
-    location.latitude = [NSNumber numberWithDouble: appDelegate.currentLocation.coordinate.latitude];
-    location.longitude = [NSNumber numberWithDouble: appDelegate.currentLocation.coordinate.longitude];
-#endif
     LocationType locationType = WEIHNACHTSMARKT;
     NSString* userMessage = self.descriptionTextField.text;
     
     id<Response> response = [ServiceProxy createAppointmentWithUser:userId
                                                 travelType:travelType
-                                                  location:location
+                                                  location:appDelegate.currentLocation
                                                   invitees:self.invitees
                                               locationType:locationType
                                                userMessage:userMessage];

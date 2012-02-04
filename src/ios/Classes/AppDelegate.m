@@ -111,6 +111,10 @@ NSString* const kLocationSetNotification = @"locationManagerGotFirstLocation";
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
+#ifdef TARGET_IPHONE_SIMULATOR
+    newLocation = [[CLLocation alloc] initWithLatitude:52.393957 longitude:13.132473]; // HPI
+#endif
+    
     if (self.currentLocation == nil) {
         self.currentLocation = newLocation;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLocationSetNotification object:self];

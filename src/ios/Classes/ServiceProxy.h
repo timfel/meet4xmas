@@ -7,6 +7,7 @@
 //
 
 #import "ServiceProtocols.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface ServiceProxy : NSObject
 
@@ -18,7 +19,7 @@
 #pragma mark Appointment
 + (id<Response>)createAppointmentWithUser:(UserId)userId
                                travelType:(TravelType)travelType
-                                 location:(id<Location>)location
+                                 location:(CLLocation*)location
                                  invitees:(NSArray *)invitees
                              locationType:(LocationType)locationType
                               userMessage:(NSString *)userMessage;
@@ -30,7 +31,7 @@
 + (id<Response>)joinAppointment:(AppointmentId)appointmentId
                  userId:(UserId)userId
              travelType:(TravelType)travelType
-               location:(id<Location>)location;
+               location:(CLLocation*)location;
 
 + (id<Response>)declineAppointment:(AppointmentId)appointmentId
                     userId:(UserId)userId;
@@ -38,7 +39,7 @@
 #pragma mark TravelPlan
 + (id<Response>)getTravelPlanForAppointmentId: (AppointmentId)appointmentId
                                    travelType:(TravelType)travelType
-                                     location:(id<Location>)location;
+                                     location:(CLLocation*)location;
 
 @end
 

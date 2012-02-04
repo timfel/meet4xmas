@@ -115,17 +115,7 @@ NSArray *sectionGroups;
             return;
         }
     } else {
-        CWValueObject<Location>* location = (CWValueObject<Location>*)[CWValueObject valueObjectWithProtocol:@protocol(Location)];
-#if TARGET_IPHONE_SIMULATOR
-        // Stub
-        location.latitude = [NSNumber numberWithDouble:52.393957];
-        location.longitude = [NSNumber numberWithDouble:13.132473];
-#else
-        location.latitude = [NSNumber numberWithDouble: appDelegate.currentLocation.coordinate.latitude];
-        location.longitude = [NSNumber numberWithDouble: appDelegate.currentLocation.coordinate.longitude];
-#endif
-        
-        id<Response> response = [ServiceProxy joinAppointment:self.appointment.identifier userId:user travelType:0 /*TODO*/location:location];
+        id<Response> response = [ServiceProxy joinAppointment:self.appointment.identifier userId:user travelType:0 /*TODO*/location:appDelegate.currentLocation];
         if (!response.success) {
             UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
                                                               message:@"Something went wrong joining the appointment." 
