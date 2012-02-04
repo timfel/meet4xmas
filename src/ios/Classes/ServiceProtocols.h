@@ -49,7 +49,7 @@ OBJC_EXPORT NSString* const kLocationClassName;
 @property(strong, nonatomic) NSNumber* /*double*/ latitude;
 @property(strong, nonatomic) NSNumber* /*double*/ longitude;
 @property(strong, nonatomic) NSString* title;
-@property(strong, nonatomic) NSString* desciption;
+@property(strong, nonatomic) NSString* description;
 
 @end
 

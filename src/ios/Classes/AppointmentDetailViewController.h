@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet MKMapView* locationMap;
 
 @property (nonatomic, strong) NSDictionary* participantGroups;
+@property (nonatomic, strong) NSMutableArray* mapAnnotations;
 
 - (AppointmentDetailViewController*) initWithDefaultNibAndAppointment:(id<Appointment>)appointment;
 
@@ -29,5 +30,7 @@
 
 - (void) updateParticipantGroups;
 - (id<Participant>) getParticipantNr: (NSInteger) number ofGroup: (NSInteger) groupNumber;
-- (void) adjustMapView;
+
+- (void) fetchMapAnnotations;
+- (void) updateMapAnnotations;
 @end

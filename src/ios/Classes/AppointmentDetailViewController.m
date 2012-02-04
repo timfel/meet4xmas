@@ -11,6 +11,7 @@
 #import "ServiceProxy.h"
 #import "MapAnnotation.h"
 #import <MapKit/MapKit.h>
+#import "MKMapView+FitAnnotations.h"
 #import "CWValueObject.h"
 
 
@@ -26,14 +27,13 @@ NSArray *sectionGroups;
 @synthesize appointment = _appointment;
 @synthesize scrollView, participantsTableView, acceptButton, declineButton;
 @synthesize locationMap;
-@synthesize participantGroups;
+@synthesize mapAnnotations, participantGroups;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         sectionGroups = [NSArray arrayWithObjects: @"Accepted", @"Undecided", @"Declined", nil];
-        // Custom initialization
     }
     return self;
 }
@@ -79,7 +79,7 @@ NSArray *sectionGroups;
         self.declineButton.titleLabel.text = @"Cancel";
     }
     
-    [self adjustMapView];
+    [self updateMapAnnotations];
 }
 
 - (void)viewDidUnload
@@ -244,26 +244,34 @@ NSArray *sectionGroups;
     return participant;
 }
 
+#pragma mark - Map View
 
-- (void) adjustMapView{
-        
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = [self.appointment.location.latitude doubleValue];
-    zoomLocation.longitude = [self.appointment.location.longitude doubleValue];
-
+- (void) fetchMapAnnotations
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    id<Response> response = [ServiceProxy getTravelPlanForAppointmentId:self.appointment.identifier travelType:PUBLICTRANSPORT location:appDelegate.currentLocation];
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*1000, 0.5*1000);
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [self.locationMap dequeueReusableAnnotationViewWithIdentifier: @"Super"];
-      
-    MapPin *annotation = [[MapPin alloc] initWithTitle: @"Treffpunkt" subtitle: @"Super hier" coordinate: zoomLocation];
-    
-    [self.locationMap addAnnotation: annotation];
-    
-
-    MKCoordinateRegion adjustedRegion = [self.locationMap regionThatFits:viewRegion];                
-
-    [self.locationMap setRegion:adjustedRegion animated:YES];        
-
-    NSLog(@"hier %@", self.appointment.location.longitude);
+    if (!response.success) {
+        //TODO
+    } else {
+        self.mapAnnotations = [NSMutableArray array];
+        id<TravelPlan> travelPlan = response.payload;
+        NSArray* path = travelPlan.path;
+        for (id<Location> location in path) {
+            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([location.latitude doubleValue], [location.longitude doubleValue]);
+            [self.mapAnnotations addObject:[[MapAnnotation alloc] initWithTitle:location.title 
+                                                                       subtitle:location.description 
+                                                                     coordinate:coord]];
+        }
+    }
 }
+
+- (void) updateMapAnnotations
+{
+    [self.locationMap removeAnnotations:self.mapAnnotations];
+    [self fetchMapAnnotations];
+    [self.locationMap addAnnotations:self.mapAnnotations];
+    [self.locationMap zoomToFitMapAnnotationsAnimated:YES];
+}
+
 @end
