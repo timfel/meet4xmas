@@ -103,7 +103,7 @@ NSArray *sectionGroups;
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     UserId user = appDelegate.currentUser;
     
-    if (self.appointment.creator == user) {
+    if ([self.appointment.creator isEqualToString:user]) {
         id<Response> response = [ServiceProxy finalizeAppointment:self.appointment.identifier];
         if (!response.success) {
             UIAlertView* message = [[UIAlertView alloc] initWithTitle:@"Error" 
