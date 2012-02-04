@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0116C8FA14DD6C3E006400D3 /* MKMapView+FitAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 0116C8F914DD6C3E006400D3 /* MKMapView+FitAnnotations.m */; };
 		0167975C14CC3306001979E6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975B14CC3306001979E6 /* icon.png */; };
 		0167975E14CC3310001979E6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975D14CC3310001979E6 /* icon@2x.png */; };
 		0167976014CC331C001979E6 /* icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 0167975F14CC331B001979E6 /* icon~ipad.png */; };
@@ -37,7 +38,7 @@
 		B040D1C414D023750080C3D0 /* AppointmentDetailView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B040D1C214D023750080C3D0 /* AppointmentDetailView_iPhone.xib */; };
 		B040D1C714D025550080C3D0 /* AppointmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */; };
 		B092F82714D190DC003F65D3 /* AppointmentDetailView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */; };
-		D743877C14D6756900CE3B96 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = D743877B14D6756900CE3B96 /* MapPin.m */; };
+		D743877C14D6756900CE3B96 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D743877B14D6756900CE3B96 /* MapAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0116C8F814DD6C3E006400D3 /* MKMapView+FitAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+FitAnnotations.h"; sourceTree = "<group>"; };
+		0116C8F914DD6C3E006400D3 /* MKMapView+FitAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+FitAnnotations.m"; sourceTree = "<group>"; };
 		0167975B14CC3306001979E6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		0167975D14CC3310001979E6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		0167975F14CC331B001979E6 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon~ipad.png"; sourceTree = "<group>"; };
@@ -113,8 +116,8 @@
 		B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentDetailViewController.h; sourceTree = "<group>"; };
 		B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailViewController.m; sourceTree = "<group>"; };
 		B092F82614D190DC003F65D3 /* AppointmentDetailView_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointmentDetailView_iPad.xib; sourceTree = "<group>"; };
-		D743877A14D6756900CE3B96 /* MapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
-		D743877B14D6756900CE3B96 /* MapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
+		D743877A14D6756900CE3B96 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
+		D743877B14D6756900CE3B96 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +148,8 @@
 				01B814AB14C07A0300D323A6 /* AppointmentListViewController.m */,
 				B040D1C514D025550080C3D0 /* AppointmentDetailViewController.h */,
 				B040D1C614D025550080C3D0 /* AppointmentDetailViewController.m */,
-				D743877A14D6756900CE3B96 /* MapPin.h */,
-				D743877B14D6756900CE3B96 /* MapPin.m */,
+				D743877A14D6756900CE3B96 /* MapAnnotation.h */,
+				D743877B14D6756900CE3B96 /* MapAnnotation.m */,
 				01B814AD14C07C4C00D323A6 /* CreateAppointmentViewController.h */,
 				01B814AE14C07C4C00D323A6 /* CreateAppointmentViewController.m */,
 				016AFC0F14C86A8400E5E340 /* AddInviteeViewController.h */,
@@ -229,6 +232,8 @@
 				01A47CE81490F4CF007E1DFC /* Controllers */,
 				01CE308A1490F05F00548992 /* AppDelegate.h */,
 				01CE308B1490F05F00548992 /* AppDelegate.m */,
+				0116C8F814DD6C3E006400D3 /* MKMapView+FitAnnotations.h */,
+				0116C8F914DD6C3E006400D3 /* MKMapView+FitAnnotations.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -373,7 +378,8 @@
 				01B814AF14C07C4C00D323A6 /* CreateAppointmentViewController.m in Sources */,
 				016AFC1114C86A8400E5E340 /* AddInviteeViewController.m in Sources */,
 				B040D1C714D025550080C3D0 /* AppointmentDetailViewController.m in Sources */,
-				D743877C14D6756900CE3B96 /* MapPin.m in Sources */,
+				D743877C14D6756900CE3B96 /* MapAnnotation.m in Sources */,
+				0116C8FA14DD6C3E006400D3 /* MKMapView+FitAnnotations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

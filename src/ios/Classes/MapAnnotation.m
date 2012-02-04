@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 HPI. All rights reserved.
 //
 
-#import "MapPin.h"
+#import "MapAnnotation.h"
 #import <MapKit/MapKit.h>
 
 
-@implementation MapPin
+@implementation MapAnnotation
 
 @synthesize title = _title;
 @synthesize subtitle = _subtile;

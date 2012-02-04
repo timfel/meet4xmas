@@ -9,7 +9,7 @@
 #import "AppointmentDetailViewController.h"
 #import "AppDelegate.h"
 #import "ServiceProxy.h"
-#import "MapPin.h"
+#import "MapAnnotation.h"
 #import <MapKit/MapKit.h>
 #import "CWValueObject.h"
 
