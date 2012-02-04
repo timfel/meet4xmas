@@ -24,7 +24,7 @@ NSArray *sectionGroups;
 @implementation AppointmentDetailViewController
 
 @synthesize appointment = _appointment;
-@synthesize scrollView, acceptButton, declineButton;
+@synthesize scrollView, participantsTableView, acceptButton, declineButton;
 @synthesize locationMap;
 @synthesize participantGroups;
 
@@ -137,12 +137,20 @@ NSArray *sectionGroups;
         }
     }
     
-    //TODO: Update participant list
+    for (id<Participant> participant in self.appointment.participants) {
+        if ([participant.userId isEqualToString:user]) {
+            participant.status = JOINED;
+            [self updateParticipantGroups];
+            [self.participantsTableView reloadData];
+            return;
+        }
+    }
 }
 
 - (IBAction)declineAppointment:(UIButton*)sender
 {
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    UserId user = appDelegate.currentUser;
     
     id<Response> response = [ServiceProxy declineAppointment:self.appointment.identifier userId:appDelegate.currentUser];
     if (!response.success) {
@@ -154,7 +162,13 @@ NSArray *sectionGroups;
         [message show];
         return;
     } else {
-        [self.navigationController popViewControllerAnimated:YES];
+        for (id<Participant> participant in self.appointment.participants) {
+            if ([participant.userId isEqualToString:user]) {
+                participant.status = DECLINED;
+                [self.navigationController popViewControllerAnimated:YES];
+                return;
+            }
+        }
     }
 }
 

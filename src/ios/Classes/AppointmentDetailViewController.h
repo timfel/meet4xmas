@@ -15,6 +15,7 @@
 @property (nonatomic, strong) id<Appointment> appointment;
 
 @property (nonatomic, strong) IBOutlet UIScrollView* scrollView;
+@property (nonatomic, strong) IBOutlet UITableView* participantsTableView;
 @property (nonatomic, strong) IBOutlet UIButton* acceptButton;
 @property (nonatomic, strong) IBOutlet UIButton* declineButton;
 @property (nonatomic, strong) IBOutlet MKMapView* locationMap;
