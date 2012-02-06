@@ -2,6 +2,7 @@ package org.meet4xmas;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -83,7 +84,12 @@ public class Service {
         if (!response.success) {
             raise("Sign-up failed", response.error);
         }
-    	return (List<Appointment>) response.payload;
+        List<Integer> appIds = (List<Integer>) response.payload;
+        List<Appointment> appointments = new ArrayList<Appointment>(appIds.size());
+        for (Integer id: appIds) {
+            appointments.add((Appointment)getAPI().getAppointment(id).payload);
+        }
+        return appointments;
     }
     
     public void createAppointment(String user, android.location.Location location, String what, Collection<String> invitees,
