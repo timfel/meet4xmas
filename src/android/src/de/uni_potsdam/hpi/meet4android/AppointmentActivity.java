@@ -119,7 +119,7 @@ public class AppointmentActivity extends Activity {
     }
 
     protected void setupCreateButton() {
-        Button button = (Button) findViewById(R.id.create_appointment_button);
+        final Button button = (Button) findViewById(R.id.create_appointment_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 List<String> emails = new LinkedList<String>();
@@ -130,11 +130,14 @@ public class AppointmentActivity extends Activity {
                 String user = new Preferences(self).getUser();
                 TextView what = (TextView) self.findViewById(R.id.appointment_what);
                 try {
+                    button.setEnabled(false);
                     service.createAppointment(user, self.dloc, what.getText().toString(), emails,
                             TravelPlan.TravelType.PublicTransport);
                 } catch (ServiceException e) {
                     Log.d("AppointmentCreation", e.toString());
                     new MessageBox("Error: " + e.getMessage(), self).show();
+                } finally {
+                    button.setEnabled(true);
                 }
             }
         });
