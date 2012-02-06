@@ -3,6 +3,8 @@ source 'http://rubygems.org'
 gem 'nokogiri'
 gem 'json'
 
+gem "jruby-openssl"
+
 # push notifications
 gem 'apns' # apple push notification service
 gem 'wpns' # WP7 push notification service
