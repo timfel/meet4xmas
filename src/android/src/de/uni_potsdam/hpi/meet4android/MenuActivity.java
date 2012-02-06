@@ -35,10 +35,16 @@ public class MenuActivity extends Activity {
     }
 
     protected void setupAppointmentButton() {
-        final Button button = (Button) findViewById(R.id.menuCreateAppointment);
+        Button button = (Button) findViewById(R.id.menuCreateAppointment);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(self, AppointmentActivity.class));
+            }
+        });
+        button = (Button) findViewById(R.id.menuListAppointments);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(self, AppointmentListActivity.class));
             }
         });
     }

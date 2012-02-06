@@ -11,6 +11,7 @@
 
     <string name="menu_title">Meet4xmas</string>
     <string name="menu_create_appointment">Create Appointment</string>
+    <string name="menu_list_appointments">Show Appointments</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_logout">Logout</string>
 

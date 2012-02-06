@@ -28,6 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AppointmentActivity" android:label="Create Appointment"/>
+        <activity android:name=".AppointmentListActivity" android:label="Your Appointments"/>
+        <activity android:name=".AppointmentShowActivity" android:label="Appointment Details"/>
         <activity android:name=".SettingsActivity" android:label="Meet4Xmas Settings"/>
 
         <receiver android:name="de.uni_potsdam.hpi.meet4android.C2DMReceiver"
