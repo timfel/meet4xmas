@@ -3,7 +3,9 @@ package org.meet4xmas;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.List;
 
+import org.meet4xmas.wire.Appointment;
 import org.meet4xmas.wire.ErrorInfo;
 import org.meet4xmas.wire.IServiceAPI;
 import org.meet4xmas.wire.Location;
@@ -76,6 +78,14 @@ public class Service {
         }
     }
 
+    public List<Appointment> getAppointments(String email) throws ServiceException {
+        Response response = getAPI().registerAccount(email, null);
+        if (!response.success) {
+            raise("Sign-up failed", response.error);
+        }
+    	return (List<Appointment>) response.payload;
+    }
+    
     public void createAppointment(String user, android.location.Location location, String what, Collection<String> invitees,
                                   int travelType) throws ServiceException {
         Location loc = new Location();

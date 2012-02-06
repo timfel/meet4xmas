@@ -33,10 +33,9 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
     }
 
     public void testSignUp() {
-        IServiceAPI api = getService().getAPI();
-        Response response = api.registerAccount("hans@wur.st", null);
-
-        Assert.assertTrue(response.success);
+        Service service = new Service(this);
+        List<Appointment> appointments = service.getAppointments("hans@wur.st");
+        Log.d("xmas", appointments.toString());
     }
 
     public Service getService() {
