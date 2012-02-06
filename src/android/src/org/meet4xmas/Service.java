@@ -84,10 +84,10 @@ public class Service {
         if (!response.success) {
             raise("Sign-up failed", response.error);
         }
-        List<Integer> appIds = (List<Integer>) response.payload;
+        List<Long> appIds = (List<Long>) response.payload;
         List<Appointment> appointments = new ArrayList<Appointment>(appIds.size());
-        for (Integer id: appIds) {
-            appointments.add((Appointment)getAPI().getAppointment(id).payload);
+        for (long id: appIds) {
+            appointments.add((Appointment)getAPI().getAppointment((int) id).payload);
         }
         return appointments;
     }
