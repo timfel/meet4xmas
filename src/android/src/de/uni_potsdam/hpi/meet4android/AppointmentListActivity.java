@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
 import org.meet4xmas.Service;
 import org.meet4xmas.ServiceException;
@@ -16,6 +19,8 @@ import android.util.Log;
 import android.widget.ListView;
 
 public class AppointmentListActivity extends Activity {
+
+    private AppointmentListActivity self = this;
     private SimpleAdapter appointmentAdapter;
 
     @Override
@@ -23,7 +28,7 @@ public class AppointmentListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appointment_list);
         try {
-            List<Appointment> appointments = new Service(this).getAppointments(new Preferences(this).getUser());
+            final List<Appointment> appointments = new Service(this).getAppointments(new Preferences(this).getUser());
             List<Map<String, String>> views = new ArrayList<Map<String, String>>(appointments.size());
             for (Appointment app: appointments) {
                 Map<String, String> view = new HashMap<String, String>();
@@ -34,8 +39,19 @@ public class AppointmentListActivity extends Activity {
                     new String[] { "title" }, new int[] { R.id.app_item_title });
             ListView list = (ListView) findViewById(R.id.appointment_list);
             list.setAdapter(appointmentAdapter);
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(self, AppointmentShowActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("appointment", appointments.get(position));
+                    intent.putExtra("data", bundle);
+                    startActivity(intent);
+                }
+            });
         } catch (ServiceException e) {
             Log.d("xmas", e.getMessage());
+            new MessageBox("Error: " + e.getMessage(), this).show();
         }
     }
 }
