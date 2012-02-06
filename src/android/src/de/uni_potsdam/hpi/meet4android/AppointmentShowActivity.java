@@ -1,22 +1,42 @@
 package de.uni_potsdam.hpi.meet4android;
 
-import android.content.Intent;
-import android.widget.TextView;
 import org.meet4xmas.wire.Appointment;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
-public class AppointmentShowActivity extends Activity {
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+
+
+public class AppointmentShowActivity extends MapActivity {
+    private LinearLayout linearLayout;
+    private MapView mapView;
+    private MapController mapController;
+    private GeoPoint meetingPoint;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.appointment_show);
-
         Appointment app = getAppointment();
 
-        ((TextView) findViewById(R.id.textView1)).setText(app.message);
+        setContentView(R.layout.appointment_show);
+        mapView = (MapView) findViewById(R.id.mapview);
+        mapView.setBuiltInZoomControls(true);
+        mapController = mapView.getController();
+        mapController.setZoom(14); // Zoom 1 is world view
+        meetingPoint = new GeoPoint((int)(app.location.latitude * 1E6), (int)(app.location.longitude * 1E6));
+        mapController.animateTo(meetingPoint);
+
+//        ((TextView) findViewById(R.id.textView1)).setText(app.message);
+    }
+
+    @Override
+    protected boolean isRouteDisplayed() {
+        return false;
     }
 
     public Appointment getAppointment() {
