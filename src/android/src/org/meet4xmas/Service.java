@@ -81,8 +81,13 @@ public class Service {
         Location loc = new Location();
         loc.title = "current location";
         loc.description = "where I am right now";
-        loc.latitude = location.getLatitude();
-        loc.longitude = location.getLongitude();
+        if (location != null) {
+            loc.latitude = location.getLatitude();
+            loc.longitude = location.getLongitude();
+        } else {
+            loc.latitude = 52.396868;
+            loc.longitude = 13.13467;
+        }
         Response response = getAPI().createAppointment(user, travelType, loc,
                 invitees.toArray(new String[invitees.size()]), Location.LocationType.ChristmasMarket, what);
         if (!response.success) {
