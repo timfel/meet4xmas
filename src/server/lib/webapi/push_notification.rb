@@ -242,7 +242,7 @@ module Meet4Xmas
           notifications.each do |notification|
             begin
               ssl.write notification.packaged_notification
-            rescue => e
+            rescue Exception => e
               puts "Error in while sending #{service_name} notification (#{notification}) - #{e}"
               puts e.backtrace
             end
@@ -253,7 +253,7 @@ module Meet4Xmas
           notifications.map do |notification|
             begin
               Wpns.send_notification(*notification)
-            rescue => e
+            rescue Exception => e
               puts "Error in while sending #{service_name} notification (#{notification}) - #{e}"
               puts e.backtrace
             end
@@ -263,7 +263,7 @@ module Meet4Xmas
           notifications.each do |notification|
             begin
               c2dm.send_notification(notification)
-            rescue => e
+            rescue Exception => e
               puts "Error in while sending #{service_name} notification (#{notification}) - #{e}"
               puts e.backtrace
             end

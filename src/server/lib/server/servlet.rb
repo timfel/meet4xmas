@@ -35,22 +35,25 @@ module Meet4Xmas
       def handle_servlet_action(meth, *args, &block)
         begin
           puts "received: #{meth}(#{args_to_s(*args)})"
-        rescue => e
+        rescue Exception => e
           puts "error logging received operation: #{e}"
         end unless $MEET4XMAS_NO_LOGGING
 
         begin
           response = @handler.send(meth, *args, &block)
-        rescue => e
+        rescue Exception => e
           response = @handler._error_response(0, "#{e}\n  "+e.backtrace.join("\n  "))
         end
 
         begin
           puts "sending: #{response}"
-        rescue => e
+        rescue Exception => e
           puts "error logging response: #{e}"
         end unless $MEET4XMAS_NO_LOGGING
         response
+      rescue Exception => e
+        puts "general error: #{e}"
+        puts e.backtrace
       end
 
     private
