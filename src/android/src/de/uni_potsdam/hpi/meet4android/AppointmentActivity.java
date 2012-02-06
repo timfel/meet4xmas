@@ -134,7 +134,7 @@ public class AppointmentActivity extends Activity {
                             TravelPlan.TravelType.PublicTransport);
                 } catch (ServiceException e) {
                     Log.d("AppointmentCreation", e.toString());
-                    Toast.makeText(self, e.getMessage(), Toast.LENGTH_LONG).show();
+                    new MessageBox("Error: " + e.getMessage(), self).show();
                 }
             }
         });
