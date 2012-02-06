@@ -1,26 +1,37 @@
 package de.uni_potsdam.hpi.meet4android;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.View;
-import android.widget.*;
-import android.provider.ContactsContract.Contacts;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.meet4xmas.Service;
 import org.meet4xmas.ServiceException;
 import org.meet4xmas.wire.TravelPlan;
 
-import java.util.LinkedList;
-import java.util.List;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class AppointmentActivity extends Activity {
 
     private AppointmentActivity self = this;
     private ArrayAdapter<String> contacts;
+    private android.location.Location dloc;
     private static final int CONTACT_PICKER_RESULT = 1001;
 
     @Override
@@ -28,6 +39,7 @@ public class AppointmentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appointment);
 
+        setupFetchLocation();
         setupListView();
         setupCreateButton();
     }
@@ -55,6 +67,20 @@ public class AppointmentActivity extends Activity {
                     Toast.makeText(self, self.getText(R.string.appointment_no_email), Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    protected void setupFetchLocation() {
+        LocationManager mngr = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        self.dloc = mngr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(android.location.Location location) {
+                self.dloc = location;
+            }
+            public void onStatusChanged(String provider, int status, Bundle extras) { }
+            public void onProviderEnabled(String provider) { }
+            public void onProviderDisabled(String provider) { }
+        };
+        mngr.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
     }
 
     protected void setupListView() {
@@ -104,9 +130,10 @@ public class AppointmentActivity extends Activity {
                 String user = new Preferences(self).getUser();
                 TextView what = (TextView) self.findViewById(R.id.appointment_what);
                 try {
-                    service.createAppointment(user, what.getText().toString(), emails,
+                    service.createAppointment(user, self.dloc, what.getText().toString(), emails,
                             TravelPlan.TravelType.PublicTransport);
                 } catch (ServiceException e) {
+                    Log.d("AppointmentCreation", e.toString());
                     Toast.makeText(self, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }

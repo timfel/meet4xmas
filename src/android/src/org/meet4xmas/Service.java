@@ -1,24 +1,25 @@
 package org.meet4xmas;
 
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.location.*;
-import android.os.Bundle;
-import android.preference.Preference;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import com.caucho.hessian.client.HessianProxyFactory;
-import de.uni_potsdam.hpi.meet4android.Preferences;
-import de.uni_potsdam.hpi.meet4android.R;
-import org.meet4xmas.wire.*;
-import org.meet4xmas.wire.Location;
-
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+
+import org.meet4xmas.wire.ErrorInfo;
+import org.meet4xmas.wire.IServiceAPI;
+import org.meet4xmas.wire.Location;
+import org.meet4xmas.wire.NotificationServiceInfo;
+import org.meet4xmas.wire.Response;
+
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Criteria;
+import android.location.LocationManager;
+
+import com.caucho.hessian.client.HessianProxyFactory;
+
+import de.uni_potsdam.hpi.meet4android.Preferences;
+import de.uni_potsdam.hpi.meet4android.R;
 
 public class Service {
 
@@ -75,10 +76,14 @@ public class Service {
         }
     }
 
-    public void createAppointment(String user, String what, Collection<String> invitees,
+    public void createAppointment(String user, android.location.Location location, String what, Collection<String> invitees,
                                   int travelType) throws ServiceException {
-
-        Response response = getAPI().createAppointment(user, travelType, getLocation(),
+        Location loc = new Location();
+        loc.title = "current location";
+        loc.description = "where I am right now";
+        loc.latitude = location.getLatitude();
+        loc.longitude = location.getLongitude();
+        Response response = getAPI().createAppointment(user, travelType, loc,
                 invitees.toArray(new String[invitees.size()]), Location.LocationType.ChristmasMarket, what);
         if (!response.success) {
             raise("Appointment Creation failed", response.error);
@@ -92,41 +97,6 @@ public class Service {
      */
     public String getDeviceId() {
         return new Preferences(context).getRegistrationId();
-    }
-
-    public Location getLocation() throws ServiceException {
-
-        LocationManager mngr = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        String locProvider = selectProvider(mngr);
-
-        if (locProvider == null) {
-            throw new ServiceException("No appropriate location provider found (in: " + mngr.getAllProviders() + ").");
-        }
-        android.location.Location dloc = mngr.getLastKnownLocation(locProvider);
-        if (dloc == null && false) {
-            final List<android.location.Location> locs = new LinkedList<android.location.Location>();
-            mngr.requestSingleUpdate(locProvider, new LocationListener() {
-                public void onLocationChanged(android.location.Location location) {
-                    locs.add(location);
-                }
-                public void onStatusChanged(String s, int i, Bundle bundle) { }
-                public void onProviderEnabled(String s) { }
-                public void onProviderDisabled(String s) { }
-            }, null);
-            if (locs.size() == 0) {
-                throw new ServiceException("Location Provider disabled");
-            } else {
-                dloc = locs.get(0);
-            }
-        }
-
-        Location loc = new Location();
-        loc.title = "current location";
-        loc.description = "where I am right now";
-        loc.latitude = 52d; // dloc.getLatitude();
-        loc.longitude = 13d; // dloc.getLongitude();
-
-        return loc;
     }
 
     protected String selectProvider(LocationManager manager) {
