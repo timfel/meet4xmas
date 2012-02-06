@@ -24,7 +24,7 @@ public class AppointmentListActivity extends Activity {
         setContentView(R.layout.appointment_list);
         try {
             List<Appointment> appointments = new Service(this).getAppointments(new Preferences(this).getUser());
-            List<Map> views = new ArrayList<Map>(appointments.size());
+            List<Map<String, String>> views = new ArrayList<Map<String, String>>(appointments.size());
             for (Appointment app: appointments) {
                 Map<String, String> view = new HashMap<String, String>();
                 view.put("title", app.message);
