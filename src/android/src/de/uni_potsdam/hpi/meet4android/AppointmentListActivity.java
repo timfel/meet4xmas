@@ -43,9 +43,7 @@ public class AppointmentListActivity extends Activity {
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(self, AppointmentShowActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("appointment", appointments.get(position));
-                    intent.putExtra("data", bundle);
+                    AppointmentShowActivity.setAppointment(intent, appointments.get(position));
                     startActivity(intent);
                 }
             });
