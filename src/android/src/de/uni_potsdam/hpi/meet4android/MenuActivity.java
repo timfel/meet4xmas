@@ -60,6 +60,8 @@ public class MenuActivity extends Activity {
                     public void run() {
                         Preferences pref = new Preferences(self);
                         pref.setUser(null);
+                        pref.setRegistrationId(null);
+                        new Service(self).unregisterWithC2DM();
                     }
                 }).start();
                 startActivity(new Intent(self, SignUpActivity.class));
