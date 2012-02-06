@@ -79,6 +79,10 @@ public class Service {
         }
     }
 
+    public Appointment getAppointment(int id) throws ServiceException {
+        return (Appointment) getAPI().getAppointment(id).payload;
+    }
+
     public List<Appointment> getAppointments(String email) throws ServiceException {
         Response response = getAPI().registerAccount(email, null);
         if (!response.success) {
@@ -91,7 +95,7 @@ public class Service {
         }
         return appointments;
     }
-    
+
     public void createAppointment(String user, android.location.Location location, String what, Collection<String> invitees,
                                   int travelType) throws ServiceException {
         Location loc = new Location();

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 import org.meet4xmas.Service;
 import org.meet4xmas.ServiceException;
+import org.meet4xmas.wire.Appointment;
 
 public class C2DMReceiver extends BroadcastReceiver {
 
@@ -38,7 +39,15 @@ public class C2DMReceiver extends BroadcastReceiver {
     public void handleMessage(Context context, Intent intent) {
         String msg = intent.getExtras().getString("message");
         String appointmentId = intent.getExtras().getString("appointmentId");
-        Toast.makeText(context, "Appointment " + appointmentId + ": " + msg, Toast.LENGTH_LONG).show();
+        try {
+            Appointment app = new Service(context).getAppointment(Integer.valueOf(appointmentId).intValue());
+            Intent details = new Intent(context, AppointmentShowActivity.class);
+            details.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            AppointmentShowActivity.setAppointment(details, app);
+            context.startActivity(details);
+        } catch (ServiceException e) {
+            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
         Log.d("xmas", "Received notification: " + msg);
     }
 
