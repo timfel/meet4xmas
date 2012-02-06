@@ -1,11 +1,16 @@
 package de.uni_potsdam.hpi.meet4android;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import junit.framework.Assert;
 import org.meet4xmas.Service;
+import org.meet4xmas.ServiceException;
+import org.meet4xmas.wire.Appointment;
 import org.meet4xmas.wire.IServiceAPI;
 import org.meet4xmas.wire.NotificationServiceInfo;
 import org.meet4xmas.wire.Response;
+
+import java.util.List;
 
 /**
  * This is a simple framework for a test of an Application.  See
@@ -33,9 +38,13 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
     }
 
     public void testSignUp() {
-        Service service = new Service(this);
-        List<Appointment> appointments = service.getAppointments("hans@wur.st");
-        Log.d("xmas", appointments.toString());
+        Service service = new Service(getActivity());
+        try {
+            List<Appointment> appointments = service.getAppointments("hans@wur.st");
+            Log.d("xmas", appointments.toString());
+        } catch (ServiceException e) {
+            Assert.assertTrue(false);
+        }
     }
 
     public Service getService() {
