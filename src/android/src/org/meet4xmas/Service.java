@@ -96,7 +96,7 @@ public class Service {
         return appointments;
     }
 
-    public void createAppointment(String user, android.location.Location location, String what, Collection<String> invitees,
+    public int createAppointment(String user, android.location.Location location, String what, Collection<String> invitees,
                                   int travelType) throws ServiceException {
         Location loc = new Location();
         loc.title = "current location";
@@ -113,6 +113,7 @@ public class Service {
         if (!response.success) {
             raise("Appointment Creation failed", response.error);
         }
+        return ((Long) response.payload).intValue();
     }
 
     /**
